@@ -106,7 +106,7 @@
                                                                 <span class="input-group-addon ">
                                                                     <i class="fa fa-code"></i>
                                                                 </span>
-                                    <input type="text" name="po_no" class="form-control" placeholder="PO No" data-error-msg="PO # is required." required>
+                                    <input type="text" name="po_no" class="form-control" placeholder="AUTO" data-error-msg="PO # is required." disabled>
                                 </div>
                             </div>
                         </div>
@@ -166,15 +166,17 @@
                                   <thead style="background-color:#2c3e50;color:white;">
                                   <tr>
                                       <th width="10%">Qty</th>
-                                      <th width="30%">Item</th>
-                                      <th width="12%" style="text-align: right">Cost</th>
-                                      <th width="12%" style="text-align: right">Discount</th>
+                                      <th width="25%">Item</th>
+                                      <th width="10%" style="text-align: right">Cost</th>
+                                      <th width="10%" style="text-align: right">Discount</th>
                                       <th style="display: none;">T.D</th> <!-- total discount -->
-                                      <th>Tax %</th>
+                                      <th width="8%" style="text-align: right">Tax %</th>
                                       <th width="12%" style="text-align: right">Total</th>
                                       <th style="display: none;">V.I</th> <!-- vat input -->
                                       <th style="display: none;">N.V</th> <!-- net of vat -->
                                       <td style="display: none;">Item ID</td><!-- product id -->
+                                      <th width="12%" style="text-align: right">Delivered Qty</th>
+                                      <th width="13%" style="text-align: right">Balance</th>
                                       <th><center>Action</center></th>
                                   </tr>
                                   </thead>
@@ -227,40 +229,134 @@
     <!-- /.content -->
   </div>
   <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Supplier</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_supplier_new">
-                      <div class="form-group">
-                          <label>* Supplier :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-users"></i>
-                              </span>
-                              <input type="text" name="supplier_name" class="form-control" placeholder="Supplier" data-error-msg="Supplier name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Supplier : <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_supplier_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Code :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_code" class="form-control" placeholder="AUTO" data-error-msg="Supplier Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label>* Email :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-envelope-o"></i>
-                              </span>
-                              <input type="text" name="email_address" class="form-control" placeholder="Email" data-error-msg="Email address is required." required>
-                          </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Name :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_user_suppliers" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_user_suppliers" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                       <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="tin#">TIN # :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="tin_no" class="form-control" placeholder="TIN #">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="contactperson">Contact Person :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="contact_person" class="form-control" placeholder="Contact Person">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="address" class="form-control" placeholder="Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Email Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="email" name="email_address" class="form-control" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Landline :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="landline" class="form-control" placeholder="Landline">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Mobile No :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="mobile_no" class="form-control" placeholder="Mobile No#">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="vat">Vatted :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <select name="vatted" id="cbo_vatted" data-error-msg="Vatted is required." required>
+                                        <?php foreach($tax_types as $vat){ ?>
+                                            <option value="<?php echo $vat->tax_type_id; ?>"><?php echo $vat->tax_type; ?></option>
+                                        <?php } ?>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_user_suppliers" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -291,7 +387,6 @@
 <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 
 <!-- <?php echo $_rights; ?> -->
-
     <script type="text/javascript">
 
       var oTableItems={
@@ -302,7 +397,9 @@
             tax : 'td:eq(5)',
             total : 'td:eq(6)',
             vat_input : 'td:eq(7)',
-            net_vat : 'td:eq(8)'
+            net_vat : 'td:eq(8)',
+            delivered_qty : 'td:eq(10)',
+            balance : 'td:eq(11)'
 
 
         };
@@ -423,7 +520,9 @@
             tax_type_id : null,
             po_line_total : total,
             non_tax_amount: net_vat,
-            tax_amount:vat_input
+            tax_amount:vat_input,
+            delivered_qty:"0.00",
+            balance:"1"
         }));
 
         reInitializeNumeric();
@@ -579,7 +678,11 @@
         });
 
 
-
+        _cboVat=$("#cbo_vatted").select2({
+                placeholder: "Please Select.",
+                allowClear: true
+            });
+        _cboVat.select2('val',null);
         $('#tbl_purchase_order tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
             _txnMode="edit";
@@ -625,6 +728,7 @@
 
                     $.each(rows,function(i,value){
                         //alert(value.non_tax_amount);
+                        $bal = (value.po_qty - value.delivered_qty);
                         $('#tbl_items > tbody').prepend(newRowItem({
                             po_qty : value.po_qty,
                             product_code : value.product_code,
@@ -638,7 +742,9 @@
                             tax_type_id : null,
                             po_line_total : value.po_line_total,
                             non_tax_amount: value.non_tax_amount,
-                            tax_amount:value.tax_amount
+                            tax_amount:value.tax_amount,
+                            delivered_qty: value.delivered_qty,
+                            balance: $bal
                         }));
 
 
@@ -658,7 +764,7 @@
                     //tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(total_non_tax_amount,2));
                     //tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_tax_amount,2));
                     //tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(gross_amount,2)+'</b>');
-                    //reComputeTotal();
+                    reComputeTotal();
 
                 }
             });
@@ -686,7 +792,7 @@
             var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
             var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
             var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
-
+            var delivered_qty=parseFloat(accounting.unformat(row.find(oTableItems.delivered_qty).find('input.numeric').val()));
             if(discount>price){
                 showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
                 row.find(oTableItems.discount).find('input.numeric').val('');
@@ -702,7 +808,7 @@
             $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
             $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-
+            $(oTableItems.balance,row).find('input.numeric').val(qty-delivered_qty);
             //console.log(net_vat);
             reComputeTotal();
 
@@ -858,15 +964,17 @@
         return '<tr>'+
         '<td width="10%"><input name="po_qty[]" type="text" class="numeric form-control" value="'+ d.po_qty+'"></td>'+
 
-        '<td width="30%">'+d.product_desc+'</td>'+
-        '<td width="11%"><input name="po_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.po_price,2)+'" style="text-align:right;"></td>'+
-        '<td width="11%"><input name="po_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_discount,2)+'" style="text-align:right;"></td>'+
+        '<td width="25%">'+d.product_desc+'</td>'+
+        '<td width="10%"><input name="po_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.po_price,2)+'" style="text-align:right;"></td>'+
+        '<td width="10%"><input name="po_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_discount,2)+'" style="text-align:right;"></td>'+
         '<td style="display: none;" width="11%"><input name="po_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_line_total_discount,2)+'" readonly></td>'+
-        '<td width="11%"><input name="po_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_tax_rate,2)+'"></td>'+
-        '<td width="11%" align="right"><input name="po_line_total[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_line_total,2)+'" readonly></td>'+
+        '<td width="8%"><input name="po_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_tax_rate,2)+'"></td>'+
+        '<td width="12%" align="right"><input name="po_line_total[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.po_line_total,2)+'" readonly></td>'+
         '<td style="display: none;"><input name="tax_amount[]" type="text" class="numeric form-control" value="'+ d.tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.non_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
+        '<td width="12%"><input name="delivered_qty[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.delivered_qty,2)+'" style="text-align:right;" readonly></td>'+
+        '<td width="13%"><input name="balance[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.balance,2)+'" style="text-align:right;" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };

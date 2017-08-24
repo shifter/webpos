@@ -10,10 +10,11 @@ class Products extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Categories_model');
         $this->load->model('Units_model');
-		$this->load->model('Inventory_model');
-		$this->load->model('Brands_model');
-		$this->load->model('Vendors_model');
+    		$this->load->model('Inventory_model');
+    		$this->load->model('Brands_model');
+    		$this->load->model('Vendors_model');
         $this->load->model('Suppliers_model');
+        $this->load->model('Tax_types_model');
     }
 
     public function index() {
@@ -30,7 +31,9 @@ class Products extends CORE_Controller
         $data['product_vendor'] = $this->Vendors_model->get_list(null,'vendor_id,vendor_name');
         $data['product_supplier'] = $this->Suppliers_model->get_list(null,'supplier_id,supplier_name');
         $data['_title'] = 'Product Management';
-
+        $data['tax_types']=$this->Tax_types_model->get_list(
+            'tax_types.is_deleted = 0'
+            );
         $this->load->view('products_view', $data);
     }
 
@@ -55,14 +58,14 @@ class Products extends CORE_Controller
                 $m_products->unit_id = $this->input->post('unit_id', TRUE);
                 $m_products->vendor_id = $this->input->post('vendor_id', TRUE);
                 $m_products->markup_percent = $this->input->post('markup_percent', TRUE);
-				$m_products->min_stock =$this->get_numeric_value($this->input->post('min_stock', TRUE));
-				$m_products->max_stock =$this->get_numeric_value($this->input->post('max_stock', TRUE));
-				$m_products->sale_cost =$this->get_numeric_value($this->input->post('sale_cost', TRUE));
-				$m_products->quantity =$this->get_numeric_value($this->input->post('quantity', TRUE));
+        				$m_products->min_stock =$this->get_numeric_value($this->input->post('min_stock', TRUE));
+        				$m_products->max_stock =$this->get_numeric_value($this->input->post('max_stock', TRUE));
+        				$m_products->sale_cost =$this->get_numeric_value($this->input->post('sale_cost', TRUE));
+        				$m_products->quantity =$this->get_numeric_value($this->input->post('quantity', TRUE));
                 $m_products->promo_cost=$this->get_numeric_value($this->input->post('promo_cost', TRUE));
                 $m_products->discounted_cost=$this->get_numeric_value($this->input->post('discounted_cost',TRUE));
                 $m_products->purchase_cost =$this->get_numeric_value($this->input->post('purchase_cost', TRUE));
-        		$m_products->tax_rate =$this->get_numeric_value($this->input->post('tax_rate', TRUE));
+        		    $m_products->tax_rate =$this->get_numeric_value($this->input->post('tax_rate', TRUE));
                 $m_products->save();
 
                 $product_id = $m_products->last_insert_id();

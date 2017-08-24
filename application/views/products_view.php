@@ -150,7 +150,7 @@
                                         </div>
                                     </div>
                                 </div>
-                              </div>  
+                              </div>
                               <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">VAT :</label>
@@ -195,7 +195,7 @@
                                                 <input type="text" name="max_stock" class="form-control numeric" placeholder="Max Stock">
                                         </div>
                                     </div>
-                                </div>                             
+                                </div>
                               </div>
                               <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
@@ -327,183 +327,375 @@
   </div>
   <div id="modal_new_category" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
       <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Category</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_category_new">
-                      <div class="form-group">
-                          <label>* Category Name :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-tags"></i>
-                              </span>
-                              <input type="text" name="category_name" class="form-control" placeholder="Category Name" data-error-msg="Category name is required." required>
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bgm-indigo">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="xbutton">×</span></button>
+                    <h4 class="modal-title">Category : <transaction class="transaction"></transaction></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="frm_category_new">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Category Code  :</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                            <input type="text" name="category_code" class="form-control" placeholder="AUTO" data-error-msg="Category Code is required." readonly>
+                                    </div>
+                                </div>
+                            </div>
                           </div>
-                      </div>
-                      <div class="form-group">
-                          <label>Description :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-file"></i>
-                              </span>
-                              <textarea name="category_desc" class="form-control" placeholder="Category Description"></textarea>
+                          <div class="row" style="margin-top:5px;">
+                            <div class="form-group">
+                                <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Category Name  :</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                            <input type="text" name="category_name" class="form-control" placeholder="Category Name" data-error-msg="Category Name is required." required>
+                                    </div>
+                                </div>
+                            </div>
                           </div>
+                          <div class="row" style="margin-top:5px;">
+                            <div class="form-group">
+                                <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Description  :</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-file-text fa-size" aria-hidden="true"></i></span>
+                                            <input type="text" name="category_desc" class="form-control" placeholder="Description">
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_category" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_category" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
+                    </div>
+                </div>
+                </form>
+                <div class="modal-footer" >
+                    <button id="btn_create_category" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                    </button>
+                    <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
       </div>
   </div><!---modal-->
   <div id="modal_new_brand" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Brand</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_brand_new">
-                      <div class="form-group">
-                          <label>* Brand Name :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-tags"></i>
-                              </span>
-                              <input type="text" name="brand_name" class="form-control" placeholder="Brand Name" data-error-msg="Brand name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Brands: <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_brand_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Brand Code  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="brand_code" class="form-control" placeholder="AUTO" data-error-msg="Brand Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label>Description :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-file"></i>
-                              </span>
-                              <textarea name="brand_desc" class="form-control" placeholder="Brand Description"></textarea>
-                          </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Brand Name  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="brand_name" class="form-control" placeholder="Brand Name" data-error-msg="Brand Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_brand" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_brand" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Description  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-file-text fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="brand_desc" class="form-control" placeholder="Description" >
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_brand" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <div id="modal_new_unit" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Unit</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_unit_new">
-                      <div class="form-group">
-                          <label>* Unit Name :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-tags"></i>
-                              </span>
-                              <input type="text" name="unit_name" class="form-control" placeholder="Unit Name" data-error-msg="Unit name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Unit: <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_unit_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Unit Code  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="unit_code" class="form-control" placeholder="AUTO" data-error-msg="Unit Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label>Description :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-file"></i>
-                              </span>
-                              <textarea name="unit_desc" class="form-control" placeholder="Unit Description"></textarea>
-                          </div>
+                      <div class="row"  style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Unit Name  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="unit_name" class="form-control" placeholder="Unit Name" data-error-msg="Unit Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_unit" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_unit" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Description  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-file-text fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="unit_desc" class="form-control" placeholder="Description">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_unit" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <div id="modal_new_vendor" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Vendor</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_vendor_new">
-                      <div class="form-group">
-                          <label>* Vendor Name :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-tags"></i>
-                              </span>
-                              <input type="text" name="vendor_name" class="form-control" placeholder="Vendor Name" data-error-msg="Vendor name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Category : <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_vendor_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Vendor Code  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="vendor_code" class="form-control" placeholder="AUTO" data-error-msg="Category Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label>Description :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-file"></i>
-                              </span>
-                              <textarea name="vendor_desc" class="form-control" placeholder="Vendor Description"></textarea>
-                          </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Vendors Name  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="vendor_name" class="form-control" placeholder="Vendor Name" data-error-msg="Vendor Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_vendor" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_vendor" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Description  :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-file-text fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="vendor_desc" class="form-control" placeholder="Description">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_vendor" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Supplier</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_supplier_new">
-                      <div class="form-group">
-                          <label>* Supplier Name :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-tags"></i>
-                              </span>
-                              <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Supplier : <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_supplier_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Code :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_code" class="form-control" placeholder="AUTO" data-error-msg="Supplier Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label> Contact Person :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-phone"></i>
-                              </span>
-                              <input type="text" name="contact_person" class="form-control" placeholder="Contact Person">
-                          </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Name :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_supplier" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_supplier" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                       <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="tin#">TIN # :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="tin_no" class="form-control" placeholder="TIN #">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="contactperson">Contact Person :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="contact_person" class="form-control" placeholder="Contact Person">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="address" class="form-control" placeholder="Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Email Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="email" name="email_address" class="form-control" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Landline :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="landline" class="form-control" placeholder="Landline">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Mobile No :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="mobile_no" class="form-control" placeholder="Mobile No#">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="vat">Vatted :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <select name="vatted" id="cbo_vatted" data-error-msg="Vatted is required." required>
+                                        <?php foreach($tax_types as $vat){ ?>
+                                            <option value="<?php echo $vat->tax_type_id; ?>"><?php echo $vat->tax_type; ?></option>
+                                        <?php } ?>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_supplier" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -568,7 +760,11 @@
         });
 
     }();
-
+    _cboVat=$("#cbo_vatted").select2({
+            placeholder: "Please Select.",
+            allowClear: true
+        });
+    _cboVat.select2('val',null);
     $('#btn_browse').click(function(event){
             event.preventDefault();
             $('input[name="file_upload[]"]').click();

@@ -33,6 +33,9 @@ class Discount extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_discounts = $this->Discount_model;
@@ -50,6 +53,13 @@ class Discount extends CORE_Controller
 
                 $discount_id = $m_discounts->last_insert_id();
 
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $discount_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_discounts->discount_code=$ecode;
+
+                $m_discounts->modify($discount_id);
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
                 $response['msg'] = 'Discount information successfully created.';

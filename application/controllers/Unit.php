@@ -26,6 +26,9 @@ class Unit extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_units = $this->Units_model;
@@ -41,6 +44,14 @@ class Unit extends CORE_Controller
                 $m_units->save();
 
                 $unit_id = $m_units->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $unit_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_units->unit_code=$ecode;
+
+                $m_units->modify($unit_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

@@ -45,6 +45,7 @@
               <table id="tbl_supplier" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
+                      <th>Supplier Code</th>
                       <th>Supplier Name</th>
                       <th>TIN #</th>
                       <th>Contact Person</th>
@@ -60,6 +61,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                      <th>Supplier Code</th>
                       <th>Supplier Name</th>
                       <th>TIN #</th>
                       <th>Contact Person</th>
@@ -91,6 +93,17 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Code :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="supplier_code" class="form-control" placeholder="AUTO" data-error-msg="Supplier Name is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Name :</label>
                                     <div class="col-sm-8">
@@ -229,14 +242,15 @@
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "ajax" : "Suppliers/transaction/list",
             "columns": [
-                { targets:[0],data: "supplier_name" },
-                { targets:[1],data: "tin_no" },
-                { targets:[2],data: "contact_person" },
-                { targets:[3],data: "address" },
-                { targets:[4],data: "email_address" },
-                { targets:[5],data: "landline" },
-                { targets:[6],data: "mobile_no" },
-                { targets:[7],data: "vattype" },
+                { targets:[0],data: "supplier_code"},
+                { targets:[1],data: "supplier_name" },
+                { targets:[2],data: "tin_no" },
+                { targets:[3],data: "contact_person" },
+                { targets:[4],data: "address" },
+                { targets:[5],data: "email_address" },
+                { targets:[6],data: "landline" },
+                { targets:[7],data: "mobile_no" },
+                { targets:[8],data: "vattype" },
                 {
 
                     targets:[8],

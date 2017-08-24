@@ -35,6 +35,9 @@ class Generics extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_generics = $this->Generics_model;
@@ -48,6 +51,14 @@ class Generics extends CORE_Controller
                 $m_generics->save();
 
                 $generic_id = $m_generics->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $generic_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_generics->generic_code=$ecode;
+
+                $m_generics->modify($generic_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

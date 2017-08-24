@@ -35,6 +35,9 @@ class GiftCards extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_giftcard = $this->Giftcard_model;
@@ -48,6 +51,14 @@ class GiftCards extends CORE_Controller
                 $m_giftcard->save();
 
                 $giftcard_id = $m_giftcard->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $giftcard_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_giftcard->giftcard_code=$ecode;
+
+                $m_giftcard->modify($giftcard_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
