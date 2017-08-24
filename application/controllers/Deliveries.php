@@ -42,8 +42,9 @@ class Deliveries extends CORE_Controller
             'purchase_order.is_deleted = 0 AND purchase_order.total_after_tax != 0'
         );
 
-        $data['tax_types']=$this->Tax_types_model->get_list();
-
+        $data['tax_types']=$this->Tax_types_model->get_list(
+            'tax_types.is_deleted = 0'
+            );
         $data['products']=$this->Products_model->get_list();
 
         $data['title'] = 'Delivery Invoice';
@@ -53,6 +54,9 @@ class Deliveries extends CORE_Controller
     }
 
     function transaction($txn = null,$id_filter=null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn){
             case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
                 $m_delivery_invoice=$this->Delivery_invoice_model;
@@ -63,7 +67,6 @@ class Deliveries extends CORE_Controller
                   delivery_invoice.remarks as remarks,
                   purchase_order.purchase_order_id,
                   purchase_order.po_no,
-                  suppliers.supplier_name,
                   suppliers.supplier_name',
                   array(
                       array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left'),
@@ -105,7 +108,6 @@ class Deliveries extends CORE_Controller
 	              $m_products=$this->Products_model;
 
                 //$m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
                 $m_delivery_invoice->supplier_id=$this->input->post('supplier',TRUE);
                 $m_delivery_invoice->remarks=$this->input->post('remarks',TRUE);
                 $m_delivery_invoice->date_received=date('Y-m-d',strtotime($this->input->post('date_received',TRUE)));
@@ -118,6 +120,15 @@ class Deliveries extends CORE_Controller
                 $m_delivery_invoice->save();
 
                 $dr_invoice_id=$m_delivery_invoice->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $dr_invoice_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_delivery_invoice->dr_invoice_no=$ecode;
+                $m_delivery_invoice->modify($dr_invoice_id);
+
+
                 $m_dr_items=$this->Delivery_invoice_item_model;
 
                 $prod_id=$this->input->post('product_id',TRUE);
@@ -130,62 +141,60 @@ class Deliveries extends CORE_Controller
                 $dr_tax_amount=$this->input->post('dr_tax_amount',TRUE);
                 $dr_non_tax_amount=$this->input->post('dr_non_tax_amount',TRUE);
                 $po_item_id=$this->input->post('po_item_id', TRUE);
-						$i=0;
-				$m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                        foreach($prod_id as $item)
-						{
-							$minus="-";
-							$data[] =
-							   array(
-								  'dr_invoice_id' => $dr_invoice_id,
-								  'product_id' => $prod_id[$i],
-								  'dr_qty' => $dr_qty[$i],
-								  'dr_price' => $dr_price[$i],
-								  'dr_discount' => $dr_discount[$i],
-								  'dr_line_total_discount' => $dr_line_total_discount[$i],
-								  'dr_tax_rate' => $dr_tax_rate[$i],
-								  'dr_line_total_price' => $dr_line_total_price[$i],
-								  'dr_tax_amount' => $dr_tax_amount[$i],
-								  'dr_non_tax_amount' => $dr_non_tax_amount[$i]
-							   );
-
-
-							$i++;
-						}
-                        $x=0;
-                        foreach($po_item_id as $poitem)
-                        {
-                            if($poitem != "0")
-                            {
-                                $m_po_item->set('po_qty','po_qty-'.$dr_qty[$x]);
-                                $m_po_item->set('po_line_total','po_line_total-'.$dr_line_total_price[$x]);
-                                $m_po_item->set('tax_amount','tax_amount-'.$dr_tax_amount[$x]);
-                                $m_po_item->set('non_tax_amount','non_tax_amount-'.$dr_non_tax_amount[$x]);
-                                $m_po_item->modify($poitem);
-                                $x++;
-                            }
-                        }
-					$this->db->insert_batch('delivery_invoice_items', $data);
+						    $i=0;
+				        $m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
+                foreach($prod_id as $item)
+    						{
+    							$minus="-";
+    							$data[] =
+    							   array(
+    								  'dr_invoice_id' => $dr_invoice_id,
+    								  'product_id' => $prod_id[$i],
+    								  'dr_qty' => $this->get_numeric_value($dr_qty[$i]),
+    								  'dr_price' => $this->get_numeric_value($dr_price[$i]),
+    								  'dr_discount' => $this->get_numeric_value($dr_discount[$i]),
+    								  'dr_line_total_discount' => $this->get_numeric_value($dr_line_total_discount[$i]),
+    								  'dr_tax_rate' => $this->get_numeric_value($dr_tax_rate[$i]),
+    								  'dr_line_total_price' => $this->get_numeric_value($dr_line_total_price[$i]),
+    								  'dr_tax_amount' => $this->get_numeric_value($dr_tax_amount[$i]),
+    								  'dr_non_tax_amount' => $this->get_numeric_value($dr_non_tax_amount[$i]),
+                      'po_item_id' => $po_item_id[$i]
+    							   );
+    							$i++;
+    						}
+                $x=0;
+                foreach($po_item_id as $poitem)
+                {
+                    if($poitem > 0)
+                    {
+                        $m_po_item->set('delivered_qty','delivered_qty+'.$this->get_numeric_value($dr_qty[$x]));
+                        $m_po_item->modify($poitem);
+                    }
+                    $x++;
+                }
+					      $this->db->insert_batch('delivery_invoice_items', $data);
                 $purchase_order_id=$this->input->post('purchase_order_id', TRUE);
                 $m_po->set('total_discount','total_discount-'.$this->get_numeric_value($this->input->post('summary_discount',TRUE)));
                 $m_po->set('total_before_tax','total_before_tax-'.$this->get_numeric_value($this->input->post('summary_before_discount',TRUE)));
                 $m_po->set('total_tax_amount','total_tax_amount-'.$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE)));
                 $m_po->set('total_after_tax','total_after_tax-'.$this->get_numeric_value($this->input->post('summary_after_tax',TRUE)));
                 $m_po->modify($purchase_order_id);
-                  $response['title'] = 'Success!';
-                  $response['stat'] = 'success';
-                  $response['msg'] = 'Delivery invoice successfully created.';
-        		  $response['row_added']=$m_delivery_invoice->get_list(
+                $response['title'] = 'Success!';
+                $response['stat'] = 'success';
+                $response['msg'] = 'Delivery invoice successfully created.';
+        		    $response['row_added']=$m_delivery_invoice->get_list(
                     $dr_invoice_id,
                     'delivery_invoice.*,DATE_FORMAT(delivery_invoice.date_received,"%m/%d/%Y")as date_received,
                     DATE_FORMAT(delivery_invoice.date_delivered,"%m/%d/%Y")as date_delivered,
-                    remarks as remarks,
-                    suppliers.supplier_name,
+                    delivery_invoice.remarks as remarks,
+                    purchase_order.purchase_order_id,
+                    purchase_order.po_no,
                     suppliers.supplier_name',
-                            array(
-                                array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left')
-                        )
-                      );
+                    array(
+                        array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left'),
+                        array('purchase_order','purchase_order.purchase_order_id=delivery_invoice.purchase_order_id','left')
+                    )
+                  );
 
                     echo json_encode($response);
 
@@ -197,15 +206,15 @@ class Deliveries extends CORE_Controller
             ////***************************************update purchase invoice************************************************
             case 'update':
                 $m_delivery_invoice=$this->Delivery_invoice_model;
-
+                $m_po_item=$this->purchase_order_item_model;
 		            $m_products=$this->Products_model;
                 $dr_invoice_id=$this->input->post('dr_invoice_id',TRUE);
                 //$m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
                 $m_delivery_invoice->supplier_id=$this->input->post('supplier',TRUE);
                 $m_delivery_invoice->remarks=$this->input->post('remarks',TRUE);
                 $m_delivery_invoice->date_received=date('Y-m-d',strtotime($this->input->post('date_received',TRUE)));
                 $m_delivery_invoice->posted_by_user=$this->session->user_id;
+                $m_delivery_invoice->total_discount_all=$this->get_numeric_value($this->input->post('summary_discount_total',TRUE));
                 $m_delivery_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_delivery_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_delivery_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
@@ -219,6 +228,7 @@ class Deliveries extends CORE_Controller
 
 
                 $prod_id=$this->input->post('product_id',TRUE);
+                $po_item_id=$this->input->post('po_item_id',TRUE);
                 $dr_qty=$this->input->post('dr_qty',TRUE);
                 $dr_price=$this->input->post('dr_price',TRUE);
                 $dr_discount=$this->input->post('dr_discount',TRUE);
@@ -227,12 +237,14 @@ class Deliveries extends CORE_Controller
                 $dr_line_total_price=$this->input->post('dr_line_total_price',TRUE);
                 $dr_tax_amount=$this->input->post('dr_tax_amount',TRUE);
                 $dr_non_tax_amount=$this->input->post('dr_non_tax_amount',TRUE);
+                $delivered_qty=$this->input->post('delivered_qty',TRUE);
 
                 for($i=0;$i<count($prod_id);$i++){
 
-		               $m_dr_items->dr_invoice_id=$dr_invoice_id;
+		                $m_dr_items->dr_invoice_id=$dr_invoice_id;
                     $m_dr_items->product_id=$prod_id[$i];
                     $m_dr_items->dr_qty=$dr_qty[$i];
+                    $m_dr_items->po_item_id=$po_item_id[$i];
                     $m_dr_items->dr_price=$this->get_numeric_value($dr_price[$i]);
                     $m_dr_items->dr_discount=$this->get_numeric_value($dr_discount[$i]);
                     $m_dr_items->dr_line_total_discount=$this->get_numeric_value($dr_line_total_discount[$i]);
@@ -243,6 +255,15 @@ class Deliveries extends CORE_Controller
 	                  $m_dr_items->save();
 
                 }
+                $x=0;
+                foreach($po_item_id as $poitem){
+                    if($poitem > 0){
+                      $new_dqty=(int)$dr_qty[$x] - (int)$delivered_qty[$x];
+                      $m_po_item->set('delivered_qty','delivered_qty+'.$this->get_numeric_value($new_dqty));
+                      $m_po_item->modify($poitem);
+                    }
+                    $x++;
+                }
 
                     $response['title'] = 'Success!';
                     $response['stat'] = 'success';
@@ -251,11 +272,13 @@ class Deliveries extends CORE_Controller
                       $dr_invoice_id,
                       'delivery_invoice.*,DATE_FORMAT(delivery_invoice.date_received,"%m/%d/%Y")as date_received,
                       DATE_FORMAT(delivery_invoice.date_delivered,"%m/%d/%Y")as date_delivered,
-                      remarks as remarks,
-                      suppliers.supplier_name,
+                      delivery_invoice.remarks as remarks,
+                      purchase_order.purchase_order_id,
+                      purchase_order.po_no,
                       suppliers.supplier_name',
                       array(
                           array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left'),
+                          array('purchase_order','purchase_order.purchase_order_id=delivery_invoice.purchase_order_id','left')
                       )
                     );
 

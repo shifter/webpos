@@ -46,6 +46,7 @@
               <table id="tbl_card" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
+                      <th>Card Code</th>
                       <th>Card Name</th>
                       <th>Action</th>
                     </tr>
@@ -54,6 +55,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                      <th>Card Code</th>
                       <th>Card Name</th>
                       <th>Action</th>
                     </tr>
@@ -78,6 +80,17 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Card Code  :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="card_code" class="form-control" placeholder="AUTO" data-error-msg="Card Name is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Card Name  :</label>
                                     <div class="col-sm-8">
@@ -134,7 +147,8 @@
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "ajax" : "Cards/transaction/list",
             "columns": [
-                { targets:[0],data: "card_name" },
+                { targets:[0],data: "card_code" },
+                { targets:[1],data: "card_name" },
                 {
 
                     targets:[1],

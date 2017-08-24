@@ -16,6 +16,7 @@ class Purchase_Order extends CORE_Controller
 
     }
 
+
     public function index() {
 
         //default resources of the active view
@@ -37,8 +38,10 @@ class Purchase_Order extends CORE_Controller
             )
         );
 
-
-        $data['tax_types']=$this->Tax_types_model->get_list();
+        $data['tax_types']=$this->Tax_types_model->get_list(
+            'tax_types.is_deleted = 0'
+            );
+        
 
         $data['products']=$this->Products_model->get_list();
 
@@ -49,6 +52,9 @@ class Purchase_Order extends CORE_Controller
     }
 
     function transaction($txn = null,$id_filter=null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn){
             case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
                 $m_purchase_order=$this->purchase_order_model;
@@ -96,7 +102,7 @@ class Purchase_Order extends CORE_Controller
 	              $m_products=$this->Products_model;
 
                 //$m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_purchase_order->po_no=$this->input->post('po_no',TRUE);
+
                 $m_purchase_order->supplier_id=$this->input->post('supplier',TRUE);
                 $m_purchase_order->remarks=$this->input->post('remarks',TRUE);
                 $m_purchase_order->date_created=date('Y-m-d',strtotime($this->input->post('date_created',TRUE)));
@@ -109,6 +115,14 @@ class Purchase_Order extends CORE_Controller
                 $m_purchase_order->save();
 
                 $purchase_order_id=$m_purchase_order->last_insert_id();
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $purchase_order_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_purchase_order->po_no=$ecode;
+                $m_purchase_order->modify($purchase_order_id);
+
+
                 $m_po_items=$this->purchase_order_item_model;
 
                 $prod_id=$this->input->post('product_id',TRUE);
@@ -120,6 +134,8 @@ class Purchase_Order extends CORE_Controller
                 $po_line_total_price=$this->input->post('po_line_total',TRUE);
                 $po_tax_amount=$this->input->post('tax_amount',TRUE);
                 $po_non_tax_amount=$this->input->post('non_tax_amount',TRUE);
+                $delivered_qty=$this->input->post('delivered_qty',TRUE);
+                $balance=$this->input->post('balance',TRUE);
 
 						$i=0;
 						foreach($prod_id as $item)
@@ -129,14 +145,15 @@ class Purchase_Order extends CORE_Controller
 							   array(
 								  'purchase_order_id' => $purchase_order_id,
 								  'product_id' => $prod_id[$i],
-								  'po_qty' => $po_qty[$i],
-								  'po_price' => $po_price[$i],
-								  'po_discount' => $po_discount[$i],
-								  'po_line_total_discount' => $po_line_total_discount[$i],
-								  'po_tax_rate' => $po_tax_rate[$i],
-								  'po_line_total' => $po_line_total_price[$i],
-								  'tax_amount' => $po_tax_amount[$i],
-								  'non_tax_amount' => $po_non_tax_amount[$i]
+								  'po_qty' => $this->get_numeric_value($po_qty[$i]),
+								  'po_price' => $this->get_numeric_value($po_price[$i]),
+								  'po_discount' => $this->get_numeric_value($po_discount[$i]),
+								  'po_line_total_discount' => $this->get_numeric_value($po_line_total_discount[$i]),
+								  'po_tax_rate' => $this->get_numeric_value($po_tax_rate[$i]),
+								  'po_line_total' => $this->get_numeric_value($po_line_total_price[$i]),
+								  'tax_amount' => $this->get_numeric_value($po_tax_amount[$i]),
+								  'non_tax_amount' => $this->get_numeric_value($po_non_tax_amount[$i]),
+                  'delivered_qty' => $this->get_numeric_value($delivered_qty[$i])
 							   );
 
 
@@ -172,7 +189,6 @@ class Purchase_Order extends CORE_Controller
 		            $m_products=$this->Products_model;
                 $purchase_order_id=$this->input->post('purchase_order_id',TRUE);
                 //$m_delivery_invoice->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_purchase_order->po_no=$this->input->post('po_no',TRUE);
                 $m_purchase_order->supplier_id=$this->input->post('supplier',TRUE);
                 $m_purchase_order->remarks=$this->input->post('remarks',TRUE);
                 $m_purchase_order->date_created=date('Y-m-d',strtotime($this->input->post('date_created',TRUE)));

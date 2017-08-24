@@ -46,8 +46,9 @@
               <table id="tbl_vendors" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
-                        <th>Vendors Name</th>
-                        <th>Vendors Desc</th>
+                        <th>Vendor Code</th>
+                        <th>Vendor Name</th>
+                        <th>Vendor Desc</th>
                         <th style="text-align:center;">Action</th>
                     </tr>
                 </thead>
@@ -55,8 +56,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Vendors Name</th>
-                        <th>Vendors Desc</th>
+                        <th>Vendor Code</th>
+                        <th>Vendor Name</th>
+                        <th>Vendor Desc</th>
                         <th style="text-align:center;">Action</th>
                     </tr>
                 </tfoot>
@@ -81,11 +83,22 @@
                             <div class="col-md-12">
                               <div class="row">
                                 <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Vendor Code  :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="vendor_code" class="form-control" placeholder="AUTO" data-error-msg="Category Name is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
+                                <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Vendors Name  :</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
-                                                <input type="text" name="vendor_name" class="form-control" placeholder="Vendors Name" data-error-msg="Category Name is required." required>
+                                                <input type="text" name="vendor_name" class="form-control" placeholder="Vendor Name" data-error-msg="Vendor Name is required." required>
                                         </div>
                                     </div>
                                 </div>
@@ -147,8 +160,9 @@
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "ajax" : "Vendors/transaction/list",
             "columns": [
-                { targets:[0],data: "vendor_name" },
-                { targets:[1],data: "vendor_desc" },
+                { targets:[0],data: "vendor_code" },
+                { targets:[1],data: "vendor_name" },
+                { targets:[2],data: "vendor_desc" },
                 {
 
                     targets:[2],

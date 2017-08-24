@@ -32,6 +32,9 @@ class Location extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_locations = $this->Location_model;
@@ -48,6 +51,14 @@ class Location extends CORE_Controller
                 $m_locations->save();
 
                 $location_id = $m_locations->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $location_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_locations->location_code=$ecode;
+
+                $m_locations->modify($location_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

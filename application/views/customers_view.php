@@ -46,6 +46,7 @@
               <table id="tbl_customers" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
+                        <th >Customer Code</th>
                         <th >Customer Name</th>
                         <th >Email Address</th>
                         <th >Landline</th>
@@ -58,6 +59,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th >Customer Code</th>
                         <th >Customer Name</th>
                         <th >Email Address</th>
                         <th >Landline</th>
@@ -106,6 +108,17 @@
                             </div>
                             <div class="col-sm-8">
                               <div class="row" style="margin-top:10px;">
+                                <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Customer Code  :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="customer_code" class="form-control" placeholder="AUTO" data-error-msg="Customer Name is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Customer Name  :</label>
                                     <div class="col-sm-8">
@@ -220,11 +233,12 @@
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "ajax" : "Customers/transaction/list",
             "columns": [
-                { targets:[0],data: "customer_name" },
-                { targets:[1],data: "email_address" },
-                { targets:[2],data: "landline" },
-                { targets:[3],data: "mobile_no" },
-                { targets:[4],data: "vattype" },
+                { targets:[0],data: "customer_code"},
+                { targets:[1],data: "customer_name" },
+                { targets:[2],data: "email_address" },
+                { targets:[3],data: "landline" },
+                { targets:[4],data: "mobile_no" },
+                { targets:[5],data: "vattype" },
                 {
 
                     targets:[5],
