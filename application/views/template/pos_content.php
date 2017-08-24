@@ -116,6 +116,26 @@
         padding-left: 0px;
         padding-right: 10px;
     }
+    .receipt-body-table{
+      text-align: right;
+      height: 15px;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-top: 0px !important;
+      margin-top: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
+    }
+    .receipt-body-table-amounts{
+      text-align: right;
+      height: 15px;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-top: 0px !important;
+      margin-top: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
+    }
 
 </style>
 </head>
@@ -130,19 +150,30 @@
                             <div id="header">
                                 <?php echo $company_info->company_name; ?><br>
                                 <?php echo $company_info->company_address; ?><br>
-                                Contact:&nbsp;<?php echo $company_info->landline; ?><br>
                             </div>
                             <div id="middle1">
-                                VAT&nbsp;Reg&nbsp;TIN:&nbsp;<?php echo $company_info->tin_no; ?><br>
+                                VAT Reg TIN: <?php echo $company_info->tin_no; ?><br>
+                            </div>
+                            <div class="col-md-12" style="margin-top: 10px !important;">
+                                <div id="left1">
+                                    Buyer's&nbsp;Name<br>
+                                    Address<br>
+                                    TIN&nbsp;#<br>
+                                </div>
+                                <div id="right1">
+                                    ___________________________<br>
+                                    ___________________________<br>
+                                    ___________________________<br>
+                                </div>
                             </div>
                         </div>
-                    </div><br>
+                    </div><br><br><br>
 
-                    <div class="row">
-                        <div id="" class="col-md-12">
+                    <div class="row" style="margin-top: 10px !important;">
+                        <div id="" style="text-align: center;" class="col-md-12">
                             MIN#&nbsp;<br>
                             SN#&nbsp;<br>
-                            FP#&nbsp;<br>                            
+                            FP#&nbsp;<br>
                         </div>
                     </div><br>
 
@@ -155,59 +186,75 @@
                                 Receipt&nbsp;<br>
                             </div>
                             <div id="right2">
-                                #&nbsp;:&nbsp;
-                                <?php
-                                    $currentDateTime = $delivery_info->transaction_timestamp;
-                                    $newDateTime = date('m/d/Y h:i A', strtotime($currentDateTime));
-                                    echo $newDateTime;
-                                ?><br>
-                                #&nbsp;:&nbsp;<?php echo $delivery_info->cashier; ?><br>
-                                #&nbsp;:&nbsp;<?php echo $company_info->terminal_no; ?><br>
-                                #&nbsp;:&nbsp;<?php echo $delivery_info->receipt_no; ?><br>
+                                # : <?php
+                                      $currentDateTime = $delivery_info->transaction_timestamp;
+                                      $newDateTime = date('m/d/Y H:i A', strtotime($currentDateTime));
+                                      echo $newDateTime;
+                                    ?><br>
+                                # : <?php echo $delivery_info->cashier; ?><br>
+                                # : <?php echo $company_info->terminal_no; ?><br>
+                                # : <?php echo $delivery_info->receipt_no; ?><br>
                             </div>
                         </div>
                     </div><br><br><br><br><br>
 
                     <center>
 
-                        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11px;border-top: 2px dashed gray;">
+                        <table width="95%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;font-size: 11px;border-top: 1px dashed gray;">
                             <thead>
+                            <tr style="border-bottom: 1px dashed gray;">
+                                <td width="15%" style="text-align: right;height: 15px;padding: 6px;">Qty</td>
+                                <td width="50%" style="text-align: center;height: 15px;padding: 6px;">Description</td>
+                                <td width="11%" style="text-align: right;height: 15px;padding: 6px;"></td>
+                                <td width="11%" style="text-align: right;height: 15px;padding: 6px;">Price</td>
+                                <td width="11%" style="text-align: right;height: 15px;padding: 6px;">Amount</td>
+                            </tr>
                             <tr>
-                                <td width="15%" style="border-bottom: 2px dashed gray;text-align: left;height: 15px;padding: 6px;">Qty</td>
-                                <td width="50%" style="border-bottom: 2px dashed gray;text-align: left;height: 15px;padding: 6px;">Description</td>
-                                <td width="11%" style="border-bottom: 2px dashed gray;text-align: right;height: 15px;padding: 6px;"></td>
-                                <td width="11%" style="border-bottom: 2px dashed gray;text-align: left;height: 15px;padding: 6px;">Price</td>
-                                <td width="11%" style="border-bottom: 2px dashed gray;text-align: right;height: 15px;padding: 6px;">Amount</td>
+                              <td colspan="5" style="padding:4px;">
                             </tr>
                             </thead>
                             <tbody id="pos_item">
                             <?php
                             $count = 0;
+                            $discount_total = 0;
+                            $sub_total = 0;
                             $qty = 0;
                             foreach($pos_invoice_item as $item){
                             $count++;
                             $qty += $item->pos_qty;
+                            $sub_total += $item->total;
+                            $discount_total += $item->pos_discount;
                             ?>
                                 <tr>
-                                    <td width="15%" style="border-bottom: 1px dashed gray;text-align: left;height: 15px;padding: 6px;"><?php echo number_format($item->pos_qty); ?></td>
-                                    <td width="50%" style="border-bottom: 1px dashed gray;text-align: left;height: 15px;padding: 6px;"><?php echo $item->product_desc; ?></td>
-                                    <td width="11%" style="border-bottom: 1px dashed gray;text-align: left;height: 15px;padding: 6px;"></td>
-                                    <td width="11%" style="border-bottom: 1px dashed gray;text-align: right;height: 15px;padding: 6px;"><?php echo number_format($item->pos_price,2); ?></td>
-                                    <td width="11%" style="border-bottom: 1px dashed gray;text-align: right;height: 15px;padding: 6px;"><?php echo number_format($item->total,2); ?></td>
+                                    <td width="15%" class="receipt-body-table"><?php echo number_format($item->pos_qty); ?></td>
+                                    <td width="50%" class="receipt-body-table"><?php echo $item->product_desc; ?></td>
+                                    <td width="11%" class="receipt-body-table"></td>
+                                    <td width="11%" class="receipt-body-table-amounts"><?php echo number_format($item->pos_price,2); ?></td>
+                                    <td width="11%" class="receipt-body-table-amounts"><?php echo number_format($item->total,2); ?></td>
                                 </tr>
-                            <?php } ?>
-
+                            <?php
+                              if ($item->pos_discount != "0.00"){?>
+                                <tr>
+                                  <td colspan="3"></td>
+                                  <td style="text-align: right;padding-right: 6px;">Disc: </td>
+                                  <td style="text-align: right;padding-right: 6px;"><?php echo number_format($item->pos_discount,2); ?></td>
+                                </tr>
+                            <?php }} ?>
+                              <tr>
+                                <td colspan="5" style="border-bottom: 1px dashed gray; padding-top: 8px;"></td>
+                              </tr>
                             </tbody>
                             <tfoot>
                             <tr>
                                 <td colspan="2" style="text-align: right;height: 15px;padding-top: 10px;"></td>
                                 <td colspan="2" style="text-align: left;height: 15px;padding-top: 10px;">Sub Total : </td>
-                                <td style="text-align: right;height: 15px;padding-top: 10px;padding-right: 4px;"><?php echo number_format($delivery_info->total_after_tax,2); ?></td>
+                                <td style="text-align: right;height: 15px;padding-top: 10px;padding-right: 4px;"><?php
+                                echo number_format($sub_total,2); ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="text-align: left;height: 15px;"></td>
                                 <td colspan="2" style="text-align: left;height: 15px;">Discount :</td>
-                                <td style="text-align: right;height: 15px;padding-right: 4px;"><?php echo number_format($delivery_info->totaldiscount,2); ?></td>
+                                <td style="text-align: right;height: 15px;padding-right: 4px;"><?php echo number_format($discount_total,2); ?></td>
                             </tr>
                             <!-- <tr>
                                 <td colspan="2" style="text-align: left;height: 15px;padding-top: 10px;">Amount&nbsp;Due</td>
@@ -318,22 +365,33 @@
                             </div>
                         </div>
                     </div><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
                     <div class="row">
-                        <div class="col-md-12">
-                            <div id="left1">
-                                Buyer's&nbsp;Name<br>
-                                Address<br>
-                                TIN&nbsp;#<br>
-                            </div>
-                            <div id="right1">
-                                ___________________________<br>
-                                ___________________________<br>
-                                ___________________________<br>
-                            </div>
-                        </div>
-                    </div><br><br><br><br>
-
+                      <div class="col-md-12">
+                          <?php foreach ($sc_info as $sc_info) {?>
+                            <p>Senior Citizen Discount</p>
+                            <hr style="border: 1px dashed gray !important;">
+                            <table>
+                              <tr>
+                                <td>ID: </td>
+                                <td><?php echo $sc_info->seniorID;?></td>
+                              </tr>
+                              <tr>
+                                <td>NAME: </td>
+                                <td><?php echo $sc_info->seniorName;?></td>
+                              </tr>
+                              <tr>
+                                <td>ADD: </td>
+                                <td><?php echo $sc_info->seniorAddress;?></td>
+                              </tr>
+                              <tr>
+                                <td>AMNT: </td>
+                                <td><?php echo $sc_info->discountAmount;?></td>
+                              </tr>
+                            </table>
+                            <hr style="border: 1px dashed gray !important;">
+                        <?php } ?>
+                      </div>
+                    </div>
                     <div class="row">
                         <div id="middle2" class="col-md-12">
                             <?php echo $footer_info->note1; ?><br>

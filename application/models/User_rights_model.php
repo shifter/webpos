@@ -12,8 +12,6 @@ class User_rights_model extends CORE_Model{
         parent::__construct();
     }
 
-
-
 }
 
 
