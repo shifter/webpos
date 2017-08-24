@@ -19,6 +19,7 @@ class Templates extends CORE_Controller {
         $this->load->model('Adjustment_item_model');
         $this->load->model('Adjustment_model');
         $this->load->model('Notes_model');
+        $this->load->model('Seniorcitizen_model');
     }
 
     public function index() {
@@ -165,6 +166,7 @@ class Templates extends CORE_Controller {
                         $m_invoice_items=$this->Purchase_items_model;
                         $m_company=$this->Company_model;
                         $m_info=$this->Notes_model;
+                        $m_snrcitizen=$this->Seniorcitizen_model;
 
                         // $info=$m_invoice->get_list(
                         //     $filter_value,
@@ -182,14 +184,22 @@ class Templates extends CORE_Controller {
                                             array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
                                             array('customers','customers.customer_id=pos_invoice.customer_id','left'),
                                             array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left'),
-                                            array('pos_invoice_items','pos_invoice_items.pos_invoice_id=pos_payment.pos_invoice_id','left')                               //join
+                                            array('pos_invoice_items','pos_invoice_items.pos_invoice_id=pos_payment.pos_invoice_id','left')
                                         )
                         );
 
+                        $receipt_no=$info[0]->receipt_no;
             						$invoice_id=$info[0]->pos_invoice_id;
                         $data['info']=$invoice_id;
                         $footer=$m_info->get_list();
                         $company=$m_company->get_list();
+
+                        $result_sc_info=$m_snrcitizen->get_receipt($receipt_no);
+
+                        // $sc_info=$m_snrcitizen->get_list(
+                        //   array('tblseniorcitizen.invoiceNumber'=>$receipt_no),
+                        //   'tblseniorcitizen.*'
+                        //   );
 
                         $data['pos_invoice_item']=$m_invoice_items->get_list(
 
@@ -200,10 +210,13 @@ class Templates extends CORE_Controller {
             							)
             						);
 
-
                         $data['delivery_info']=$info[0];
                         $data['company_info']=$company[0];
                         $data['footer_info']=$footer[0];
+
+                        if ($result_sc_info > 0){
+                          $data['sc_info']=$result_sc_info;
+                        }
 
                         if($filter_value2=='print'){
                           echo $this->load->view('template/pos_content',$data,TRUE);

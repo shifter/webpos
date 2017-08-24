@@ -88,7 +88,9 @@ class Purchases extends CORE_Controller
 
             //***************************************create new purchase invoice************************************************
             case 'create':
+          // date_default_timezone_get();
 					$today = date("Y-m-d");
+          // $fulldate = date('Y-m-d H:i:s');
 					$pos_invoice_summary=$this->Invoice_model;
 					$m_products=$this->Products_model;
 
@@ -100,16 +102,14 @@ class Purchases extends CORE_Controller
 					$session_id=$this->input->post('session_id',TRUE);
 
 					$pos_invoice_summary->totaldiscount=$this->get_numeric_value($summary_discount);
-          $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
-          $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
-          $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
+	        $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
+	        $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
+	        $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
 					$pos_invoice_summary->customer_id=$customers;
 					$pos_invoice_summary->transaction_date=$today;
+          //$pos_invoice_summary->transaction_timestamp=$fulldate;
 					$pos_invoice_summary->user_id=$this->session->user_id;
 					$pos_invoice_summary->save();
-
-
-
 
 					$pos_invoice_id=$pos_invoice_summary->last_insert_id();
           $m_po_items=$this->Purchase_items_model;
@@ -120,10 +120,10 @@ class Purchases extends CORE_Controller
           $pos_discount=$this->input->post('pos_discount',TRUE);
           $tax_rate=$this->input->post('pos_tax_rate',TRUE);
           $tax_amount=$this->input->post('pos_tax_amount',TRUE);
-          $total=$this->input->post('pos_line_total_price',TRUE);
-
-						$i=0;
-						$a="+";
+          //$total = $pos_price + $pos_qty;
+          //$total=$this->input->post('pos_line_total_price',TRUE);
+					$i=0;
+					$a="+";
 						// New function for insert
 						foreach($product_id as $item)
 						{
@@ -137,13 +137,12 @@ class Purchases extends CORE_Controller
 								  'pos_discount' => $this->get_numeric_value($pos_discount[$i]),
 								  'tax_rate' => $this->get_numeric_value($tax_rate[$i]),
 								  'tax_amount' => $this->get_numeric_value($tax_amount[$i]),
-								  'total' => $this->get_numeric_value($total[$i])
+								  'total' => $this->get_numeric_value($pos_price[$i]*$pos_qty[$i])
 							   );
 							$i++;
 						}
 
 					$this->db->insert_batch('pos_invoice_items', $data);
-
 
 					$pos_payment=$this->Pos_payment_model;
 					$post_amountdue=$this->input->post('post_amountdue',TRUE);
