@@ -53,9 +53,6 @@ class Login extends CORE_Controller {
 
     }
 
-
-
-
     function transaction($txn=null){
 
         switch($txn){

@@ -34,6 +34,17 @@ class Users_model extends CORE_Model{
 
     }
 
+    function authenticate_user_pwd($pword){
+        $this->db->select('ua.user_id,ua.user_name,ua.user_group_id,ua.photo_path,ua.user_email,CONCAT_WS(" ",ua.user_fname,ua.user_mname,ua.user_lname) as user_fullname,ug.user_group,ua.date_created');
+        $this->db->from('user_accounts as ua');
+        $this->db->join('user_groups as ug', 'ua.user_group_id = ug.user_group_id','left');
+        $this->db->join('user_groups_permission as ugp', 'ugp.user_group_id = ug.user_group_id','left');
+        $this->db->where('ugp.pos_void', 'enabled');
+        $this->db->where('ua.user_pword', sha1($pword));
+        return $this->db->get();
+
+    }
+
     function get_user_list($id=null){
 
         $this->db->select('ua.user_id,ua.user_name,ua.user_lname,ua.user_fname,ua.user_mname,ua.photo_path');

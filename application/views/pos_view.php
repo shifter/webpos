@@ -43,6 +43,10 @@
         border-top: 1px solid #d50000;
         border-bottom: 1px solid #d50000;
       }
+      .void-notif-class{
+        font-size: 12pt !important;
+        font-weight: bold !important;
+      }
       html body{
           -webkit-touch-callout: none; /* iOS Safari */
           -webkit-user-select: none; /* Safari */
@@ -70,6 +74,26 @@
       }
       #tbl_discounts{
         font-size: 13pt !important;
+      }
+      #modal-senior{
+        width:400px;
+        margin-top: 14% !important;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding-box;
+        background-clip: padding-box;
+      }
+      .modal-dialog{
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding-box;
+        background-clip: padding-box;
       }
 
       .twitter-typeahead, .tt-hint, .tt-input, .tt-dropdown-menu { width: 100%; }
@@ -108,7 +132,7 @@
                           </div><br />
 
                           <form id="frm_items">
-                              <div class="table-responsive" style="overflow-x: auto;overflow-y: scroll; height: 315px;">
+                              <div class="table-responsive" style="overflow-x: auto;overflow-y: scroll; height: 469px;">
                                   <table id="tbl_items" class="table table-striped table-bordered " cellspacing="0" width="100%">
                                   <thead style="background-color:#2c3e50;color:white;">
                                   <tr>
@@ -133,7 +157,7 @@
                           </form>
                           <div class="row">
                               <div class="col-lg-3 col-lg-offset-9">
-                                  <table id="tbl_purchase_summary" class="table invoice-total">
+                                  <table id="tbl_purchase_summary" class="table invoice-total" style="display: none;">
                                       <tbody>
                                       <tr>
                                           <td class="black">Discount :</td>
@@ -278,6 +302,9 @@
                         </button>
                         <button id="btn_endbatch" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
                            Alt H - End Batch
+                        </button>
+                        <button id="btn_scinfo" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
+                          Senior Citizen
                         </button>
                       </div>
                   </div>
@@ -736,14 +763,12 @@
   </div><!---modal-->
 
   <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-m">
+      <div class="modal-dialog modal-m" style="margin-top: 5%;">
           <div class="modal-content"><!---content--->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;">Discounts</h4>
-
             </div>
-
               <div class="modal-body">
                  <div class="container-fluid">
                      <div id="div_product_list">
@@ -797,7 +822,7 @@
                           </table>
                         </div>
                         <div class="enter-qty-header">Enter quantity</div>
-                         <input type="text" name="row_qty" id="row_qty" class="numeric form-control" style="height: 100px; font-size: 80px !important; text-align: center; color: green;" min="1" placeholder="0.00">
+                         <input type="text" name="row_qty" id="row_qty" class="numeric form-control" style="height: 100px; font-size: 80px !important; text-align: center; color: green;" min="1" placeholder="0.00" autocomplete="off">
                        </form>
                     </div>
                </div>
@@ -805,6 +830,86 @@
           </div><!---content---->
       </div>
   </div><!---modal-->
+
+  <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" ><!--modal-->
+      <div class="modal-dialog" style="top: 25%; width: 350px !important;">
+          <div class="modal-content"><!---content--->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
+                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user fa-size"></span> Authorization</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
+               <div class="container-fluid">
+                 <div class="input-group">
+                   <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                    <i class="fa fa-lock" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                   <input type="password" class="form-control" name="void_pwd" id="void_pwd" style="font-size: 15pt !important;">
+                 </div>
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important;">
+                   <button id="void_pwd_btn" type="button" style="width: 40%;" class="btn btn-primary">OK</button>
+                   <button type="button" class="btn btn-danger" style="width: 40%;" data-dismiss="modal" aria-label="Close">
+                       Cancel</button>
+                 </div>
+               </div>
+          </div><!---content---->
+      </div>
+  </div><!---modal-->
+
+
+  <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog" id="modal-senior">
+          <div class="modal-content">
+              <div class="modal-header bgm-indigo" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
+                  <h4 class="modal-title"><center style="font-weight: bold;">Senior Citizen Information</center></h4>
+              </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
+                  <form id="frm_senior">
+                  <div class="container-fluid">
+                        <div class="row">
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                          <input type="text" id="seniorID" class="form-control" style="font-size: 12pt !important;" placeholder="Senior ID" data-error-msg="Senior ID is required." required>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                      <input type="text" id="seniorName" class="form-control" style="font-size: 12pt !important;" placeholder="Name" data-error-msg="Senior name is required." required>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                          <div class="form-group">
+                              <div class="col-sm-12">
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
+                                      <input type="text" id="seniorAddress" class="form-control" style="font-size: 12pt !important;" placeholder="Address" data-error-msg="Address is required." required>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+              </form>
+              <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                <div class="row" style="text-align: center !important;">
+                  <button id="c_btn" type="button" style="width: 38%;" class="btn btn-primary">Save</button>
+                  <button id="cancel-btn" type="button" class="btn btn-danger" style="width: 38%;" data-dismiss="modal" aria-label="Close">
+                      Cancel</button>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -839,7 +944,8 @@
     <script type="text/javascript">
 
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
-    var row; var rowhead; var itemcount = 0;
+    var row; var rowhead; var itemcount = 0; var seniorcitizenid; var dataDiscount; var dataDiscountDesc;
+    var sc; var discounted_price = 0; var line_total_discount= 0; var line_total=0; var net_vat=0; var vat_input=0;
       $('#txtsearch').focus(400);
       var oTableItems={
           desc : 'td:eq(0)',
@@ -1292,13 +1398,6 @@
               var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
               var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
 
-              if(discount>price){
-                  showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
-                  row.find(oTableItems.discount).find('input.numeric').val('0.00');
-                  //$(this).trigger('keyup');
-                  //return;
-              }
-
               var discounted_price=price-discount;
               var line_total_discount=discount*qty;
               var line_total=discounted_price*qty;
@@ -1351,24 +1450,99 @@
           }
         });
 
+        var authorization=(function(){
+           var _data={pword : $('input[name="void_pwd"]').val()};
+
+                   return $.ajax({
+                       "dataType":"json",
+                       "type":"POST",
+                       "url":"Authorization/transaction/chck_authorization",
+                       "data" : _data,
+                       "beforeSend": function(){
+
+                       }
+             });
+       });
+
+       $('#void_pwd').keypress(function(evt){
+           if(evt.keyCode==13){
+             $('#void_pwd_btn').click();
+           }
+         });
+
+         var void_notif=function(itemname){
+           swal({
+                   title: "",
+                   type: "warning",
+                   text: "Are you sure want to void "+ itemname +"?",
+                   closeOnConfirm: true,
+                   allowOutsideClick: false,
+                   showConfirmButton: true,
+                   closeOnCancel: true,
+                   confirmButtonColor: '#4CAF50',
+                   cancelButtonText: "Cancel",
+                   confirmButtonText: "Yes",
+                   showCancelButton: true,
+                   reverseButtons: true,
+                   focusOnCancel: true,
+                   allowEnterKey: true,
+                   customClass: 'void-notif-class',
+               },function(isConfirm){
+                  if (isConfirm) {
+                      row.remove();
+                      row=$('#tbl_items tr').last();
+                      $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
+                      row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
+                      row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
+                      row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
+                      row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+                      reComputeTotal();
+                      reComputeChange();
+                   } else {
+                   }
+
+                   countCart();
+                   $('#txtsearch').focus();
+                   _objTypeHead.typeahead('close');
+               });
+         };
+
+       $('#void_pwd_btn').click(function(){
+         authorization().done(function(response){   //End Batch
+   			 var checking = response['stat'];
+       			if(checking=="success")
+       			{
+       				$('#modal_void').modal('hide');
+
+              if (_txnMode == "void"){
+                var desc_name = row.find(oTableItems.desc).find('.row_desc').text();
+                void_notif(desc_name);
+              }
+              else if (_txnMode == "cancel"){
+                cancel_notif();
+              }
+       			}
+       			else{
+       				showNotification(response);
+       			}
+          countCart();
+          reComputeTotal();
+          reComputeChange();
+   			  });
+       });
+
 
         $('#btn_void').click(function(){
           if (itemcount != 0){
-            row.remove();
-            row=$('#tbl_items tr').last();
-            $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
-            row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-            row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-            row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-            row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+            _txnMode = "void";
+            $('#modal_void').modal('show');
+            $('#void_pwd').val("");
+            $('#void_pwd').focus(500).select();
           }
           else {
             var voidtitle = "No items to void.";
             swalpopup(voidtitle);
           }
-          countCart();
-          reComputeTotal();
-          reComputeChange();
         });
 
         $(document).keydown(function(event) {
@@ -1379,33 +1553,34 @@
 
         var cancel_notif=function(type){
           swal({
-                  title: "Are you sure want to cancel transaction?",
+                  title: "Are you sure want to cancel this transaction?",
                   type: "warning",
                   closeOnConfirm: true,
                   closeOnCancel: true,
                   showCancelButton: true,
                   cancelButtonText: "No",
                   confirmButtonText: "Yes",
+                  confirmButtonColor: '#4CAF50',
               },function(isConfirm){
                   if (isConfirm) {
                         $('#tbl_items tbody tr').remove();
-                        reComputeTotal();
-                        reComputeChange();
+                  } else {}
 
-                        $('#txtsearch').focus();
-                        _objTypeHead.typeahead('close');
-                  } else {
-                      swal("Cancelled", "", "error");
-                      countCart();
-                  }
+                  $('#txtsearch').focus();
+                  _objTypeHead.typeahead('close');
+                  countCart();
+                  reComputeTotal();
+                  reComputeChange();
               });
         };
 
 
         $('#btn_cancel').click(function(){
           if (itemcount != 0){
-            cancel_notif();
-            itemcount = 0;
+            _txnMode = "cancel";
+            $('#modal_void').modal('show');
+            $('#void_pwd').val("");
+            $('#void_pwd').focus(500).select();
           }
           else {
             var stitle = "No items to cancel.";
@@ -1495,16 +1670,33 @@
         }
     };
 
+    var showNotificationDiscount=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat,
+            addClass: 'pnotify_class',
+            nonblock: {
+              nonblock: true
+            }
+
+        });
+        PNotify.prototype.options.delay ? (function() {
+            PNotify.prototype.options.delay = 800;
+            update_timer_display();
+        }()) : (alert('Timer is already at zero.'))
+
+    };
+
     var showNotification=function(obj){
         PNotify.removeAll(); //remove all notifications
         new PNotify({
             title:  obj.title,
             text:  obj.msg,
-            type:  obj.stat
+            type:  obj.stat,
         });
     };
-
-
 
     var showSpinningProgress=function(e){
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
@@ -1627,16 +1819,6 @@
         text: "Not Enough Funds.",
         imageUrl: "assets/img/warning.png"
       });
-    };
-
-
-    var showNotification=function(obj){
-        PNotify.removeAll();
-        new PNotify({
-            title:  obj.title,
-            text:  obj.msg,
-            type:  obj.stat
-        });
     };
 
 
@@ -1863,23 +2045,17 @@
 				oopsnotice();
 			}
 			else{
-			if(parseFloat(tendered)>=parseFloat(amountdue)){
-
-			validaterequirefields();
-
-				//go to validate requirefields function if true
+  			if(parseFloat(tendered)>=parseFloat(amountdue)){
+            validaterequirefields();
+            $('#btn_bcode').click();
+  			}
+  			else{
+  				oopsfunds();
+  			}
 			}
-			else{
-				oopsfunds();
-			}
-			}
-
-
 		});
 
     $('#cash').keypress(function(evt){
-        if(evt.keyCode == 13){
-          event.preventDefault();
           var scash = $("#cash").val();
           var samountdue = $("#amountdue").val();
     			var amountdue = samountdue.replace(/,/g, "");
@@ -1893,89 +2069,82 @@
             if(parseFloat(scash)>=parseFloat(samountdue))
             {
               validaterequirefields();
+              $('#btn_bcode').click();
             }
             else if(parseFloat(scash)<parseFloat(samountdue)){
               oopsfunds();
             }
       			else if(parseFloat(tendered)>=parseFloat(amountdue)){
-      			validaterequirefields();
-      				//go to validate requirefields function if true
+        			validaterequirefields();
+              $('#btn_bcode').click();
       			}
       			else{
       				oopsfunds();
       			}
     			}
-        }
       });
 
     var validaterequirefields=function(){
+
 			var scheckamount = $('#checkamount').val();
 			var checkamount = scheckamount.replace(/,/g, "");
 			var scardamount = $('#cardamount').val();
 			var cardamount = scardamount.replace(/,/g, "");
 			var schargeamount = $('#chargeamount').val();
 			var chargeamount = schargeamount.replace(/,/g, "");
-
 			var checkbank = $('#check_bank').val();
 			var checknumber = $('#check_number').val();
-
 			var cardholder = $('#cardholder').val();
 			var cardnumber = $('#cardnum').val();
 			var cardapprovalnum = $('#approvalnum').val();
-
 			var chargeto = $('#chargeto').val();
 
 			if(parseFloat(checkamount)!="0"){
 					if(checkbank==""){
-					bankisrequired();
-					return;
+  					bankisrequired();
+  					return;
 					}
 					if(checknumber==""){
-					checknumberisrequired();
-					return;
+  					checknumberisrequired();
+  					return;
 					}
 
 				}
 			if(parseFloat(cardamount)!="0"){
 					if(cardholder==""){
-					cardholderisrequired();
-					return;
+  					cardholderisrequired();
+  					return;
 					}
 					if(cardnumber==""){
-					cardnumberisrequired();
-					return;
+  					cardnumberisrequired();
+  					return;
 					}
 					if(cardapprovalnum==""){
-					cardapprovalisrequired();
-					return;
+  					cardapprovalisrequired();
+  					return;
 					}
 				}
 
 			if(parseFloat(chargeamount)!="0"){
 					if(chargeto==""){
-					chargetofieldisrequired();
-					return;
+  					chargetofieldisrequired();
+  					return;
 					}
 				}
 					//if all condtion is false -> proceed
 				createPurchaseOrder().done(function(response){   //Create Purchase
-        showNotification(response);
-				var payment_id=response.pos_payment_id;
-				$("#payment_id").val(payment_id);
-				clearFields();
-				reComputeTotal();
-				$('#cart_count').text("0 rows");
-				$("#modal_payment").modal('hide');
-				window.open("Templates/layout/pospr/"+payment_id+"/print");
-        $('#txtsearch').focus(3000);
-        _objTypeHead.typeahead('close');
-        _objTypeHead.typeahead('val','');
-
-        swal("Finish!", "Transaction Complete.", "success", "10");
-        $.unblockUI();
+          showNotification(response);
+  				var payment_id=response.pos_payment_id;
+  				$("#payment_id").val(payment_id);
+  				clearFields();
+  				reComputeTotal();
+  				$('#cart_count').text("0 rows");
+  				$("#modal_payment").modal('hide');
+  				window.open("Templates/layout/pospr/"+payment_id+"/print");
+          countCart();
+          swal("Finish!", "Transaction Complete.", "success");
+          $.unblockUI();
 				});
-
-
     };
 
     var synchronizeFields=function(){
@@ -2209,49 +2378,22 @@
     }
 
     $('#tbl_discounts tbody').on( 'click', 'button[name="applyDiscount"]', function () {
-      row.find(oTableItems.discount).find('input.numeric').val(parseFloat($('#row_qty').val()).toFixed(2));
+      //row.find(oTableItems.discount).find('input.numeric').val(parseFloat($('#row_qty').val()).toFixed(2));
       //var sc = row.find(oTableItems.net_vat).find('input.numeric').val();
 
       _selectRowObj=$(this).closest('tr');
       var data=dt.row(_selectRowObj).data();
       var seniorcitizenid = data.discount_id;
       var dataDiscount = data.discount_percent;
-      var sc;
+      var dataDiscountDesc = data.discount_desc;
+      sc = row.find(oTableItems.sale_cost).find('input.numeric').val();
 
       if (seniorcitizenid == 2){
-        sc = row.find(oTableItems.net_vat).find('input.numeric').val();
+        $('#modal_senior_citizen').modal('show');
+        $('#seniorID').focus();
 
-        var countdiscount = ((parseFloat(sc)*(dataDiscount/100)));
-        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(countdiscount).toFixed(2));
-        var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
-        var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
-        var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
-        var tax_rate=0;
-
-        if(discount>price){
-            showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
-            row.find(oTableItems.discount).find('input.numeric').val('0.00');
-            //$(this).trigger('keyup');
-            //return;
-        }
-
-        var discounted_price=price-discount;
-        var line_total_discount=discount*qty;
-        var line_total=discounted_price*qty;
-        var net_vat=line_total;
-        var vat_input=line_total-net_vat;
-
-        $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
-        $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
-        $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
-        $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-
-        reComputeTotal();
-        reComputeChange();
       }
       else {
-        sc = row.find(oTableItems.sale_cost).find('input.numeric').val();
-
         var countdiscount = ((parseFloat(sc)*(dataDiscount/100)));
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(countdiscount).toFixed(2));
         var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
@@ -2259,18 +2401,14 @@
         var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
         var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()))/100;
 
-        if(discount>price){
-            showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
-            row.find(oTableItems.discount).find('input.numeric').val('0.00');
-            //$(this).trigger('keyup');
-            //return;
-        }
+        var computeTotalDiscount = qty*countdiscount;
+        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(computeTotalDiscount).toFixed(2));
 
-        var discounted_price=price-discount;
-        var line_total_discount=discount*qty;
-        var line_total=discounted_price*qty;
-        var net_vat=line_total/(1+tax_rate);
-        var vat_input=line_total-net_vat;
+        discounted_price=price-discount;
+        line_total_discount=discount*qty;
+        line_total=((price*qty)-computeTotalDiscount);
+        net_vat=line_total/(1+tax_rate);
+        vat_input=line_total-net_vat;
 
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
         $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
@@ -2279,11 +2417,57 @@
 
         reComputeTotal();
         reComputeChange();
+        $('#modal_browse_discounts').modal('hide');
+        showNotificationDiscount({title:"Discount Applied",stat:"success",msg:""+dataDiscountDesc+""});
+        $('#txtsearch').focus();
+        _objTypeHead.typeahead('close');
       }
+    });
 
-      $('#modal_browse_discounts').modal('hide');
-      $('#txtsearch').focus();
-      _objTypeHead.typeahead('close');
+    $('#c_btn').click(function(){
+      
+      var data=dt.row(_selectRowObj).data();
+      var seniorcitizenid = data.discount_id;
+      var dataDiscount = data.discount_percent;
+      var dataDiscountDesc = data.discount_desc;
+      sc = row.find(oTableItems.sale_cost).find('input.numeric').val();
+
+      if(validateRequiredFields($('#frm_senior'))){
+        var tax_rate_sc = row.find(oTableItems.tax).find('input.numeric').val();
+        var discountCitizen = (dataDiscount/100);
+        var exemptVAT = ((parseFloat(sc)/parseFloat(tax_rate_sc)));
+        var SeniorCitizenDiscount = (parseFloat(exemptVAT)*parseFloat(discountCitizen));
+        var AmountCollectible = (parseFloat(exemptVAT)-parseFloat(SeniorCitizenDiscount));
+
+        var countdiscount = ((parseFloat(sc)*(dataDiscount/100)));
+        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(SeniorCitizenDiscount).toFixed(2));
+
+        var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
+        var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
+        var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
+        var tax_rate=0;
+
+        discounted_price=price-discount;
+        line_total_discount=discount*qty;
+        line_total=AmountCollectible*qty;
+        net_vat=line_total;
+        vat_input=line_total-net_vat;
+
+        var TotalSeniorCitizenDiscount = qty*SeniorCitizenDiscount;
+        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(TotalSeniorCitizenDiscount).toFixed(2));
+        $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
+        $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
+        $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
+        $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
+
+        reComputeTotal();
+        reComputeChange();
+        $('#modal_senior_citizen').modal('hide');
+        $('#modal_browse_discounts').modal('hide');
+        showNotificationDiscount({title:"Discount Applied",stat:"success",msg:""+dataDiscountDesc+""});
+        $('#txtsearch').focus();
+        _objTypeHead.typeahead('close');
+      }
     });
 
     $('#tbl_products tbody').on( 'click', 'button[name="addtocart_close"]', function () {
@@ -2303,15 +2487,14 @@
 			// var d_product_id = dataArray[5];
 
 			    var tax_id="1";
-                var tax_rate=data.tax_rate;
+          var tax_rate=data.tax_rate;
 
-                var total=getFloat(data.sale_cost);
-                var net_vat=0;
-                var vat_input=0;
+          var total=getFloat(data.sale_cost);
+          var net_vat=0;
+          var vat_input=0;
 
-
-                    net_vat=total/(1+(getFloat(tax_rate)/100));
-                    vat_input=total-net_vat;
+          net_vat=total/(1+(getFloat(tax_rate)/100));
+          vat_input=total-net_vat;
 			//Use dataArray here
 					$('#tbl_items > tbody').append(newRowItem({
                     pos_qty : "1",

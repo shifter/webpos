@@ -104,7 +104,7 @@
             <li class=""><a href="Products"><i class="fa fa-product-hunt"></i> Products</a></li>
             <li class="right_supplier_view"><a href="Suppliers"><i class="fa fa-user"></i> Suppliers</a></li>
             <li class=""><a href="Customers"><i class="fa fa-user"></i> Customers</a></li>
-            <li class=""><a href=""><i class="fa fa-wrench"></i> Stock Adjustment</a></li>
+            <li class=""><a href="Adjustment"><i class="fa fa-wrench"></i> Stock Adjustment</a></li>
           </ul>
         </li>
         <li class="treeview">
