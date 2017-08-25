@@ -33,10 +33,13 @@ class Suppliers extends CORE_Controller
             'tax_types.is_deleted = 0'
             );
         $this->load->view('suppliers_view', $data);
-        
+
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_suppliers = $this->Suppliers_model;
@@ -67,6 +70,14 @@ class Suppliers extends CORE_Controller
                 $m_suppliers->save();
 
                 $supplier_id = $m_suppliers->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $supplier_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_suppliers->supplier_code=$ecode;
+
+                $m_suppliers->modify($supplier_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

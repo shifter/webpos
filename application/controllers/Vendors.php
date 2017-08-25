@@ -26,6 +26,9 @@ class Vendors extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_vendors = $this->Vendors_model;
@@ -41,6 +44,14 @@ class Vendors extends CORE_Controller
                 $m_vendors->save();
 
                 $vendor_id = $m_vendors->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $vendor_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_vendors->vendor_code=$ecode;
+
+                $m_vendors->modify($vendor_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

@@ -47,6 +47,7 @@
                 <thead class="tbl-header">
                     <tr>
                         <!--<th>#</th>-->
+                        <th>Category Code</th>
                         <th>Category Name</th>
                         <th>Category Desc</th>
                         <th style="text-align:center;">Action</th>
@@ -57,6 +58,7 @@
                 <tfoot>
                     <tr>
                         <!--<th>#</th>-->
+                        <th>Category Code</th>
                         <th>Category Name</th>
                         <th>Category Desc</th>
                         <th style="text-align:center;">Action</th>
@@ -82,6 +84,17 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Category Code  :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="category_code" class="form-control" placeholder="AUTO" data-error-msg="Category Code is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Category Name  :</label>
                                     <div class="col-sm-8">
@@ -154,8 +167,9 @@
                 //     return meta.row + meta.settings._iDisplayStart + 1;
                 //   }
                 // },
-                { targets:[0],data: "category_name" },
-                { targets:[1],data: "category_desc" },
+                { targets:[0],data: "category_code" },
+                { targets:[1],data: "category_name" },
+                { targets:[2],data: "category_desc" },
                 {
 
                     targets:[2],

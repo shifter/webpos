@@ -87,7 +87,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-barcode" aria-hidden="true"></i></span>
-                                            <input type="text" name="discount_code" class="form-control" placeholder="Code" data-error-msg="Discount code is required." required>
+                                            <input type="text" name="discount_code" class="form-control" placeholder="AUTO" data-error-msg="Discount code is required." readonly>
                                     </div>
                                 </div>
                             </div>

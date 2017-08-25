@@ -108,7 +108,7 @@
                                                                 <span class="input-group-addon ">
                                                                     <i class="fa fa-code"></i>
                                                                 </span>
-                                    <input type="text" name="dr_invoice_no" class="form-control" placeholder="Doc No" data-error-msg="Doc # is required." required>
+                                    <input type="text" name="dr_invoice_no" class="form-control" placeholder="AUTO" data-error-msg="Doc # is required." disabled>
                                 </div>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                                       <th width="10%">Qty</th>
                                       <th width="30%">Item</th>
                                       <th width="12%" style="text-align: right">Cost</th>
-                                      <th width="12%" style="text-align: right">Discount</th>
+                                      <th width="12%" style="text-align: right">Discount %</th>
                                       <th style="display: none;">T.D</th> <!-- total discount -->
                                       <th>Tax %</th>
                                       <th width="12%" style="text-align: right">Total</th>
@@ -197,6 +197,7 @@
                                       <th style="display: none;">N.V</th> <!-- net of vat -->
                                       <td style="display: none;">Item ID</td><!-- product id -->
                                       <td style="display: none;">Po Item ID</td><!-- po_item_id -->
+                                      <td style="display: none;">D Qty</td>
                                       <th><center>Action</center></th>
                                   </tr>
                                   </thead>
@@ -211,7 +212,11 @@
                                   <table id="tbl_delivery_summary" class="table invoice-total">
                                       <tbody>
                                       <tr>
-                                          <td class="black">Discount :</td>
+                                        <td class="black">Discount %:</td>
+                                        <td width="47%" align"right" class="black"><input id="disctototal" name="discount" type="text" class="numeric form-control" ></td>
+                                      </tr>
+                                      <tr>
+                                          <td class="black">Total Discount :</td>
                                           <td align="right" class="black">0.00</td>
                                       </tr>
                                       <tr>
@@ -249,40 +254,134 @@
     <!-- /.content -->
   </div>
   <div id="modal_new_supplier" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-      <div class="modal-dialog modal-md">
-          <div class="modal-content"><!---content--->
-              <div class="modal-header">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title"><span id="modal_mode"> </span>New Supplier</h4>
-              </div>
-              <div class="modal-body">
-                  <form id="frm_supplier_new">
-                      <div class="form-group">
-                          <label>* Supplier :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-users"></i>
-                              </span>
-                              <input type="text" name="supplier_name" class="form-control" placeholder="Supplier" data-error-msg="Supplier name is required." required>
-                          </div>
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header bgm-indigo">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="xbutton">×</span></button>
+                <h4 class="modal-title">Supplier : <transaction class="transaction"></transaction></h4>
+            </div>
+            <div class="modal-body">
+                <form id="frm_supplier_new">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Code :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_code" class="form-control" placeholder="AUTO" data-error-msg="Supplier Name is required." readonly>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                          <label>* Email :</label>
-                          <div class="input-group">
-                              <span class="input-group-addon">
-                                  <i class="fa fa-envelope-o"></i>
-                              </span>
-                              <input type="text" name="email_address" class="form-control" placeholder="Email" data-error-msg="Email address is required." required>
-                          </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="supplier">Supplier Name :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="supplier_name" class="form-control" placeholder="Supplier Name" data-error-msg="Supplier Name is required." required>
+                                </div>
+                            </div>
+                        </div>
                       </div>
-                  </form>
-              </div>
-              <div class="modal-footer">
-                  <button id="btn_create_user_suppliers" type="button" class="btn btn-primary"  style="text-transform: capitalize;"><span class=""></span> Create</button>
-                  <button id="btn_close_user_suppliers" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;">Cancel</button>
-              </div>
-          </div><!---content---->
-      </div>
+                       <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="tin#">TIN # :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="tin_no" class="form-control" placeholder="TIN #">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="contactperson">Contact Person :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="contact_person" class="form-control" placeholder="Contact Person">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="address" class="form-control" placeholder="Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Email Address :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa-size" aria-hidden="true"></i></span>
+                                        <input type="email" name="email_address" class="form-control" placeholder="Email Address">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Landline :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="landline" class="form-control" placeholder="Landline">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="address">Mobile No :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <input type="text" name="mobile_no" class="form-control" placeholder="Mobile No#">
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="row" style="margin-top:5px;">
+                        <div class="form-group">
+                            <label class="col-sm-4" style="margin-top:8px;" for="vat">Vatted :</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-phone fa-size" aria-hidden="true"></i></span>
+                                        <select name="vatted" id="cbo_vatted" data-error-msg="Vatted is required." required>
+                                        <?php foreach($tax_types as $vat){ ?>
+                                            <option value="<?php echo $vat->tax_type_id; ?>"><?php echo $vat->tax_type; ?></option>
+                                        <?php } ?>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <div class="modal-footer" >
+                <button id="btn_create_user_suppliers" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                </button>
+                <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
   </div><!---modal-->
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -331,10 +430,11 @@ bloodhound.min.js"></script>
 
 
         var oTableDetails={
-            discount : 'tr:eq(0) > td:eq(1)',
-            before_tax : 'tr:eq(1) > td:eq(1)',
-            tax_amount : 'tr:eq(2) > td:eq(1)',
-            after_tax : 'tr:eq(3) > td:eq(1)'
+            disctototal : 'tr:eq(0) > td:eq(1)',
+            discount : 'tr:eq(1) > td:eq(1)',
+            before_tax : 'tr:eq(2) > td:eq(1)',
+            tax_amount : 'tr:eq(3) > td:eq(1)',
+            after_tax : 'tr:eq(4) > td:eq(1)'
         };
 
         var initializeControls=function(){
@@ -447,7 +547,8 @@ bloodhound.min.js"></script>
             dr_line_total_price : total,
             dr_non_tax_amount: net_vat,
             dr_tax_amount:vat_input,
-            po_item_id:"0"
+            po_item_id:"0",
+            delivered_qty:"0"
         }));
 
         reInitializeNumeric();
@@ -497,7 +598,11 @@ bloodhound.min.js"></script>
         } );
 
 
-
+        _cboVat=$("#cbo_vatted").select2({
+                placeholder: "Please Select.",
+                allowClear: true
+            });
+        _cboVat.select2('val',null);
 
         $('#tbl_po_list tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
@@ -550,7 +655,7 @@ bloodhound.min.js"></script>
             allowClear: true
         });
         _cboPO.select2('val',null);
-        
+
         _cboPO.on("select2:select", function (e) {
 
             var i=$(this).select2('val');
@@ -578,7 +683,7 @@ bloodhound.min.js"></script>
                     $.each(rows,function(i,value){
                         //alert(value.non_tax_amount);
                         $('#tbl_items > tbody').prepend(newRowItem({
-                            dr_qty : value.po_qty,
+                            dr_qty : value.po_qty-value.delivered_qty,
                             product_code : value.product_code,
                             product_id: value.product_id,
                             product_desc : value.product_desc,
@@ -592,7 +697,8 @@ bloodhound.min.js"></script>
                             dr_non_tax_amount: value.non_tax_amount,
                             dr_tax_amount:value.tax_amount,
                             po_item_id: value.po_item_id,
-                            drqty: value.po_qty
+                            drqty: value.po_qty,
+                            delivered_qty: value.delivered_qty
                         }));
 
 
@@ -705,6 +811,7 @@ bloodhound.min.js"></script>
                 });
                 $('#cbo_po').select2('val',data.purchase_order_id);
                 $('#cbo_po').attr("disabled", 'disabled');
+                $('#disctototal').val(data.total_discount_all);
               });
             resetSummary();
 
@@ -745,7 +852,9 @@ bloodhound.min.js"></script>
                             tax_type_id : null,
                             dr_line_total_price : value.dr_line_total_price,
                             dr_non_tax_amount: value.dr_non_tax_amount,
-                            dr_tax_amount:value.dr_tax_amount
+                            dr_tax_amount:value.dr_tax_amount,
+                            po_item_id:value.po_item_id,
+                            delivered_qty:value.dr_qty
                         }));
 
 
@@ -800,13 +909,13 @@ bloodhound.min.js"></script>
                 row.find(oTableItems.qty).find('input.numeric').val(drqty);
             }
 
-            if(discount>price){
-                showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than unit price."});
+            if(discount>100){
+                showNotification({title:"Invalid",stat:"error",msg:"Discount must not greater than 100."});
                 row.find(oTableItems.discount).find('input.numeric').val('');
             }
 
-            var discounted_price=price-discount;
-            var line_total_discount=discount*qty;
+            var discounted_price=price-(price*(discount/100));
+            var line_total_discount=(price*(discount/100))*qty;
             var line_total=discounted_price*qty;
             var net_vat=line_total/(1+tax_rate);
             var vat_input=line_total-net_vat;
@@ -820,6 +929,10 @@ bloodhound.min.js"></script>
             reComputeTotal();
 
 
+        });
+
+        $('#disctototal').on('keyup',function(){
+            reComputeTotal();
         });
 
         $('#btn_cancel').click(function(){
@@ -882,7 +995,7 @@ bloodhound.min.js"></script>
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
         _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
-
+        _data.push({name : "summary_discount_total", value :  $('#disctototal').val()});
         return $.ajax({
             "dataType":"json",
             "type":"POST",
@@ -900,6 +1013,7 @@ bloodhound.min.js"></script>
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
         _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
+        _data.push({name : "summary_discount_total", value : $('#disctototal').val()});
         _data.push({name : "dr_invoice_id" ,value : _selectedID});
 
         return $.ajax({
@@ -980,8 +1094,9 @@ bloodhound.min.js"></script>
         '<td style="display: none;"><input name="dr_tax_amount[]" type="text" class="numeric form-control" value="'+ d.dr_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="dr_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.dr_non_tax_amount+'" readonly></td>'+
         '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
-        '<td style="display: none;"><input name="po_item_id[]" type="text" class="numeric form-control" value="'+ d.po_item_id+'" readonly></td>'+
+        '<td style="display: none;"><input name="po_item_id[]" type="text" class="form-control" value="'+ d.po_item_id+'" readonly></td>'+
         '<td style="display: none;"><input name="drqty[]" type="text" class="numeric form-control" value="'+ d.drqty+'" readonly></td>'+
+        '<td style="display: none;"><input name="delivered_qty[]" type="text" class="numeric form-control" value="'+ d.delivered_qty +'" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
@@ -992,7 +1107,7 @@ bloodhound.min.js"></script>
         var rows=$('#tbl_items > tbody tr');
         var tbl_summary=$('#tbl_delivery_summary');
 
-        var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0;
+        var disctl=0; var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0;
 
         $.each(rows,function(){
             discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));
@@ -1001,10 +1116,31 @@ bloodhound.min.js"></script>
             after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
 
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
-        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
+        var disc= $('#disctototal').val();
+        var grandtotal;
+        var totaldisc;
+        var totalbeforetax;
+        var totaltaxamount;
+
+        if (disc == ""){
+          disctl = 0.00;
+          grandtotal = after_tax;
+          totaldisc = discounts;
+          totalbeforetax = before_tax;
+          totaltaxamount = tax_amount;
+        }
+        else{
+          disctl = $('#disctototal').val();
+          grandtotal = after_tax - after_tax * (parseFloat(disctl)/100);
+          totaldisc = discounts + after_tax * (parseFloat(disctl)/100);
+          totalbeforetax = before_tax - before_tax * (parseFloat(disctl)/100);
+          totaltaxamount = grandtotal - totalbeforetax;
+        }
+
+        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(totaldisc,2));
+        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(totalbeforetax,2));
+        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(totaltaxamount,2));
+        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(grandtotal,2)+'</b>');
 
     };
 

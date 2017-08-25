@@ -34,6 +34,9 @@ class Cards extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_cards = $this->Card_model;
@@ -47,6 +50,14 @@ class Cards extends CORE_Controller
                 $m_cards->save();
 
                 $card_id = $m_cards->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $card_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_cards->card_code=$ecode;
+
+                $m_cards->modify($card_id);
 
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';

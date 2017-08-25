@@ -46,6 +46,7 @@
               <table id="tbl_brands" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
+                        <th >Brand Code</th>
                         <th >Brand Name</th>
                         <th >Brand Desc</th>
                         <th style="text-align:center;">Action</th>
@@ -55,6 +56,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th >Brand Code</th>
                         <th >Brand Name</th>
                         <th >Brand Desc</th>
                         <th style="text-align:center;">Action</th>
@@ -80,6 +82,17 @@
                           <div class="row">
                             <div class="col-md-12">
                               <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Brand Code  :</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                                <input type="text" name="brand_code" class="form-control" placeholder="AUTO" data-error-msg="Brand Name is required." readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
                                     <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Brand Name  :</label>
                                     <div class="col-sm-8">
@@ -147,8 +160,9 @@
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "ajax" : "Brands/transaction/list",
             "columns": [
-                { targets:[0],data: "brand_name" },
-                { targets:[1],data: "brand_desc" },
+                { targets:[0],data: "brand_code" },
+                { targets:[1],data: "brand_name" },
+                { targets:[2],data: "brand_desc" },
                 {
 
                     targets:[2],

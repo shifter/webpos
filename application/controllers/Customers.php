@@ -29,6 +29,9 @@ class Customers extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_customers = $this->Customers_model;
@@ -57,6 +60,14 @@ class Customers extends CORE_Controller
                 $m_customers->save();
 
                 $customer_id=$m_customers->last_insert_id();//get last insert id
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $customer_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_customers->customer_code=$ecode;
+
+                $m_customers->modify($customer_id);
 
                 $response['title']='Success!';
                 $response['stat']='success';

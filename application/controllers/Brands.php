@@ -26,6 +26,9 @@ class Brands extends CORE_Controller
     }
 
     function transaction($txn = null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn) {
             case 'list':
                 $m_brands = $this->Brands_model;
@@ -43,6 +46,13 @@ class Brands extends CORE_Controller
 
                 $brand_id = $m_brands->last_insert_id();
 
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $brand_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_brands->brand_code=$ecode;
+
+                $m_brands->modify($brand_id);
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
                 $response['msg'] = 'Brand information successfully created.';
