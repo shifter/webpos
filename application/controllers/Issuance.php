@@ -14,6 +14,7 @@ class Issuance extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Issuance_item_model');
         $this->load->model('Purchases_model');
+        $this->load->model('Location_model');
 
     }
 
@@ -30,12 +31,8 @@ class Issuance extends CORE_Controller
 
 
         //data required by active view
-        $data['suppliers']=$this->Suppliers_model->get_list(
-            null,
-            'suppliers.*,IFNULL(tax_types.tax_rate,0)as tax_rate',
-            array(
-                array('tax_types','tax_types.tax_type_id=suppliers.tax_type_id','left')
-            )
+        $data['location']=$this->Location_model->get_list(
+          'locations.is_deleted = 0'
         );
 
 
@@ -47,6 +44,9 @@ class Issuance extends CORE_Controller
     }
 
     function transaction($txn = null,$id_filter=null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn){
           case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
               $m_issuance=$this->Issuance_model;
@@ -55,10 +55,9 @@ class Issuance extends CORE_Controller
                     'issuance.*,
                     DATE_FORMAT(issuance.date_issued,"%m/%d/%Y")as date_issued,
                     remarks as remarks,
-                    suppliers.supplier_name,
-    		            suppliers.supplier_name',
+    		            locations.location_name',
                 array(
-                    array('suppliers','suppliers.supplier_id=issuance.supplier_id','left')
+                    array('locations','locations.location_id=issuance.location_id','left')
                 )
               );
               echo json_encode($response);
@@ -73,12 +72,9 @@ class Issuance extends CORE_Controller
                         'issuance_items.*',
                         'products.product_code',
                         'products.product_desc',
-                        'units.unit_id',
-                        'units.unit_name'
                     ),
                     array(
                         array('products','products.product_id=issuance_items.product_id','left'),
-                        array('units','units.unit_id=issuance_items.unit_id','left')
                     ),
                     'issuance_items.issuance_items_id DESC'
                 );
@@ -96,8 +92,8 @@ class Issuance extends CORE_Controller
 	              $m_products=$this->Products_model;
 
                 //$m_issuance->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_issuance->issuance_no=$this->input->post('issuance_no',TRUE);
-                $m_issuance->supplier_id=$this->input->post('supplier',TRUE);
+                $m_issuance->location_id=$this->input->post('location',TRUE);
+                $m_issuance->issued_to=$this->input->post('issued_to', TRUE);
                 $m_issuance->remarks=$this->input->post('remarks',TRUE);
                 $m_issuance->date_issued=date('Y-m-d',strtotime($this->input->post('date_received',TRUE)));
                 $m_issuance->posted_by_user=$this->session->user_id;
@@ -109,6 +105,15 @@ class Issuance extends CORE_Controller
                 $m_issuance->save();
 
                 $issuance_id=$m_issuance->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $issuance_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_issuance->issuance_no=$ecode;
+                $m_issuance->modify($issuance_id);
+
+
                 $m_issuance_items=$this->Issuance_item_model;
 
                 $prod_id=$this->input->post('product_id',TRUE);
@@ -129,14 +134,7 @@ class Issuance extends CORE_Controller
     							   array(
     								  'issuance_id' => $issuance_id,
     								  'product_id' => $prod_id[$i],
-    								  'is_qty' => $is_qty[$i],
-    								  'is_price' => $is_price[$i],
-    								  'is_discount' => $is_discount[$i],
-    								  'is_line_total_discount' => $is_line_total_discount[$i],
-    								  'is_tax_rate' => $is_tax_rate[$i],
-    								  'is_line_total_price' => $is_line_total_price[$i],
-    								  'is_tax_amount' => $is_tax_amount[$i],
-    								  'is_non_tax_amount' => $is_non_tax_amount[$i]
+    								  'is_qty' => $is_qty[$i]
     							   );
 
 
@@ -152,10 +150,9 @@ class Issuance extends CORE_Controller
                 'issuance.*,
                 DATE_FORMAT(issuance.date_issued,"%m/%d/%Y")as date_issued,
                 remarks as remarks,
-                suppliers.supplier_name,
-                suppliers.supplier_name',
+                locations.location_name',
                   array(
-                      array('suppliers','suppliers.supplier_id=issuance.supplier_id','left')
+                      array('locations','locations.location_id=issuance.location_id','left')
                   )
                 );
               echo json_encode($response);
@@ -170,8 +167,8 @@ class Issuance extends CORE_Controller
 		            $m_products=$this->Products_model;
                 $issuance_id=$this->input->post('issuance_id',TRUE);
                 //$m_issuance->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_issuance->issuance_no=$this->input->post('issuance_no',TRUE);
-                $m_issuance->supplier_id=$this->input->post('supplier',TRUE);
+                $m_issuance->location_id=$this->input->post('location',TRUE);
+                $m_issuance->issued_to=$this->input->post('issued_to',TRUE);
                 $m_issuance->remarks=$this->input->post('remarks',TRUE);
                 $m_issuance->date_issued=date('Y-m-d',strtotime($this->input->post('date_received',TRUE)));
                 $m_issuance->posted_by_user=$this->session->user_id;
@@ -202,13 +199,6 @@ class Issuance extends CORE_Controller
 		               $m_issuance_items->issuance_id=$issuance_id;
                     $m_issuance_items->product_id=$prod_id[$i];
                     $m_issuance_items->is_qty=$is_qty[$i];
-                    $m_issuance_items->is_price=$this->get_numeric_value($is_price[$i]);
-                    $m_issuance_items->is_discount=$this->get_numeric_value($is_discount[$i]);
-                    $m_issuance_items->is_line_total_discount=$this->get_numeric_value($is_line_total_discount[$i]);
-                    $m_issuance_items->is_tax_rate=$this->get_numeric_value($is_tax_rate[$i]);
-                    $m_issuance_items->is_line_total_price=$this->get_numeric_value($is_line_total_price[$i]);
-                    $m_issuance_items->is_tax_amount=$this->get_numeric_value($is_tax_amount[$i]);
-                    $m_issuance_items->is_non_tax_amount=$this->get_numeric_value($is_non_tax_amount[$i]);
 	                  $m_issuance_items->save();
 
                 }
@@ -221,10 +211,9 @@ class Issuance extends CORE_Controller
                       'issuance.*,
                       DATE_FORMAT(issuance.date_issued,"%m/%d/%Y")as date_issued,
                       remarks as remarks,
-                      suppliers.supplier_name,
-                      suppliers.supplier_name',
+                      locations.location_name',
                         array(
-                            array('suppliers','suppliers.supplier_id=issuance.supplier_id','left')
+                            array('locations','locations.location_id=issuance.location_id','left')
                         )
                       );
                     echo json_encode($response);

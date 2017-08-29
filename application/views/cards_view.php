@@ -151,7 +151,7 @@
                 { targets:[1],data: "card_name" },
                 {
 
-                    targets:[1],
+                    targets:[2],
                     render: function (data, type, full, meta){
                       var btn_edit='<button class="btn btn-success btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                       var btn_trash='<button class="btn btn-danger btn-xs" name="remove_info" style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
