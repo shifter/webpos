@@ -13,6 +13,7 @@ class Adjustment extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Adjustment_item_model');
         $this->load->model('Purchases_model');
+        $this->load->model('Status_model');
 
     }
 
@@ -29,13 +30,18 @@ class Adjustment extends CORE_Controller
 
 
         $data['tax_types']=$this->Tax_types_model->get_list();
-
+        $data['status']=$this->Status_model->get_list(
+          'status.is_deleted=0'
+        );
         $data['products']=$this->Products_model->get_list();
         $this->load->view('adjustment_view', $data);
 
     }
 
     function transaction($txn = null,$id_filter=null) {
+      function replaceCharsInNumber($num, $chars) {
+                       return substr((string) $num, 0, -strlen($chars)) . $chars;
+                  }
         switch ($txn){
           case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
               $m_adjustment=$this->Adjustment_model;
@@ -56,13 +62,10 @@ class Adjustment extends CORE_Controller
                     array(
                         'adjustment_items.*',
                         'products.product_code',
-                        'products.product_desc',
-                        'units.unit_id',
-                        'units.unit_name'
+                        'products.product_desc'
                     ),
                     array(
-                        array('products','products.product_id=adjustment_items.product_id','left'),
-                        array('units','units.unit_id=products.unit_id','left')
+                        array('products','products.product_id=adjustment_items.product_id','left')
                     ),
                     'adjustment_items.adjustment_items_id DESC'
                 );
@@ -80,8 +83,6 @@ class Adjustment extends CORE_Controller
 	              $m_products=$this->Products_model;
 
                 //$m_adjustment->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_adjustment->adjustment_no=$this->input->post('adjustment_no',TRUE);
-                $m_adjustment->adjustment_type=$this->input->post('adjustment_type',TRUE);
                 $m_adjustment->remarks=$this->input->post('remarks',TRUE);
                 $m_adjustment->date_adjusted=date('Y-m-d',strtotime($this->input->post('date_adjusted',TRUE)));
                 $m_adjustment->created_by=$this->session->user_id;
@@ -93,17 +94,21 @@ class Adjustment extends CORE_Controller
                 $m_adjustment->save();
 
                 $adjustment_id=$m_adjustment->last_insert_id();
+
+                $format = "000000";
+                $temp = replaceCharsInNumber($format, $adjustment_id); //5069xxx
+                $ecode = $temp .'-'. $today = date("Y");
+
+                $m_adjustment->adjustment_no=$ecode;
+
+                $m_adjustment->modify($adjustment_id);
+
                 $m_adjustment_items=$this->Adjustment_item_model;
 
                 $prod_id=$this->input->post('product_id',TRUE);
                 $adj_qty=$this->input->post('adj_qty',TRUE);
-                $adj_price=$this->input->post('adj_price',TRUE);
-                $adj_discount=$this->input->post('adj_discount',TRUE);
-                $adj_line_total_discount=$this->input->post('adj_line_total_discount',TRUE);
-                $adj_tax_rate=$this->input->post('adj_tax_rate',TRUE);
-                $adj_line_total_price=$this->input->post('adj_line_total_price',TRUE);
-                $adj_tax_amount=$this->input->post('adj_tax_amount',TRUE);
-                $adj_non_tax_amount=$this->input->post('adj_non_tax_amount',TRUE);
+                $adj_type=$this->input->post('adj_type',TRUE);
+                $status=$this->input->post('status',TRUE);
 
     						$i=0;
     						foreach($prod_id as $item)
@@ -114,13 +119,8 @@ class Adjustment extends CORE_Controller
     								  'adjustment_id' => $adjustment_id,
     								  'product_id' => $prod_id[$i],
     								  'adj_qty' => $adj_qty[$i],
-    								  'adj_price' => $adj_price[$i],
-    								  'adj_discount' => $adj_discount[$i],
-    								  'adj_line_total_discount' => $adj_line_total_discount[$i],
-    								  'adj_tax_rate' => $adj_tax_rate[$i],
-    								  'adj_line_total_price' => $adj_line_total_price[$i],
-    								  'adj_tax_amount' => $adj_tax_amount[$i],
-    								  'adj_non_tax_amount' => $adj_non_tax_amount[$i]
+    								  'adjustment_type' => $adj_type[$i],
+                      'status' => $status[$i]
     							   );
 
 
@@ -149,8 +149,6 @@ class Adjustment extends CORE_Controller
 		            $m_products=$this->Products_model;
                 $adjustment_id=$this->input->post('adjustment_id',TRUE);
                 //$m_adjustment->dr_invoice_no=$this->input->post('dr_invoice_no',TRUE);
-                $m_adjustment->adjustment_no=$this->input->post('adjustment_no',TRUE);
-                $m_adjustment->adjustment_type=$this->input->post('adjustment_type',TRUE);
                 $m_adjustment->remarks=$this->input->post('remarks',TRUE);
                 $m_adjustment->date_adjusted=date('Y-m-d',strtotime($this->input->post('date_adjusted',TRUE)));
                 $m_adjustment->modified_by=$this->session->user_id;
@@ -168,26 +166,16 @@ class Adjustment extends CORE_Controller
 
                 $prod_id=$this->input->post('product_id',TRUE);
                 $adj_qty=$this->input->post('adj_qty',TRUE);
-                $adj_price=$this->input->post('adj_price',TRUE);
-                $adj_discount=$this->input->post('adj_discount',TRUE);
-                $adj_line_total_discount=$this->input->post('adj_line_total_discount',TRUE);
-                $adj_tax_rate=$this->input->post('adj_tax_rate',TRUE);
-                $adj_line_total_price=$this->input->post('adj_line_total_price',TRUE);
-                $adj_tax_amount=$this->input->post('adj_tax_amount',TRUE);
-                $adj_non_tax_amount=$this->input->post('adj_non_tax_amount',TRUE);
+                $adj_type=$this->input->post('adj_type',TRUE);
+                $status=$this->input->post('status',TRUE);
 
                 for($i=0;$i<count($prod_id);$i++){
 
-		               $m_adjustment_items->adjustment_id=$adjustment_id;
+		                $m_adjustment_items->adjustment_id=$adjustment_id;
                     $m_adjustment_items->product_id=$prod_id[$i];
                     $m_adjustment_items->adj_qty=$adj_qty[$i];
-                    $m_adjustment_items->adj_price=$this->get_numeric_value($adj_price[$i]);
-                    $m_adjustment_items->adj_discount=$this->get_numeric_value($adj_discount[$i]);
-                    $m_adjustment_items->adj_line_total_discount=$this->get_numeric_value($adj_line_total_discount[$i]);
-                    $m_adjustment_items->adj_tax_rate=$this->get_numeric_value($adj_tax_rate[$i]);
-                    $m_adjustment_items->adj_line_total_price=$this->get_numeric_value($adj_line_total_price[$i]);
-                    $m_adjustment_items->adj_tax_amount=$this->get_numeric_value($adj_tax_amount[$i]);
-                    $m_adjustment_items->adj_non_tax_amount=$this->get_numeric_value($adj_non_tax_amount[$i]);
+                    $m_adjustment_items->adjustment_type=$adj_type[$i];
+                    $m_adjustment_items->status=$this->get_numeric_value($status[$i]);
 	                  $m_adjustment_items->save();
 
                 }

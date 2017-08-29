@@ -484,6 +484,9 @@ bloodhound.min.js"></script>
         //$('.toggle-fullscreen').click();
         clearFields($('#frm_deliveries'));
         showList(false);
+        $('.numeric').autoNumeric('init');
+        $('#disctototal').val('0.00');
+
     });
 
     var raw_data=<?php echo json_encode($products); ?>;
@@ -697,7 +700,7 @@ bloodhound.min.js"></script>
                             dr_non_tax_amount: value.non_tax_amount,
                             dr_tax_amount:value.tax_amount,
                             po_item_id: value.po_item_id,
-                            drqty: value.po_qty,
+                            drqty: value.po_qty-value.delivered_qty,
                             delivered_qty: value.delivered_qty
                         }));
 
@@ -734,7 +737,6 @@ bloodhound.min.js"></script>
         _cboSuppliers.select2('val',null);
 
         _cboSuppliers.on("select2:select", function (e) {
-
         var i=$(this).select2('val');
 				if(i=="newsupp"){
                 _cboSuppliers.select2('val',null)
@@ -854,6 +856,7 @@ bloodhound.min.js"></script>
                             dr_non_tax_amount: value.dr_non_tax_amount,
                             dr_tax_amount:value.dr_tax_amount,
                             po_item_id:value.po_item_id,
+                            drqty: value.dr_qty,
                             delivered_qty:value.dr_qty
                         }));
 
