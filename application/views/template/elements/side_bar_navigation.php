@@ -73,6 +73,7 @@
             <li class="right_gift_card_view" id="side-li"><a href="Giftcards"><i class="fa fa-credit-card"></i> Gift Card</a></li>
             <li class="right_vendor_view" id="side-li"><a href="Vendors"><i class="fa fa-user"></i> Vendors</a></li>
             <li class="right_locations_view" id="side-li"><a href="Location"><i class="fa fa-location-arrow"></i> Locations</a></li>
+            <li class="right_status_view" id="side-li"><a href="Status"><i class="fa fa-adjust"></i> Status</a></li>
           </ul>
         </li>
         <li class="treeview">

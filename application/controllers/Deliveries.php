@@ -39,7 +39,7 @@ class Deliveries extends CORE_Controller
             )
         );
         $data['purchase_order']=$this->purchase_order_model->get_list(
-            'purchase_order.is_deleted = 0 AND purchase_order.total_after_tax != 0'
+            'purchase_order.is_deleted = 0'
         );
 
         $data['tax_types']=$this->Tax_types_model->get_list(
@@ -174,11 +174,6 @@ class Deliveries extends CORE_Controller
                 }
 					      $this->db->insert_batch('delivery_invoice_items', $data);
                 $purchase_order_id=$this->input->post('purchase_order_id', TRUE);
-                $m_po->set('total_discount','total_discount-'.$this->get_numeric_value($this->input->post('summary_discount',TRUE)));
-                $m_po->set('total_before_tax','total_before_tax-'.$this->get_numeric_value($this->input->post('summary_before_discount',TRUE)));
-                $m_po->set('total_tax_amount','total_tax_amount-'.$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE)));
-                $m_po->set('total_after_tax','total_after_tax-'.$this->get_numeric_value($this->input->post('summary_after_tax',TRUE)));
-                $m_po->modify($purchase_order_id);
                 $response['title'] = 'Success!';
                 $response['stat'] = 'success';
                 $response['msg'] = 'Delivery invoice successfully created.';

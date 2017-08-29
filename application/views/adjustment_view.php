@@ -64,7 +64,6 @@
                   <tr>
                     <th ></th>
                     <th >Adjustment #</th>
-                    <th >Adjustment Type</th>
                     <th >Date Adjusted</th>
                     <th style="text-align:center;">Action</th>
                   </tr>
@@ -75,7 +74,6 @@
                   <tr>
                     <th ></th>
                     <th >Adjustment #</th>
-                    <th >Adjustment Type</th>
                     <th >Date Adjusted</th>
                     <th style="text-align:center;">Action</th>
                   </tr>
@@ -93,13 +91,13 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label class="col-md-3  control-label boldlabel">* Adjustment # :</label>
+                            <label class="col-md-3  control-label boldlabel">* Adj # :</label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                                                 <span class="input-group-addon ">
                                                                     <i class="fa fa-code"></i>
                                                                 </span>
-                                    <input type="text" name="adjustment_no" class="form-control" placeholder="Adjustment Number" data-error-msg="Doc # is required." required>
+                                    <input type="text" name="adjustment_no" class="form-control" placeholder="AUTO" data-error-msg="Doc # is required." readonly>
                                 </div>
                             </div>
                         </div>
@@ -116,20 +114,6 @@
                         </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6 form-group">
-                        <label class="col-md-3  control-label boldlabel">Adj. Type: </label>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                     <i class="fa fa-calendar"></i>
-                                </span>
-                                <select name="adjustment_type"  class="form-control" data-error-msg="Adjustment Type is required." required>
-                                    <option value="In">Stock In</option>
-                                    <option value="Out">Stock Out</option>
-                                </select>
-                            </div>
-                        </div>
-                      </div>
                       <div class="col-md-6 form-group">
                           <label class="col-md-3  control-label boldlabel">Remarks: </label>
                           <div class="col-md-9">
@@ -157,16 +141,11 @@
                                   <thead style="background-color:#2c3e50;color:white;">
                                   <tr>
                                       <th width="10%">Qty</th>
+                                      <th width="12%" style="text-align: right">Item Code</th>
                                       <th width="30%">Item</th>
-                                      <th width="12%" style="text-align: right">Cost</th>
-                                      <th width="12%" style="text-align: right">Discount</th>
-                                      <th style="display: none;">T.D</th> <!-- total discount -->
-                                      <th>Tax %</th>
-                                      <th width="12%" style="text-align: right">Total</th>
-                                      <th style="display: none;">V.I</th> <!-- vat input -->
-                                      <th style="display: none;">N.V</th> <!-- net of vat -->
-                                      <td style="display: none;">Item ID</td><!-- product id -->
-                                      <th><center>Action</center></th>
+                                      <th width="12%" style="text-align: right">Adjustment Type</th>
+                                      <th width="12%" style="text-align: right">Status</th>
+                                      <th width="10%"><center>Action</center></th>
                                   </tr>
                                   </thead>
                                   <tbody>
@@ -175,7 +154,7 @@
                               </table>
                               </div>
                           </form>
-                          <div class="row">
+                          <!-- <div class="row">
                               <div class="col-lg-3 col-lg-offset-9">
                                   <table id="tbl_delivery_summary" class="table invoice-total">
                                       <tbody>
@@ -198,7 +177,7 @@
                                       </tbody>
                                   </table>
                               </div>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
               </div>
@@ -253,6 +232,55 @@
           </div><!---content---->
       </div>
   </div><!---modal-->
+  <div id="modal_new_status" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-md">
+          <div class="modal-content">
+              <div class="modal-header bgm-indigo">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true" class="xbutton">×</span></button>
+                  <h4 class="modal-title">Status : <transaction class="transaction"></transaction></h4>
+              </div>
+              <div class="modal-body">
+                  <form id="frm_status">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="form-group">
+                              <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Status Code  :</label>
+                              <div class="col-sm-8">
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                          <input type="text" name="status_code" class="form-control" placeholder="AUTO" data-error-msg="Status Code is required." readonly>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top:5px;">
+                          <div class="form-group">
+                              <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Status Name  :</label>
+                              <div class="col-sm-8">
+                                  <div class="input-group">
+                                      <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                          <input type="text" name="status_name" class="form-control" placeholder="Card Name" data-error-msg="Card Name is required." required>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </form>
+              <div class="modal-footer" >
+                  <button id="btn_create_status" style="margin-top:5px;" type="button" class="btn btn-primary">Save
+                  </button>
+                  <button type="button" style="margin-top:5px;" class="btn bgm-red" data-dismiss="modal">Close
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
@@ -284,7 +312,7 @@
 <!-- <?php echo $_rights; ?> -->
 
     <script type="text/javascript">
-
+      var status_class;
       var oTableItems={
             qty : 'td:eq(0)',
             unit_price : 'td:eq(2)',
@@ -320,11 +348,11 @@
                   "defaultContent": ""
               },
               { targets:[1],data: "adjustment_no" },
-              { targets:[2],data: "adjustment_type" },
 
-              { targets:[3],data: "date_adjusted" },
+
+              { targets:[2],data: "date_adjusted" },
               {
-                  targets:[4],
+                  targets:[3],
                   render: function (data, type, full, meta){
                       var btn_edit='<button class="btn btn-blue btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                       var btn_trash='<button class="btn btn-danger btn-xs" name="remove_info" style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -335,7 +363,7 @@
 
             ],
             language: {
-                         searchPlaceholder: "Search Receiving Stock"
+                         searchPlaceholder: "Search Adjustment"
                      },
             "rowCallback":function( row, data, index ){
 
@@ -403,22 +431,14 @@
         $('#tbl_items > tbody').prepend(newRowItem({
                 adj_qty : "1",
                 product_code : suggestion.product_code,
-                unit_id : suggestion.unit_id,
                 product_id: suggestion.product_id,
                 product_desc : suggestion.product_desc,
-                adj_line_total_discount : "0.00",
-                tax_exempt : false,
-                adj_tax_rate : tax_rate,
-                adj_price : suggestion.purchase_cost,
-                adj_discount : "0.00",
-                tax_type_id : null,
-                adj_line_total_price : total,
-                adj_non_tax_amount: net_vat,
-                adj_tax_amount:vat_input
+                adj_type : "0",
+                status : "0",
+                a : 0
             }));
 
         reInitializeNumeric();
-        reComputeTotal();
 
     });
 
@@ -479,27 +499,57 @@
             showList(false);
         });
 
-        $('#btn_create_user_suppliers').click(function(){
+        // $('#btn_create_user_suppliers').click(function(){
+        //
+        //     var btn=$(this);
+        //
+        //     if(validateRequiredFields($('#frm_supplier_new'))){
+        //         var data=$('#frm_supplier_new').serializeArray();
+        //
+        //         $.ajax({
+        //             "dataType":"json",
+        //             "type":"POST",
+        //             "url":"Suppliers/transaction/create",
+        //             "data":data,
+        //             "beforeSend" : function(){
+        //                 showSpinningProgress(btn);
+        //             }
+        //         }).done(function(response){
+        //             showNotification(response);
+        //             $('#modal_new_supplier').modal('hide');
+        //
+        //             var _suppliers=response.row_added[0];
+        //             $('#cbo_suppliers').append('<option value="'+_suppliers.supplier_id+'" selected>'+_suppliers.supplier_name+'</option>');
+        //             $('#cbo_suppliers').select2('val',_suppliers.supplier_id);
+        //         }).always(function(){
+        //             showSpinningProgress(btn);
+        //         });
+        //     }
+        //
+        // });
+
+
+        $('#btn_create_status').click(function(){
 
             var btn=$(this);
 
-            if(validateRequiredFields($('#frm_supplier_new'))){
-                var data=$('#frm_supplier_new').serializeArray();
+            if(validateRequiredFields($('#frm_status'))){
+                var data=$('#frm_status').serializeArray();
 
                 $.ajax({
                     "dataType":"json",
                     "type":"POST",
-                    "url":"Suppliers/transaction/create",
+                    "url":"Status/transaction/create",
                     "data":data,
                     "beforeSend" : function(){
                         showSpinningProgress(btn);
                     }
                 }).done(function(response){
                     showNotification(response);
-                    $('#modal_new_supplier').modal('hide');
-
-                    var _suppliers=response.row_added[0];
-
+                    $('#modal_new_status').modal('hide');
+                    var _status=response.row_added[0];
+                    $(status_class).append('<option value="'+_status.status_id+'" selected>'+_status.status_name+'</option>');
+                    $(status_class).select2('val',_status.status_id);
                 }).always(function(){
                     showSpinningProgress(btn);
                 });
@@ -508,14 +558,12 @@
         });
 
 
-
         $('#tbl_adjustment tbody').on('click','button[name="edit_info"]',function(){
               ///alert("ddd");
               _txnMode="edit";
               _selectRowObj=$(this).closest('tr');
               var data=dt.row(_selectRowObj).data();
               _selectedID=data.adjustment_id;
-
               $('input,textarea').each(function(){
                   var _elem=$(this);
                   $.each(data,function(name,value){
@@ -527,7 +575,6 @@
 
               });
 
-              resetSummary();
 
               $.ajax({
                   url : 'Adjustment/transaction/items/'+data.adjustment_id,
@@ -547,7 +594,7 @@
                       //var total_tax_amount=0;
                       //var total_non_tax_amount=0;
                       //var gross_amount=0;
-
+                      var a=1;
                       $.each(rows,function(i,value){
                           //alert(value.non_tax_amount);
                           $('#tbl_items > tbody').prepend(newRowItem({
@@ -555,39 +602,58 @@
                               product_code : value.product_code,
                               product_id: value.product_id,
                               product_desc : value.product_desc,
-                              adj_line_total_discount : value.adj_line_total_discount,
-                              tax_exempt : false,
-                              adj_tax_rate : value.adj_tax_rate,
-                              adj_price : value.adj_price,
-                              adj_discount : value.adj_discount,
-                              tax_type_id : null,
-                              adj_line_total_price : value.adj_line_total_price,
-                              adj_non_tax_amount: value.adj_non_tax_amount,
-                              adj_tax_amount:value.adj_tax_amount
+                              adj_type : value.adjustment_type,
+                              status : value.status,
+                              adjustment_type : value.adjustment_type,
+                              a : a,
+                              // $(".cbo_status").select2('val', value.status);
+                              // $("#cbo_adj_type").select2('val', value.adjustment_type);
                           }));
 
+                          _cboAdjtypetemp=$('.cbo_adj_type'+a).select2({
+                                  placeholder: "Select Type.",
+                                  allowClear: true
+                              });
+                          _cboAdjtypetemp.select2('val', value.adjustment_type);
+                          _cboStatus=$('.cbo_status'+a).select2({
+                                  placeholder: "Select Status.",
+                                  allowClear: true
+                              });
+                          _cboStatus.select2('val', value.status);
 
+                          a++;
+                          // $(".cbo_adj_type"+a).select2('val', value.adjustment_type);
                           //sum up all footer details
                           //total_discount+=getFloat(value.adj_line_total_discount);
                           //total_tax_amount+=getFloat(value.tax_amount);
                           //total_non_tax_amount+=getFloat(value.non_tax_amount);
                           //gross_amount+=getFloat(value.adj_line_total_price);
-
-
+                          // $(".cbo_status").select2('val', value.status);
+                          // $("#cbo_adj_type").select2('val', value.adjustment_type);
                       });
 
-
+                      // reInitializeNumeric();
                       //write summary details
                       //var tbl_summary=$('#tbl_delivery_summary');
                       //tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(total_discount,2));
                       //tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(total_non_tax_amount,2));
                       //tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_tax_amount,2));
                       //tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(gross_amount,2)+'</b>');
-                      reComputeTotal();
+
 
                   }
+
               });
               showList(false);
+        });
+
+        $('#tbl_items tbody').on('change','select[name="status[]"]',function(){
+            if($(this).val() == "newstatus")
+            {
+              $(this).select2('val',null)
+              $('#modal_new_status').modal('show');
+              status_class = $(this);
+            }
         });
 
         $('#tbl_adjustment tbody').on('click','button[name="remove_info"]',function(){
@@ -623,7 +689,6 @@
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
 
             //console.log(net_vat);
-            reComputeTotal();
 
 
         });
@@ -672,7 +737,7 @@
 
         $('#tbl_items > tbody').on('click','button[name="remove_item"]',function(){
             $(this).closest('tr').remove();
-            reComputeTotal();
+
         });
 
 
@@ -772,62 +837,77 @@
         return parseFloat(accounting.unformat(f));
     };
 
+    var adjtype;
+    var status;
     var newRowItem=function(d){
+
+      if(d.a == 0) {
+        adjtype="cbo_adj_type";
+        status="cbo_status";
+      }
+      else {
+        adjtype="cbo_adj_type"+d.a;
+        status="cbo_status"+d.a;
+      }
 
 
         return '<tr>'+
         '<td width="10%"><input name="adj_qty[]" type="text" class="numeric form-control" value="'+ d.adj_qty+'"></td>'+
-
+        '<td width="12%">'+d.product_code+'</td>'+
         '<td width="30%">'+d.product_desc+'</td>'+
-        '<td width="11%"><input name="adj_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.adj_price,2)+'" style="text-align:right;"></td>'+
-        '<td width="11%"><input name="adj_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.adj_discount,2)+'" style="text-align:right;"></td>'+
-        '<td style="display: none;" width="11%"><input name="adj_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.adj_line_total_discount,2)+'" readonly></td>'+
-        '<td width="11%"><input name="adj_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.adj_tax_rate,2)+'"></td>'+
-        '<td width="11%" align="right"><input name="adj_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.adj_line_total_price,2)+'" readonly></td>'+
-        '<td style="display: none;"><input name="adj_tax_amount[]" type="text" class="numeric form-control" value="'+ d.adj_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="adj_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.adj_non_tax_amount+'" readonly></td>'+
+        '<td width="12%"><select name="adj_type[]" data-error-msg="Adjustment Type is required." class="cbo_adj_type form-control '+adjtype+'" required><option value="IN">IN</option><option value="OUT">OUT</option></select>'+
+        '<td width="12%"><select name="status[]" value="'+d.status+'" data-error-msg="Status is required." class="form-control '+status+'" required><option value="newstatus">[ Create New Status ]</option><?php foreach($status as $status){ ?><option value="<?php echo $status->status_id ?>"><?php echo $status->status_name ?></option> <?php } ?></select>'+
         '<td style="display: none;"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-default"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
 
-
-
-    var reComputeTotal=function(){
-        var rows=$('#tbl_items > tbody tr');
-        var tbl_summary=$('#tbl_delivery_summary');
-
-        var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0;
-
-        $.each(rows,function(){
-            discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));
-            before_tax+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
-            tax_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
-            after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
-        });
-
-        tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
-        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(tax_amount,2));
-        tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
-
-    };
+    // var reComputeTotal=function(){
+    //     var rows=$('#tbl_items > tbody tr');
+    //     var tbl_summary=$('#tbl_delivery_summary');
+    //
+    //     var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0;
+    //
+    //     $.each(rows,function(){
+    //         discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));
+    //         before_tax+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
+    //         tax_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
+    //         after_tax+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
+    //     });
+    //
+    //     tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(discounts,2));
+    //     tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(before_tax,2));
+    //     tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(tax_amount,2));
+    //     tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(after_tax,2)+'</b>');
+    //
+    // };
 
 
 
     var reInitializeNumeric=function(){
         $('.numeric').autoNumeric('init');
+        _cboAdjtype=$(".cbo_adj_type").select2({
+                placeholder: "Select Type.",
+                allowClear: true
+            });
+        _cboAdjtype.select2('val',null);
+        _cboStatus=$(".cbo_status").select2({
+                placeholder: "Select Status.",
+                allowClear: true
+            });
+        _cboStatus.select2('val',null);
+
     };
 
 
 
-    var resetSummary=function(){
-        var tbl_summary=$('#tbl_delivery_summary');
-        tbl_summary.find(oTableDetails.discount).html('0.00');
-        tbl_summary.find(oTableDetails.before_tax).html('0.00');
-        tbl_summary.find(oTableDetails.tax_amount).html('0.00');
-        tbl_summary.find(oTableDetails.after_tax).html('<b>0.00</b>');
-    };
+    // var resetSummary=function(){
+    //     var tbl_summary=$('#tbl_delivery_summary');
+    //     tbl_summary.find(oTableDetails.discount).html('0.00');
+    //     tbl_summary.find(oTableDetails.before_tax).html('0.00');
+    //     tbl_summary.find(oTableDetails.tax_amount).html('0.00');
+    //     tbl_summary.find(oTableDetails.after_tax).html('<b>0.00</b>');
+    // };
 
     var delete_notif=function(type){
             swal({

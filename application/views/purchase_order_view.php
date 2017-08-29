@@ -441,7 +441,7 @@
 
             ],
             language: {
-                         searchPlaceholder: "Search Receiving Stock"
+                         searchPlaceholder: "Search Purchase Order"
                      },
             "rowCallback":function( row, data, index ){
 
@@ -558,7 +558,7 @@
                 $.ajax({
                     "dataType":"html",
                     "type":"POST",
-                    "url":"Templates/layout/dr/"+ d.dr_invoice_id,
+                    "url":"Templates/layout/purchase_order/"+ d.purchase_order_id,
                     "beforeSend": showSpinningProgressEarth($('#'))
                 }).done(function(response){
                     row.child( response ).show();
