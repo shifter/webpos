@@ -7,7 +7,9 @@ class Purchase_Order extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-
+        if($this->session->userdata('purchase_order') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('purchase_order_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_types_model');
@@ -94,6 +96,27 @@ class Purchase_Order extends CORE_Controller
                 echo json_encode($response);
                 break;
 
+            case 'items_receive': //items on the specific PO, loads when edit button is called
+                $m_items=$this->purchase_order_item_model;
+                $response['data']=$m_items->get_list(
+                    array('purchase_order_id'=>$id_filter,
+                          'po_qty != 0'
+                            ),
+                    array(
+                        'purchase_order_items.*',
+                        'products.product_code',
+                        'products.product_desc',
+                        'units.unit_id',
+                        'units.unit_name'
+                    ),
+                    array(
+                        array('products','products.product_id=purchase_order_items.product_id','left'),
+                        array('units','units.unit_id=purchase_order_items.unit_id','left')
+                    ),
+                    'purchase_order_items.po_item_id DESC'
+                );
+                echo json_encode($response);
+                break;
 
             //***************************************create new purchase invoice************************************************
             case 'create':

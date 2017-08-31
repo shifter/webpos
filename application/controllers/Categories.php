@@ -7,6 +7,9 @@ class Categories extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
+        if($this->session->userdata('category_view') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('Categories_model');
     }
 
