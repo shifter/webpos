@@ -40,7 +40,7 @@ class Users_model extends CORE_Model{
         $this->db->from('user_accounts as ua');
         $this->db->join('user_groups as ug', 'ua.user_group_id = ug.user_group_id','left');
         $this->db->join('user_groups_permission as ugp', 'ugp.user_group_id = ug.user_group_id','left');
-        $this->db->where('ugp.pos_void', 'enabled');
+        $this->db->where('ugp.pos_void', 1);
         $this->db->where('ua.user_pword', sha1($pword));
         return $this->db->get();
 

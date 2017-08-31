@@ -29,7 +29,7 @@ class Pos extends CORE_Controller
         $data['_right_navigation']=$this->load->view('template/elements/right_bar_navigation.php','',TRUE);
         // $data['_rights']=$this->load->view('template/elements/rights','',TRUE);
         $data['_title']='POINT OF SALES';
-        $data['customers'] = $this->Customers_model->get_list(array('customers.is_deleted'=>FALSE),'customer_id,customer_name');
+        $data['customers'] = $this->Customers_model->get_list(array('customers.is_deleted'=>FALSE),'customer_id,customer_code,customer_name');
         $data['products']=$this->Products_model->get_list();
         $this->load->view('pos_view', $data);
 

@@ -29,7 +29,7 @@ class Templates extends CORE_Controller {
     }
 
 
-    function layout($layout=null,$filter_value=null,$filter_value2=null){
+    function layout($layout=null,$filter_value=null,$filter_value2=null,$id_filter=null){
 
         switch($layout){
             case 'po': //purchase order
@@ -47,42 +47,73 @@ class Templates extends CORE_Controller {
 
 
                         break;
+
+            case 'journallist':  //this returns JSON of Purchase Order to be rendereds on Datatable
+                $m_pos_payment=$this->Pos_payment_model;
+
+                $journal_date = ($this->input->post('journal_date', TRUE) == null || $this->input->post('journal_date', TRUE) == "" ) ? 0 : $this->input->post('journal_date', TRUE);
+                $j_date = date('Y-m-d',strtotime($journal_date));
+
+                $receipt_no = ($this->input->post('receipt_no', TRUE) == null || $this->input->post('receipt_no', TRUE) == "" ) ? "0" : $this->input->post('receipt_no', TRUE);
+
+                if ($receipt_no != "0"){
+                    $response['data']=$m_pos_payment->get_list(
+                    'pos_payment.receipt_no LIKE "'.$receipt_no.'%"',
+                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
+                       array(
+                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
+                       )
+                    );
+                }else{
+                    $response['data']=$m_pos_payment->get_list(
+                    'pos_invoice.transaction_date="'.$j_date.'"',
+                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
+                       array(
+                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
+                       )
+                    );
+                }
+                echo json_encode($response);
+            break;
+
             //****************************************************
             case 'purchase_order': //delivery invoice
-                        $m_purchase_order=$this->purchase_order_model;
-                        $m_po_items=$this->purchase_order_item_model;
-                        $m_company=$this->Company_model;
+            $m_purchase_order=$this->purchase_order_model;
+            $m_po_items=$this->purchase_order_item_model;
+            $m_company=$this->Company_model;
 
-                        $info=$m_purchase_order->get_list(
-                            $filter_value,
+            $info=$m_purchase_order->get_list(
+                $filter_value,
 
-                            'purchase_order.*,
-                            suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.landline',
+                'purchase_order.*,
+                suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.landline',
 
-                            array(
-                                array('suppliers','suppliers.supplier_id=purchase_order.supplier_id','left'),
-                            )
-                        );
+                array(
+                    array('suppliers','suppliers.supplier_id=purchase_order.supplier_id','left'),
+                )
+            );
 
-                        $company=$m_company->get_list();
+            $company=$m_company->get_list();
 
-                        $data['purchase_order_info']=$info[0];
-                        $data['company_info']=$company[0];
-                        $data['po_items']=$m_po_items->get_list(
-                            array('purchase_order_id'=>$filter_value),
-                            'purchase_order_items.*,products.product_desc,units.unit_name',
-                            array(
-                                array('products','products.product_id=purchase_order_items.product_id','left'),
-                                array('units','units.unit_id=purchase_order_items.unit_id','left')
-                            )
-                        );
-                        if($filter_value2=='print'){
-                          echo $this->load->view('template/purchase_order_content',$data,TRUE);
-                        }
-                        else{
-                          echo $this->load->view('template/purchase_order_content',$data,TRUE);
-                          echo $this->load->view('template/purchase_order_menu',$data,TRUE);
-                        }
+            $data['purchase_order_info']=$info[0];
+            $data['company_info']=$company[0];
+            $data['po_items']=$m_po_items->get_list(
+                array('purchase_order_id'=>$filter_value),
+                'purchase_order_items.*,products.product_desc,units.unit_name',
+                array(
+                    array('products','products.product_id=purchase_order_items.product_id','left'),
+                    array('units','units.unit_id=purchase_order_items.unit_id','left')
+                )
+            );
+            if($filter_value2=='print'){
+              echo $this->load->view('template/purchase_order_content',$data,TRUE);
+            }
+            else{
+              echo $this->load->view('template/purchase_order_content',$data,TRUE);
+              echo $this->load->view('template/purchase_order_menu',$data,TRUE);
+            }
 
             break;
 
@@ -163,7 +194,6 @@ class Templates extends CORE_Controller {
 
 
             break;
-
             case 'adjustment': //delivery invoice
                         $m_adjustment=$this->Adjustment_model;
                         $m_adjustment_items=$this->Adjustment_item_model;
@@ -206,39 +236,24 @@ class Templates extends CORE_Controller {
                         $m_info=$this->Notes_model;
                         $m_snrcitizen=$this->Seniorcitizen_model;
 
-                        // $info=$m_invoice->get_list(
-                        //     $filter_value,
-                        //     'pos_payment.pos_invoice_id,pos_payment.pos_payment_id,pos_payment.receipt_no,pos_invoice.*,customers.customer_name',
-              					// 		array(
-              					// 			array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-              					// 			array('customers','customers.customer_id=pos_invoice.customer_id','left')								//join
-            						// 	)
-                        // );
-
                         $info=$m_invoice->get_list(
                             $filter_value,
-                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,customers.customer_name,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier',
+                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,pos_invoice.tax_amount as total_tax_amount,customers.*,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier',
                                         array(
                                             array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-                                            array('customers','customers.customer_id=pos_invoice.customer_id','left'),
+                                            array('customers','customers.customer_code=pos_invoice.customer_code','left'),
                                             array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left'),
                                             array('pos_invoice_items','pos_invoice_items.pos_invoice_id=pos_payment.pos_invoice_id','left')
                                         )
                         );
 
-                        $receipt_no=$info[0]->receipt_no;
-            						$invoice_id=$info[0]->pos_invoice_id;
+                        $pos_paymt_id=$info[0]->pos_payment_id;
+            			$invoice_id=$info[0]->pos_invoice_id;
                         $data['info']=$invoice_id;
                         $footer=$m_info->get_list();
                         $company=$m_company->get_list();
 
-                        $result_sc_info=$m_snrcitizen->get_receipt($receipt_no);
-
-                        // $sc_info=$m_snrcitizen->get_list(
-                        //   array('tblseniorcitizen.invoiceNumber'=>$receipt_no),
-                        //   'tblseniorcitizen.*'
-                        //   );
-
+                        $result_sc_info=$m_snrcitizen->get_receipt($pos_paymt_id);
                         $data['pos_invoice_item']=$m_invoice_items->get_list(
 
             							array('pos_invoice_items.pos_invoice_id'=>$invoice_id),
@@ -489,6 +504,18 @@ echo json_encode($data);
                         break;
         }
     }
+
+        function response_rows($filter_value,$order_by=null,$ate_journal){
+        return $this->Pos_payment_model->get_list(
+        null,
+        'pos_payment.*,pos_payment.receipt_no,pos_invoice.*',
+            array(
+                array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left') //join
+            ),
+            'pos_payment.pos_payment_id DESC'
+        );
+    }
+
 
 
 }

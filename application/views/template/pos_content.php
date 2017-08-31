@@ -126,6 +126,16 @@
       padding-bottom: 0px !important;
       margin-bottom: 0px !important;
     }
+    .receipt-body-desc{
+      text-align: left;
+      height: 15px;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-top: 0px !important;
+      margin-top: 0px !important;
+      padding-bottom: 0px !important;
+      margin-bottom: 0px !important;
+    }
     .receipt-body-table-amounts{
       text-align: right;
       height: 15px;
@@ -135,6 +145,35 @@
       margin-top: 0px !important;
       padding-bottom: 0px !important;
       margin-bottom: 0px !important;
+    }
+    .cnclass{
+        border-bottom: : 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .aclass{
+        border-bottom: 1px solid black; 
+        border-top: 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .woaclass{
+        border-bottom: 1px solid black; 
+        border-top: 1px solid black; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+        width: 99%;
+    }
+    .tclass{
+        border-bottom: 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .wotclass{
+        border-bottom: 1px solid black; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+        width: 99%;
     }
 
 </style>
@@ -160,11 +199,34 @@
                                     Address<br>
                                     TIN&nbsp;#<br>
                                 </div>
+                                <?php if ($delivery_info->customer_code == 0){?>
                                 <div id="right1">
-                                    ___________________________<br>
-                                    ___________________________<br>
-                                    ___________________________<br>
+                                      ___________________________<br>
+                                      ___________________________<br>
+                                      ___________________________<br>
                                 </div>
+                              <?php }else{?>
+
+                                <div id="right1">
+                                    <div class="cnclass">
+                                        <?php echo $delivery_info->customer_name; ?>
+                                    <div>
+                                    <?php if ($delivery_info->address != null){ ?>
+                                        <div class="aclass">
+                                            <?php echo $delivery_info->address; ?>
+                                        </div> 
+                                    <?php }else{?>
+                                        <div class="woaclass"></div>
+                                    <?php }?>  
+                                    <?php if ($delivery_info->tin_no != null){ ?>
+                                        <div class="tclass">
+                                            <?php echo $delivery_info->tin_no; ?>
+                                        </div> 
+                                    <?php }else{?>
+                                        <div class="wotclass"></div>
+                                    <?php }?>
+                                </div>
+                              <?php } ?>
                             </div>
                         </div>
                     </div><br><br><br>
@@ -227,7 +289,7 @@
                             ?>
                                 <tr>
                                     <td width="15%" class="receipt-body-table"><?php echo number_format($item->pos_qty); ?></td>
-                                    <td width="50%" class="receipt-body-table"><?php echo $item->product_desc; ?></td>
+                                    <td width="50%" class="receipt-body-desc"><?php echo $item->product_desc; ?></td>
                                     <td width="11%" class="receipt-body-table"></td>
                                     <td width="11%" class="receipt-body-table-amounts"><?php echo number_format($item->pos_price,2); ?></td>
                                     <td width="11%" class="receipt-body-table-amounts"><?php echo number_format($item->total,2); ?></td>
@@ -256,52 +318,6 @@
                                 <td colspan="2" style="text-align: left;height: 15px;">Discount :</td>
                                 <td style="text-align: right;height: 15px;padding-right: 4px;"><?php echo number_format($discount_total,2); ?></td>
                             </tr>
-                            <!-- <tr>
-                                <td colspan="2" style="text-align: left;height: 15px;padding-top: 10px;">Amount&nbsp;Due</td>
-                                <td colspan="2" style="text-align: left;height: 15px;padding-top: 10px;">. . . . . . . . . </td>
-                                <td style="text-align: right;height: 15px;padding-top: 10px;">AMOUNT<?php echo number_format($delivery_info->total_after_tax,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: left;height: 15px;">Tendered</td>
-                                <td colspan="2" style="text-align: left;height: 15px;">. . . . . . . . . </td>
-                                <td style="text-align: right;height: 15px;">AMOUNT<?php echo number_format($delivery_info->total_after_tax,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: left;height: 15px;padding-bottom: 10px;">Change</td>
-                                <td colspan="2" style="text-align: left;height: 15px;padding-bottom: 10px;">. . . . . . . . . </td>
-                                <td style="text-align: right;height: 15px;padding-bottom: 10px;">AMOUNT<?php echo number_format($delivery_info->total_after_tax,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;height: 15px;">Total&nbsp;Item(s)</td>
-                                <td style="text-align: left;height: 15px;">. . . . .</td>
-                                <td colspan="3" style="text-align: left;height: 15px;">AMOUNT<?php echo number_format($delivery_info->total_after_tax,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;height: 15px;padding-bottom: 10px;">Total&nbsp;Qty</td>
-                                <td style="text-align: left;height: 15px;padding-bottom: 10px;">. . . . .</td>
-                                <td colspan="3" style="text-align: left;height: 15px;padding-bottom: 10px;">AMOUNT<?php echo number_format($delivery_info->total_after_tax,2); ?></td>
-                            </tr>  -->
-
-
-
-
-
-
-                            <!-- <tr>
-                                <td colspan="2" style="text-align: right;height: 15px;padding: 6px;"></td>
-                                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 15px;padding: 6px;">Total before Tax : </td>
-                                <td style="border-bottom: 1px solid gray;text-align: right;height: 15px;padding: 6px;"><?php echo number_format($delivery_info->before_tax,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: right;height: 15px;padding: 6px;"></td>
-                                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 15px;padding: 6px;">Tax Amount : </td>
-                                <td style="border-bottom: 1px solid gray;text-align: right;height: 15px;padding: 6px;"><?php echo number_format($delivery_info->tax_amount,2); ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align: right;height: 15px;padding: 6px;"></td>
-                                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 15px;padding: 6px;"><strong>Total after Tax : </strong></td>
-                                <td style="border-bottom: 1px solid gray;text-align: right;height: 15px;padding: 6px;"><strong><?php echo number_format($delivery_info->total_after_tax,2); ?></strong></td>
-                            </tr> -->
                             </tfoot>
                         </table>
                     </center>
@@ -360,11 +376,11 @@
                             <div id="right5">
                                 <?php echo number_format($delivery_info->before_tax,2); ?><br>
                                 <?php echo number_format($delivery_info->total_after_tax,2); ?><br>
-                                <?php echo number_format($delivery_info->tax_amount,2); ?><br>
-                                0.00<br>
+                                <?php echo number_format($delivery_info->total_tax_amount,2); ?><br>
+                                <?php echo number_format($delivery_info->non_vat_sales,2); ?><br><br>
                             </div>
                         </div>
-                    </div><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    </div><br><br><br><br><br><br><br><br><br><br><br><br>
                     <div class="row">
                       <div class="col-md-12">
                           <?php foreach ($sc_info as $sc_info) {?>
@@ -391,7 +407,7 @@
                             <hr style="border: 1px dashed gray !important;">
                         <?php } ?>
                       </div>
-                    </div>
+                    </div><br>
                     <div class="row">
                         <div id="middle2" class="col-md-12">
                             <?php echo $footer_info->note1; ?><br>

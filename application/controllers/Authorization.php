@@ -27,12 +27,12 @@ class Authorization extends CORE_Controller {
 
                         $response['stat']='success';
                         $response['msg']='Successfully authenticated.';
-
                         echo json_encode($response);
 
                     }else{ //not valid
                         $response['stat']='error';
                         $response['msg']='You are not Authorized.';
+                        $response['title']='Error authentication!';
                         echo json_encode($response);
                     }
 
