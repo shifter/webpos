@@ -20,6 +20,8 @@ class Templates extends CORE_Controller {
         $this->load->model('Adjustment_model');
         $this->load->model('Notes_model');
         $this->load->model('Seniorcitizen_model');
+        $this->load->model('purchase_order_model');
+        $this->load->model('purchase_order_item_model');
     }
 
     public function index() {
@@ -46,6 +48,44 @@ class Templates extends CORE_Controller {
 
                         break;
             //****************************************************
+            case 'purchase_order': //delivery invoice
+                        $m_purchase_order=$this->purchase_order_model;
+                        $m_po_items=$this->purchase_order_item_model;
+                        $m_company=$this->Company_model;
+
+                        $info=$m_purchase_order->get_list(
+                            $filter_value,
+
+                            'purchase_order.*,
+                            suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.landline',
+
+                            array(
+                                array('suppliers','suppliers.supplier_id=purchase_order.supplier_id','left'),
+                            )
+                        );
+
+                        $company=$m_company->get_list();
+
+                        $data['purchase_order_info']=$info[0];
+                        $data['company_info']=$company[0];
+                        $data['po_items']=$m_po_items->get_list(
+                            array('purchase_order_id'=>$filter_value),
+                            'purchase_order_items.*,products.product_desc,units.unit_name',
+                            array(
+                                array('products','products.product_id=purchase_order_items.product_id','left'),
+                                array('units','units.unit_id=purchase_order_items.unit_id','left')
+                            )
+                        );
+                        if($filter_value2=='print'){
+                          echo $this->load->view('template/purchase_order_content',$data,TRUE);
+                        }
+                        else{
+                          echo $this->load->view('template/purchase_order_content',$data,TRUE);
+                          echo $this->load->view('template/purchase_order_menu',$data,TRUE);
+                        }
+
+            break;
+
             case 'dr': //delivery invoice
                         $m_delivery=$this->Delivery_invoice_model;
                         $m_dr_items=$this->Delivery_invoice_item_model;
@@ -94,10 +134,10 @@ class Templates extends CORE_Controller {
                             $filter_value,
 
                             'issuance.*,
-                            suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.landline',
+                            locations.location_name',
 
                             array(
-                                array('suppliers','suppliers.supplier_id=issuance.supplier_id','left'),
+                                array('locations','locations.location_id=issuance.location_id','left'),
                             )
                         );
 
@@ -107,10 +147,9 @@ class Templates extends CORE_Controller {
                         $data['company_info']=$company[0];
                         $data['issuance_items']=$m_issuance_items->get_list(
                             array('issuance_id'=>$filter_value),
-                            'issuance_items.*,products.product_desc,units.unit_name',
+                            'issuance_items.*,products.product_desc',
                             array(
-                                array('products','products.product_id=issuance_items.product_id','left'),
-                                array('units','units.unit_id=issuance_items.unit_id','left')
+                                array('products','products.product_id=issuance_items.product_id','left')
                             )
                         );
 
@@ -143,10 +182,9 @@ class Templates extends CORE_Controller {
                         $data['company_info']=$company[0];
                         $data['adjustment_items']=$m_adjustment_items->get_list(
                             array('adjustment_id'=>$filter_value),
-                            'adjustment_items.*,products.product_desc,units.unit_name',
+                            'adjustment_items.*,products.product_desc',
                             array(
                                 array('products','products.product_id=adjustment_items.product_id','left'),
-                                array('units','units.unit_id=adjustment_items.unit_id','left')
                             )
                         );
 

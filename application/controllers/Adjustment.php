@@ -7,7 +7,9 @@ class Adjustment extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-
+        if($this->session->userdata('adjustment') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('Adjustment_model');
         $this->load->model('Tax_types_model');
         $this->load->model('Products_model');

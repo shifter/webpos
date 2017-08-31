@@ -28,7 +28,7 @@
 
                 <p>
                   <?php echo $this->session->user_fullname; ?> - <?php echo $this->session->user_group; ?>
-                  <small>Member since Nov. <?php echo $this->session->date_created; ?></small>
+                  <small>Member since Nov. <?php echo date('M-d-Y', strtotime($this->session->date_created)); ?></small>
                 </p>
               </li>
               <!-- Menu Body -->

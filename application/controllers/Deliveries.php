@@ -7,7 +7,9 @@ class Deliveries extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-
+        if($this->session->userdata('receiving_stock') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_types_model');
@@ -38,9 +40,7 @@ class Deliveries extends CORE_Controller
                 array('tax_types','tax_types.tax_type_id=suppliers.tax_type_id','left')
             )
         );
-        $data['purchase_order']=$this->purchase_order_model->get_list(
-            'purchase_order.is_deleted = 0'
-        );
+        $data['purchase_order']=$this->purchase_order_model->getPoList();
 
         $data['tax_types']=$this->Tax_types_model->get_list(
             'tax_types.is_deleted = 0'
@@ -158,7 +158,7 @@ class Deliveries extends CORE_Controller
     								  'dr_line_total_price' => $this->get_numeric_value($dr_line_total_price[$i]),
     								  'dr_tax_amount' => $this->get_numeric_value($dr_tax_amount[$i]),
     								  'dr_non_tax_amount' => $this->get_numeric_value($dr_non_tax_amount[$i]),
-                      'po_item_id' => $po_item_id[$i]
+                                      'po_item_id' => $po_item_id[$i]
     							   );
     							$i++;
     						}

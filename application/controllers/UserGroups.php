@@ -34,9 +34,9 @@ class UserGroups extends CORE_Controller {
             case 'list':
                 $response['data']=$this->User_groups_model->get_list(
                     array('user_groups.is_deleted'=>0),
-                    'user_groups.*,user_rights.*',
+                    'user_groups.*,user_groups_permission.*',
                     array(
-                            array('user_rights','user_rights.user_group_id=user_groups.user_group_id','left'),
+                            array('user_groups_permission','user_groups_permission.user_group_id=user_groups.user_group_id','left'),
                         )
                     );
                 echo json_encode($response);
@@ -49,17 +49,19 @@ class UserGroups extends CORE_Controller {
                 $m_user_group->user_group_desc=$this->input->post('user_group_desc',TRUE);
                 $m_user_group->save();
                 $user_group_id=$m_user_group->last_insert_id();
+                foreach($_POST as $key => $val){
+                    if($key =="user_group" || $key =="user_group_desc"){
 
-                foreach($_POST as $key => $val)
-                {
-                    if($key=="user_group" || $key=="user_group_desc"){
-                        /*echo "patient";*/
                     }
                     else{
                         $m_user_group_rights->$key=$this->input->post($key);
                     }
                 }
                 $m_user_group_rights->user_group_id=$user_group_id;
+                // $m_user_group_rights->receiving_stock=$this->input->post('receiving',TRUE);
+                // $m_user_group_rights->purchase_order=$this->input->post('purchase_order',TRUE);
+                // $m_user_group_rights->issuance=$this->input->post('issuance',TRUE);
+                // $m_user_group_rights->adjustment=$this->input->post('adjustment',TRUE);
                 $m_user_group_rights->save();
 
                 $response['title']='Success!';
@@ -86,16 +88,19 @@ class UserGroups extends CORE_Controller {
 
                 $m_user_group_rights->delete_via_fk($user_group_id);
 
-                foreach($_POST as $key => $val)
-                {
-                    if($key=="user_group" || $key=="user_group_desc"){
-                        /*echo "patient";*/
+                foreach($_POST as $key => $val){
+                    if($key =="user_group" || $key =="user_group_desc"){
+
                     }
                     else{
                         $m_user_group_rights->$key=$this->input->post($key);
                     }
                 }
-
+                // $m_user_group_rights->user_group_id=$user_group_id;
+                // $m_user_group_rights->receiving_stock=$this->input->post('receiving',TRUE);
+                // $m_user_group_rights->purchase_order=$this->input->post('purchase_order',TRUE);
+                // $m_user_group_rights->issuance=$this->input->post('issuance',TRUE);
+                // $m_user_group_rights->adjustment=$this->input->post('adjustment',TRUE);
                 $m_user_group_rights->save();
 
                 $response['title']='Success!';
