@@ -146,6 +146,35 @@
       padding-bottom: 0px !important;
       margin-bottom: 0px !important;
     }
+    .cnclass{
+        border-bottom: : 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .aclass{
+        border-bottom: 1px solid black; 
+        border-top: 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .woaclass{
+        border-bottom: 1px solid black; 
+        border-top: 1px solid black; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+        width: 99%;
+    }
+    .tclass{
+        border-bottom: 1px solid black; 
+        height: 100%; 
+        width: 99%;
+    }
+    .wotclass{
+        border-bottom: 1px solid black; 
+        padding-top: 5px; 
+        padding-bottom: 5px; 
+        width: 99%;
+    }
 
 </style>
 </head>
@@ -170,17 +199,32 @@
                                     Address<br>
                                     TIN&nbsp;#<br>
                                 </div>
-                                <?php if ($delivery_info->customer_code == "0"){?>
+                                <?php if ($delivery_info->customer_code == 0){?>
                                 <div id="right1">
                                       ___________________________<br>
                                       ___________________________<br>
                                       ___________________________<br>
                                 </div>
                               <?php }else{?>
+
                                 <div id="right1">
-                                    <?php echo $delivery_info->customer_name; ?><hr style="padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important;">
-                                    <?php echo $delivery_info->address; ?><hr style="padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important;">
-                                    <hr style="padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important;">
+                                    <div class="cnclass">
+                                        <?php echo $delivery_info->customer_name; ?>
+                                    <div>
+                                    <?php if ($delivery_info->address != null){ ?>
+                                        <div class="aclass">
+                                            <?php echo $delivery_info->address; ?>
+                                        </div> 
+                                    <?php }else{?>
+                                        <div class="woaclass"></div>
+                                    <?php }?>  
+                                    <?php if ($delivery_info->tin_no != null){ ?>
+                                        <div class="tclass">
+                                            <?php echo $delivery_info->tin_no; ?>
+                                        </div> 
+                                    <?php }else{?>
+                                        <div class="wotclass"></div>
+                                    <?php }?>
                                 </div>
                               <?php } ?>
                             </div>
@@ -332,7 +376,7 @@
                             <div id="right5">
                                 <?php echo number_format($delivery_info->before_tax,2); ?><br>
                                 <?php echo number_format($delivery_info->total_after_tax,2); ?><br>
-                                <?php echo number_format($delivery_info->tax_amount,2); ?><br>
+                                <?php echo number_format($delivery_info->total_tax_amount,2); ?><br>
                                 <?php echo number_format($delivery_info->non_vat_sales,2); ?><br><br>
                             </div>
                         </div>

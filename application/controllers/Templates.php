@@ -29,7 +29,7 @@ class Templates extends CORE_Controller {
     }
 
 
-    function layout($layout=null,$filter_value=null,$filter_value2=null){
+    function layout($layout=null,$filter_value=null,$filter_value2=null,$id_filter=null){
 
         switch($layout){
             case 'po': //purchase order
@@ -47,6 +47,37 @@ class Templates extends CORE_Controller {
 
 
                         break;
+
+            case 'journallist':  //this returns JSON of Purchase Order to be rendereds on Datatable
+                $m_pos_payment=$this->Pos_payment_model;
+
+                $journal_date = ($this->input->post('journal_date', TRUE) == null || $this->input->post('journal_date', TRUE) == "" ) ? 0 : $this->input->post('journal_date', TRUE);
+                $j_date = date('Y-m-d',strtotime($journal_date));
+
+                $receipt_no = ($this->input->post('receipt_no', TRUE) == null || $this->input->post('receipt_no', TRUE) == "" ) ? "0" : $this->input->post('receipt_no', TRUE);
+
+                if ($receipt_no != "0"){
+                    $response['data']=$m_pos_payment->get_list(
+                    'pos_payment.receipt_no LIKE "'.$receipt_no.'%"',
+                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
+                       array(
+                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
+                       )
+                    );
+                }else{
+                    $response['data']=$m_pos_payment->get_list(
+                    'pos_invoice.transaction_date="'.$j_date.'"',
+                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
+                       array(
+                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
+                       )
+                    );
+                }
+                echo json_encode($response);
+            break;
+
             //****************************************************
             case 'purchase_order': //delivery invoice
             $m_purchase_order=$this->purchase_order_model;
@@ -205,18 +236,9 @@ class Templates extends CORE_Controller {
                         $m_info=$this->Notes_model;
                         $m_snrcitizen=$this->Seniorcitizen_model;
 
-                        // $info=$m_invoice->get_list(
-                        //     $filter_value,
-                        //     'pos_payment.pos_invoice_id,pos_payment.pos_payment_id,pos_payment.receipt_no,pos_invoice.*,customers.customer_name',
-              					// 		array(
-              					// 			array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-              					// 			array('customers','customers.customer_id=pos_invoice.customer_id','left')								//join
-            						// 	)
-                        // );
-
                         $info=$m_invoice->get_list(
                             $filter_value,
-                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,customers.*,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier',
+                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,pos_invoice.tax_amount as total_tax_amount,customers.*,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier',
                                         array(
                                             array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
                                             array('customers','customers.customer_code=pos_invoice.customer_code','left'),
@@ -226,7 +248,7 @@ class Templates extends CORE_Controller {
                         );
 
                         $pos_paymt_id=$info[0]->pos_payment_id;
-            						$invoice_id=$info[0]->pos_invoice_id;
+            			$invoice_id=$info[0]->pos_invoice_id;
                         $data['info']=$invoice_id;
                         $footer=$m_info->get_list();
                         $company=$m_company->get_list();
@@ -482,6 +504,18 @@ echo json_encode($data);
                         break;
         }
     }
+
+        function response_rows($filter_value,$order_by=null,$ate_journal){
+        return $this->Pos_payment_model->get_list(
+        null,
+        'pos_payment.*,pos_payment.receipt_no,pos_invoice.*',
+            array(
+                array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left') //join
+            ),
+            'pos_payment.pos_payment_id DESC'
+        );
+    }
+
 
 
 }

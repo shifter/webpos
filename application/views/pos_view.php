@@ -19,8 +19,31 @@
   <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
   <style>
 
-      .custom_frame{
+/*        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
+        .table-responsive::-webkit-scrollbar {
+            width: 10px !important;
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3) !important;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+          background-color: slategrey !important;
+          outline: 1px solid darkgrey !important;
+        }
+
+         
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: slategrey;
+          outline: 1px solid darkgrey;
+        }*/
+
+      .custom_frame{
           border: 1px solid lightgray;
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
@@ -140,15 +163,16 @@
                                     <th width="10%">Qty</th>
                                     <th width="12%" style="text-align: right">SRP</th>
                                     <th width="12%" style="text-align: right">Discount</th>
-                                    <th style="display: none;">T.D</th> <!-- total discount -->
-                                    <th style="display: none;">Tax %</th>
+                                    <th>T.D</th> <!-- total discount -->
+                                    <th>Tax %</th>
                                     <th width="12%" style="text-align: right">Total</th>
-                                    <th style="display: none;">V.I</th> <!-- vat input -->
-                                    <th style="display: none;">N.V</th> <!-- net of vat -->
-                                    <td style="display: none;">Item ID</td><!-- product id -->
-                                    <td style="display: none;">Item Code</td>
-                                    <td style="display: none;">Disc Status</td><!-- product id -->
-                                    <td style="display: none;">Non Vat Sales</td>
+                                    <th>V.I</th> <!-- vat input -->
+                                    <th>N.V</th> <!-- net of vat -->
+                                    <td>Item ID</td><!-- product id -->
+                                    <td>Item Code</td>
+                                    <td>Disc Status</td><!-- product id -->
+                                    <td>Non Vat Sales</td>
+                                    <td hidden>Rate</td>
                                     <!--<th><center>Action</center></th>-->
                                   </tr>
                                   </thead>
@@ -272,7 +296,7 @@
                                ?>
                            </select>
                              <span class="input-group-btn">
-                             <button class="btn btn-default" type="button" tabindex="-1" data-toggle="modal" data-target="#modal_customers_list"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
+                             <button class="btn btn-default" id="btn_customer" type="button"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
                              </span>
                            </div>
                           </div>
@@ -310,9 +334,6 @@
                         <button id="btn_endbatch" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
                            Alt H - End Batch
                         </button>
-                        <button id="btn_sc" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
-                           Senior
-                        </button>
                       </div>
                   </div>
               </div>
@@ -325,7 +346,7 @@
   </div>
   <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
       <div class="modal-dialog modal-lg" style="float:left !important;margin-left:5%;">
-          <div class="modal-content"><!---content--->
+          <div class="modal-content"><!---content-->
               <div class="modal-header" style="background-color:#2ecc71">
                   <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                   <h4 class="modal-title" style="color:white;">Payment</h4>
@@ -731,14 +752,14 @@
 
 
 
-          </div><!---content---->
+          </div><!---content-->
       </div>
     </div>
   </div><!---modal-->
 
   <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
       <div class="modal-dialog modal-lg">
-          <div class="modal-content"><!---content--->
+          <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;">Items/Products</h4>
@@ -747,8 +768,8 @@
 
               <div class="modal-body">
                  <div class="container-fluid">
-                     <div id="div_product_list">
-                        <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                     <div class="table-responsive" id="div_product_list">
+                        <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 13pt !important;">
                           <thead class="tbl-header">
                             <tr>
                             <th>PLU</th>
@@ -765,13 +786,13 @@
                     </div>
                </div>
             </div>
-          </div><!---content---->
+          </div><!---content-->
       </div>
   </div><!---modal-->
 
   <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
       <div class="modal-dialog modal-m" style="margin-top: 5%;">
-          <div class="modal-content"><!---content--->
+          <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;">Discounts</h4>
@@ -797,9 +818,85 @@
       </div>
   </div><!---modal-->
 
+  <div id="modal_customers_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+      <div class="modal-dialog modal-m" style="margin-top: 5%;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9;">
+                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" style="color:white;">Customers</h4>
+            </div>
+              <div class="modal-body">
+                 <div class="container-fluid">
+                     <div id="div_product_list">
+                        <table id="tbl_customers" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                          <thead class="tbl-header">
+                            <tr>
+                              <th>Code</th>
+                              <th>Customer Name</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                          <tfoot>
+                              <th>Code</th>
+                              <th>Customer Name</th>
+                              <th>Action</th>
+                          </tfoot>
+                        </table>
+                    </div>
+               </div>
+            </div>
+          </div><!---content---->
+      </div>
+  </div><!---modal-->
+
+    <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+      <div class="modal-dialog modal-m" style="margin-top: 5%;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" style="color:white;">Journal</h4>
+            </div>
+              <div class="modal-body" style="width: 100% !important; margin: 0 !important; padding: 0 !important;">
+                 <div class="container-fluid">
+                     <div id="div_product_list">
+                      <div class="row" style="background: #ECEFF1; padding: 10px;padding-bottom: 10px; border-bottom: 1px solid #B0BEC5;border-top: 1px solid #B0BEC5;">
+                        <div class="col-md-6">
+                           <label>Receipt No:</label>
+                           <input type="text" name="receipt_no" id="receipt_no" class="form-control">
+                        </div>
+                       <div class="col-md-6">
+                          <label>Filter Date:</label>
+                          <input type="text" name="date_created" id="journal_date" class="date-picker form-control">
+                        </div>
+                      </div>
+                        <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                          <thead class="tbl-header">
+                            <tr>
+                              <center>
+                                <th></th>
+                                <th>Invoice #</th>
+                                <th>Transaction Date</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                              </center>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                    </div>
+               </div>
+            </div>
+          </div><!---content---->
+      </div>
+  </div><!---modal-->
+
+
   <div id="modal_qty" class="modal fade" tabindex="-1" role="dialog" ><!--modal-->
       <div class="modal-dialog modal-sm" style="top: 15%;">
-          <div class="modal-content" style="margin: 0 auto;"><!---content--->
+          <div class="modal-content" style="margin: 0 auto;"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title"><span id="qty_pro_name" style="font-weight: bold;"></span></h4>
@@ -838,9 +935,9 @@
       </div>
   </div><!---modal-->
 
-  <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" ><!--modal-->
+  <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog" style="top: 25%; width: 350px !important;">
-          <div class="modal-content"><!---content--->
+          <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
                 <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user fa-size"></span> Authorization</center></h4>
             </div>
@@ -860,12 +957,34 @@
                        Cancel</button>
                  </div>
                </div>
+          </div><!---content-->
+      </div>
+  </div><!---modal-->
+
+    <div id="modal_refund" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog" style="top: 25%; width: 450px !important;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
+                <h4 class="modal-title"><center style="font-weight: bold;"> <span class="fa fa-reply"></span> Refund</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
+               <div class="container-fluid">
+                <div class="refundDetails"></div>
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important;">
+                   <button id="refund_yes_btn" type="button" style="width: 40%;" class="btn btn-primary">Yes</button>
+                   <button type="button" class="btn btn-danger" style="width: 40%;" data-dismiss="modal" aria-label="Close">
+                       No</button>
+                 </div>
+               </div>
           </div><!---content---->
       </div>
   </div><!---modal-->
 
 
-  <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+  <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog" id="modal-senior">
           <div class="modal-content">
               <div class="modal-header bgm-indigo" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
@@ -967,7 +1086,8 @@
           net_vat : 'td:eq(8)',
           bcode : 'td:eq(10)',
           disc_status : 'td:eq(11)',
-          non_vat_sales: 'td:eq(12)'
+          non_vat_sales: 'td:eq(12)',
+          rate: 'td:eq(13)'
 
       };
 
@@ -1013,10 +1133,6 @@
         //$('.toggle-fullscreen').click();
         clearFields($('#frm_adjustment'));
         showList(false);
-    });
-
-    $('#btn_sc').click(function(){
-      $('#modal_senior_citizen').modal('show');
     });
 
     var raw_data=<?php echo json_encode($products); ?>;
@@ -1266,6 +1382,12 @@
         });
 
         $(document).keydown(function(event) {
+            if( event.which == 74 && event.altKey ) {
+              $('#btn_journal').click();
+            }
+        });
+
+        $(document).keydown(function(event) {
             if( event.which == 81 && event.altKey ) {
               $('#btn_qty').click();
             }
@@ -1366,6 +1488,13 @@
           }
         });
 
+        $('#btn_customer').click(function(){
+
+            $('#tbl_customers').dataTable().fnDestroy();
+            getcustomers();
+            $('#modal_customers_list').modal('toggle');
+        });
+
         var authorization=(function(){
            var _data={pword : $('input[name="void_pwd"]').val()};
 
@@ -1457,6 +1586,9 @@
    			  });
        });
 
+        $('#refund_yes_btn').click(function(){
+            
+        });
 
         $('#btn_void').click(function(){
           if (itemcount != 0){
@@ -1643,15 +1775,16 @@
         '<td width="10%" style="border: .5px solid #CFD8DC;"><input name="pos_qty[]" type="text" class="numeric" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly value="'+ d.pos_qty+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_price[]" type="text" class="numeric" value="'+accounting.formatNumber(d.pos_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_discount[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_discount,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td width="11%" style="display: none;"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
-        '<td style="display: none;"><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td width="11%"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
+        '<td><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;" align="right"><input name="pos_line_total_price[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_line_total_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td style="display: none;"><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
-        '<td style="display: none;"><div class="row_bcode">'+d.product_code+'</div></td>'+
-        '<td style="display: none;"><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
-        '<td style="display: none;"><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
+        '<td><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
+        '<td><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
+        '<td><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
+        '<td><div class="row_bcode">'+d.product_code+'</div></td>'+
+        '<td><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
+        '<td><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
+        '<td hidden><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '</tr>';
     };
 
@@ -2075,6 +2208,7 @@
   				$("#payment_id").val(payment_id);
   				clearFields();
   				reComputeTotal();
+          _customers.select2('val',"0");
   				$('#cart_count').text("0 rows");
   				$("#modal_payment").modal('hide');
   				window.open("Templates/layout/pospr/"+payment_id+"/print");
@@ -2273,10 +2407,10 @@
                 {
                      targets:[5],
                      render: function (data, type, full, meta){
-                         var btn_addtocart_close='<button class="btn btn-default btn-sm" name="addtocart_close"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="add and close"><span class="glyphicon glyphicon-ok"></span> </button>';
-                         var btn_addtocart='<button class="btn btn-default btn-sm" name="addtocart" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-plus" aria-hidden="true"></i> </button>';
+                         var btn_addtocart_close='<button class="btn btn-default btn-l" style="width: 50px; height: 50px; background-color: #B0BEC5;" name="addtocart_close"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Add"><span class="glyphicon glyphicon-ok" style="color: #fff;"></span> </button>';
+                         // var btn_addtocart='<button class="btn btn-default btn-l" name="addtocart" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-plus" aria-hidden="true"></i> </button>';
 
-                         return '<center>'+btn_addtocart_close+btn_addtocart+'</center>';
+                         return '<center>'+btn_addtocart_close+'</center>';
                      }
                  },
 
@@ -2320,6 +2454,210 @@
          });
     }
 
+        var getjournal=function(){
+          var _selecteddatedt = $('#journal_date').val();
+          dt=$('#tbl_journal').DataTable({
+              "dom": '<"toolbar">frtip',               
+              "bFilter": false,
+              "ajax": {
+              "url": "Templates/layout/journallist",
+              "type": "POST",
+              "bDestroy": true,
+              "data": function ( d ) {
+                  return $.extend( {}, d, {
+                      "journal_date": _selecteddatedt
+                      } );
+                  }
+              },
+              "columns": [
+                  {
+                      "targets": [0],
+                      "class":          "details-control",
+                      "orderable":      false,
+                      "data":           null,
+                      "defaultContent": ""
+                  },
+                  { targets:[1],data: "receipt_no" },
+                  { targets:[2],data: "transaction_date" },
+                  { targets:[3],data: "amount_due" },
+                  {
+                     targets:[4],
+                     render: function (data, type, full, meta){
+                         var btn_refund='<button class="btn btn-default btn-l" name="refundTransaction" style="width: 50px; height: 50px;" data-toggle="tooltip" data-placement="top" title="Refund"><i class="fa fa-reply" aria-hidden="true"></i></button>';
+
+                         return '<center>'+btn_refund+'</center>';
+                     }
+                 },
+              ],
+              language: {
+                           searchPlaceholder: "Search Transactions"
+                       },
+              "rowCallback":function( row, data, index ){
+
+                  $(row).find('td').eq(10).attr({
+                      "align": "right"
+                  });
+              }
+          });
+
+        }
+
+         var GetJournalReceiptFilter=function(){
+          var _selectreceiptno = $('#receipt_no').val();
+          dt=$('#tbl_journal').DataTable({
+              "dom": '<"toolbar">frtip',               
+              "bFilter": false,
+              "ajax": {
+              "url": "Templates/layout/journallist",
+              "type": "POST",
+              "bDestroy": true,
+              "data": function ( d ) {
+                  return $.extend( {}, d, {
+                      "receipt_no": _selectreceiptno
+                      } );
+                  }
+              },
+              "columns": [
+                  {
+                      "targets": [0],
+                      "class":          "details-control",
+                      "orderable":      false,
+                      "data":           null,
+                      "defaultContent": ""
+                  },
+                  { targets:[1],data: "receipt_no" },
+                  { targets:[2],data: "transaction_date" },                  
+                  { targets:[3],data: "amount_due" },
+                  {
+                     targets:[4],
+                     render: function (data, type, full, meta){
+                         var btn_refund='<button class="btn btn-default btn-l" name="refundTransaction" style="width: 50px; height: 50px;" data-toggle="tooltip" data-placement="top" title="Refund"><i class="fa fa-reply" aria-hidden="true"></i></button>';
+
+                         return '<center>'+btn_refund+'</center>';
+                     }
+                 },
+              ],
+              language: {
+                           searchPlaceholder: "Search Transactions"
+                       },
+              "rowCallback":function( row, data, index ){
+
+                  $(row).find('td').eq(10).attr({
+                      "align": "right"
+                  });
+              }
+          });
+
+        }
+
+        $('#journal_date').change(function(){ 
+          $('#tbl_journal').dataTable().fnDestroy();
+          getjournal();
+        });
+
+        $('#receipt_no').keyup(function(){ 
+          $('#tbl_journal').dataTable().fnDestroy();
+          GetJournalReceiptFilter();
+        });
+
+        $('#btn_journal').click(function(){
+          var d = new Date();
+          var strDate =  (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+          $('#journal_date').val(strDate);
+          $('#tbl_journal').dataTable().fnDestroy();
+          getjournal();
+          $('#modal_journal_list').modal('toggle');
+        });
+
+
+        $('#tbl_journal tbody').on( 'click', 'tr td.details-control', function () {
+            var detailRows = [];
+            var tr = $(this).closest('tr');
+            var row = dt.row( tr );
+            var idx = $.inArray( tr.attr('id'), detailRows );
+
+            if ( row.child.isShown() ) {
+                tr.removeClass( 'details' );
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice( idx, 1 );
+            }
+            else {
+                tr.addClass( 'details' );
+                //console.log(row.data());
+                var d=row.data();
+
+                $.ajax({
+                    "dataType":"html",
+                    "type":"POST",
+                    "url":"Templates/layout/pospr/"+ d.pos_payment_id,
+                    "beforeSend": showSpinningProgressEarth($('#'))
+                }).done(function(response){
+                    row.child( response ).show();
+                    // Add to the 'open' array
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                    $.unblockUI();
+                });
+            }
+        });
+
+    var getcustomers=function(){
+          dt=$('#tbl_customers').DataTable({
+             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+             "ajax" : "Customers/transaction/list",
+             "bDestroy": true,
+              "language": {
+                 "searchPlaceholder": "Search Customer"
+             },
+             "columns": [
+                { targets:[0],data: "customer_code"},
+                { targets:[1],data: "customer_name" },
+                {
+                     targets:[2],
+                     render: function (data, type, full, meta){
+                         var btn_apply_customer='<button class="btn btn-default btn-l" name="applyCustomer"  data-toggle="tooltip" data-placement="top" title="Apply Discount"><span class="glyphicon glyphicon-ok"></span> </button>';
+
+                         return '<center>'+btn_apply_customer+'</center>';
+                     }
+                 },
+
+             ],
+             "rowCallback":function( row, data, index ){
+
+                 $(row).find('td').eq(2).attr({
+                     "align": "right"
+                 });
+             }
+         });
+    }
+
+      $('#tbl_customers tbody').on( 'click', 'button[name="applyCustomer"]', function () {
+
+      var _selectRowObjcustomers=$(this).closest('tr');
+      var cdata=dt.row(_selectRowObjcustomers).data();
+
+      var customerCode = cdata.customer_code;
+      var customerName = cdata.customer_name;
+
+      _customers.select2('val',customerCode);
+      $('#modal_customers_list').modal('hide');
+
+      });
+
+    $('#tbl_journal tbody').on( 'click', 'button[name="refundTransaction"]', function () {
+      _selectRowObj=$(this).closest('tr');
+      var data=dt.row(_selectRowObj).data();
+      var invoice_id = data.invoice_id;
+      var datareceipt_no = data.receipt_no;
+
+      $('.refundDetails').html('<strong>WARNING: ALL DATA WILL BE ZERO OUT!</strong> <br /> Sales Transaction number [ '+ datareceipt_no +' ] was selected for refund. <br> Make sure manager/supervisor approved the customer/s refund. <hr style=""> Are you sure want to continue refund?');
+      $('#modal_refund').modal('show');
+    });
+
+
     $('#tbl_discounts tbody').on( 'click', 'button[name="applyDiscount"]', function () {
 
       _selectRowObj=$(this).closest('tr');
@@ -2330,23 +2668,32 @@
       sc = row.find(oTableItems.sale_cost).find('input.numeric').val();
 
       if (seniorcitizenid == 2){
+        var SeniorCitizenDiscount = 0; var AmountCollectible = 0;
+
         var countdiscount = ((parseFloat(sc)*(dataDiscount/100)));
-        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(SeniorCitizenDiscount).toFixed(2));
         var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
         var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
         var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
         var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()));
-        var SeniorCitizenDiscount = 0; var AmountCollectible = 0;
+        var rate=parseFloat(accounting.unformat(row.find(oTableItems.rate).find('input.numeric').val()));
         var discountCitizen = (dataDiscount/100);
+        var status=row.find(oTableItems.disc_status).find('.disc_stat').val();
 
-        if (tax_rate != "0.00"){
-          var exemptVAT = ((parseFloat(price)/parseFloat(tax_rate)));
-          SeniorCitizenDiscount = (parseFloat(exemptVAT)*parseFloat(discountCitizen));
-          AmountCollectible = (parseFloat(exemptVAT)-parseFloat(SeniorCitizenDiscount));
-        }else{
-          SeniorCitizenDiscount = (parseFloat(price)*parseFloat(discountCitizen));
-          AmountCollectible = (parseFloat(price)-parseFloat(SeniorCitizenDiscount));
-        }
+          if (tax_rate != 0){
+            var exemptVAT = ((parseFloat(price)/parseFloat(rate)));
+            SeniorCitizenDiscount = (parseFloat(exemptVAT)*parseFloat(discountCitizen));
+            AmountCollectible = (parseFloat(exemptVAT)-parseFloat(SeniorCitizenDiscount));
+          }else{
+            if (status == 0){
+              SeniorCitizenDiscount = (parseFloat(price)*parseFloat(discountCitizen));
+              AmountCollectible = (parseFloat(price)-parseFloat(SeniorCitizenDiscount));
+            }
+            else if (status == 1) {
+              var exemptVAT = ((parseFloat(price)/parseFloat(rate)));
+              SeniorCitizenDiscount = (parseFloat(exemptVAT)*parseFloat(discountCitizen));
+              AmountCollectible = (parseFloat(exemptVAT)-parseFloat(SeniorCitizenDiscount));
+            }
+          }
 
         var net_vat = 0;
         var vat_input = 0;
@@ -2354,7 +2701,6 @@
         var TotalSeniorCitizenDiscount = SeniorCitizenDiscount*qty;
 
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(TotalSeniorCitizenDiscount).toFixed(2));
-
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(nvs,2)); // line total amount
         $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
         $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
@@ -2364,18 +2710,16 @@
         row.find(oTableItems.disc_status).find('.disc_stat').val(1);
         var std = parseFloat(TotalSeniorCitizenDiscount).toFixed(2);
 
-        if ($('#seniorTotalDiscount').val() == ""){
-          $('#seniorTotalDiscount').val(std);
-        }
-        else {
-          var c_std = $('#seniorTotalDiscount').val();
-          var computeSeniorTotalDiscount = parseFloat(c_std) + parseFloat(std);
-          $('#seniorTotalDiscount').val(computeSeniorTotalDiscount);
-        }
+          if ($('#seniorTotalDiscount').val() == ""){
+            $('#seniorTotalDiscount').val(std);
+          }
+          else {
+            var c_std = $('#seniorTotalDiscount').val();
+            var computeSeniorTotalDiscount = parseFloat(c_std) + parseFloat(std);
+            $('#seniorTotalDiscount').val(computeSeniorTotalDiscount);
+          }
       }
       else {
-
-        row.find(oTableItems.discount).find('input.numeric').val(parseFloat(countdiscount).toFixed(2));
         var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
         var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
         var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
@@ -2386,15 +2730,15 @@
         var computeTotalwdisc = 0; var net_vat =0;var vat_input=0;var nvs = 0;
         computeTotalwdisc = ((parseFloat(price)*qty))-computeTotalDiscount;
 
-        if (tax_rate != "0.00"){
-          net_vat = computeTotalwdisc/parseFloat(tax_rate);
-          vat_input = computeTotalwdisc-net_vat;
-          nvs = 0;
-        }else{
-          net_vat = 0;
-          vat_input = 0;
-          nvs = computeTotalwdisc;
-        }
+          if (tax_rate != "0.00"){
+            net_vat = computeTotalwdisc/parseFloat(tax_rate);
+            vat_input = computeTotalwdisc-net_vat;
+            nvs = 0;
+          }else{
+            net_vat = 0;
+            vat_input = 0;
+            nvs = computeTotalwdisc;
+          }
 
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(computeTotalDiscount).toFixed(2));
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(computeTotalwdisc,2)); // line total amount

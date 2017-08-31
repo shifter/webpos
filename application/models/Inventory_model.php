@@ -48,7 +48,7 @@ class Inventory_model extends CORE_Model {
               SELECT SUM(adj_qty) as total_added_stock,product_id FROM adjustment_items
                 LEFT JOIN adjustment
                 ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='In'
+              WHERE adjustment_items.adjustment_type='IN'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sda
@@ -58,7 +58,7 @@ class Inventory_model extends CORE_Model {
               SELECT SUM(adj_qty) as total_deducted_stock,product_id FROM adjustment_items
                 LEFT JOIN adjustment
                 ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='Out'
+              WHERE adjustment_items.adjustment_type='OUT'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sdd
@@ -113,9 +113,9 @@ class Inventory_model extends CORE_Model {
               LEFT JOIN
               (
               SELECT SUM(adj_qty) as total_added_stock,product_id FROM adjustment_items
-                LEFT JOIN adjustment
-                ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='In'
+              LEFT JOIN adjustment
+              ON adjustment.adjustment_id=adjustment_items.adjustment_id
+              WHERE adjustment_items.adjustment_type='IN'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sda
@@ -125,7 +125,7 @@ class Inventory_model extends CORE_Model {
               SELECT SUM(adj_qty) as total_deducted_stock,product_id FROM adjustment_items
                 LEFT JOIN adjustment
                 ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='Out'
+              WHERE adjustment_items.adjustment_type='OUT'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sdd
@@ -179,7 +179,7 @@ class Inventory_model extends CORE_Model {
               SELECT SUM(adj_qty) as total_added_stock,product_id FROM adjustment_items
                 LEFT JOIN adjustment
                 ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='In'
+              WHERE adjustment_items.adjustment_type='IN'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sda
@@ -189,7 +189,7 @@ class Inventory_model extends CORE_Model {
               SELECT SUM(adj_qty) as total_deducted_stock,product_id FROM adjustment_items
                 LEFT JOIN adjustment
                 ON adjustment.adjustment_id=adjustment_items.adjustment_id
-              WHERE adjustment.adjustment_type='Out'
+              WHERE adjustment_items.adjustment_type='OUT'
               AND adjustment.is_deleted = 0
               GROUP BY product_id
               ) as sdd
