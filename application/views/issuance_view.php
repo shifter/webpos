@@ -353,6 +353,7 @@
     $('#btn_new').click(function(){
         _txnMode="new";
         //$('.toggle-fullscreen').click();
+        _cboLocation.select2('val', null);
         clearFields($('#frm_issuance'));
         showList(false);
     });
