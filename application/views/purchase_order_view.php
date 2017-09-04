@@ -456,6 +456,7 @@
     $('#btn_new').click(function(){
         _txnMode="new";
         //$('.toggle-fullscreen').click();
+        _cboSuppliers.select2('val',null);
         clearFields($('#frm_deliveries'));
         showList(false);
     });
@@ -638,13 +639,6 @@
 				}
 
 
-        });
-
-        $('#btn_new').click(function(){
-            _txnMode="new";
-            //$('.toggle-fullscreen').click();
-            clearFields($('#frm_deliveries'));
-            showList(false);
         });
 
         $('#btn_create_user_suppliers').click(function(){

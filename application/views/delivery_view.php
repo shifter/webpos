@@ -482,6 +482,8 @@ bloodhound.min.js"></script>
     $('#btn_new').click(function(){
         _txnMode="new";
         //$('.toggle-fullscreen').click();
+        _cboPO.select2('val', null);
+        _cboSuppliers.select2('val', null);
         clearFields($('#frm_deliveries'));
         showList(false);
         $('.numeric').autoNumeric('init');
