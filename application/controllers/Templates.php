@@ -48,6 +48,19 @@ class Templates extends CORE_Controller {
 
                         break;
 
+            case 'refund': //transaction refund
+                $m_pos_payment=$this->Pos_payment_model;
+                $pos_pymnt_id=$this->input->post('pos_payment_id',TRUE);
+
+                $m_pos_payment->refund=1;
+                if($m_pos_payment->modify($pos_pymnt_id)){
+                    $response['title']='Success!';
+                    $response['stat']='success';
+
+                    echo json_encode($response);
+                }
+            break;
+
             case 'journallist':  //this returns JSON of Purchase Order to be rendereds on Datatable
                 $m_pos_payment=$this->Pos_payment_model;
 
@@ -58,7 +71,7 @@ class Templates extends CORE_Controller {
 
                 if ($receipt_no != "0"){
                     $response['data']=$m_pos_payment->get_list(
-                    'pos_payment.receipt_no LIKE "'.$receipt_no.'%"',
+                    'pos_payment.receipt_no LIKE "'.$receipt_no.'%" AND pos_payment.refund=0',
                       'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
                        array(
                          array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
@@ -67,7 +80,7 @@ class Templates extends CORE_Controller {
                     );
                 }else{
                     $response['data']=$m_pos_payment->get_list(
-                    'pos_invoice.transaction_date="'.$j_date.'"',
+                    'pos_invoice.transaction_date="'.$j_date.'"  AND pos_payment.refund=0',
                       'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
                        array(
                          array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),

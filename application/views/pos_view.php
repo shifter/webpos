@@ -19,30 +19,6 @@
   <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
   <style>
 
-/*        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        .table-responsive::-webkit-scrollbar {
-            width: 10px !important;
-        }
-        .table-responsive::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3) !important;
-        }
-        .table-responsive::-webkit-scrollbar-thumb {
-          background-color: slategrey !important;
-          outline: 1px solid darkgrey !important;
-        }
-
-         
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.3);
-        }
-        ::-webkit-scrollbar-thumb {
-          background-color: slategrey;
-          outline: 1px solid darkgrey;
-        }*/
-
       .custom_frame{
           border: 1px solid lightgray;
           -webkit-border-radius: 5px;
@@ -65,6 +41,9 @@
       .swal-top{
         border-top: 1px solid #d50000;
         border-bottom: 1px solid #d50000;
+      }
+      .swal-body{
+
       }
       .void-notif-class{
         font-size: 12pt !important;
@@ -159,21 +138,20 @@
                                   <table id="tbl_items" class="table table-striped table-bordered " cellspacing="0" width="100%">
                                   <thead style="background-color:#2c3e50;color:white;">
                                   <tr>
-                                    <th width="40%">Item</th>
-                                    <th width="10%">Qty</th>
-                                    <th width="12%" style="text-align: right">SRP</th>
-                                    <th width="12%" style="text-align: right">Discount</th>
-                                    <th>T.D</th> <!-- total discount -->
-                                    <th>Tax %</th>
-                                    <th width="12%" style="text-align: right">Total</th>
-                                    <th>V.I</th> <!-- vat input -->
-                                    <th>N.V</th> <!-- net of vat -->
-                                    <td>Item ID</td><!-- product id -->
-                                    <td>Item Code</td>
-                                    <td>Disc Status</td><!-- product id -->
-                                    <td>Non Vat Sales</td>
-                                    <td hidden>Rate</td>
-                                    <!--<th><center>Action</center></th>-->
+                                    <th width="40%">Item</th><!-- Item Description -->
+                                    <th width="10%">Qty</th><!-- Item Quantity -->
+                                    <th width="12%" style="text-align: right">SRP</th><!-- Item Cost -->
+                                    <th width="12%" style="text-align: right">Discount</th><!-- Item Discount -->
+                                    <th style="display: none;">T.D</th> <!-- total discount -->
+                                    <th style="display: none;">Tax %</th><!-- Item tax -->
+                                    <th width="12%" style="text-align: right">Total</th><!-- Line Total -->
+                                    <th style="display: none;">V.I</th> <!-- vat input -->
+                                    <th style="display: none;">N.V</th> <!-- net of vat -->
+                                    <th style="display: none;">Item ID</td><!-- product id -->
+                                    <th style="display: none;">Item Code</td><!-- Item Code -->
+                                    <th style="display: none;">Disc Status</td><!-- Discount Status -->
+                                    <th style="display: none;">Non Vat Sales</td><!-- Non-vat-sales -->
+                                    <th style="display: none;">Rate</td><!-- Item rate -->
                                   </tr>
                                   </thead>
                                   <tbody>
@@ -301,7 +279,7 @@
                            </div>
                           </div>
                           <div class="row">
-                            <button class="btn btn-primary" style="margin-top:5px;width:100%;" data-toggle="modal" data-target="#modal_payment">Alt P - Make Payment</button>
+                            <button class="btn btn-primary" style="margin-top:5px;width:100%;" id="btn_payment">Alt P - Make Payment</button>
                             <button class="btn btn-success finalize" style="margin-top:5px;width:100%;margin-bottom:8px;">Finalize</button>
                           </div>
                         </div>
@@ -344,7 +322,7 @@
     </section>
     <!-- /.content -->
   </div>
-  <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+  <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-lg" style="float:left !important;margin-left:5%;">
           <div class="modal-content"><!---content-->
               <div class="modal-header" style="background-color:#2ecc71">
@@ -757,13 +735,12 @@
     </div>
   </div><!---modal-->
 
-  <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+  <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-lg">
           <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;">Items/Products</h4>
-
             </div>
 
               <div class="modal-body">
@@ -847,11 +824,11 @@
                     </div>
                </div>
             </div>
-          </div><!---content---->
+          </div><!---content-->
       </div>
   </div><!---modal-->
 
-    <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+    <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-m" style="margin-top: 5%;">
           <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
@@ -871,7 +848,8 @@
                           <input type="text" name="date_created" id="journal_date" class="date-picker form-control">
                         </div>
                       </div>
-                        <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                       <div class="table-responsive">
+                          <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
                           <thead class="tbl-header">
                             <tr>
                               <center>
@@ -886,6 +864,7 @@
                           <tbody>
                           </tbody>
                         </table>
+                       </div>
                     </div>
                </div>
             </div>
@@ -960,29 +939,6 @@
           </div><!---content-->
       </div>
   </div><!---modal-->
-
-    <div id="modal_refund" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 25%; width: 450px !important;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
-                <h4 class="modal-title"><center style="font-weight: bold;"> <span class="fa fa-reply"></span> Refund</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
-               <div class="container-fluid">
-                <div class="refundDetails"></div>
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important;">
-                   <button id="refund_yes_btn" type="button" style="width: 40%;" class="btn btn-primary">Yes</button>
-                   <button type="button" class="btn btn-danger" style="width: 40%;" data-dismiss="modal" aria-label="Close">
-                       No</button>
-                 </div>
-               </div>
-          </div><!---content---->
-      </div>
-  </div><!---modal-->
-
 
   <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog" id="modal-senior">
@@ -1646,6 +1602,12 @@
           }
         });
 
+        $('#btn_payment').click(function(){
+          $('#modal_payment').modal('show');        
+          var amountdueinput = $('#amountdue').val();          
+          $('#cash').val(amountdueinput);
+        });
+
         //track every changes on numeric fields
         // $('#tbl_items tbody').on('keyup','input.numeric',function(){
         //     var row=$(this).closest('tr');
@@ -1775,16 +1737,16 @@
         '<td width="10%" style="border: .5px solid #CFD8DC;"><input name="pos_qty[]" type="text" class="numeric" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly value="'+ d.pos_qty+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_price[]" type="text" class="numeric" value="'+accounting.formatNumber(d.pos_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_discount[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_discount,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td width="11%"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
-        '<td><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td style="display: none;" width="11%"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
+        '<td style="display: none;"><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;" align="right"><input name="pos_line_total_price[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_line_total_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
-        '<td><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
-        '<td><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
-        '<td><div class="row_bcode">'+d.product_code+'</div></td>'+
-        '<td><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
-        '<td><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
-        '<td hidden><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td style="display: none;"><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
+        '<td style="display: none;"><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
+        '<td style="display: none;"><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
+        '<td style="display: none;"><div class="row_bcode">'+d.product_code+'</div></td>'+
+        '<td style="display: none;"><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
+        '<td style="display: none;"><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
+        '<td style="display: none;"><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '</tr>';
     };
 
@@ -2456,7 +2418,7 @@
 
         var getjournal=function(){
           var _selecteddatedt = $('#journal_date').val();
-          dt=$('#tbl_journal').DataTable({
+          dtjournal=$('#tbl_journal').DataTable({
               "dom": '<"toolbar">frtip',               
               "bFilter": false,
               "ajax": {
@@ -2504,7 +2466,7 @@
 
          var GetJournalReceiptFilter=function(){
           var _selectreceiptno = $('#receipt_no').val();
-          dt=$('#tbl_journal').DataTable({
+          dtjournal=$('#tbl_journal').DataTable({
               "dom": '<"toolbar">frtip',               
               "bFilter": false,
               "ajax": {
@@ -2563,6 +2525,7 @@
         $('#btn_journal').click(function(){
           var d = new Date();
           var strDate =  (d.getMonth()+1) + "/" + d.getDate() + "/" + d.getFullYear();
+          $('#receipt_no').val("");
           $('#journal_date').val(strDate);
           $('#tbl_journal').dataTable().fnDestroy();
           getjournal();
@@ -2573,7 +2536,7 @@
         $('#tbl_journal tbody').on( 'click', 'tr td.details-control', function () {
             var detailRows = [];
             var tr = $(this).closest('tr');
-            var row = dt.row( tr );
+            var row = dtjournal.row( tr );
             var idx = $.inArray( tr.attr('id'), detailRows );
 
             if ( row.child.isShown() ) {
@@ -2618,7 +2581,7 @@
                 {
                      targets:[2],
                      render: function (data, type, full, meta){
-                         var btn_apply_customer='<button class="btn btn-default btn-l" name="applyCustomer"  data-toggle="tooltip" data-placement="top" title="Apply Discount"><span class="glyphicon glyphicon-ok"></span> </button>';
+                         var btn_apply_customer='<button class="btn btn-default btn-l" name="applyCustomer"  data-toggle="tooltip" data-placement="top" title="Apply Customer"><span class="glyphicon glyphicon-ok"></span> </button>';
 
                          return '<center>'+btn_apply_customer+'</center>';
                      }
@@ -2646,17 +2609,51 @@
       $('#modal_customers_list').modal('hide');
 
       });
+    var datareceipt_no;var pos_pymnt_id;
 
     $('#tbl_journal tbody').on( 'click', 'button[name="refundTransaction"]', function () {
       _selectRowObj=$(this).closest('tr');
-      var data=dt.row(_selectRowObj).data();
-      var invoice_id = data.invoice_id;
-      var datareceipt_no = data.receipt_no;
+      var data=dtjournal.row(_selectRowObj).data();
+      datareceipt_no = data.receipt_no;
+      pos_pymnt_id = data.pos_payment_id;
 
-      $('.refundDetails').html('<strong>WARNING: ALL DATA WILL BE ZERO OUT!</strong> <br /> Sales Transaction number [ '+ datareceipt_no +' ] was selected for refund. <br> Make sure manager/supervisor approved the customer/s refund. <hr style=""> Are you sure want to continue refund?');
-      $('#modal_refund').modal('show');
+      var rdetails = '<div style="text-align: left; font-size: 10pt !important; font-weight: bold; margin-left: 34px;">WARNING: ALL DATA WILL BE ZERO OUT!</div><div style="text-align: center; font-size: 10pt !important;"> <br /> Sales transaction number [ '+ datareceipt_no +' ] was selected for refund. <br> Make sure manager/supervisor approved the customer/s refund. <hr> Are you sure you want continue customer refund?</div>';
+      swalpopuprefund(rdetails);
     });
 
+      var refundTransactions=function(){
+          return $.ajax({
+              "dataType":"json",
+              "type":"POST",
+              "url":"Templates/layout/refund",
+              "data":{pos_payment_id : pos_pymnt_id},
+              "beforeSend": showSpinningProgress($('#'))
+          });
+      };
+
+     var swalpopuprefund=function(rdetails){
+      swal({
+              title: "Refund",
+              text: rdetails,
+              html: true,
+              customClass: 'swal-body',
+              closeOnConfirm: true,
+              closeOnCancel: true,
+              showCancelButton: true,
+              cancelButtonText: "No",
+              confirmButtonText: "Yes",
+              confirmButtonColor: '#4CAF50',
+          },function(isConfirm){
+              if (isConfirm) {
+                 refundTransactions().done(function(response){
+                  //showNotification(response);
+                      dtjournal.row(_selectRowObj).remove().draw();
+                   //   alert(data.ref_service_id);
+                 $.unblockUI();
+               });
+              } else {}
+          });
+    };
 
     $('#tbl_discounts tbody').on( 'click', 'button[name="applyDiscount"]', function () {
 

@@ -10,9 +10,9 @@ class Products extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Categories_model');
         $this->load->model('Units_model');
-    		$this->load->model('Inventory_model');
-    		$this->load->model('Brands_model');
-    		$this->load->model('Vendors_model');
+		$this->load->model('Inventory_model');
+		$this->load->model('Brands_model');
+		$this->load->model('Vendors_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_types_model');
     }
