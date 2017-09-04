@@ -62,7 +62,7 @@ class Users extends CORE_Controller
                     $m_users->user_group_id=$this->input->post('user_group_id',TRUE);
                     $m_users->photo_path=$this->input->post('photo_path',TRUE);
                     date_default_timezone_set("Asia/Manila");
-                    $date_created = date("Y-m-d");
+                    $date_created = date("Y-m-d HH:MM:ss");
                     $m_users->date_created=$date_created;
                     $m_users->save();
 

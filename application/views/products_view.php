@@ -716,7 +716,7 @@
 <?php echo $_def_js_files ?>
 <script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
 <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
-<?php echo $_rights; ?>
+<!-- <?php echo $_rights; ?> -->
 
     <script type="text/javascript">
     var _cboCategories; var _cboBrand; var _cboUnit; var _cboVendor; var _cboSuppliers;

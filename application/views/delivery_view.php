@@ -482,6 +482,8 @@ bloodhound.min.js"></script>
     $('#btn_new').click(function(){
         _txnMode="new";
         //$('.toggle-fullscreen').click();
+        _cboPO.select2('val', null);
+        _cboSuppliers.select2('val', null);
         clearFields($('#frm_deliveries'));
         showList(false);
         $('.numeric').autoNumeric('init');
@@ -665,16 +667,17 @@ bloodhound.min.js"></script>
             _cboSuppliers.select2('val',$(this).find('option:selected').attr('data-supplier'));
             $('#dr_remarks').val($(this).find('option:selected').attr('data-remarks'));
             $.ajax({
-                url : 'Purchase_Order/transaction/items/'+i,
+                url : 'Purchase_Order/transaction/items_receive/'+i,
                 type : "GET",
                 cache : false,
                 dataType : 'json',
                 processData : false,
                 contentType : false,
                 beforeSend : function(){
-                    $('#tbl_items > tbody').html('<tr><td align="center" colspan="8"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
+                  showSpinningProgressLoading();
                 },
                 success : function(response){
+                    $.unblockUI();
                     var rows=response.data;
                     $('#tbl_items > tbody').html('');
 
@@ -828,9 +831,10 @@ bloodhound.min.js"></script>
                 processData : false,
                 contentType : false,
                 beforeSend : function(){
-                    $('#tbl_items > tbody').html('<tr><td align="center" colspan="8"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
+                    showSpinningProgressLoading();
                 },
                 success : function(response){
+                    $.unblockUI();
                     var rows=response.data;
                     $('#tbl_items > tbody').html('');
 
@@ -939,6 +943,13 @@ bloodhound.min.js"></script>
         });
 
         $('#btn_cancel').click(function(){
+            clearFields($('#frm_deliveries'));
+            $('#cbo_po').attr('disabled', false);
+            _cboPO.select2('val',null);
+            _cboPO=$("#cbo_po").select2({
+            placeholder: "Please select PO #.",
+            allowClear: true
+        });
             showList(true);
         });
 
@@ -954,6 +965,7 @@ bloodhound.min.js"></script>
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
                         clearFields($('#frm_deliveries'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
@@ -1221,6 +1233,18 @@ bloodhound.min.js"></script>
             $('#invoice_fields').show();
             $('.btn_new').hide();
         }
+    };
+
+    var showSpinningProgressLoading=function(e){
+        $.blockUI({ message: '<img src="assets/img/gears.svg"/><br><h4 style="color:#ecf0f1;">Loading Data...</h4>',
+            css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: 'none',
+            opacity: 1,
+            zIndex: 20000,
+        } });
+        $('.blockOverlay').attr('title','Click to unblock').click($.unblockUI);
     };
 
     var validateRequiredFields=function(f){

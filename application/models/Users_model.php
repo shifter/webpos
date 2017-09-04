@@ -25,9 +25,10 @@ class Users_model extends CORE_Model{
     }
 
     function authenticate_user($uname,$pword){
-        $this->db->select('ua.user_id,ua.user_name,ua.user_group_id,ua.photo_path,ua.user_email,CONCAT_WS(" ",ua.user_fname,ua.user_mname,ua.user_lname) as user_fullname,ug.user_group,ua.date_created');
+        $this->db->select('ua.user_id,ua.user_name,ua.user_group_id,ua.photo_path,ua.user_email,CONCAT_WS(" ",ua.user_fname,ua.user_mname,ua.user_lname) as user_fullname,ug.user_group,ua.date_created,ugp.*');
         $this->db->from('user_accounts as ua');
         $this->db->join('user_groups as ug', 'ua.user_group_id = ug.user_group_id','left');
+        $this->db->join('user_groups_permission as ugp', 'ug.user_group_id = ugp.user_group_id','left');
         $this->db->where('ua.user_name', $uname);
         $this->db->where('ua.user_pword', sha1($pword));
         return $this->db->get();
@@ -39,7 +40,7 @@ class Users_model extends CORE_Model{
         $this->db->from('user_accounts as ua');
         $this->db->join('user_groups as ug', 'ua.user_group_id = ug.user_group_id','left');
         $this->db->join('user_groups_permission as ugp', 'ugp.user_group_id = ug.user_group_id','left');
-        $this->db->where('ugp.pos_void', 'enabled');
+        $this->db->where('ugp.pos_void', 1);
         $this->db->where('ua.user_pword', sha1($pword));
         return $this->db->get();
 

@@ -16,6 +16,7 @@ class Purchases extends CORE_Controller
 	      $this->load->model('Pos_payment_model');
         $this->load->model('Payment_details_model');
         $this->load->model('Customers_model');
+        $this->load->model('Seniorcitizen_model');
 
     }
 
@@ -98,14 +99,16 @@ class Purchases extends CORE_Controller
           $summary_before_tax=$this->input->post('summary_before_tax',TRUE);
           $summary_tax_amount=$this->input->post('summary_tax_amount',TRUE);
           $summary_after_tax=$this->input->post('summary_after_tax',TRUE);
-					$customers=$this->input->post('customers_name',TRUE);
+          $summary_non_vat_sales=$this->input->post('summary_non_vat_sales',TRUE);
+					$customers=$this->input->post('customer_code',TRUE);
 					$session_id=$this->input->post('session_id',TRUE);
 
 					$pos_invoice_summary->totaldiscount=$this->get_numeric_value($summary_discount);
 	        $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
 	        $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
 	        $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
-					$pos_invoice_summary->customer_id=$customers;
+          $pos_invoice_summary->non_vat_sales=$this->get_numeric_value($summary_non_vat_sales);
+					$pos_invoice_summary->customer_code=$customers;
 					$pos_invoice_summary->transaction_date=$today;
           //$pos_invoice_summary->transaction_timestamp=$fulldate;
 					$pos_invoice_summary->user_id=$this->session->user_id;
@@ -157,7 +160,19 @@ class Purchases extends CORE_Controller
 					$pos_payment->set('receipt_no','cr_receipt("T1")');
 					$pos_payment->save();
 
-					$pos_payment_id=$pos_payment->last_insert_id();
+          $pos_payment_id=$pos_payment->last_insert_id();
+
+          $pos_seniorcitizen=$this->Seniorcitizen_model;
+          $post_seniorTotalDiscount=$this->input->post('seniorTotalDiscount',TRUE);
+
+          if ($post_seniorTotalDiscount != ""){
+            $pos_seniorcitizen->discountAmount=$this->get_numeric_value($post_seniorTotalDiscount);
+  					$pos_seniorcitizen->pos_payment_id=$pos_payment_id;
+  					$pos_seniorcitizen->seniorID=$this->input->post('seniorID',TRUE);
+  					$pos_seniorcitizen->seniorName=$this->input->post('seniorName',TRUE);
+  					$pos_seniorcitizen->seniorAddress=$this->input->post('seniorAddress',TRUE);
+  					$pos_seniorcitizen->save();
+          }
 
 					$pos_paymentdetails=$this->Payment_details_model;
 					$post_cashamount=$this->input->post('post_cashamount',TRUE);

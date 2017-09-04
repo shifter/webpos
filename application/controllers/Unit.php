@@ -7,6 +7,9 @@ class Unit extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
+        if($this->session->userdata('unit_view') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('Units_model');
     }
 

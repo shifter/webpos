@@ -10,9 +10,9 @@ class Products extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Categories_model');
         $this->load->model('Units_model');
-    		$this->load->model('Inventory_model');
-    		$this->load->model('Brands_model');
-    		$this->load->model('Vendors_model');
+		$this->load->model('Inventory_model');
+		$this->load->model('Brands_model');
+		$this->load->model('Vendors_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_types_model');
     }
@@ -109,10 +109,10 @@ class Products extends CORE_Controller
                 $m_products->unit_id = $this->input->post('unit_id', TRUE);
                 $m_products->vendor_id = $this->input->post('vendor_id', TRUE);
                 $m_products->markup_percent = $this->input->post('markup_percent', TRUE);
-				$m_products->min_stock =$this->get_numeric_value($this->input->post('min_stock', TRUE));
-				$m_products->max_stock =$this->get_numeric_value($this->input->post('max_stock', TRUE));
-	            $m_products->sale_cost =$this->get_numeric_value($this->input->post('sale_cost', TRUE));
-	            $m_products->quantity =$this->get_numeric_value($this->input->post('quantity', TRUE));
+        				$m_products->min_stock =$this->get_numeric_value($this->input->post('min_stock', TRUE));
+        				$m_products->max_stock =$this->get_numeric_value($this->input->post('max_stock', TRUE));
+  	            $m_products->sale_cost =$this->get_numeric_value($this->input->post('sale_cost', TRUE));
+  	            $m_products->quantity =$this->get_numeric_value($this->input->post('quantity', TRUE));
                 $m_products->purchase_cost =$this->get_numeric_value($this->input->post('purchase_cost', TRUE));
                 $m_products->discounted_cost=$this->get_numeric_value($this->input->post('discounted_cost',TRUE));
                 $m_products->promo_cost =$this->get_numeric_value($this->input->post('promo_cost', TRUE));

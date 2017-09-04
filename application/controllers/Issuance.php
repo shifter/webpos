@@ -7,7 +7,9 @@ class Issuance extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-
+        if($this->session->userdata('issuance') == 0) {
+             redirect('../Homepage');
+        }
         $this->load->model('Issuance_model');
         $this->load->model('Suppliers_model');
         $this->load->model('Tax_types_model');

@@ -154,6 +154,23 @@
 <?php echo $_rights; ?>
 
     <script type="text/javascript">
+     var v = true;
+    <?php
+        if($this->session->brands_create == 0){
+    ?>
+            $("#btn_new").remove();
+    <?php
+        } 
+    ?>
+    <?php
+        if($this->session->brands_update == 0 && $this->session->brands_delete == 0){
+    ?>
+            v = false;
+    <?php
+        } 
+    ?>
+    var btn_edit = "";
+    var btn_trash = "";
     var _cboBrands; var _cboBrand; var _cboUnit; var _cboVendor;
         var initializeControls=function(){
         dt=$('#tbl_brands').DataTable({
@@ -165,11 +182,21 @@
                 { targets:[2],data: "brand_desc" },
                 {
 
-                    targets:[2],
+                    targets:[3],
+                    visible:+v,
                     render: function (data, type, full, meta){
-                      var btn_edit='<button class="btn btn-success btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                      var btn_trash='<button class="btn btn-danger btn-xs" name="remove_info" style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
-
+                        <?php
+                            if($this->session->brands_update == 1){
+                        ?>      
+                            btn_edit='<button class="btn btn-success btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        <?php
+                            } 
+                            if($this->session->brands_delete == 1){
+                        ?>      
+                            btn_trash='<button class="btn btn-danger btn-xs" name="remove_info" style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
+                        <?php
+                            } 
+                        ?>
                       return '<center>'+btn_edit+btn_trash+'</center>';
                     }
                 }

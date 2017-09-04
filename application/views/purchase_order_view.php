@@ -456,6 +456,7 @@
     $('#btn_new').click(function(){
         _txnMode="new";
         //$('.toggle-fullscreen').click();
+        _cboSuppliers.select2('val',null);
         clearFields($('#frm_deliveries'));
         showList(false);
     });
@@ -640,13 +641,6 @@
 
         });
 
-        $('#btn_new').click(function(){
-            _txnMode="new";
-            //$('.toggle-fullscreen').click();
-            clearFields($('#frm_deliveries'));
-            showList(false);
-        });
-
         $('#btn_create_user_suppliers').click(function(){
 
             var btn=$(this);
@@ -715,9 +709,10 @@
                 processData : false,
                 contentType : false,
                 beforeSend : function(){
-                    $('#tbl_items > tbody').html('<tr><td align="center" colspan="8"><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></td></tr>');
+                   showSpinningProgressLoading();
                 },
                 success : function(response){
+                    $.unblockUI();
                     var rows=response.data;
                     $('#tbl_items > tbody').html('');
 
@@ -831,6 +826,7 @@
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
                         clearFields($('#frm_deliveries'));
+                        showList(true);
                     }).always(function(){
                         showSpinningProgress($('#btn_save'));
                     });
@@ -1075,6 +1071,18 @@
             $('#invoice_fields').show();
             $('.btn_new').hide();
         }
+    };
+
+    var showSpinningProgressLoading=function(e){
+        $.blockUI({ message: '<img src="assets/img/gears.svg"/><br><h4 style="color:#ecf0f1;">Loading Data...</h4>',
+            css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: 'none',
+            opacity: 1,
+            zIndex: 20000,
+        } });
+        $('.blockOverlay').attr('title','Click to unblock').click($.unblockUI);
     };
 
     var validateRequiredFields=function(f){

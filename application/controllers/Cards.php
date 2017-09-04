@@ -8,7 +8,7 @@ class Cards extends CORE_Controller
         parent::__construct('');
         $this->validate_session();
         // if($this->session->userdata('right_discount_view') == 0 || $this->session->userdata('right_discount_view') == null) {
-        //     redirect('../Homepage');
+        //      redirect('../Homepage');
         // }
         $this->load->model('Brands_model');
         $this->load->model('Users_model');

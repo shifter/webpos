@@ -269,8 +269,68 @@
                 } });
                 $('.blockOverlay').attr('title','Click to unblock').click($.unblockUI);
     };
-
-
+    <?php
+    if ($this->session->receiving_stock == 0 && $this->session->purchase_order == 0) {
+    ?>
+        $('#rmv_purchasing').remove();
+    <?php }
+    if ($this->session->receiving_stock == 0) {
+    ?>
+        $('#rmv_receiving').remove();
+    <?php }
+    if ($this->session->purchase_order == 0) {
+      ?>
+        $('#rmv_purchase_order').remove();
+    <?php }
+    if ($this->session->issuance == 0) {
+      ?>
+        $('#rmv_issuance').remove();
+    <?php }
+    if ($this->session->adjustment == 0) {
+      ?>
+        $('#rmv_adjustment').remove();
+    <?php }
+    if ($this->session->category_view == 0) {
+    ?>
+        $('#rmv_categories').remove();
+    <?php }
+    if ($this->session->unit_view == 0) {
+    ?>
+        $('#rmv_unit').remove();
+    <?php }
+    if ($this->session->brands_view == 0) {
+    ?>
+        $('#rmv_brands').remove();
+    <?php }
+    if ($this->session->discount_view == 0) {
+    ?>
+        $('#rmv_discount').remove();
+    <?php }
+    if ($this->session->card_view == 0) {
+    ?>
+        $('#rmv_card').remove();
+    <?php }
+    if ($this->session->generic_view == 0) {
+    ?>
+        $('#rmv_generic').remove();
+    <?php }
+    if ($this->session->vendors_view == 0) {
+    ?>
+        $('#rmv_vendors').remove();
+    <?php }
+    if ($this->session->locations_view == 0) {
+    ?>
+        $('#rmv_locations').remove();
+    <?php }
+    if ($this->session->status_view == 0) {
+    ?>
+        $('#rmv_status').remove();
+    <?php }
+    if ($this->session->giftcard_view == 0) {
+    ?>
+        $('#rmv_giftcard').remove();
+    <?php }
+     ?> 
 
     var validateRequiredFields=function(f){
     var stat=true;

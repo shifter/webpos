@@ -118,47 +118,89 @@
                                           <div id="collapsereceiving" class="panel-collapse collapse" aria-expanded="false">
                                             <div class="box-body">
                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Allow :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_receiving_view" >
+                                                                <select id="receiving" class="form-control select" name="receiving_stock" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="panel box box-success">
+                                          <div class="box-header with-border">
+                                            <h4 class="box-title">
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsepurchaseorder" style="" class="collapsed" aria-expanded="false">
+                                                Purchase Order
+                                              </a>
+                                            </h4>
+                                          </div>
+                                          <div id="collapsepurchaseorder" class="panel-collapse collapse" aria-expanded="false">
+                                            <div class="box-body">
+                                              <div class="form-group">
+                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Allow :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_receiving_create" >
+                                                                <select id="purchase_order" class="form-control select" name="purchase_order" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="panel box box-success">
+                                          <div class="box-header with-border">
+                                            <h4 class="box-title">
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseissuance" style="" class="collapsed" aria-expanded="false">
+                                                Issuance
+                                              </a>
+                                            </h4>
+                                          </div>
+                                          <div id="collapseissuance" class="panel-collapse collapse" aria-expanded="false">
+                                            <div class="box-body">
+                                              <div class="form-group">
+                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Allow :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_receiving_edit" >
+                                                                <select id="issuance" class="form-control select" name="issuance" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="panel box box-success">
+                                          <div class="box-header with-border">
+                                            <h4 class="box-title">
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseadjustment" style="" class="collapsed" aria-expanded="false">
+                                                Adjustment
+                                              </a>
+                                            </h4>
+                                          </div>
+                                          <div id="collapseadjustment" class="panel-collapse collapse" aria-expanded="false">
+                                            <div class="box-body">
+                                              <div class="form-group">
+                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Allow :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_receiving_delete" >
+                                                                <select id="adjustment" class="form-control select" name="adjustment" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
@@ -171,844 +213,612 @@
                                         <div class="panel box box-success">
                                           <div class="box-header with-border">
                                             <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapselaboratory" class="collapsed" aria-expanded="false">
-                                                Medical Record : Laboratory
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsecategories" style="" class="collapsed" aria-expanded="false">
+                                                Categories
                                               </a>
                                             </h4>
                                           </div>
-                                          <div id="collapselaboratory" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
+                                          <div id="collapsecategories" class="panel-collapse collapse" aria-expanded="false">
+                                              <div class="box-body">
+                                                <div class="form-group">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="category_view" class="form-control select" name="category_view" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="category_create" class="form-control select" name="category_create" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="category_update" class="form-control select" name="category_update" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                  <div class="col-sm-9" style="margin-top:5px;">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="category_delete" class="form-control select" name="category_delete" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div>
+                                          <div class="panel box box-success">
+                                            <div class="box-header with-border">
+                                              <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseunit" style="" class="collapsed" aria-expanded="false">
+                                                  Unit
+                                                </a>
+                                              </h4>
+                                            </div>
+                                            <div id="collapseunit" class="panel-collapse collapse" aria-expanded="false">
+                                              <div class="box-body">
+                                                <div class="form-group">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medlab_view" >
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="unit_view" class="form-control select" name="unit_view" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medlab_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                <div class="col-sm-9">
+                                                    <div class="input-group" style="margin-top:5px;">
+                                                        <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                            <select id="unit_create" class="form-control select" name="unit_create" >
+                                                                <option value="0">Off</option>
+                                                                <option value="1">On</option>
+                                                            </select>
                                                     </div>
+                                                  </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medlab_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="unit_update" class="form-control select" name="unit_update" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medlab_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                  <div class="col-sm-9" style="margin-top:5px;">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="unit_delete" class="form-control select" name="unit_delete" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
                                                 </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                        <div class="panel box box-success">
+                                          <div class="panel box box-success">
                                           <div class="box-header with-border">
                                             <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsebilling" class="collapsed" aria-expanded="false">
-                                                Medical Record : Billing
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsebrands" style="" class="collapsed" aria-expanded="false">
+                                                Brands
                                               </a>
                                             </h4>
                                           </div>
-                                          <div id="collapsebilling" class="panel-collapse collapse" aria-expanded="false">
+                                          <div id="collapsebrands" class="panel-collapse collapse" aria-expanded="false">
                                             <div class="box-body">
                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_billing_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_billing_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_billing_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_billing_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="brands_view" class="form-control select" name="brands_view" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="brands_create" class="form-control select" name="brands_create" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="brands_update" class="form-control select" name="brands_update" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                  <div class="col-sm-9" style="margin-top:5px;">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="brands_delete" class="form-control select" name="brands_delete" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                        <div class="panel box box-success">
+                                          </div>
+                                          <div class="panel box box-success">
                                           <div class="box-header with-border">
                                             <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsevisitingrecord" class="collapsed" aria-expanded="false">
-                                                Medical Record : Visiting Record
+                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsediscount" style="" class="collapsed" aria-expanded="false">
+                                                Discount
                                               </a>
                                             </h4>
                                           </div>
-                                          <div id="collapsevisitingrecord" class="panel-collapse collapse" aria-expanded="false">
+                                          <div id="collapsediscount" class="panel-collapse collapse" aria-expanded="false">
                                             <div class="box-body">
                                               <div class="form-group">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="discount_view" class="form-control select" name="discount_view" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="discount_create" class="form-control select" name="discount_create" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                  <div class="col-sm-9">
+                                                      <div class="input-group" style="margin-top:5px;">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="discount_update" class="form-control select" name="discount_update" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="form-group" style="margin-top:5px;">
+                                                  <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                  <div class="col-sm-9" style="margin-top:5px;">
+                                                      <div class="input-group">
+                                                          <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                              <select id="discount_delete" class="form-control select" name="discount_delete" >
+                                                                  <option value="0">Off</option>
+                                                                  <option value="1">On</option>
+                                                              </select>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div>
+                                          <div class="panel box box-success">
+                                            <div class="box-header with-border">
+                                              <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsecard" style="" class="collapsed" aria-expanded="false">
+                                                  Card
+                                                </a>
+                                              </h4>
+                                            </div>
+                                            <div id="collapsecard" class="panel-collapse collapse" aria-expanded="false">
+                                              <div class="box-body">
+                                                <div class="form-group">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_visiting_view" >
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="card_view" class="form-control select" name="card_view" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_visiting_create" >
+                                                        <div class="input-group" style="margin-top:5px;">
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="card_create" class="form-control select" name="card_create" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
+                                                        <div class="input-group" style="margin-top:5px;">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_visiting_edit" >
+                                                                <select id="card_update" class="form-control select" name="card_update" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
+                                                    <div class="col-sm-9" style="margin-top:5px;">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_visiting_delete" >
+                                                                <select id="card_delete" class="form-control select" name="card_delete" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
+                                              </div>
                                             </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseclinicaldb" class="collapsed" aria-expanded="false">
-                                                Medical Record : Clinical Database
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapseclinicaldb" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
+                                            </div>
+                                            <div class="panel box box-success">
+                                              <div class="box-header with-border">
+                                                <h4 class="box-title">
+                                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsegeneric" style="" class="collapsed" aria-expanded="false">
+                                                    Generic
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapsegeneric" class="panel-collapse collapse" aria-expanded="false">
+                                                <div class="box-body">
+                                                  <div class="form-group">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="generic_view" class="form-control select" name="generic_view" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="generic_create" class="form-control select" name="generic_create" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="generic_update" class="form-control select" name="generic_update" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                      <div class="col-sm-9" style="margin-top:5px;">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="generic_delete" class="form-control select" name="generic_delete" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="panel box box-success">
+                                              <div class="box-header with-border">
+                                                <h4 class="box-title">
+                                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsegiftcard" style="" class="collapsed" aria-expanded="false">
+                                                    Gift Card
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapsegiftcard" class="panel-collapse collapse" aria-expanded="false">
+                                                <div class="box-body">
+                                                  <div class="form-group">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="giftcard_view" class="form-control select" name="giftcard_view" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="giftcard_create" class="form-control select" name="giftcard_create" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="giftcard_update" class="form-control select" name="giftcard_update" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                      <div class="col-sm-9" style="margin-top:5px;">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="giftcard_delete" class="form-control select" name="giftcard_delete" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="panel box box-success">
+                                              <div class="box-header with-border">
+                                                <h4 class="box-title">
+                                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapsevendors" style="" class="collapsed" aria-expanded="false">
+                                                    Vendors
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapsevendors" class="panel-collapse collapse" aria-expanded="false">
+                                                <div class="box-body">
+                                                  <div class="form-group">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="vendors_view" class="form-control select" name="vendors_view" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="vendors_create" class="form-control select" name="vendors_create" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
+                                                      <div class="col-sm-9">
+                                                          <div class="input-group" style="margin-top:5px;">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="vendors_update" class="form-control select" name="vendors_update" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group" style="margin-top:5px;">
+                                                      <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
+                                                      <div class="col-sm-9" style="margin-top:5px;">
+                                                          <div class="input-group">
+                                                              <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                  <select id="vendors_delete" class="form-control select" name="vendors_delete" >
+                                                                      <option value="0">Off</option>
+                                                                      <option value="1">On</option>
+                                                                  </select>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="panel box box-success">
+                                            <div class="box-header with-border">
+                                              <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapselocation" style="" class="collapsed" aria-expanded="false">
+                                                  Locations
+                                                </a>
+                                              </h4>
+                                            </div>
+                                            <div id="collapselocation" class="panel-collapse collapse" aria-expanded="false">
+                                              <div class="box-body">
+                                                <div class="form-group">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_clinicaldb_view" >
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="locations_view" class="form-control select" name="locations_view" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_clinicaldb_create" >
+                                                        <div class="input-group" style="margin-top:5px;">
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="locations_create" class="form-control select" name="locations_create" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
+                                                        <div class="input-group" style="margin-top:5px;">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_clinicaldb_edit" >
+                                                                <select id="locations_update" class="form-control select" name="locations_update" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsemedicalabstract" class="collapsed" aria-expanded="false">
-                                                Medical Record : Medical Abstract
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapsemedicalabstract" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medabstract_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medabstract_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medabstract_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
+                                                    <div class="col-sm-9" style="margin-top:5px;">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medabstract_delete" >
+                                                                <select id="locations_delete" class="form-control select" name="locations_delete" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsenephro" class="collapsed" aria-expanded="false">
-                                                Request Form : Nephro Order
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapsenephro" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_nephro_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_nephro_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_nephro_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_nephro_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
+                                          <div class="panel box box-success">
+                                            <div class="box-header with-border">
+                                              <h4 class="box-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsestatus" style="" class="collapsed" aria-expanded="false">
+                                                  Status
+                                                </a>
+                                              </h4>
                                             </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapselabreport" class="collapsed" aria-expanded="false">
-                                                Requst Form : Laboratory Report
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapselabreport" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_labreport_view">
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_labreport_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_labreport_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_labreport_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsemedcert" class="collapsed" aria-expanded="false">
-                                                Request Form : Medical Certificate
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapsemedcert" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medcert_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medcert_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medcert_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_medcert_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsepatientinfo" class="collapsed" aria-expanded="false">
-                                                Medical Record : Nephro Record
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapsepatientinfo" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientinfo_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientinfo_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientinfo_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientinfo_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapsepatientref" class="collapsed" aria-expanded="false">
-                                                Patient Reference
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapsepatientref" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientref_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientref_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientref_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_patientref_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseserviceref" class="collapsed" aria-expanded="false">
-                                                Service Reference
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapseserviceref" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_services_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_services_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_services_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_services_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-success">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseservicedesc" class="collapsed" aria-expanded="false">
-                                                Service Desc. Reference
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapseservicedesc" class="panel-collapse collapse" aria-expanded="false">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_servicedesc_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_servicedesc_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_servicedesc_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_servicedesc_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-primary">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-                                                User Accounts
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                            <div class="box-body">
+                                            <div id="collapsestatus" class="panel-collapse collapse" aria-expanded="false">
+                                              <div class="box-body">
                                                 <div class="form-group">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
                                                     <div class="col-sm-9">
                                                         <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_useraccount_view" >
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="status_view" class="form-control select" name="status_view" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_useraccount_create" >
+                                                        <div class="input-group" style="margin-top:5px;">
+                                                            <span class="input-group-addon" ><i class="fa fa-cogs" aria-hidden="true"></i></span>
+                                                                <select id="status_create" class="form-control select" name="status_create" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
                                                     <div class="col-sm-9">
-                                                        <div class="input-group">
+                                                        <div class="input-group" style="margin-top:5px;">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_useraccount_edit" >
+                                                                <select id="status_update" class="form-control select" name="status_update" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" style="margin-top:5px;">
                                                     <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
+                                                    <div class="col-sm-9" style="margin-top:5px;">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_useraccount_delete" >
+                                                                <select id="status_delete" class="form-control select" name="status_delete" >
                                                                     <option value="0">Off</option>
                                                                     <option value="1">On</option>
                                                                 </select>
                                                         </div>
                                                     </div>
                                                 </div>
+                                              </div>
                                             </div>
-                                          </div>
-                                        </div>
-                                        <div class="panel box box-danger">
-                                          <div class="box-header with-border">
-                                            <h4 class="box-title">
-                                              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
-                                                User Groups
-                                              </a>
-                                            </h4>
-                                          </div>
-                                          <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                                            <div class="box-body">
-                                              <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">View :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_usergroup_view" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                               <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Create :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_usergroup_create" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Edit :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_usergroup_edit" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-3" style="margin-top:8px;" for="inputEmail1">Delete :</label>
-                                                    <div class="col-sm-9">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon"><i class="fa fa-cogs" aria-hidden="true"></i></span>
-                                                                <select class="form-control" name="right_usergroup_delete" >
-                                                                    <option value="0">Off</option>
-                                                                    <option value="1">On</option>
-                                                                </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -1136,6 +946,7 @@
         _txnMode="new";
         $('#modal_user_group').modal('show');
         clearFields($('#frm_UserGroups'));
+        $(".select").val(0);
     });
 
     $('#btn_create').click(function(){
@@ -1145,7 +956,7 @@
                 createUserAccount().done(function(response){
                     showNotification(response);
                     dt.row.add(response.row_added[0]).draw();
-                    clearFields($('#frm_UserGroups'))
+                    clearFields($('#frm_UserGroups'));
                 }).always(function(){
                     $('#modal_user_group').modal('hide');
                     $.unblockUI();
@@ -1157,6 +968,7 @@
                 updateUserAccount().done(function(response){
                     showNotification(response);
                     dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                    clearFields($('#frm_UserGroups'));
                 }).always(function(){
                     $('#modal_user_group').modal('hide');
                     $.unblockUI();
@@ -1196,7 +1008,10 @@
                 }
             });
         });
-
+        // $('#receiving').val(data.receiving_stock);
+        // $('#purchase_order').val(data.purchase_order);
+        // $('#issuance').val(data.issuance);
+        // $('#adjustment').val(data.adjustment);
         $('#modal_user_group').modal('toggle');
 
     });
