@@ -287,7 +287,6 @@
         var data=dt.row(_selectRowObj).data();
         _selectedID=data.category_id;
         delete_notif();
-
     });
 
     var createCategory=function(){

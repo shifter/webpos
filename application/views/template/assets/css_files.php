@@ -42,6 +42,9 @@
 
 
   <style>
+    textarea{
+      resize:vertical;
+    }
     input{
         font-size:10pt !important;
     }
