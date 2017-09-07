@@ -26,12 +26,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <span class="fa fa-credit-card-alt"></span> Status
+        <span class="fa fa-credit-card-alt"></span> Banks
         <small>Reference</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="Homepage"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Status</li>
+        <li class="active">Banks</li>
       </ol>
     </section>
 
@@ -39,15 +39,15 @@
     <section class="content">
         <div class="box">
             <div class="box-header" style="">
-              <button class="btn btn-primary" id="btn_new"><i class="fa fa-plus-circle" aria-hidden="true"></i> New Status</button>
+              <button class="btn btn-primary" id="btn_new"><i class="fa fa-plus-circle" aria-hidden="true"></i> New Banks</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="tbl_status" class="table table-bordered table-striped">
+              <table id="tbl_banks" class="table table-bordered table-striped">
                 <thead class="tbl-header">
                     <tr>
-                      <th>Status Code</th>
-                      <th>Status Name</th>
+                      <th>Bank Code</th>
+                      <th>Bank Name</th>
                       <th>Action</th>
                     </tr>
                 </thead>
@@ -55,8 +55,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                      <th>Status Code</th>
-                      <th>Status Name</th>
+                      <th>Bank Code</th>
+                      <th>Bank Name</th>
                       <th>Action</th>
                     </tr>
                 </tfoot>
@@ -66,37 +66,37 @@
           </div>
 
     <!--modal-->
-        <div id="modal_status" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
+        <div id="modal_banks" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header bgm-indigo">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="xbutton">×</span></button>
-                        <h4 class="modal-title">Status : <transaction class="transaction"></transaction></h4>
+                        <h4 class="modal-title">Charge : <transaction class="transaction"></transaction></h4>
                     </div>
                     <div class="modal-body">
-                        <form id="frm_status">
+                        <form id="frm_banks">
                         <div class="container-fluid">
                           <div class="row">
                             <div class="col-md-12">
                               <div class="row">
                                 <div class="form-group">
-                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Status Code  :</label>
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Bank Code  :</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
-                                                <input type="text" name="status_code" class="form-control" placeholder="AUTO" data-error-msg="Status Code is required." readonly>
+                                                <input type="text" name="bank_code" class="form-control" placeholder="AUTO" data-error-msg="Bank Code is required." readonly>
                                         </div>
                                     </div>
                                 </div>
                               </div>
                               <div class="row" style="margin-top:5px;">
                                 <div class="form-group">
-                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Status Name  :</label>
+                                    <label class="col-sm-4" style="margin-top:8px;" for="inputEmail1">Bank Name  :</label>
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
-                                                <input type="text" name="status_name" class="form-control" placeholder="Card Name" data-error-msg="Card Name is required." required>
+                                                <input type="text" name="bank_name" class="form-control" placeholder="Bank Name" data-error-msg="Charge description is required." required>
                                         </div>
                                     </div>
                                 </div>
@@ -143,14 +143,14 @@
     <script type="text/javascript">
     var v = true;
     <?php
-        if($this->session->status_create == 0){
+        if($this->session->banks_create == 0){
     ?>
             $("#btn_new").remove();
     <?php
         } 
     ?>
     <?php
-        if($this->session->status_update == 0 && $this->session->status_delete == 0){
+        if($this->session->banks_update == 0 && $this->session->banks_delete == 0){
     ?>
             v = false;
     <?php
@@ -160,24 +160,24 @@
     var btn_trash = "";
     var _cboCards; var _cboBrand; var _cboUnit; var _cboVendor;
         var initializeControls=function(){
-        dt=$('#tbl_status').DataTable({
+        dt=$('#tbl_banks').DataTable({
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "ajax" : "Status/transaction/list",
+            "ajax" : "Banks/transaction/list",
             "columns": [
-                { targets:[0],data: "status_code" },
-                { targets:[1],data: "status_name" },
+                { targets:[0],data: "bank_code" },
+                { targets:[1],data: "bank_name" },
                 {
 
                     targets:[2],
                     visible:+v,
                     render: function (data, type, full, meta){
                     <?php
-                        if($this->session->status_update == 1){
+                        if($this->session->banks_update == 1){
                     ?>      
                         btn_edit='<button class="btn btn-success btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                     <?php
                         } 
-                        if($this->session->status_delete == 1){
+                        if($this->session->banks_delete == 1){
                     ?>      
                         btn_trash='<button class="btn btn-danger btn-xs" name="remove_info" style="margin-left:5px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
                     <?php
@@ -189,7 +189,7 @@
 
             ],
             language: {
-                         searchPlaceholder: "Search Status"
+                         searchPlaceholder: "Search Banks"
                      },
             "rowCallback":function( row, data, index ){
 
@@ -205,20 +205,20 @@
     $('#btn_new').click(function(){
         _txnMode="new";
         $('.transaction').text('New');
-        $('#modal_status').modal('show');
-        clearFields($('#frm_status'));
+        $('#modal_banks').modal('show');
+        clearFields($('#frm_banks'));
     });
 
     $('#btn_create').click(function(){
-            if(validateRequiredFields($('#frm_status'))){
+            if(validateRequiredFields($('#frm_banks'))){
                 if(_txnMode==="new"){
                     //alert("aw");
                     createCard().done(function(response){
                         showNotification(response);
                         dt.row.add(response.row_added[0]).draw();
-                        clearFields($('#frm_status'))
+                        clearFields($('#frm_banks'))
                     }).always(function(){
-                        $('#modal_status').modal('hide');
+                        $('#modal_banks').modal('hide');
                         $.unblockUI();
                     });
                     return;
@@ -229,7 +229,7 @@
                         showNotification(response);
                         dt.row(_selectRowObj).data(response.row_updated[0]).draw();
                     }).always(function(){
-                        $('#modal_status').modal('hide');
+                        $('#modal_banks').modal('hide');
                         $.unblockUI();
                     });
                     return;
@@ -238,12 +238,12 @@
             else{}
         });
 
-    $('#tbl_status tbody').on('click','button[name="edit_info"]',function(){
+    $('#tbl_banks tbody').on('click','button[name="edit_info"]',function(){
         _txnMode="edit";
         $('.transaction').text('Edit');
         _selectRowObj=$(this).closest('tr');
         var data=dt.row(_selectRowObj).data();
-        _selectedID=data.status_id;
+        _selectedID=data.bank_id;
         //$('#emp_exemptpagibig').val(data.emp_exemptphilhealth);
 
        // alert($('input[name="tax_exempt"]').length);
@@ -259,26 +259,26 @@
             });
         });
 
-        $('#modal_status').modal('toggle');
+        $('#modal_banks').modal('toggle');
 
     });
 
-    $('#tbl_status tbody').on('click','button[name="remove_info"]',function(){
+    $('#tbl_banks tbody').on('click','button[name="remove_info"]',function(){
         _selectRowObj=$(this).closest('tr');
         var data=dt.row(_selectRowObj).data();
-        _selectedID=data.status_id;
+        _selectedID=data.bank_id;
         delete_notif();
 
     });
 
     var createCard=function(){
-        var _data=$('#frm_status').serializeArray();
+        var _data=$('#frm_banks').serializeArray();
         /*_data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});*/
 
         return $.ajax({
             "dataType":"json",
             "type":"POST",
-            "url":"Status/transaction/create",
+            "url":"Banks/transaction/create",
             "data":_data,
             "beforeSend": showSpinningProgress($('#btn_save'))
         });
@@ -286,13 +286,13 @@
     };
 
     var updateCard=function(){
-            var _data=$('#frm_status').serializeArray();
-            _data.push({name : "status_id" ,value : _selectedID});
+            var _data=$('#frm_banks').serializeArray();
+            _data.push({name : "bank_id" ,value : _selectedID});
 
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Status/transaction/update",
+                "url":"Banks/transaction/update",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
@@ -302,8 +302,8 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Status/transaction/delete",
-                "data":{status_id : _selectedID},
+                "url":"Banks/transaction/delete",
+                "data":{bank_id : _selectedID},
                 "beforeSend": showSpinningProgress($('#'))
             });
         };
@@ -353,7 +353,7 @@
 
     $('.date-picker').datepicker({
       autoclose: true
-    });4
+    });
 
  </script>
 </body>

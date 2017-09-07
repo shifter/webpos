@@ -120,7 +120,15 @@ class Login extends CORE_Controller {
                                 'status_view'=>$result->row()->status_view,
                                 'status_create'=>$result->row()->status_create,
                                 'status_update'=>$result->row()->status_update,
-                                'status_delete'=>$result->row()->status_delete
+                                'status_delete'=>$result->row()->status_delete,
+                                'charges_view'=>$result->row()->charges_view,
+                                'charges_create'=>$result->row()->charges_create,
+                                'charges_update'=>$result->row()->charges_update,
+                                'charges_delete'=>$result->row()->charges_delete,
+                                'banks_view'=>$result->row()->banks_view,
+                                'banks_create'=>$result->row()->banks_create,
+                                'banks_update'=>$result->row()->banks_update,
+                                'banks_delete'=>$result->row()->banks_delete
                             )
                         );
                         $response['stat']='success';
