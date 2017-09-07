@@ -715,12 +715,10 @@
                     $.unblockUI();
                     var rows=response.data;
                     $('#tbl_items > tbody').html('');
-
                     //var total_discount=0;
                     //var total_tax_amount=0;
                     //var total_non_tax_amount=0;
                     //var gross_amount=0;
-
                     $.each(rows,function(i,value){
                         //alert(value.non_tax_amount);
                         $bal = (value.po_qty - value.delivered_qty);
@@ -741,18 +739,12 @@
                             delivered_qty: value.delivered_qty,
                             balance: $bal
                         }));
-
-
                         //sum up all footer details
                         //total_discount+=getFloat(value.dr_line_total_discount);
                         //total_tax_amount+=getFloat(value.tax_amount);
                         //total_non_tax_amount+=getFloat(value.non_tax_amount);
                         //gross_amount+=getFloat(value.dr_line_total_price);
-
-
                     });
-
-
                     //write summary details
                     //var tbl_summary=$('#tbl_delivery_summary');
                     //tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(total_discount,2));
@@ -760,15 +752,9 @@
                     //tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_tax_amount,2));
                     //tbl_summary.find(oTableDetails.after_tax).html('<b>'+accounting.formatNumber(gross_amount,2)+'</b>');
                     reComputeTotal();
-
                 }
             });
-
-
-
-
             showList(false);
-
         });
 
         $('#tbl_purchase_order tbody').on('click','button[name="remove_info"]',function(){

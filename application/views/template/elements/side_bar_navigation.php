@@ -54,7 +54,6 @@
             </span>
           </a>
         </li>
-
         <li class="treeview">
           <a href="#/">
             <i class="fa fa-file"></i>
@@ -74,6 +73,8 @@
             <li class="right_vendor_view" id="rmv_vendors"><a href="Vendors"><i class="fa fa-user"></i> Vendors</a></li>
             <li class="right_locations_view" id="rmv_locations"><a href="Location"><i class="fa fa-location-arrow"></i> Locations</a></li>
             <li class="right_status_view" id="rmv_status"><a href="Status"><i class="fa fa-adjust"></i> Status</a></li>
+            <li class="right_charges_view" id="rmv_charges"><a href="Charges"><i class="fa fa-group"></i> Charges</a></li>
+            <li class="right_banks_view" id="rmv_banks"><a href="Banks"><i class="fa fa-bank"></i> Banks</a></li>
           </ul>
         </li>
         <li class="treeview">

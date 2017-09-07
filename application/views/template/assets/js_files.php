@@ -330,6 +330,14 @@
     ?>
         $('#rmv_giftcard').remove();
     <?php }
+    if ($this->session->charges_view == 0) {
+    ?>
+        $('#rmv_charges').remove();
+    <?php }
+    if ($this->session->banks_view == 0) {
+    ?>
+        $('#rmv_banks').remove();
+    <?php }
      ?> 
 
     var validateRequiredFields=function(f){

@@ -143,7 +143,7 @@
     <script type="text/javascript">
     var v = true;
     <?php
-        if($this->session->giftcard_view == 0){
+        if($this->session->giftcard_create == 0){
     ?>
             $("#btn_new").remove();
     <?php
