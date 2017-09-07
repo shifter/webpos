@@ -61,11 +61,44 @@ class Pos_payment_model extends CORE_Model {
 
     }
 
+        function get_journal_list($jdate, $receipt_no){
 
+        if ($receipt_no != "0"){
+            $wherestmt = "pos_payment.receipt_no LIKE '".$receipt_no."%'"; 
+        }
+        else{
+            $wherestmt = "pos_payment.transaction_date = '".$jdate."'";
+        }
 
+        $sql="SELECT 
+                pos_payment.*,
+                pos_payment.receipt_no,
+                pos_payment_id,
+                pos_invoice.*,
+                CONCAT(user_fname,
+                        ' ',
+                        user_mname,
+                        ' ',
+                        user_lname) AS cashiername,
+                CASE
+                    WHEN pos_invoice.customer_code = '0' THEN 'Walk-in'
+                    ELSE customers.customer_name
+                END AS cname
+            FROM
+                pos_payment
+                    LEFT JOIN
+                pos_invoice ON pos_invoice.pos_invoice_id = pos_payment.pos_invoice_id
+                    LEFT JOIN
+                user_accounts ON user_accounts.user_id = pos_invoice.user_id
+                    LEFT JOIN
+                customers ON customers.customer_code = pos_invoice.customer_code
+            WHERE
+                ".$wherestmt."
+                    AND pos_payment.refund = 0
+            ";
+        return $this->db->query($sql)->result(); 
+    }
 
 }
-
-
 
 ?>

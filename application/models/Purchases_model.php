@@ -8,7 +8,7 @@ class Purchases_model extends CORE_Model {
         parent::__construct();
     }
 	
-function get_purchases_list($purchase_order_id=null){
+    function get_purchases_list($purchase_order_id=null){
         $sql="  SELECT
                   a.*
                 FROM
