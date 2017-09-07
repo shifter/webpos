@@ -194,16 +194,19 @@
     }
     .btncash{
       width:100%;
-      background-color:#27ae60;
-      color:white !important;
+      background-color:#B0BEC5;
+      color:#263238 !important;
       height:60px;
       margin-top:2px;
       font-weight:bold;
       font-size:13pt;
-      box-shadow: 1px 1px 5px black;
-      border:1px solid #2c3e50;
+      box-shadow: 1px 1px 2px gray;
+      border:1px solid #90A4AE;
+      margin-bottom: 5px !important;
     }
-
+    .btncash:hover{
+      background-color: #CFD8DC;
+    }
     .amounts{
       color:#2ecc71;
       margin-right:5px;
@@ -218,9 +221,12 @@
     }
 
     .lgtext{
-      font-weight: bold !important;
-      color:#27ae60 !important;
-      font-size:18pt !important;
+      color:#e74c3c !important;
+      text-align:right !important;
+      font-size:30pt !important;  
+      width: 95% !important;
+      height: 50px !important;
+      border: 0px !important;
     }
 
     .btn-blue{

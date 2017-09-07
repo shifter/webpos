@@ -17,13 +17,14 @@
   <![endif]-->
   <!--/twitter typehead-->
   <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
   <style>
 
       .custom_frame{
           border: 1px solid lightgray;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-          border-radius: 5px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
       }
 
       .numeric{
@@ -66,6 +67,38 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
       }
+      #amountduepymt, #chngedpymnt{
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+      }
+      .pymntmthdtbl input{
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        width: 100%;
+        border: 1px solid #FAFAFA;
+      }
+
+      #cash:focus{
+        outline:none !important;
+      }
+      #txtsearch:focus{
+        outline:none !important;
+      }
+      .pymntmthdtbl td{
+        border-bottom: 1px solid #CFD8DC !important;
+      }
+      .pymntmthd{
+        text-align: right;
+        font-size: 15pt !important;
+      }
       .smalltable input{
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */
@@ -99,27 +132,37 @@
       }
 
       .twitter-typeahead, .tt-hint, .tt-input, .tt-dropdown-menu { width: 100%; }
+      .btn-main-pos{
+        text-transform: capitalize; 
+        font-weight: bold; 
+        height: 80px; 
+        width: 120px; 
+        background-color: #ECEFF1; 
+        color: #263238;
+      }
+      .btn-main-pos:hover{
+        background-color: #CFD8DC;
+      }
+      .btn-ins-main{
+        margin: 10px
+      }
+      .btn-hr-main{
+        margin: 0 !important; 
+        padding: 0 !important; 
+        border-top: 1px solid #CFD8DC;
+      }
+      #tbl_card, #tbl_gc, #tbl_charge, #tbl_cheque tbody tr{
+        cursor: pointer;
+      }
+
   </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
-<div class="wrapper">
-    <?php echo $_top_navigation; ?>
-    <?php echo $_side_navigation; ?>
+<body>
+<!-- <div class="wrapper"> -->
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Pos
-        <small>Sales</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="Homepage"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">POS</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
+  <div>
+  <?php echo $_top_navigation;?>
+      <!-- Main content -->
     <section class="content">
         <div class="box">
             <!-- /.box-header -->
@@ -130,21 +173,21 @@
                           <label class="control-label boldlabel" ><strong>Enter Barcode or Search Item :</strong></label>
                           <div id="custom-templates">
                               <label class="control-label"><strong>Quantity:</strong></label><input style="border:none;background-color:white !important;" type="text" id="tempcode" disabled>
-                              <input class="typeahead colorsearch" id="txtsearch" style="border:1px solid #27ae60 !important;" type="text" placeholder="Enter PLU or Search Item">
+                              <input class="typeahead" id="txtsearch" style="border-style: inset !important; border:4px solid #607D8B !important; border-radius: 2px !important; height: 40px; font-size: 17pt !important;" type="text">
                           </div><br />
 
                           <form id="frm_items">
                               <div class="table-responsive" style="overflow-x: auto;overflow-y: scroll; height: 469px;">
-                                  <table id="tbl_items" class="table table-striped table-bordered " cellspacing="0" width="100%">
-                                  <thead style="background-color:#2c3e50;color:white;">
+                                  <table id="tbl_items" class="table table-striped table-bordered " cellspacing="0" width="100%" style="border-collapse: collapse !important;">
+                                  <thead style="background-color: #DCEDC8 !important;">
                                   <tr>
-                                    <th width="40%">Item</th><!-- Item Description -->
-                                    <th width="10%">Qty</th><!-- Item Quantity -->
-                                    <th width="12%" style="text-align: right">SRP</th><!-- Item Cost -->
-                                    <th width="12%" style="text-align: right">Discount</th><!-- Item Discount -->
+                                    <th width="40%" style="border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-left: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Item</th><!-- Item Description -->
+                                    <th width="10%" style="border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;text-align: center !important;border-right: 1px solid #90A4AE !important;">Qty</th><!-- Item Quantity -->
+                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">SRP</th><!-- Item Cost -->
+                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Discount</th><!-- Item Discount -->
                                     <th style="display: none;">T.D</th> <!-- total discount -->
                                     <th style="display: none;">Tax %</th><!-- Item tax -->
-                                    <th width="12%" style="text-align: right">Total</th><!-- Line Total -->
+                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Total</th><!-- Line Total -->
                                     <th style="display: none;">V.I</th> <!-- vat input -->
                                     <th style="display: none;">N.V</th> <!-- net of vat -->
                                     <th style="display: none;">Item ID</td><!-- product id -->
@@ -189,13 +232,23 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-md-3 custom_frame">
-                        <div class="col-md-12" style="margin-top:3px;">
-                          <div class="row" style="background-color:black;border-radius:5px;">
+                      <div class="col-md-3 custom_frame" style="padding-bottom: 20px !important;">
+                        <div class="col-md-12" style="margin-top:20px;">
+                          <div class="row" style="background-color:#4CAF50;border-radius:4px; padding: 10px;">
                             <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Amount Due</h3>
-                            <input class="amounts" type="text" name="post_amountdue" value="0.00" id="amountdue" disabled>
+                            <hr style="border-top: 1px solid #CFD8DC !important; margin: 0px !important;margin-bottom: 10px !important;">
+                            <input class="amounts" type="text" style="color: #DCEDC8 !important;" name="post_amountdue" value="0.00" id="amountdue" disabled>
                           </div>
-                          <hr style="margin:0;">
+                          <hr style="margin:0 !important;">
+                          <div class="row" style="background-color:#607D8B;border-radius:5px;padding: 10px;margin-top: 2px !important;">
+                            <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Discount</h3>
+                            <hr style="border-top: 1px solid #CFD8DC !important; margin: 0px !important;margin-bottom: 10px !important;">
+                            <input class="amounts" type="text" style="color: #DCEDC8 !important;" name="post_tendered" value="0.00" id="tendered" disabled>
+                          </div>
+
+
+
+ <!--                          <hr style="margin:0;">
                           <div class="row" style="background-color:black;border-radius:5px;">
                             <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Tendered</h3>
                             <input class="amounts" type="text" name="post_tendered" value="0.00" id="tendered" disabled>
@@ -204,8 +257,8 @@
                           <div class="row" style="background-color:black;border-radius:5px;">
                             <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Change</h3>
                             <input class="amounts" type="text" name="post_change" value="0.00" id="change" disabled>
-                          </div>
-                          <div class="row">
+                          </div> -->
+                          <!-- <div class="row">
                             <h4 style="word-wrap:break-word;margin:5px;font-weight:bold;">Payment</h4>
                             <table class="table table-responsive table-striped table-bordered smalltable">
                               <thead>
@@ -222,7 +275,6 @@
                                   <td>Cash</td>
       														<td><input type="text" class="noborder inputsmall" id="cashamount" name="post_cashamount" value="0.00" readonly></td>
       														<td><center><span class="pointer"><i  id="removecash" class="fa fa-trash-o"></i></span></center>
-      														<td hidden><input type="text" class="noborder" id="post_cash_remarks" name="post_cash_remarks" value="0.00" readonly></td>
                                 </tr>
                                 <tr>
       														<td>2</td>
@@ -260,7 +312,7 @@
       													</tr>
                               </tbody>
                             </table>
-                          </div>
+                          </div> -->
                           <div class="row">
                             <label for="Customer" style="font-weight:bold;">Customer:</label>
                            <div class="input-group">
@@ -268,9 +320,9 @@
                              <option value="0">Walk-In</option>
                                <?php
                                foreach($customers as $row)
-                               {
-                                   echo '<option value="'.$row->customer_code.'">'.$row->customer_name.'</option>';
-                               }
+                                 {
+                                     echo '<option value="'.$row->customer_code.'">'.$row->customer_name.'</option>';
+                                 }
                                ?>
                            </select>
                              <span class="input-group-btn">
@@ -279,38 +331,73 @@
                            </div>
                           </div>
                           <div class="row">
-                            <button class="btn btn-primary" style="margin-top:5px;width:100%;" id="btn_payment">Alt P - Make Payment</button>
-                            <button class="btn btn-success finalize" style="margin-top:5px;width:100%;margin-bottom:8px;">Finalize</button>
+                            <button class="btn" style="margin-top:5px;width:100%; padding: 10px; background-color: #ECEFF1 !important; font-size: 12pt !important; color:#212121 !important; border: 1px solid #455A64 !important;" id="btn_payment">Alt P - <strong>Payment</strong></button>
+                            <!-- <button class="btn btn-success finalize" style="margin-top:5px;width:100%;margin-bottom:8px;">Finalize</button> -->
                           </div>
+                        </div>
+                        <div class="row">
+                          <img src="assets/img/jdev-logo.png" style="margin-top: 20px !important; margin-left: 20px !important; width: 90% !important;" draggable="false" style="-moz-user-select: none;">
                         </div>
                       </div>
               </div>
               <div class="panel-footer">
                   <div class="row">
                       <div class="col-sm-12">
-                        <button id="btn_bcode" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
-                           Alt S - Scan Barcode
+                        <button id="btn_bcode" class="btn-main-pos">
+                            <div class="btn-ins-main">
+                              <small>Alt + S </small>
+                                <hr class="btn-hr-main">
+                                  <strong>Scan Barcode</strong>
+                            </div>
                         </button>
-                        <button id="btn_browse" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                            Alt B - Browse List
+                        <button id="btn_browse" class="btn-main-pos">
+                            <div class="btn-ins-main">
+                              <small> Alt + B </small>
+                                <hr class="btn-hr-main">
+                                  <strong>Browse List </strong>
+                            </div>
                         </button>
-                        <button id="btn_qty" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                           Alt Q - Quantity
+                        <button id="btn_qty" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + Q </small>
+                              <hr class="btn-hr-main">
+                                <strong>Quantity</strong>
+                          </div>
                         </button>
-                        <button id="btn_journal" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                           Alt J - Journal
+                        <button id="btn_journal" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + J</small>
+                              <hr class="btn-hr-main">
+                                <strong>Journal</strong>
+                          </div>
                         </button>
-                        <button id="btn_cancel" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                           Alt C - Cancel
+                        <button id="btn_cancel" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + C </small>
+                              <hr class="btn-hr-main">
+                                <strong>Cancel</strong>
+                          </div>
                         </button>
-                        <button id="btn_void" type="button" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                           Alt V - Void
+                        <button id="btn_void" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + V </small>
+                              <hr class="btn-hr-main">
+                                <strong>Void</strong>
+                          </div>
                         </button>
-                        <button id="btn_discount" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; margin: 5px; height: 50px;">
-                           Alt T - Discount
+                        <button id="btn_discount" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + T </small>
+                              <hr class="btn-hr-main">
+                                <strong>Discount</strong>
+                          </div>
                         </button>
-                        <button id="btn_endbatch" class="btn-primary btn" style="text-transform: capitalize; font-weight: bold; height: 50px;">
-                           Alt H - End Batch
+                        <button id="btn_endbatch" class="btn-main-pos">
+                          <div class="btn-ins-main">
+                            <small>Alt + H </small>
+                              <hr class="btn-hr-main">
+                                <strong>End Batch</strong>
+                          </div>
                         </button>
                       </div>
                   </div>
@@ -323,24 +410,21 @@
     <!-- /.content -->
   </div>
   <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-lg" style="float:left !important;margin-left:5%;">
+      <div class="modal-dialog modal-lg" style="float:left !important;margin-left:18%; margin-top: 5% !important;">
           <div class="modal-content"><!---content-->
-              <div class="modal-header" style="background-color:#2ecc71">
-                  <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                  <h4 class="modal-title" style="color:white;">Payment</h4>
+              <div class="modal-header" style="background-color:#2ecc71; border-bottom: 10px solid #ECEFF1 !important;">
+                  <h4 class="modal-title"><strong>PAYMENT</strong></h4>
 
               </div>
 
               <div class="modal-body">
-				<ul class="nav nav-tabs">
-					<li class="active"><a data-toggle="tab" href="#cash_tab">Cash</a></li>
-					<li><a data-toggle="tab" href="#check_tab">Check</a></li>
-					<li><a data-toggle="tab" href="#card_tab">Card</a></li>
-					<li><a data-toggle="tab" href="#charge_tab">Charge</a></li>
-
-				  </ul>
-
-				  </div>
+<!--       				  <ul class="nav nav-tabs">
+          				<li class="active"><a data-toggle="tab" href="#cash_tab">Cash</a></li>
+          				<li><a data-toggle="tab" href="#check_tab">Check</a></li>
+          				<li><a data-toggle="tab" href="#card_tab">Card</a></li>
+          				<li><a data-toggle="tab" href="#charge_tab">Charge</a></li>
+      				  </ul> -->
+				        </div>
 
 				  <div class="tab-content">
 				<div id="cash_tab" class="tab-pane fade in active">
@@ -365,15 +449,16 @@
 						<div class="col-md-4">
 							<button class="btn btncash click_class" value="1000">1000</button>
 						</div>
+            <div class="col-md-12" style="margin-bottom: 10px !important;"></div>
 
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="1">1</button>
+							<button class="btn btncash click_class2" value="7">7</button>
 						</div>
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="2">2</button>
+							<button class="btn btncash click_class2" value="8">8</button>
 						</div>
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="3">3</button>
+							<button class="btn btncash click_class2" value="9">9</button>
 						</div>
 						<div class="col-md-4">
 							<button class="btn btncash click_class2" value="4">4</button>
@@ -385,32 +470,83 @@
 							<button class="btn btncash click_class2" value="6">6</button>
 						</div>
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="7">7</button>
+							<button class="btn btncash click_class2" value="1">1</button>
 						</div>
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="8">8</button>
+							<button class="btn btncash click_class2" value="2">2</button>
 						</div>
 						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="9">9</button>
+							<button class="btn btncash click_class2" value="3">3</button>
 						</div>
 						<div class="col-md-4">
 							<button class="btn btncash click_class2" value="0">0</button>
 						</div>
 						<div class="col-md-4" style="margin-bottom:2px;">
-							<button class="btn btncash clearcash" style="background-color:#e74c3c !important;">CLEAR</button>
+							<button class="btn btncash clearcash" style="color: #e67e22 !important;">CLEAR</button>
 						</div>
+            <div class="col-md-4" style="margin-bottom:2px;">
+              <button class="btn btncash cancelpymnt" style="color: #e74c3c !important;">CANCEL</button>
+            </div>
+            <div class="col-md-12">
+            <button class="btn btncash finalize" style="background-color:#78909C !important; color: #ecf0f1 !important; height:60px !important; font-size: 18pt !important;">ENTER</button>
+            </div>
 					</div>
 					<div class="col-md-6">
-
-						<form role="form">
-						<div class="form-group" style="margin-top:5px;">
-						 <label for="Type of Payment" style="font-weight:bold;">Remarks:</label>
-						  <textarea type="text" class="form-control" id="cash_remarks"></textarea>
-							 <label for="Type of Payment" style="font-weight:bold;">Cash Amount Receive:</label>
-							<input type="text" class="form-control lgtext" id="cash" placeholder="0.00" style="color:#e74c3c;text-align:right;font-size:18pt" autocomplete="off">
+            <div>
+              <div>
+                <table class="pymntmthdtbl" style="width: 95%; font-size: 15pt !important;">
+                  <tr>
+                    <td colspan="2" style="border-bottom: 3px solid #90A4AE !important;">
+                      <small style="font-weight: bold;">Type of payment</small>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="60%">Alt 1 - Card</td>
+                    <td><input type="text" class="crd pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                  <tr>
+                    <td>Alt 2 - Cheque</td>
+                    <td><input type="text" class="chq pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                  <tr>
+                    <td>Alt 3 - GC</td>
+                    <td><input type="text" class="gc pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                  <tr>
+                    <td>Alt 4 - Charge</td>
+                    <td><input type="text" class="chrge pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                  <tr>
+                    <td>Alt 5 - Cash</td>
+                    <td><input type="text" class="csh pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                  <tr>
+                    <td style="border-bottom: 0px !important;"></td>
+                    <td style="border-bottom: 0px !important;"><input type="text" class="totalpymntmthd pymntmthd" value="0.00" readonly></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+						<div style="margin-top: 0px !important;">
+  						<div class="form-group" style="margin-top:5px;">
+                <div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
+                  <label for="payment summary" style="font-weight:bold;">AMOUNT DUE:</label>
+                </div>
+                <input type="text" class="lgtext" id="amountduepymt" style="color: #d35400 !important;" placeholder="0.00" readonly>
+              </div>
+                <div class="form-group">
+                  <div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
+                    <label for="payment summary" style="font-weight:bold;">TENDERED:</label>
+                  </div>
+                  <input type="text" class="lgtext" id="cash" style="color: #2E7D32 !important;" placeholder="0.00" autocomplete="off">
+                </div>
+              <div class="form-group">
+  							<div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
+                  <label for="payment summary" style="font-weight:bold;">CHANGED:</label>
+                </div>
+  							<input type="text" class="lgtext" id="chngedpymnt" style="color: #d35400 !important;" placeholder="0.00" readonly>
+  						</div>
 						</div>
-						</form>
-						<button class="btn btncash finalize" style="background-color:#2980b9 !important; height:60px !important;">Finalize</button>
 					</div>
 				</div>
 				</div>
@@ -736,30 +872,32 @@
   </div><!---modal-->
 
   <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-lg" style="top: 5%;">
           <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9;">
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 10px solid #ECEFF1 !important;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;">Items/Products</h4>
+                <h4 class="modal-title"><strong>Items/Products</strong></h4>
             </div>
 
-              <div class="modal-body">
+              <div class="modal-body" style="margin-left: 0px !important;margin-top: 10px !important; padding:0px !important; ">
                  <div class="container-fluid">
                      <div class="table-responsive" id="div_product_list">
-                        <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 13pt !important;">
-                          <thead class="tbl-header">
-                            <tr>
-                            <th>PLU</th>
-                            <th>Description</th>
-                            <th>SRP</th>
-                            <th>Tax Value</th>
-                            <th>On hand</th>
-                            <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
+                       <div style="overflow:scroll; max-height: 550px;">
+                          <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 12pt !important;">
+                            <thead> 
+                              <tr>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">PLU</th>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">Description</th>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">SRP</th>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">Tax Value</th>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">On hand</th>
+                                <th style="border-bottom: 2px solid #90A4AE !important;">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                      </div>
                     </div>
                </div>
             </div>
@@ -767,7 +905,7 @@
       </div>
   </div><!---modal-->
 
-  <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+  <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-m" style="margin-top: 5%;">
           <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
@@ -791,11 +929,11 @@
                     </div>
                </div>
             </div>
-          </div><!---content---->
+          </div><!---content-->
       </div>
   </div><!---modal-->
 
-  <div id="modal_customers_list" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+  <div id="modal_customers_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-m" style="margin-top: 5%;">
           <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
@@ -829,7 +967,7 @@
   </div><!---modal-->
 
     <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-m" style="margin-top: 5%;">
+      <div class="modal-dialog modal-m" style="margin-top: 8%;">
           <div class="modal-content"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
@@ -849,13 +987,14 @@
                         </div>
                       </div>
                        <div class="table-responsive">
-                          <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                         <div style="overflow:scroll; max-height: 400px;">
+                           <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
                           <thead class="tbl-header">
                             <tr>
                               <center>
                                 <th></th>
                                 <th>Invoice #</th>
-                                <th>Transaction Date</th>
+                                <th>Customer Name</th>
                                 <th>Amount</th>
                                 <th>Action</th>
                               </center>
@@ -864,16 +1003,17 @@
                           <tbody>
                           </tbody>
                         </table>
+                         </div>
                        </div>
                     </div>
                </div>
             </div>
-          </div><!---content---->
+          </div><!---content-->
       </div>
   </div><!---modal-->
 
 
-  <div id="modal_qty" class="modal fade" tabindex="-1" role="dialog" ><!--modal-->
+  <div id="modal_qty" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
       <div class="modal-dialog modal-sm" style="top: 15%;">
           <div class="modal-content" style="margin: 0 auto;"><!---content-->
             <div class="modal-header" style="background-color:#2980b9;">
@@ -910,14 +1050,14 @@
                     </div>
                </div>
             </div>
-          </div><!---content---->
+          </div><!---content-->
       </div>
   </div><!---modal-->
 
   <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 25%; width: 350px !important;">
+      <div class="modal-dialog" style="top: 30%; width: 350px !important;">
           <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
                 <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user fa-size"></span> Authorization</center></h4>
             </div>
               <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
@@ -940,8 +1080,269 @@
       </div>
   </div><!---modal-->
 
+    <div id="modal_card_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog" style="top: 18%; width: 800px !important;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
+                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-credit-card"></span> Card</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
+               <div class="container-fluid" style="margin-top: 10px !important;">  
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
+                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
+                      <table id="tbl_card" style="width: 100%; margin: 0px !important; padding: 0px !important;">
+                        <thead>
+                          <th style="display: none;">Card</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <form role="form" name="check_payment">
+            <div class="form-group" style="margin-top:5px;">
+
+              <div style="margin-bottom: 10px;">
+                  <label for="usr">Card Holder Name</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                    <i class="fa fa-user" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" id="check_bank" placeholder="Card Holder Name" name="check_bank" style="font-size:11pt !important;">
+                  </div>
+                </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <label for="usr">Approval No.</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Approval No." style="font-size:11pt !important;">
+                    </div>
+                  </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <label for="usr">Card No.</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Card No." style="font-size:11pt !important;">
+                    </div>
+                  </div>
+
+                  <label for="check amount">Amount</label>
+                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
+                </div>
+                </form>
+                  </div>
+                </div>
+                 
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important; ">
+                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
+                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
+                 </div>
+               </div>
+          </div><!---content-->
+      </div>
+  </div><!---modal-->
+
+      <div id="modal_gift_certificate_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog" style="top: 22%; width: 800px !important; margin-left: 22%;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
+                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-gift"></span> Gift Certificate</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
+               <div class="container-fluid" style="margin-top: 10px !important;">  
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
+                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
+                      <table id="tbl_gc" style="width: 100%; margin: 0px !important; padding: 0px !important;">
+                        <thead>
+                          <th style="display: none;">Card</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <form role="form" name="check_payment">
+            <div class="form-group" style="margin-top:5px;">
+
+              <div style="margin-bottom: 10px;">
+                  <label for="usr">Branch / Address</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
+                  </div>
+                </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <label for="usr">Gift Certificate No.</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
+                    </div>
+                  </div>
+
+                  <label for="check amount">Amount</label>
+                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
+                </div>
+                </form>
+                  </div>
+                </div>
+                 
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important; ">
+                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
+                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
+                 </div>
+               </div>
+          </div><!---content-->
+      </div>
+  </div><!---modal-->
+
+        <div id="modal_cheque_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog" style="top: 23%; width: 800px !important;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
+                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-gift"></span> Cheque</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
+               <div class="container-fluid" style="margin-top: 10px !important;">  
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
+                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
+                      <table id="tbl_cheque" style="width: 100%; margin: 0px !important; padding: 0px !important;">
+                        <thead>
+                          <th style="display: none;">Cheque</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <form role="form" name="check_payment">
+            <div class="form-group" style="margin-top:5px;">
+
+              <div style="margin-bottom: 10px;">
+                  <label for="usr">Branch / Address</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
+                  </div>
+                </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <label for="usr">Cheque No.</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
+                    </div>
+                  </div>
+
+                  <label for="check amount">Amount</label>
+                  <input type="text" class="lgtext" id="chequeamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
+                </div>
+                </form>
+                  </div>
+                </div>
+                 
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important; ">
+                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
+                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
+                 </div>
+               </div>
+          </div><!---content-->
+      </div>
+  </div><!---modal-->
+
+        <div id="modal_charge_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog" style="top: 22%; width: 800px !important;">
+          <div class="modal-content"><!---content-->
+            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
+                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user"></span> Charge</center></h4>
+            </div>
+              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
+               <div class="container-fluid" style="margin-top: 10px !important;">  
+
+                <div class="col-md-12">
+                  <div class="col-md-4">
+                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Charge</strong></div>
+                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
+                      <table id="tbl_gc" style="width: 100%; margin: 0px !important; padding: 0px !important;">
+                        <thead>
+                          <th style="display: none;">Charge</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <form role="form" name="check_payment">
+            <div class="form-group" style="margin-top:5px;">
+
+              <div style="margin-bottom: 10px;">
+                  <label for="usr">Branch / Address</label>
+                  <div class="input-group">
+                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
+                  </div>
+                </div>
+
+                  <div style="margin-bottom: 10px;">
+                    <label for="usr">Reference</label>
+                    <div class="input-group">
+                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
+                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
+                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
+                    </div>
+                  </div>
+
+                  <label for="check amount">Amount</label>
+                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
+                </div>
+                </form>
+                  </div>
+                </div>
+                 
+               </div>
+               </div>
+               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
+                 <div class="row" style="text-align: center !important; ">
+                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
+                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
+                 </div>
+               </div>
+          </div><!---content-->
+      </div>
+  </div><!---modal-->
+
   <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-      <div class="modal-dialog" id="modal-senior">
+      <div class="modal-dialog" id="modal-senior" style="top: 10%;">
           <div class="modal-content">
               <div class="modal-header bgm-indigo" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
                   <h4 class="modal-title"><center style="font-weight: bold;">Senior Citizen Information</center></h4>
@@ -954,7 +1355,7 @@
                           <div class="form-group">
                               <div class="col-sm-12">
                                   <div class="input-group">
-                                      <span class="input-group-addon"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
+                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
                                           <input type="text" id="seniorID" name="seniorID" class="form-control" style="font-size: 12pt !important;" placeholder="Senior ID" data-error-msg="Senior ID is required." required>
                                   </div>
                               </div>
@@ -964,7 +1365,7 @@
                           <div class="form-group">
                               <div class="col-sm-12">
                                   <div class="input-group">
-                                      <span class="input-group-addon"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
+                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
                                       <input type="text" id="seniorName" name="seniorName" class="form-control" style="font-size: 12pt !important;" placeholder="Name" data-error-msg="Senior name is required." required>
                                   </div>
                               </div>
@@ -974,7 +1375,7 @@
                           <div class="form-group">
                               <div class="col-sm-12">
                                   <div class="input-group">
-                                      <span class="input-group-addon"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
+                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
                                       <input type="text" id="seniorAddress" name="seniorAddress" class="form-control" style="font-size: 12pt !important;" placeholder="Address">
                                   </div>
                               </div>
@@ -993,21 +1394,6 @@
           </div>
       </div>
   </div>
-
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> Modified by JBPV
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
-
-<?php echo $_right_navigation ?>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -1061,9 +1447,11 @@
       		$('#cart_count').text(total);
         };
 
+        // $("body").css("overflow", "hidden");
+
         // $(document).bind("contextmenu", function (e) {
         //         e.preventDefault();
-        //     });
+        // });
 
         $(document).keydown(function(event){
             if(event.keyCode == 123){
@@ -1075,7 +1463,40 @@
           else if(event.ctrlKey && event.keyCode == 85){
               return false;  //Prevent from ctrl+u
           }
+
         });
+
+          $("#cash").keydown(function (e) {
+              // Allow: backspace, delete, tab, escape, enter and .
+              if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                   // Allow: Ctrl+A, Command+A
+                  (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+                   // Allow: home, end, left, right, down, up
+                  (e.keyCode >= 35 && e.keyCode <= 40)) {
+                       // let it happen, don't do anything
+                       return;
+              }
+              // Ensure that it is a number and stop the keypress
+              if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                  e.preventDefault();
+              }
+          });
+
+          $("#cardamount").keydown(function (e) {
+              // Allow: backspace, delete, tab, escape, enter and .
+              if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                   // Allow: Ctrl+A, Command+A
+                  (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+                   // Allow: home, end, left, right, down, up
+                  (e.keyCode >= 35 && e.keyCode <= 40)) {
+                       // let it happen, don't do anything
+                       return;
+              }
+              // Ensure that it is a number and stop the keypress
+              if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                  e.preventDefault();
+              }
+          });
 
         _customers=$("#customers").select2({
             placeholder: "Select Customer.",
@@ -1100,8 +1521,6 @@
     });
 
     var _objTypeHead=$('#custom-templates .typeahead');
-
-
 
     _objTypeHead.typeahead(null, {
                 name: 'products',
@@ -1215,11 +1634,11 @@
         $('#tbl_items tbody tr').css('cursor','pointer');
         $('.numeric').css('background-color','#fff');
         row=$('#tbl_items tr').last();
-        $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
-        row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+        $('#tbl_items tbody tr').last().css('background-color','#ECEFF1');
+        row.find(oTableItems.qty).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.discount).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
     });
 
     $('div.tt-menu').on('click','table.tt-suggestion',function(){
@@ -1274,7 +1693,6 @@
 
         $('#btn_new').click(function(){
             _txnMode="new";
-            //$('.toggle-fullscreen').click();
             clearFields($('#frm_adjustment'));
             showList(false);
         });
@@ -1322,18 +1740,32 @@
           $('#tbl_items tbody tr').css('cursor','pointer');
           $('#tbl_items .numeric').css('background-color','#fff');
           row=$(this).closest('tr');
-          row.css('background-color','#E0E0E0');
-          row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-          row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-          row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-          row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+          row.css('background-color','#ECEFF1');
+          row.find(oTableItems.qty).find('input.numeric').css('background-color','#ECEFF1');
+          row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#ECEFF1');
+          row.find(oTableItems.discount).find('input.numeric').css('background-color','#ECEFF1');
+          row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
           countCart();
 
         });
 
+        $('#tbl_card tbody').on('click','tr',function(){
+          $('#tbl_card tbody tr').css('background-color','#fff');
+          $('#tbl_card tbody tr').css('cursor','pointer');
+          row=$(this).closest('tr');
+          row.css('background-color','#FFF9C4');
+        });
+
+        $('#tbl_gc tbody').on('click','tr',function(){
+          $('#tbl_gc tbody tr').css('background-color','#fff');
+          $('#tbl_gc tbody tr').css('cursor','pointer');
+          row=$(this).closest('tr');
+          row.css('background-color','#FFF9C4');
+        });
+
         $(document).keydown(function(event) {
             if( event.which == 80 && event.altKey ) {
-              $('#modal_payment').modal('show');
+              $('#btn_payment').click();
             }
         });
 
@@ -1407,9 +1839,19 @@
               reComputeChange();
 
               $('#modal_qty').modal('hide');
-              $('#txtsearch').focus();
+
+              $('#txtsearch').focus();  
+
               _objTypeHead.typeahead('close');
             }
+        });
+
+        $('#txtsearch').click(function(){
+          $('#txtsearch').focus(function() {
+            $(this).css('background-color', '#FFFDE7');
+          }).blur(function(){
+            $(this).css('background-color', '#FFF');
+          });
         });
 
         var swalpopup=function(tswal){
@@ -1475,7 +1917,7 @@
            swal({
                    title: "",
                    type: "warning",
-                   text: "Are you sure want to void "+ itemname +"?",
+                   text: "Void item ["+ itemname +"]?",
                    closeOnConfirm: true,
                    allowOutsideClick: false,
                    showConfirmButton: true,
@@ -1503,11 +1945,11 @@
                       }
 
                       row=$('#tbl_items tr').last();
-                      $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
-                      row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-                      row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-                      row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-                      row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+                      $('#tbl_items tbody tr').last().css('background-color','#ECEFF1');
+                      row.find(oTableItems.qty).find('input.numeric').css('background-color','#ECEFF1');
+                      row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#ECEFF1');
+                      row.find(oTableItems.discount).find('input.numeric').css('background-color','#ECEFF1');
+                      row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
                       reComputeTotal();
                       reComputeChange();
                    }
@@ -1603,37 +2045,27 @@
         });
 
         $('#btn_payment').click(function(){
-          $('#modal_payment').modal('show');        
-          var amountdueinput = $('#amountdue').val();          
-          $('#cash').val(amountdueinput);
+          if (itemcount != 0){
+            $('#modal_payment').modal('show');        
+            var amountdueinput = $('#amountdue').val();
+            $('#amountduepymt').val(amountdueinput);   
+            $('.csh').val(amountdueinput);
+            $('#cash').val(amountdueinput);
+            $('.totalpymntmthd').val(amountdueinput);
+
+            $('#cash').focus(500).select();
+
+            var ttlcash = $('#cash').val();
+            reComputeChange();
+
+            var chngepmntmodal = parseFloat(amountdueinput)-parseFloat(ttlcash);
+            $('#chngedpymnt').val(accounting.formatNumber(chngepmntmodal,2));
+          }
         });
 
-        //track every changes on numeric fields
-        // $('#tbl_items tbody').on('keyup','input.numeric',function(){
-        //     var row=$(this).closest('tr');
-        //
-        //     var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
-        //     var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
-        //     var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
-        //     var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()));
-        //
-        //     var discounted_price=price-discount;
-        //     var line_total_discount=discount*qty;
-        //     var line_total=discounted_price*qty;
-        //
-        //     var net_vat=line_total/(1+tax_rate);
-        //     var vat_input=line_total-net_vat;
-        //
-        //     $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
-        //     $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
-        //     $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
-        //     $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-        //
-        //     //console.log(net_vat);
-        //     reComputeTotal();
-        //     reComputeChange();
-        //
-        // });
+        $('.cancelpymnt').click(function(){
+          $('#modal_payment').modal('hide'); 
+        });
 
         $('#btn_cancel').click(function(){
             showList(true);
@@ -1861,36 +2293,39 @@
     // };
 
     // CALCULATOR FUNCTIONS
-    $('#cash').change(function(){
+    
+    $('#cash').keyup(function(){
       reChange();
       reComputeChange();
     });
 
     $('.click_class').click(function() {
-		    var scurrentcash = $('#cash').val();
-	      if(scurrentcash == ""){
-				var value = ($(this).attr('value'));
-        ClearCashInput();
-				$("#cash").val(value);
-				reChange();
-	      reComputeChange();
-			}
-			else{
-				var currentcash =  scurrentcash.replace(/,/g, "");
-				var value = ($(this).attr('value'));
-        ClearCashInput();
-				$("#cash").val(value);
-				reChange();
-			  reComputeChange();
-			}
+
+      var value = ($(this).attr('value'));
+      ClearCashInput();
+      $("#cash").val(value);
+      reChange();
+      reComputeChange();
+
     });
 
 		$('.click_class2').click(function() {
         var scurrentcash = $('#cash').val();
+        var amountduepymt = $('#amountduepymt').val();
+
         var currentcash =  scurrentcash.replace(/,/g, "");
+        var currentAmountDue = amountduepymt.replace(/,/g, "");
+
         var value = ($(this).attr('value'));
-        var cash2 = currentcash + value;
-        $("#cash").val(cash2);
+    
+        if (currentcash == currentAmountDue){
+          $('#cash').val("");
+          $("#cash").val(value);
+        }else{
+          var cash2 = currentcash + value;
+          $("#cash").val(cash2);
+        }
+
         reChange();
         reComputeChange();
     });
@@ -2003,43 +2438,49 @@
 			var stotalcard = $("#card").val();
 			var stotalcharge = $("#charge").val();
 
-			var totalcash = stotalcash.replace('',0);
-			var totalcheck = stotalcheck.replace('',0);
-			var totalcard = stotalcard.replace('',0);
-			var totalcharge = stotalcharge.replace('',0);
+			var totalcash = stotalcash.replace(/,/g, "");
 
-			var sumofpayment = parseFloat(totalcash)+parseFloat(totalcheck)+parseFloat(totalcard)+parseFloat(totalcharge);
+			var sumofpayment = parseFloat(totalcash);
 
-			$("#total_payment").val(accounting.formatNumber(sumofpayment,2));
-
+			// $("#total_payment").val(accounting.formatNumber(sumofpayment,2));
+      $(".csh").val(accounting.formatNumber(sumofpayment,2));
     };
 
     var reComputeChange=function(){
+
+      var chngepmntmodal;
 			var stotalcash = $("#cash").val();
-			var stotalcheck = $("#check").val();
-			var stotalcard = $("#card").val();
-			var stotalcharge = $("#charge").val();
+      var samountdue = $("#amountdue").val();
 
-			var totalcash = stotalcash.replace('',0);
-			var totalcheck = stotalcheck.replace('',0);
-			var totalcard = stotalcard.replace('',0);
-			var totalcharge = stotalcharge.replace('',0);
+			var sumofpayment = parseFloat(totalcash);
 
-			var sumofpayment = parseFloat(totalcash)+parseFloat(totalcheck)+parseFloat(totalcard)+parseFloat(totalcharge);
-
-			var samountdue = $("#amountdue").val();
 			var amountdue = samountdue.replace(/,/g, "");
-			var change = sumofpayment-parseFloat(amountdue);
+      var cassh = stotalcash.replace(/,/g, "");
+
+      if (stotalcash == ""){
+        var csh2 = stotalcash.replace('',0);
+        chngepmntmodal = parseFloat(csh2)-parseFloat(amountdue);
+      }else{
+        chngepmntmodal = parseFloat(cassh)-parseFloat(amountdue);
+      }
+
+      var crd = $('.crd').val();
+      var chq = $('.chq').val();
+      var gc = $('.gc').val();
+      var chrge = $('.chrge').val();
+      var csh = $('.csh').val();
+
+      var totalcash = csh.replace(/,/g, "");
+      var totalcheck = chq.replace(/,/g, "");
+      var totalcard = crd.replace(/,/g, "");
+      var totalcharge = chrge.replace(/,/g, "");;
+      var totalgc = gc.replace(/,/g, "");
+
+      var totalpymntmthd = parseFloat(totalcash)+parseFloat(totalcheck)+parseFloat(totalcard)+parseFloat(totalcharge)+parseFloat(totalgc);
+      $('.totalpymntmthd').val(accounting.formatNumber(totalpymntmthd,2));
 
 			$("#cashamount").val(accounting.formatNumber(totalcash,2));
-			$("#checkamount").val(accounting.formatNumber(totalcheck,2));
-			$("#cardamount").val(accounting.formatNumber(totalcard,2));
-			$("#chargeamount").val(accounting.formatNumber(totalcharge,2));
-
-			$("#total_payment").val(accounting.formatNumber(sumofpayment,2));
-
-			$("#tendered").val(accounting.formatNumber(sumofpayment,2));
-			$("#change").val(accounting.formatNumber(change,2));
+      $('#chngedpymnt').val(accounting.formatNumber(chngepmntmodal,2));
 
     };
 
@@ -2048,12 +2489,14 @@
 			var amountdue = samountdue.replace(/,/g, "");
 			var stendered = $("#tendered").val();
 			var tendered = stendered.replace(/,/g, "");
+      var cashinput = $("#cash").val();
 			synchronizeFields();
+
 			if(amountdue==0){
 				oopsnotice();
 			}
 			else{
-  			if(parseFloat(tendered)>=parseFloat(amountdue)){
+  			if(parseFloat(cashinput)>=parseFloat(amountdue)){
           if ($('#seniorTotalDiscount').val() != ""){
             $('#modal_senior_citizen').modal('show');
           }
@@ -2070,38 +2513,44 @@
 		});
 
     $('#cash').keypress(function(evt){
-          var scash = $("#cash").val();
-          var samountdue = $("#amountdue").val();
-    			var amountdue = samountdue.replace(/,/g, "");
-    			var stendered = $("#tendered").val();
-    			var tendered = stendered.replace(/,/g, "");
-    			synchronizeFields();
-    			if(amountdue==0){
-    				oopsnotice();
-    			}
-    			else{
-            if(parseFloat(scash)>=parseFloat(samountdue))
-            {
-              if ($('#seniorTotalDiscount').val() != ""){
-                $('#modal_senior_citizen').modal('show');
+            if(evt.keyCode==13){
+              var scash = $("#cash").val();
+              var samountdue = $("#amountdue").val();
+              var amountdue = samountdue.replace(/,/g, "");
+              var stendered = $("#tendered").val();
+              var tendered = stendered.replace(/,/g, "");
+              var seniorTotalDisc = $('#seniorTotalDiscount').val();
+              synchronizeFields();
+              if(amountdue==0){
+                oopsnotice();
               }
-              else
-              {
-                validaterequirefields();
+              else{
+                if(parseFloat(scash)>=parseFloat(samountdue))
+                {
+                  $('#tendered').val(scash);
+                  reComputeChange();
+
+                    if (seniorTotalDisc != ""){
+                      $('#modal_senior_citizen').modal('show');
+                    }
+                    else
+                    {
+                      validaterequirefields();
+                    }
+                  $('#btn_bcode').click();
+                }
+                else if(parseFloat(scash)<parseFloat(samountdue)){
+                  oopsfunds();
+                }
+                else if(parseFloat(tendered)>=parseFloat(amountdue)){
+                  validaterequirefields();
+                  $('#btn_bcode').click();
+                }
+                else{
+                  oopsfunds();
+                }
               }
-              $('#btn_bcode').click();
-            }
-            else if(parseFloat(scash)<parseFloat(samountdue)){
-              oopsfunds();
-            }
-      			else if(parseFloat(tendered)>=parseFloat(amountdue)){
-        			validaterequirefields();
-              $('#btn_bcode').click();
-      			}
-      			else{
-      				oopsfunds();
-      			}
-    			}
+            }  
       });
 
     $('#c_btn').click(function(){
@@ -2181,8 +2630,6 @@
     };
 
     var synchronizeFields=function(){
-  			var cashremarks = $("#cash_remarks").val();
-  			$("#post_cash_remarks").val(cashremarks);
   			var acheckbank = $("#check_bank").val();
   			var achecknumber = $("#check_number").val();
   			var acheckaddress = $("#check_address").val();
@@ -2293,6 +2740,12 @@
     		$('#cardamount').val(accounting.formatNumber(0.00,2));
     		$('#chargeamount').val(accounting.formatNumber(0.00,2));
 
+        $('.crd').val(accounting.formatNumber(0.00,2));
+        $('.chq').val(accounting.formatNumber(0.00,2));
+        $('.gc').val(accounting.formatNumber(0.00,2));
+        $('.chrge').val(accounting.formatNumber(0.00,2));
+        $('.csh').val(accounting.formatNumber(0.00,2));
+
     		$('#method1').val(1);
     		$('#method2').val(2);
     		$('#method3').val(3);
@@ -2352,6 +2805,50 @@
         }
       });
 
+    //Alt 1 - Card
+    $(document).keydown(function(event) {
+      if( event.which === 49 && event.altKey ) {
+        $('#tbl_card').dataTable().fnDestroy();
+        getcard();
+        $('#modal_card_payment').modal('show');
+
+        var cash = $('#cash').val();
+        var tcash = cash.replace(/,/g, "");
+        $('#cardamount').val(tcash);
+      }
+    });
+
+    //Alt 2 - Cheque
+    $(document).keydown(function(event) {
+      if( event.which === 50 && event.altKey ) {
+        //$('#tbl_cheque').dataTable().fnDestroy();
+        // getcheque();
+        $('#modal_cheque_payment').modal('show');
+
+        var cash = $('#cash').val();
+        var tcash = cash.replace(/,/g, "");
+        $('#chequeamount').val(tcash);
+      }
+    });
+
+    //Alt 3 - GC
+    $(document).keydown(function(event) {
+      if( event.which === 51 && event.altKey ) {
+        $('#tbl_gc').dataTable().fnDestroy();
+        getgc();
+        $('#modal_gift_certificate_payment').modal('show');
+      }
+    });
+
+    //Alt 4 - Charge
+    $(document).keydown(function(event) {
+      if( event.which === 52 && event.altKey ) {
+        // $('#tbl_charge').dataTable().fnDestroy();
+        // getcharge();
+        $('#modal_charge_payment').modal('show');
+      }
+    });
+
     var getproducts=function(){
           dt=$('#tbl_products').DataTable({
              "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -2369,7 +2866,7 @@
                 {
                      targets:[5],
                      render: function (data, type, full, meta){
-                         var btn_addtocart_close='<button class="btn btn-default btn-l" style="width: 50px; height: 50px; background-color: #B0BEC5;" name="addtocart_close"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Add"><span class="glyphicon glyphicon-ok" style="color: #fff;"></span> </button>';
+                         var btn_addtocart_close='<button class="btn btn-default btn-l" style="width: 50px; height: 50px; margin-left:-15px;" name="addtocart_close" data-toggle="tooltip" data-placement="top" title="Add"><span class="glyphicon glyphicon-ok"></span> </button>';
                          // var btn_addtocart='<button class="btn btn-default btn-l" name="addtocart" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-plus" aria-hidden="true"></i> </button>';
 
                          return '<center>'+btn_addtocart_close+'</center>';
@@ -2382,6 +2879,8 @@
                  $(row).find('td').eq(5).attr({
                      "align": "right"
                  });
+
+                $(row).find('td').css('border-bottom','1px solid #CFD8DC');
              }
          });
     }
@@ -2400,7 +2899,7 @@
                 {
                      targets:[2],
                      render: function (data, type, full, meta){
-                         var btn_apply_discount='<button class="btn btn-default btn-l" name="applyDiscount"  data-toggle="tooltip" data-placement="top" title="Apply Discount"><span class="glyphicon glyphicon-ok"></span> </button>';
+                         var btn_apply_discount='<button class="btn btn-default btn-l" name="applyDiscount"  data-toggle="tooltip" style="width:50px; height: 50px;" data-placement="top" title="Apply Discount"><span class="glyphicon glyphicon-ok"></span> </button>';
 
                          return '<center>'+btn_apply_discount+'</center>';
                      }
@@ -2416,6 +2915,54 @@
          });
     }
 
+        var getcard=function(){
+          dt=$('#tbl_card').DataTable({
+            "dom": '<"toolbar">frtip', 
+            "bPaginate": false,
+            "bInfo" : false,            
+            "bFilter": false,
+             "ajax" : "Cards/transaction/list",
+             "bDestroy": true,
+              "language": {
+                 "searchPlaceholder": "Search Card"
+             },
+             "columns": [
+                { targets:[0],data: "card_name"},
+             ],
+             "rowCallback":function( row, data, index ){
+
+                 $(row).find('td').eq(2).attr({
+                     "align": "right"
+                 });
+
+                 $(row).find('td').css('padding','10px');
+                 $(row).find('td').css('border-bottom','1px solid #B0BEC5');
+                 }
+             });
+        }
+          var getgc=function(){
+                dt=$('#tbl_gc').DataTable({
+                  "dom": '<"toolbar">frtip', 
+                  "bPaginate": false,
+                  "bInfo" : false,            
+                  "bFilter": false,
+                   "ajax" : "Giftcards/transaction/list",
+                   "bDestroy": true,
+                   "columns": [
+                      { targets:[0],data: "giftcard_name"},
+                   ],
+                   "rowCallback":function( row, data, index ){
+
+                       $(row).find('td').eq(2).attr({
+                           "align": "right"
+                       });
+
+                       $(row).find('td').css('padding','10px');
+                       $(row).find('td').css('border-bottom','1px solid #B0BEC5');
+                   }
+               });
+          }
+    
         var getjournal=function(){
           var _selecteddatedt = $('#journal_date').val();
           dtjournal=$('#tbl_journal').DataTable({
@@ -2440,7 +2987,7 @@
                       "defaultContent": ""
                   },
                   { targets:[1],data: "receipt_no" },
-                  { targets:[2],data: "transaction_date" },
+                  { targets:[2],data: "cname" },
                   { targets:[3],data: "amount_due" },
                   {
                      targets:[4],
@@ -2461,7 +3008,6 @@
                   });
               }
           });
-
         }
 
          var GetJournalReceiptFilter=function(){
@@ -2488,7 +3034,7 @@
                       "defaultContent": ""
                   },
                   { targets:[1],data: "receipt_no" },
-                  { targets:[2],data: "transaction_date" },                  
+                  { targets:[2],data: "cname" },                  
                   { targets:[3],data: "amount_due" },
                   {
                      targets:[4],
@@ -2800,11 +3346,11 @@
         $('#tbl_items tbody tr').css('cursor','pointer');
         $('.numeric').css('background-color','#fff');
         row=$('#tbl_items tr').last();
-        $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
-        row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+        $('#tbl_items tbody tr').last().css('background-color','#ECEFF1');
+        row.find(oTableItems.qty).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.discount).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
 			return false;
     });
 
@@ -2867,11 +3413,11 @@
         $('#tbl_items tbody tr').css('cursor','pointer');
         $('.numeric').css('background-color','#fff');
         row=$('#tbl_items tr').last();
-        $('#tbl_items tbody tr').last().css('background-color','#E0E0E0');
-        row.find(oTableItems.qty).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.discount).find('input.numeric').css('background-color','#E0E0E0');
-        row.find(oTableItems.total).find('input.numeric').css('background-color','#E0E0E0');
+        $('#tbl_items tbody tr').last().css('background-color','#ECEFF1');
+        row.find(oTableItems.qty).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.sale_cost).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.discount).find('input.numeric').css('background-color','#ECEFF1');
+        row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
       return false;
     });
 

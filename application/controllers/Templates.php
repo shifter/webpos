@@ -69,25 +69,7 @@ class Templates extends CORE_Controller {
 
                 $receipt_no = ($this->input->post('receipt_no', TRUE) == null || $this->input->post('receipt_no', TRUE) == "" ) ? "0" : $this->input->post('receipt_no', TRUE);
 
-                if ($receipt_no != "0"){
-                    $response['data']=$m_pos_payment->get_list(
-                    'pos_payment.receipt_no LIKE "'.$receipt_no.'%" AND pos_payment.refund=0',
-                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
-                       array(
-                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
-                       )
-                    );
-                }else{
-                    $response['data']=$m_pos_payment->get_list(
-                    'pos_invoice.transaction_date="'.$j_date.'"  AND pos_payment.refund=0',
-                      'pos_payment.*,pos_payment.receipt_no,pos_invoice.*,CONCAT(user_fname," ",user_mname," ",user_lname) as cashiername',
-                       array(
-                         array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-                         array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left')       //join
-                       )
-                    );
-                }
+                $response['data']=$m_pos_payment->get_journal_list($j_date,$receipt_no);
                 echo json_encode($response);
             break;
 
