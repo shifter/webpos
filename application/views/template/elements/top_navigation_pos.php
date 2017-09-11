@@ -13,6 +13,9 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
+            <a onclick="toggleFullScreen();" title="Full Screen"><i class="fa fa-arrows-alt"></i> </a>
+          </li>
+          <li>
             <a href="javascript:void();" title="number of cart row"><span style="font-weight:bold;" id="cart_count">0 Items</span></a>
           </li>
           <!-- User Account: style can be found in dropdown.less -->

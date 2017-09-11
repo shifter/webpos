@@ -11,14 +11,14 @@ class CORE_Controller extends CI_Controller
 
     function validate_session(){
         if(!$this->session->user_id){
-            redirect(base_url().'login');
+            redirect(base_url().'Login');
         }
     }
 
 
     function end_session(){
         session_destroy();
-        redirect(base_url().'login');
+        redirect(base_url().'Login');
     }
 
     function get_numeric_value($str){
