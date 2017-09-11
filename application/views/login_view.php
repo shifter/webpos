@@ -23,338 +23,81 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- pnotify -->
     <link href="assets/plugins/notify/pnotify.css" rel="stylesheet">
+    <link href="assets/ample-login/animate.css" rel="stylesheet">
+  <!-- Custom CSS -->
+    <link href="assets/ample-login/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="assets/ample-login/colors/default.css" id="theme"  rel="stylesheet">
+
     <style>
-body{
-
-}
-html{
-  background: #F3904F;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #3B4371, #F3904F);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #3B4371, #F3904F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  height:100vh;
-  overflow:auto;
-}
-
-.hero{
-  background-color: transparent;
-
-
-}
-
-@media (min-width:992px) {
-  .hero .get-it{
-    text-align:right;
-    margin-top:80px;
-    padding-right:30px;
-  }
-}
-
-@media (max-width:992px) {
-  .hero .get-it{
-    text-align:center;
-  }
-}
-
-@media (max-width:992px) {
-  .hero .phone-preview{
-    text-align:center;
-  }
-}
-
-.hero .get-it h1, .hero .get-it p{
-  color:#fff;
-  text-shadow:2px 2px 3px rgba(0,0,0,0.3);
-  margin-bottom:40px;
-}
-
-.hero .get-it .btn{
-  margin-left:10px;
-  margin-bottom:10px;
-  text-shadow:none;
-}
-
-div.iphone-mockup{
-  position:relative;
-  max-width:250px;
-  margin:20px;
-  display:inline-block;
-}
-
-.iphone-mockup img.device{
-  width:100%;
-  height:auto;
-}
-
-.iphone-mockup .screen{
-  position:absolute;
-  width:88%;
-  height:77%;
-  top:12%;
-  border-radius:2px;
-  left:6%;
-  border:1px solid #444;
-  background-color:#aaa;
-  overflow:hidden;
-  background:url(../../assets/img/screen-content-iphone-6.jpg);
-  background-size:cover;
-  background-position:center;
-}
-
-.iphone-mockup .screen:before{
-  content:'';
-  background-color:#fff;
-  position:absolute;
-  width:70%;
-  height:140%;
-  top:-12%;
-  right:-60%;
-  transform:rotate(-19deg);
-  opacity:0.2;
-}
-
-.icon-feature{
-  text-align:center;
-}
-
-.icon-feature .glyphicon{
-  font-size:60px;
-}
-
-section.features{
-  background-color:#369;
-  padding:40px 0;
-  color:#fff;
-}
-
-.features h2{
-  color:#fff;
-}
-
-.features .icon-features{
-  margin-top:15px;
-}
-
-.testimonials blockquote{
-  text-align:center;
-}
-
-section.testimonials{
-  margin:50px 0;
-}
-
-.site-footer{
-  padding:20px 0;
-  text-align:center;
-}
-
-@media (min-width:768px) {
-  .site-footer h5{
-    text-align:left;
-  }
-}
-
-.site-footer h5{
-  color:inherit;
-  font-size:20px;
-}
-
-.site-footer .social-icons a:hover{
-  opacity:1;
-}
-
-.site-footer .social-icons a{
-  display:inline-block;
-  width:32px;
-  border:none;
-  font-size:20px;
-  border-radius:50%;
-  margin:4px;
-  color:#fff;
-  text-align:center;
-  background-color:#798FA5;
-  height:32px;
-  opacity:0.8;
-  line-height:32px;
-}
-
-@media (min-width:768px) {
-  .login-box-body{
-    margin-top:20px;
-    background-color: transparent;
-    border-radius: 5px;
-    color:white;
-  }
-}
-@media (min-width:1024px) {
-  .login-box-body{
-    margin-top:90px;
-    background-color: transparent;
-    border-radius: 5px;
-    color:white;
-  }
-}
-
-.login-box-body{
-  box-shadow: 5px 5px 50px black;
-  background-color: transparent;
-  border-radius: 5px;
-  color:white;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  }
-
-.login-box-body:hover{
-  box-shadow: 5px 5px 50px #ecf0f1;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-input{
-  background-color: transparent !important;
-  color:white !important;
-  border-radius:5px !important;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-input:focus{
-  background-color: #27ae60 !important;
-  color:white !important;
-  border:1px solid #ecf0f1 !important;
-  font-weight: bold;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.btn{
-  background-color:transparent;
-
-  border:1px solid #ecf0f1;
-  border-radius:5px !important;
-  color:#ecf0f1;
-  font-weight:bold;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-
-}
-.btn:hover{
-  background-color:#27ae60;
-  color:white;
-  border:1px solid #ecf0f1;
-  border-radius:5px !important;
-  color:#ecf0f1;
-  font-weight:bold;
--webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.btn:focus{
-  background-color:#27ae60;
-  color:white;
-  border:1px solid #ecf0f1;
-  border-radius:5px !important;
-  color:#ecf0f1;
-  font-weight:bold;
-}
-.white{
-  color:#ecf0f1 !important;
-}
-
-
-
+      .ui-pnotify-title {
+        color: white !important;
+      }
+      body {
+        font-family: arial;
+      }
+      .new-login-register .lg-info-panel .lg-content {
+        margin-top: 35%;
+      }
+      .new-login-register .lg-info-panel .inner-panel {
+          background: rgba(0, 0, 0, 0.7);
+      }
+      .new-login-register .lg-info-panel {
+        background: url('assets/img/login.jpg') no-repeat center center / cover !important;
+      }
+      hr {
+        border-top: 1px solid #eaeaea;
+      }
+                .new-login-box{
+        -webkit-box-shadow: -4px 9px 300px 0px rgba(222,237,255,1);
+        -moz-box-shadow: -4px 9px 300px 0px rgba(222,237,255,1);
+        box-shadow: -4px 9px 300px 0px rgba(222,237,255,1);
+        }
     </style>
 </head>
-    <body style="background-color:transparent;">
-    <div class="jumbotron hero" style="background-color:transparent;">
-        <div class="container">
-            <div class="row ">
-                <div class="col-md-4 col-md-push-7 hidden-sm hidden-xs">
-                      <div class="login-box-body">
-                        <p class="login-box-msg" style="font-weight:bold;font-family:Web Serveroff;">Sign in to start your session</p>
-                          <div class="form-group has-feedback">
-                            <input type="email" class="form-control" name="user_name" placeholder="Email">
-                            <span class="glyphicon glyphicon-envelope white form-control-feedback"></span>
-                          </div>
-                          <div class="form-group has-feedback">
-                            <input type="password" class="form-control" name="user_pword" placeholder="Password">
-                            <span class="glyphicon glyphicon-lock white form-control-feedback"></span>
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-12">
-                              <button type="submit" id="btn_login" style="font-family:Web Serveroff;" class="btn btn-block btn-flat btn_login">Login</button>
-                            </div>
-                            <!-- /.col -->
-                          </div>
-                      </div>
-                  </div>
-
-                <div class="col-md-6 col-md-pull-3 get-it hidden-md hidden-lg" style="color:white;">
-                  <div class="row">
-                      <div class="text-center">
-                          <h4 style="font-family:Web Serveroff;font-size:55pt;font-weight:bold;">JCORE</h4>
-
-                          <span >
-                              <address style="font-family:Web Serveroff;font-size:15pt;font-weight:bold;">
-                                  Web Point of Sale System
-                              </address>
-                          </span>
-                      </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6 col-md-pull-3 get-it hidden-sm hidden-xs" style="color:white;">
-                    <div class="row">
-                        <div class="text-center">
-                            <h4 style="font-family:Web Serveroff;font-size:55pt;font-weight:bold;">JCORE</h4>
-
-                            <span >
-                                <address style="font-family:Web Serveroff;font-size:15pt;font-weight:bold;">
-                                    Web Point of Sale System
-                                </address>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <center>
-                <div class="col-md-4 col-md-push-7 hidden-md hidden-lg" style="width:95%;">
-                      <div class="login-box-body">
-                        <p class="login-box-msg" style="font-weight:bold;font-family:Web Serveroff;">Sign in to start your session</p>
-                          <div class="form-group has-feedback">
-                            <input type="email" class="form-control" name="user_name1" placeholder="Email">
-                            <span class="glyphicon glyphicon-envelope white form-control-feedback"></span>
-                          </div>
-                          <div class="form-group has-feedback">
-                            <input type="password" class="form-control" name="user_pword1" placeholder="Password">
-                            <span class="glyphicon glyphicon-lock white form-control-feedback"></span>
-                          </div>
-                          <div class="row">
-                            <div class="col-xs-12">
-                              <button type="submit" id="btn_login" style="font-family:Web Serveroff;" class="btn btn-block btn-flat btn_login">Login</button>
-                            </div>
-                            <!-- /.col -->
-                          </div>
-                      </div>
-                  </div>
-                </center>
+    <body class="focused-form animated-content login-background">
+<section id="wrapper" class="new-login-register">
+      <div class="lg-info-panel">
+          <div class="inner-panel">
+              <div class="lg-content">
+                  <hr><h1 style="font-family: sans-serif!important; color: white;"><b>JCORE</b> POINT OF SALES 1.0</h1><hr>
+                  <h3 style="color: #03a9f4;"></h3>
+                  <span style="position: absolute; bottom: -3%; right: 1%;"><p>powered by JDEV OFFICE SOLUTIONS <!-- <img src="assets/img/jdev-logo2.png" height="30" width="70"> --></p></span>
+              </div>
+          </div>
+      </div>
+      <div class="new-login-box">
+        <div class="white-box">
+            <h3 class="box-title m-b-0">Sign In</h3>
+            <div class="form-horizontal" id="validate-form" style="margin-top: 5%;">
+            <div class="form-group mb-md" id="userdiv">
+              <div class="col-xs-12">
+                <label>USERNAME</label>
+                <input name="user_name" id="user" type="text" class="form-control " style="border-radius: 0;" placeholder="Username" data-parsley-minlength="20" placeholder="At least 6 characters" required>
+              </div>
             </div>
+            <div class="form-group mb-md" id="passdiv">
+              <div class="col-xs-12">
+                <label>PASSWORD</label>
+                <input name="user_pword" id="pass" type="password" class="form-control" style="border-radius: 0;" id="exampleInputPassword1" placeholder="Password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 hidden " style="margin-bottom: 10px;">
+                <button id="btn_register" class="btn btn-info btn-block">Register</button>
+              </div>
+              <div class="col-sm-offset-6"></div>               
+              <div class="col-xs-12 col-sm-12">
+                <button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
+                <span class=""></span> Login
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>            
+
+</section>
     <!-- /.login-box -->
     <script src="assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -376,13 +119,9 @@ input:focus{
 
         var bindEventHandlers=(function(){
 
-                $('.btn_login').click(function(){
-
-
+                $('#btn_login').click(function(){
                     validateUser().done(function(response){
-
                         showNotification(response);
-
                         if(response.stat=="success"){
                             setTimeout(function(){
                                 window.location.href = "Homepage";
@@ -391,7 +130,7 @@ input:focus{
 
                     }).always(function(){
                         setTimeout(function(){
-                                $(".btn_login").html('Login');
+                                $("#btn_login").html('Login');
                             },800);
                     });
 
@@ -400,7 +139,10 @@ input:focus{
 
 
                 $('input').keypress(function(evt){
-                    if(evt.keyCode==13){ $('.btn_login').click(); }
+                    if(evt.keyCode==13){ 
+                      event.preventDefault();
+                      $('#btn_login').click(); 
+                    }
                 });
 
 
@@ -411,13 +153,6 @@ input:focus{
 
 
             var validateUser=(function(){
-              if($('input[name="user_name"]').val()==null|| $('input[name="user_name"]').val()==''){
-                $('input[name="user_name"]').val($('input[name="user_name1"]').val());
-                $('input[name="user_pword"]').val($('input[name="user_pword1"]').val());
-              }
-              else{
-
-              }
 
                 var _data={uname : $('input[name="user_name"]').val() , pword : $('input[name="user_pword"]').val()};
 
