@@ -478,12 +478,17 @@
       .pymnt-details-color{
         color: #d35400 !important;
       }
+      .tbl_products{
+        margin: 0px !important; 
+        padding: 0px !important;
+      }
       .tbl_products th{
         border-bottom: 2px solid #90A4AE !important;
         font-size: 12pt !important;
       }
       .scroll-div-pro{
-        overflow:scroll; max-height: 520px;
+        overflow:scroll; 
+        max-height: 420px;
         border: 1px solid #90A4AE !important; 
         margin-bottom: 20px !important;
       }
@@ -499,6 +504,7 @@
       }
       .md-pos{
         top: 5%;
+        height: auto !important;
       }
       #div_product_list{
         margin-top: 10px !important;
@@ -586,7 +592,7 @@
         border: 1px solid #CFD8DC;
         margin: 0px !important;
       }
-      #tbl_cheque, #tbl_charge, #tbl_card, #tbl_gc{
+      #tbl_cheque, #tbl_charge, #tbl_card, #tbl_gc, #tbl_products{
         width: 100% !important; margin: 0px !important; padding: 0px !important;
       }
       .fg-pymnt{
@@ -730,7 +736,7 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
       }
-      .thead-fixed{
+      #thead-fixed{
         width: 100% !important;
         padding: 10px !important;
       }
@@ -743,5 +749,12 @@
         color: #fff;
         float: right !important;
       }
-    
+      .fscreen{
+        cursor: pointer;
+      }
+      .pos-content{
+        padding-bottom:0px !important;
+        margin-bottom:0px !important;
+      }
+      
   </style>

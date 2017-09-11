@@ -1,4 +1,4 @@
-    <header class="main-header">
+    <header class="main-header" style="color: black !important;">
     <!-- Logo -->
     <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -12,7 +12,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li>
+          <li class="fscreen">
             <a onclick="toggleFullScreen();" title="Full Screen"><i class="fa fa-arrows-alt"></i> </a>
           </li>
           <li>

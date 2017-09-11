@@ -9,14 +9,13 @@
   <?php echo $_def_css_files ?>
   <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
-
 </head>
 <body>
   <div>
     <?php echo $_top_navigation;?>
         <!-- Main content -->
-      <section class="content">
-          <div class="box">
+      <section class="content pos-content">
+          <div class="box" >
               <!-- /.box-header -->
               <div id="invoice_fields">
                 <div class="panel panel-default">
@@ -340,7 +339,7 @@
                     <div class="container-fluid">
                         <div class="table-responsive" id="div_product_list">
                         <input type="text" class="form-control inp-search-pro">
-                            <table class="thead-fixed">
+                            <table id="thead-fixed">
                               <thead class="thead-modal"> 
                                     <tr>
                                         <th class="th-modal-first" width="22%">PLU</th>
@@ -1033,7 +1032,9 @@
       		$('#cart_count').text(total);
         };
 
-        $("body").css("overflow", "hidden");
+        // $("body").css("overflow", "hidden");
+
+        $('.modal').css("overflow", "hidden");
 
         $(document).bind("contextmenu", function (e) {
                 e.preventDefault();
@@ -1049,7 +1050,19 @@
           else if(event.ctrlKey && event.keyCode == 85){
               return false;  //Prevent from ctrl+u
           }
+          else if(event.ctrlKey && event.keyCode == 84){
+              return false;  //Prevent from ctrl+t
+          }
+          else if(event.ctrlKey && event.keyCode == 83){
+              return false;  //Prevent from ctrl+s
+          }
+        });
 
+        $(window).keydown(function(event) {
+          if(event.ctrlKey && event.keyCode == 84) { 
+            event.preventDefault(); 
+            console.log("Hey! Ctrl+T event captured!");
+          }
         });
 
           $("#cash").keydown(function (e) {
@@ -1859,7 +1872,6 @@
             title:  obj.title,
             text:  obj.msg,
             type:  obj.stat,
-            addClass: 'pnotify_class',
             nonblock: {
               nonblock: true
             }
@@ -1947,7 +1959,9 @@
         tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_vat_input,2));
         tbl_summary.find(oTableDetails.after_tax).html(accounting.formatNumber(total_computed_vat_sale,2));
         tbl_summary.find(oTableDetails.summary_non_vat_sales).html(accounting.formatNumber(total_non_vat_sale,2));
+
         $('#amountdue').val(accounting.formatNumber(total_amount,2));
+        $('#tdiscount').val(accounting.formatNumber(total_discount,2));
     };
 
     var reInitializeNumeric=function(){
@@ -2531,6 +2545,51 @@
       });    
     });
 
+    $("#modal_card_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearCardPayment();
+      });    
+    });
+
+    $("#modal_cheque_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearChequePayment();
+      });    
+    });
+
+    $("#modal_gift_certificate_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearGCPayment();
+      });    
+    });
+
+    $("#modal_charge_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearChargePayment();
+      });    
+    });
+
+    var ClearCardPayment = function(){
+      $('#inp_card_holder').val("");
+      $('#inp_card_approval').val("");
+      $('#inp_card_no').val("");
+    };
+
+    var ClearChequePayment = function(){
+      $('#inp_cheque_branch').val("");
+      $('#inp_cheque_no').val("");
+    };
+
+    var ClearGCPayment = function(){
+      $('#inp_gc_branch').val("");
+      $('#inp_gc_no').val("");
+    };
+
+    var ClearChargePayment = function(){
+      $('#inp_charge_branch').val("");
+      $('#inp_charge_reference').val("");
+    };
+
     //Alt 1 - Card
     $(document).keydown(function(event) {
       if( event.which === 49 && event.altKey ) {
@@ -2615,7 +2674,6 @@
 
     var getproducts=function(){
           dt=$('#tbl_products').DataTable({
-             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "dom": '<"toolbar">frtip', 
             "bPaginate": false,
             "bInfo" : false,            
@@ -3139,16 +3197,17 @@
           }
 
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(computeTotalDiscount).toFixed(2));
+
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(computeTotalwdisc,2)); // line total amount
         $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
         $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
         $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //non vat sales
       }
+
       reComputeTotal();
       reComputeChange();
       $('#modal_senior_citizen').modal('hide');
       $('#modal_browse_discounts').modal('hide');
-      showNotificationDiscount({title:"Discount Applied",stat:"success",msg:""+dataDiscountDesc+""});
       $('#txtsearch').focus();
       _objTypeHead.typeahead('close');
     });

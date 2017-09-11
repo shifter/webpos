@@ -47,7 +47,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="Pos" id="btn_pos" onclick="toggleFullScreen(document.body)">
+          <a href="Pos" id="btn_pos">
             <i class="fa fa-shopping-cart"></i> <span>Point of Sale</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
