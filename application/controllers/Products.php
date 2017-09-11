@@ -45,6 +45,14 @@ class Products extends CORE_Controller
                 echo json_encode($response);
             break;
 
+            case 'searchlist' :
+                $search_text = ($this->input->post('search_text', TRUE) == null || $this->input->post('search_text', TRUE) == "" ) ? "0" : $this->input->post('search_text', TRUE);
+
+                $m_inventory = $this->Inventory_model;
+                $response['data'] = $m_inventory->get_inventory_onhand_list_search($search_text);
+                echo json_encode($response);
+            break;
+
             case 'create':
                 $m_products = $this->Products_model;
                 $m_inventory = $this->Inventory_model;
