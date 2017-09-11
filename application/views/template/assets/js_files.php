@@ -40,6 +40,7 @@
     <script src="assets/plugins/iCheck/icheck.min.js"></script>
 
     <script src="assets/plugins/blockUI.js"></script>
+    
     <!-- DataTables -->
     <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
