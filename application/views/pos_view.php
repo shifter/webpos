@@ -35,16 +35,17 @@
                                             <th width="10%" class="th-qty">Qty</th>
                                             <th width="12%" class="th-right-items">SRP</th>
                                             <th width="12%" class="th-right-items">Discount</th>
-                                            <th hidden>T.D</th>
-                                            <th hidden>Tax %</th>
+                                            <th>T.D</th>
+                                            <th>Tax %</th>
                                             <th width="12%" class="th-right-items">Total</th>
-                                            <th hidden>V.I</th>
-                                            <th hidden>N.V</th>
-                                            <th hidden>Item ID</td>
-                                            <th hidden>Item Code</td>
-                                            <th hidden>Disc Status</td>
-                                            <th hidden>Non Vat Sales</td>
-                                            <th hidden>Rate</td>
+                                            <th>V.I</th>
+                                            <th>N.V</th>
+                                            <th>Item ID</td>
+                                            <th>Item Code</td>
+                                            <th>Disc Status</td>
+                                            <th>Non Vat Sales</td>
+                                            <th>Rate</td>
+                                            <th>Zero Vat Sales</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -61,19 +62,19 @@
                                               <td align="right" class="black">0.00</td>
                                             </tr>
                                             <tr>
-                                              <td class="black">Total before Tax :</td>
+                                              <td class="black">Vatable Sales :</td>
                                               <td align="right" class="black">0.00</td>
                                             </tr>
                                             <tr>
-                                              <td class="black">Tax :</td>
+                                              <td class="black">Vat Amount :</td>
                                               <td align="right" class="black">0.00</td>
                                             </tr>
                                             <tr>
-                                              <td ><strong class="boldlabel">Total After Tax :</strong></td>
+                                              <td ><strong class="boldlabel">Vat Exempt Sales :</strong></td>
                                               <td class="green" align="right"><b>0.00</b></td>
                                             </tr>
                                             <tr>
-                                              <td ><strong class="boldlabel">Non Vat Sales :</strong></td>
+                                              <td ><strong class="boldlabel">Zero Vat Sales :</strong></td>
                                               <td class="green" align="right"><b>0.00</b></td>
                                             </tr>
                                             </tbody>
@@ -1001,16 +1002,17 @@
           bcode : 'td:eq(10)',
           disc_status : 'td:eq(11)',
           non_vat_sales: 'td:eq(12)',
-          rate: 'td:eq(13)'
+          rate: 'td:eq(13)',
+          zero_vat: 'td:eq(14)'
 
       };
 
       var oTableDetails={
           discount : 'tr:eq(0) > td:eq(1)',
-          before_tax : 'tr:eq(1) > td:eq(1)',
-          tax_amount : 'tr:eq(2) > td:eq(1)',
-          after_tax : 'tr:eq(3) > td:eq(1)',
-          summary_non_vat_sales: 'tr:eq(4) > td:eq(1)'
+          vatable_sales : 'tr:eq(1) > td:eq(1)',
+          vat_amount : 'tr:eq(2) > td:eq(1)',
+          vat_exempt_sales : 'tr:eq(3) > td:eq(1)',
+          zero_vat_sales: 'tr:eq(4) > td:eq(1)'
       };
 
         var countCart=function() {
@@ -1044,7 +1046,6 @@
               return false;  //Prevent from ctrl+s
           }
           else if(event.keyCode == 113){
-            alert();
               $('#txtsearch').focus();  //Prevent from ctrl+s
           }
         });
@@ -1155,22 +1156,40 @@
                 var tax_rate=getFloat(suggestion.tax_rate);
 
                 var total=getFloat(suggestion.sale_cost);
+
+                var tempvalue = $("#tempcode").val();
+                var newtotal = tempvalue * total;
+
                 var net_vat=0;
                 var vat_input=0;
                 var n_vat_sls = 0;
+                var zero_vat_sls = 0;
 
-                if (tax_rate != "0.00"){
-                  net_vat=(total/tax_rate);
-                  vat_input=total-net_vat;
-                  n_vat_sls=0;
+                if(tempvalue==""){
+                  if (tax_rate != "0.00"){
+                    net_vat=(total/tax_rate);
+                    vat_input=total-net_vat;
+                    n_vat_sls=0;
+                    zero_vat_sls = 0;
+                  }else{
+                    net_vat=0;
+                    vat_input=0;
+                    n_vat_sls=0;
+                    zero_vat_sls = total;
+                  }
                 }else{
-                  net_vat=0;
-                  vat_input=0;
-                  n_vat_sls=total;
+                  if (tax_rate != "0.00"){
+                    net_vat=(newtotal/tax_rate);
+                    vat_input=newtotal-net_vat;
+                    n_vat_sls=0;
+                    zero_vat_sls = 0;
+                  }else{
+                    net_vat=0;
+                    vat_input=0;
+                    n_vat_sls=0;
+                    zero_vat_sls = newtotal;
+                  }
                 }
-
-      					var tempvalue = $("#tempcode").val();
-      					var newtotal = tempvalue * total;
 
 				      if(tempvalue==""){
 			           $('#tbl_items > tbody').append(newRowItem({
@@ -1190,7 +1209,8 @@
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount:vat_input,
                     disc_status: "0",
-                    non_vat_sales: n_vat_sls
+                    non_vat_sales: n_vat_sls,
+                    zero_vat: zero_vat_sls
                 }));
 		          }
 				      else{
@@ -1211,7 +1231,8 @@
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount:vat_input,
                     disc_status: "0",
-                    non_vat_sales: n_vat_sls
+                    non_vat_sales: n_vat_sls,
+                    zero_vat: zero_vat_sls
                 }));
 		          }
 
@@ -1550,28 +1571,32 @@
         $('#row_qty').keypress(function(evt){
             event.preventDefault();
             if(evt.keyCode==13){
+
               row.find(oTableItems.qty).find('input.numeric').val(parseFloat($('#row_qty').val()).toFixed(2));
+
               var price=parseFloat(accounting.unformat(row.find(oTableItems.sale_cost).find('input.numeric').val()));
               var discount=parseFloat(accounting.unformat(row.find(oTableItems.discount).find('input.numeric').val()));
               var qty=parseFloat(accounting.unformat(row.find(oTableItems.qty).find('input.numeric').val()));
               var tax_rate=parseFloat(accounting.unformat(row.find(oTableItems.tax).find('input.numeric').val()));
 
               var line_total = (price*qty)-discount;
+              var vat_sales = 0; var vat_amount = 0; var zero_vat = 0; var vat_xmpt = 0;
 
               if (tax_rate != "0.00"){
-                var net_vat = line_total;
-                var vat_input = line_total - (line_total/tax_rate);
-                var nvs = 0;
+                vat_sales = line_total/tax_rate;
+                vat_amount = line_total - (line_total/tax_rate);
+                zero_vat = 0;
               }else{
-                var net_vat = 0;
-                var vat_input=0;
-                var nvs = line_total;
+                vat_sales = 0;
+                vat_amount=0;
+                zero_vat = line_total;
               }
 
               $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(line_total,2)); // line total amount
-              $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
-              $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-              $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //vat input
+
+              $(oTableItems.net_vat,row).find('input.numeric').val(vat_sales); //net of vat
+              $(oTableItems.vat_input,row).find('input.numeric').val(vat_amount); //vat input
+              $(oTableItems.zero_vat,row).find('input.numeric').val(zero_vat); //vat input
 
               reComputeTotal();
               reComputeChange();
@@ -1910,16 +1935,17 @@
         '<td width="10%" style="border: .5px solid #CFD8DC;"><input name="pos_qty[]" type="text" class="numeric" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly value="'+ d.pos_qty+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_price[]" type="text" class="numeric" value="'+accounting.formatNumber(d.pos_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;"><input name="pos_discount[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_discount,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td style="display: none;" width="11%"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
-        '<td style="display: none;"><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td style="" width="11%"><input name="pos_line_total_discount[]" style="width:40px !important;" type="text" class="numeric " value="'+ accounting.formatNumber(d.pos_line_total_discount,2)+'" readonly></td>'+
+        '<td style=""><input name="pos_tax_rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '<td width="11%" style="border: .5px solid #CFD8DC;" align="right"><input name="pos_line_total_price[]" type="text" class="numeric" value="'+ accounting.formatNumber(d.pos_line_total_price,2)+'" style="border: 0px !important; background-color: #fff; font-weight: bold; font-size: 12pt !important; width: 100%;" readonly></td>'+
-        '<td style="display: none;"><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
-        '<td style="display: none;"><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
-        '<td style="display: none;"><div class="row_bcode">'+d.product_code+'</div></td>'+
-        '<td style="display: none;"><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
-        '<td style="display: none;"><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
-        '<td style="display: none;"><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td style=""><input name="pos_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_tax_amount+'" readonly></td>'+
+        '<td style=""><input name="pos_non_tax_amount[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.pos_non_tax_amount+'" readonly></td>'+
+        '<td style=""><input name="product_id[]" type="text" style="width:40px !important;" value="'+ d.product_id+'" readonly></td>'+
+        '<td style=""><div class="row_bcode">'+d.product_code+'</div></td>'+
+        '<td style=""><input name="disc_status[]" type="text" style="width:40px !important;" class="disc_stat" value="'+d.disc_status+'" readonly></td>'+
+        '<td style=""><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
+        '<td style=""><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
+        '<td style=""><input name="zero_vat[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.zero_vat,2)+'"></td>'+
         '</tr>';
     };
 
@@ -1928,28 +1954,29 @@
         var tbl_summary=$('#tbl_purchase_summary');
 
         var total_discount=0;
-        var total_net_vat_sale=0;
-        var total_vat_sale=0;
-        var total_vat_input=0;
-        var total_non_vat_sale=0;
-        var total_computed_vat_sale=0;
+        var total_vatable_sales=0;
+        var total_vat_amount=0;
+        var total_vat_exempt_sales=0;
+        var total_zero_vat_sales=0;
         var total_amount=0;
+
         $.each(rows,function(){
+
           total_amount+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
           total_discount+=parseFloat(accounting.unformat($(oTableItems.discount,$(this)).find('input.numeric').val()));
-          total_net_vat_sale+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
-          total_vat_input+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
-          //total_vat_input+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
-          total_non_vat_sale+=parseFloat(accounting.unformat($(oTableItems.non_vat_sales,$(this)).find('input.numeric').val()));
+          total_vatable_sales+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
+          total_vat_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
+          total_vat_exempt_sales+=parseFloat(accounting.unformat($(oTableItems.non_vat_sales,$(this)).find('input.numeric').val()));
+          total_zero_vat_sales+=parseFloat(accounting.unformat($(oTableItems.zero_vat,$(this)).find('input.numeric').val()));
+
         });
 
-        total_computed_vat_sale = total_net_vat_sale + total_vat_input;
-
         tbl_summary.find(oTableDetails.discount).html(accounting.formatNumber(total_discount,2));
-        tbl_summary.find(oTableDetails.before_tax).html(accounting.formatNumber(total_net_vat_sale,2));
-        tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_vat_input,2));
-        tbl_summary.find(oTableDetails.after_tax).html(accounting.formatNumber(total_computed_vat_sale,2));
-        tbl_summary.find(oTableDetails.summary_non_vat_sales).html(accounting.formatNumber(total_non_vat_sale,2));
+
+        tbl_summary.find(oTableDetails.vatable_sales).html(accounting.formatNumber(total_vatable_sales,2));
+        tbl_summary.find(oTableDetails.vat_amount).html(accounting.formatNumber(total_vat_amount,2));
+        tbl_summary.find(oTableDetails.vat_exempt_sales).html(accounting.formatNumber(total_vat_exempt_sales,2));
+        tbl_summary.find(oTableDetails.zero_vat_sales).html(accounting.formatNumber(total_zero_vat_sales,2));
 
         $('#amountdue').val(accounting.formatNumber(total_amount,2));
         $('#tdiscount').val(accounting.formatNumber(total_discount,2));
@@ -2231,7 +2258,6 @@
 
       var cashinput = $(".totalpymntmthd").val();
       var cshinp = cashinput.replace(/,/g, "");
-      alert(cashinput);
 			synchronizeFields();
 
 			if(amountdue==0){
@@ -2441,12 +2467,13 @@
         _data.push({name : "gc_code" ,value : $('#gc_code').val()});
         _data.push({name : "gc_branch" ,value : $('#gc_branch').val()});
         _data.push({name : "gc_number" ,value : $('#gc_no').val()});
+
         var tbl_summary=$('#tbl_purchase_summary');
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
-        _data.push({name : "summary_before_tax", value :tbl_summary.find(oTableDetails.before_tax).text()});
-        _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
-        _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
-        _data.push({name : "summary_non_vat_sales", value : tbl_summary.find(oTableDetails.summary_non_vat_sales).text()});
+        _data.push({name : "summary_vatable_sales", value :tbl_summary.find(oTableDetails.vatable_sales).text()});
+        _data.push({name : "summary_vat_amount", value : tbl_summary.find(oTableDetails.vat_amount).text()});
+        _data.push({name : "summary_vat_exempt_sales", value : tbl_summary.find(oTableDetails.vat_exempt_sales).text()});
+        _data.push({name : "summary_zero_vat_sales", value : tbl_summary.find(oTableDetails.zero_vat_sales).text()});
 
         return $.ajax({
             "dataType":"json",
@@ -3168,9 +3195,16 @@
 
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(TotalSeniorCitizenDiscount).toFixed(2));
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(nvs,2)); // line total amount
+
         $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
         $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-        $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //non vat sales
+
+        if (tax_rate != 0){
+          $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //vat exempt sales ## Product Vatted
+        }else{
+          $(oTableItems.zero_vat,row).find('input.numeric').val(nvs); //vat exempt sales ## Product Non-Vatted
+        }
+
         $(oTableItems.tax,row).find('input.numeric').val(0.00); //new tax
 
         row.find(oTableItems.disc_status).find('.disc_stat').val(1);
@@ -3211,7 +3245,7 @@
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(computeTotalwdisc,2)); // line total amount
         $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
         $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
-        $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //non vat sales
+        //$(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //non vat sales
       }
 
       reComputeTotal();
@@ -3233,15 +3267,18 @@
           var net_vat=0;
           var vat_input=0;
           var n_vat_sls = 0;
+          var zero_vat_sls = 0;
 
           if (tax_rate != "0.00"){
             net_vat=(total/tax_rate);
             vat_input=total-net_vat;
             n_vat_sls=0;
+            zero_vat_sls = 0;
           }else{
             net_vat=0;
             vat_input=0;
-            n_vat_sls=total;
+            n_vat_sls=0;
+            zero_vat_sls = total;
           }
 
 			//Use dataArray here
@@ -3255,11 +3292,13 @@
                     pos_tax_rate : data.tax_rate,
                     pos_price : data.sale_cost,
                     pos_discount : "0.00",
+                    disc_status: "0",
                     tax_type_id : null,
                     pos_line_total_price : total,
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount: vat_input,
-                    non_vat_sales: n_vat_sls
+                    non_vat_sales: n_vat_sls,
+                    zero_vat : zero_vat_sls
                 }));
         reInitializeNumeric();
 				reComputeTotal();
@@ -3302,15 +3341,18 @@
                 var net_vat=0;
                 var vat_input=0;
                 var n_vat_sls = 0;
+                var zero_vat_sls = 0;
 
                 if (tax_rate != "0.00"){
                   net_vat=(total/tax_rate);
                   vat_input=total-net_vat;
                   n_vat_sls=0;
+                  zero_vat_sls = 0;
                 }else{
                   net_vat=0;
                   vat_input=0;
-                  n_vat_sls=total;
+                  n_vat_sls=0;
+                  zero_vat_sls = total;
                 }
       //Use dataArray here
           $('#tbl_items > tbody').append(newRowItem({
@@ -3323,11 +3365,13 @@
                     pos_tax_rate : data.tax_rate,
                     pos_price : data.sale_cost,
                     pos_discount : "0.00",
+                    disc_status: "0",
                     tax_type_id : null,
                     pos_line_total_price : total,
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount:vat_input,
-                    non_vat_sales: n_vat_sls
+                    non_vat_sales: n_vat_sls,
+                    zero_vat: zero_vat_sls
                 }));
         reInitializeNumeric();
         reComputeTotal();
