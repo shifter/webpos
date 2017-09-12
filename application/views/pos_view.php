@@ -338,22 +338,9 @@
                 <div class="modal-body mb-tbl-product">
                     <div class="container-fluid">
                         <div class="table-responsive" id="div_product_list">
-                        <input type="text" class="form-control inp-search-pro">
-                            <table id="thead-fixed">
-                              <thead class="thead-modal"> 
-                                    <tr>
-                                        <th class="th-modal-first" width="22%">PLU</th>
-                                        <th class="th-modal" width="35%">Description</th>
-                                        <th class="th-modal" width="8%">SRP</th>
-                                        <th class="th-modal" width="10%">Tax Value</th>
-                                        <th class="th-modal">On hand</th>
-                                        <th class="th-modal-last">Action</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                            <div class="scroll-div-pro">
+                            <div class="">
                                 <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead class="thead-modal" hidden> 
+                                    <thead class="thead-modal"> 
                                         <tr>
                                             <th>PLU</th>
                                             <th>Description</th>
@@ -1042,7 +1029,7 @@
 
         $(document).keydown(function(event){
             if(event.keyCode == 123){
-              return false;  //Prevent from F12
+              //return false;  //Prevent from F12
           }
           else if(event.ctrlKey && event.shiftKey && event.keyCode == 73){
               return false;  //Prevent from ctrl+shift+i
@@ -1055,6 +1042,10 @@
           }
           else if(event.ctrlKey && event.keyCode == 83){
               return false;  //Prevent from ctrl+s
+          }
+          else if(event.keyCode == 113){
+            alert();
+              $('#txtsearch').focus();  //Prevent from ctrl+s
           }
         });
 
@@ -2238,9 +2229,9 @@
 			var samountdue = $("#amountdue").val();
 			var amountdue = samountdue.replace(/,/g, "");
 
-      var cashinput = $("#cash").val();
+      var cashinput = $(".totalpymntmthd").val();
       var cshinp = cashinput.replace(/,/g, "");
-
+      alert(cashinput);
 			synchronizeFields();
 
 			if(amountdue==0){
@@ -2265,7 +2256,7 @@
 
     $('#cash').keypress(function(evt){
             if(evt.keyCode==13){
-              var scash = $("#cash").val();
+              var scash = $(".totalpymntmthd").val();
               var samountdue = $("#amountdue").val();
 
               var amountdue = samountdue.replace(/,/g, "");
@@ -2369,7 +2360,7 @@
   			// $("#post_card_type").val(atypeofcard);
   			// $("#post_card_holder").val(acardholder);
   			// $("#post_card_number").val(acardnum);
-  			// $("#post_card_apnumber").val(aapprovalnum);
+  			// $("#pox`st_card_apnumber").val(aapprovalnum);
   			// $("#post_card_expdate").val(acardexpiry);
 
   			// var achargeto = $("#chargeto").val();
@@ -2425,14 +2416,31 @@
     var createPurchaseOrder=function(){
         var _data=$('#frm_items').serializeArray();
         _data.push({name : "post_amountdue" ,value : $('#amountdue').val()});
-        _data.push({name : "post_tendered" ,value : $('#tendered').val()});
-        _data.push({name : "post_change" ,value : $('#change').val()});
+        _data.push({name : "post_tendered" ,value : $('.totalpymntmthd').val()});
+        _data.push({name : "post_change" ,value : $('#chngedpymnt').val()});
         _data.push({name : "seniorTotalDiscount" ,value : $('#seniorTotalDiscount').val()});
         _data.push({name : "seniorID" ,value : $('#seniorID').val()});
         _data.push({name : "seniorName" ,value : $('#seniorName').val()});
         _data.push({name : "seniorAddress" ,value : $('#seniorAddress').val()});
         _data.push({name : "customer_code" ,value : $('#customers').val()});
-
+        _data.push({name : "cash_amount" ,value : $('.csh').val()});
+        _data.push({name : "check_amount" ,value : $('.chq').val()});
+        _data.push({name : "card_amount" ,value : $('.crd').val()});
+        _data.push({name : "charge_amount" ,value : $('.chrge').val()});
+        _data.push({name : "gc_amount" ,value : $('.gc').val()});
+        _data.push({name : "check_bank" ,value : $('#cheque_bank').val()});
+        _data.push({name : "check_address" ,value : $('#cheque_branch').val()});
+        _data.push({name : "check_number" ,value : $('#cheque_no').val()});
+        _data.push({name : "card_type" ,value : $('#card_code').val()});
+        _data.push({name : "card_holder" ,value : $('#card_holder_name').val()});
+        _data.push({name : "card_number" ,value : $('#card_no').val()});
+        _data.push({name : "approval_number" ,value : $('#card_approval').val()});
+        _data.push({name : "charge_to" ,value : $('#charge_code').val()});
+        _data.push({name : "charge_branch" ,value : $('#charge_branch').val()});
+        _data.push({name : "charge_reference" ,value : $('#charge_reference').val()});
+        _data.push({name : "gc_code" ,value : $('#gc_code').val()});
+        _data.push({name : "gc_branch" ,value : $('#gc_branch').val()});
+        _data.push({name : "gc_number" ,value : $('#gc_no').val()});
         var tbl_summary=$('#tbl_purchase_summary');
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_tax", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -2677,7 +2685,9 @@
             "dom": '<"toolbar">frtip', 
             "bPaginate": false,
             "bInfo" : false,            
-            "bFilter": false,
+            "bFilter": true,
+            "scrollY": "300px",
+            "scrollCollapse": true,
              "ajax" : "Products/transaction/list",
              "bDestroy": true,
          			"language": {
