@@ -89,28 +89,32 @@ class Purchases extends CORE_Controller
 
             //***************************************create new purchase invoice************************************************
             case 'create':
-          // date_default_timezone_get();
+          			// date_default_timezone_get();
 					$today = date("Y-m-d");
-          // $fulldate = date('Y-m-d H:i:s');
+          			// $fulldate = date('Y-m-d H:i:s');
 					$pos_invoice_summary=$this->Invoice_model;
 					$m_products=$this->Products_model;
 
 					$summary_discount=$this->input->post('summary_discount',TRUE);
-			        $summary_before_tax=$this->input->post('summary_before_tax',TRUE);
-			        $summary_tax_amount=$this->input->post('summary_tax_amount',TRUE);
-			        $summary_after_tax=$this->input->post('summary_after_tax',TRUE);
-			        $summary_non_vat_sales=$this->input->post('summary_non_vat_sales',TRUE);
+			        $summary_vatable_sales=$this->input->post('summary_vatable_sales',TRUE);
+			        $summary_vat_amount=$this->input->post('summary_vat_amount',TRUE);
+
+			        $summary_vat_exempt_sales=$this->input->post('summary_vat_exempt_sales',TRUE);
+			        $summary_zero_vat_sales=$this->input->post('summary_zero_vat_sales',TRUE);
+
 					$customers=$this->input->post('customer_code',TRUE);
 					$session_id=$this->input->post('session_id',TRUE);
 
 					$pos_invoice_summary->totaldiscount=$this->get_numeric_value($summary_discount);
-			        $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
-			        $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
-			        $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
-		          	$pos_invoice_summary->non_vat_sales=$this->get_numeric_value($summary_non_vat_sales);
+
+			        $pos_invoice_summary->vatable_sales=$this->get_numeric_value($summary_vatable_sales);
+			        $pos_invoice_summary->vat_amount=$this->get_numeric_value($summary_vat_amount);
+			        $pos_invoice_summary->zero_vat_sales=$this->get_numeric_value($summary_zero_vat_sales);
+		         	$pos_invoice_summary->vat_exempt_sales=$this->get_numeric_value($summary_vat_exempt_sales);
+
 					$pos_invoice_summary->customer_code=$customers;
 					$pos_invoice_summary->transaction_date=$today;
-          //$pos_invoice_summary->transaction_timestamp=$fulldate;
+          			//$pos_invoice_summary->transaction_timestamp=$fulldate;
 					$pos_invoice_summary->user_id=$this->session->user_id;
 					$pos_invoice_summary->save();
 
@@ -118,13 +122,17 @@ class Purchases extends CORE_Controller
           			$m_po_items=$this->Purchase_items_model;
 
 			        $product_id=$this->input->post('product_id',TRUE);
+
+
 			        $pos_qty=$this->input->post('pos_qty',TRUE);
 			        $pos_price=$this->input->post('pos_price',TRUE);
+
+
 			        $pos_discount=$this->input->post('pos_discount',TRUE);
 			        $tax_rate=$this->input->post('pos_tax_rate',TRUE);
 			        $tax_amount=$this->input->post('pos_tax_amount',TRUE);
-          //$total = $pos_price + $pos_qty;
-          //$total=$this->input->post('pos_line_total_price',TRUE);
+			        //$total = $pos_price + $pos_qty;
+			        //$total=$this->input->post('pos_line_total_price',TRUE);
 					$i=0;
 					$a="+";
 						// New function for insert

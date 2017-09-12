@@ -336,7 +336,7 @@
                             </div>
                             <div id="right3">
                                 <?php echo $delivery_info->amount_due; ?><br>
-                                <?php echo $delivery_info->tendered; ?><br>
+                                <?php echo number_format($delivery_info->cash_amount,2); ?><br>
                                 <?php echo $delivery_info->change; ?><br>
                             </div>
                         </div>
@@ -362,26 +362,155 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div id="left5">
-                                Net&nbsp;Vat&nbsp;Sales&nbsp;<br>
-                                Vat&nbsp;Sales&nbsp;<br>
-                                12%&nbsp;Vat&nbsp;<br>
-                                Non-Vat&nbsp;Sales&nbsp;<br>
+                                Vatable Sales<br>
+                                Vat Amount<br>
+                                Vat Exempt Sales<br>
+                                Zero Rated Sales<br>
                             </div>
                             <div id="center5">
-                                . . . . . . . . . . . . . . <br>
-                                . . . . . . . . . . . . . . <br>
-                                . . . . . . . . . . . . . . <br>
-                                . . . . . . . . . . . . . . <br>
+                                . . . . . . . . <br>
+                                . . . . . . . . <br>
+                                . . . . . . . . <br>
+                                . . . . . . . . <br>
                             </div>
                             <div id="right5">
-                                <?php echo number_format($delivery_info->before_tax,2); ?><br>
-                                <?php echo number_format($delivery_info->total_after_tax,2); ?><br>
-                                <?php echo number_format($delivery_info->total_tax_amount,2); ?><br>
-                                <?php echo number_format($delivery_info->non_vat_sales,2); ?><br><br>
+                                <?php echo number_format($delivery_info->vatable_sales,2); ?><br>
+                                <?php echo number_format($delivery_info->vat_amount,2); ?><br>
+                                <?php echo number_format($delivery_info->vat_exempt_sales,2); ?><br>
+                                <?php echo number_format($delivery_info->zero_vat_sales,2); ?><br><br>
                             </div>
                         </div>
                     </div><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <div class="row">
+                    <?php if($delivery_info->card_amount != "0"){?>
+                        <div class="row" style="padding-top: 5px !important;">
+                          <div class="col-md-12">
+                                <p>CARD PAYMENT</p>
+                                <hr style="border: 1px dashed gray !important;">
+                                <table>
+                                    <tr>
+                                        <td>CARD AMNT</td>
+                                        <td>:</td>
+                                        <td><?php echo number_format($delivery_info->card_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CARD</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->card_name; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAME</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->card_holder; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>APPR NO.</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->approval_number; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CARD NO.</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->card_number; ?></td>
+                                    </tr>
+                                </table>
+                                <hr style="border: 1px dashed gray !important;">
+                          </div>
+                    </div>
+                    <?php }?>
+                    <?php if($delivery_info->charge_amount != "0"){?>
+                        <div class="row" style="padding-top: 5px !important;">
+                          <div class="col-md-12">
+                                <p>CHARGE PAYMENT</p>
+                                <hr style="border: 1px dashed gray !important;">
+                                <table>
+                                    <tr>
+                                        <td>CHARGE AMNT</td>
+                                        <td>:</td>
+                                        <td><?php echo number_format($delivery_info->charge_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CHARGE TO</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->charges_desc; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ADDRESS</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->charge_branch; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>REF NO.</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->charge_reference; ?></td>
+                                    </tr>
+                                </table>
+                                <hr style="border: 1px dashed gray !important;">
+                          </div>
+                    </div>
+                    <?php }?>                    
+                    <?php if($delivery_info->gc_amount != "0"){?>
+                        <div class="row" style="padding-top: 5px !important;">
+                          <div class="col-md-12">
+                                <p>GIFT CERTIFICATE</p>
+                                <hr style="border: 1px dashed gray !important;">
+                                <table>
+                                    <tr>
+                                        <td>GIFT AMNT</td>
+                                        <td>:</td>
+                                        <td><?php echo number_format($delivery_info->gc_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAME</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->giftcard_name; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ADDRESS</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->gc_branch; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>GIFT NO.</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->gc_number; ?></td>
+                                    </tr>
+                                </table>
+                                <hr style="border: 1px dashed gray !important;">
+                          </div>
+                    </div>
+                    <?php }?>
+                    <?php if($delivery_info->check_amount != "0"){?>
+                        <div class="row" style="padding-top: 5px !important;">
+                          <div class="col-md-12">
+                                <p>CHEQUE</p>
+                                <hr style="border: 1px dashed gray !important;">
+                                <table>
+                                    <tr>
+                                        <td>CHEQUE AMNT</td>
+                                        <td>:</td>
+                                        <td><?php echo number_format($delivery_info->check_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>NAME</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->bank_name; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ADDRESS</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->check_address; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CHEQUE NO.</td>
+                                        <td>:</td>
+                                        <td><?php echo $delivery_info->check_number; ?></td>
+                                    </tr>
+                                </table>
+                                <hr style="border: 1px dashed gray !important;">
+                          </div>
+                    </div>
+                    <?php }?>
+                    <div class="row" style="padding-bottom: 5px !important; padding-top: 20px !important;">
                       <div class="col-md-12">
                           <?php foreach ($sc_info as $sc_info) {?>
                             <p>Senior Citizen Discount</p>

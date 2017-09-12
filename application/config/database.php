@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'www.jdevhr.com',
+	'hostname' => 'www.jdevhr.com:3306',
 	'username' => 'jason',
 	'password' => 'jason',
 	'database' => 'webposretail',

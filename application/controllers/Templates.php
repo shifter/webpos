@@ -11,9 +11,9 @@ class Templates extends CORE_Controller {
         $this->load->model('Delivery_invoice_item_model');
         $this->load->model('Company_model');
         $this->load->model('Pos_payment_model');
-    		$this->load->model('Invoice_model');
-    		$this->load->model('Products_model');
-    		$this->load->model('Users_model');
+		$this->load->model('Invoice_model');
+		$this->load->model('Products_model');
+		$this->load->model('Users_model');
         $this->load->model('Issuance_item_model');
         $this->load->model('Issuance_model');
         $this->load->model('Adjustment_item_model');
@@ -233,12 +233,17 @@ class Templates extends CORE_Controller {
 
                         $info=$m_invoice->get_list(
                             $filter_value,
-                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,pos_invoice.tax_amount as total_tax_amount,customers.*,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier',
+                            'pos_payment.*,pos_invoice.*,pos_invoice_items.*,pos_payment_details.*,customers.*,user_accounts.*,CONCAT(user_fname, " ", user_mname, " ", user_lname) AS cashier, cards.card_name, banks.bank_name, charges.charges_desc, giftcards.giftcard_name',
                                         array(
                                             array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
                                             array('customers','customers.customer_code=pos_invoice.customer_code','left'),
                                             array('user_accounts','user_accounts.user_id=pos_invoice.user_id','left'),
-                                            array('pos_invoice_items','pos_invoice_items.pos_invoice_id=pos_payment.pos_invoice_id','left')
+                                            array('pos_invoice_items','pos_invoice_items.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+                                            array('pos_payment_details','pos_payment_details.pos_payment_id=pos_payment.pos_payment_id','left'),
+                                            array('cards','cards.card_code=pos_payment_details.card_type','left'),
+                                            array('banks','banks.bank_code=pos_payment_details.check_bank','left'),
+                                            array('charges','charges.charges_code=pos_payment_details.charge_to','left'),
+                                            array('giftcards','giftcards.giftcard_code=pos_payment_details.gc_code','left')
                                         )
                         );
 
@@ -250,7 +255,6 @@ class Templates extends CORE_Controller {
 
                         $result_sc_info=$m_snrcitizen->get_receipt($pos_paymt_id);
                         $data['pos_invoice_item']=$m_invoice_items->get_list(
-
             							array('pos_invoice_items.pos_invoice_id'=>$invoice_id),
             								'pos_invoice_items.*,products.product_desc',
             							array(
