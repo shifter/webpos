@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html class="pos-body">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,1391 +7,964 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo $_def_css_files ?>
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <!--/twitter typehead-->
   <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
-  <style>
-
-      .custom_frame{
-          border: 1px solid lightgray;
-          -webkit-border-radius: 3px;
-          -moz-border-radius: 3px;
-          border-radius: 3px;
-      }
-
-      .numeric{
-          text-align: right;
-      }
-
-      .modal-backdrop
-      {
-          opacity:0.01 !important;
-      }
-
-      html {
-        zoom: 95%;
-      }
-      .swal-top{
-        border-top: 1px solid #d50000;
-        border-bottom: 1px solid #d50000;
-      }
-      .swal-body{
-
-      }
-      .void-notif-class{
-        font-size: 12pt !important;
-        font-weight: bold !important;
-      }
-      html body{
-          -webkit-touch-callout: none; /* iOS Safari */
-          -webkit-user-select: none; /* Safari */
-          -khtml-user-select: none; /* Konqueror HTML */
-          -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-          user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-      }
-      #tbl_items input{
-        cursor: pointer;
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-      }
-      #amountduepymt, #chngedpymnt{
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-      }
-      .pymntmthdtbl input{
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-        width: 100%;
-        border: 1px solid #FAFAFA;
-      }
-
-      #cash:focus{
-        outline:none !important;
-      }
-      #txtsearch:focus{
-        outline:none !important;
-      }
-      .pymntmthdtbl td{
-        border-bottom: 1px solid #CFD8DC !important;
-      }
-      .pymntmthd{
-        text-align: right;
-        font-size: 15pt !important;
-      }
-      .smalltable input{
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-      }
-      #tbl_discounts{
-        font-size: 13pt !important;
-      }
-      #modal-senior{
-        width:400px;
-        margin-top: 14% !important;
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding-box;
-        background-clip: padding-box;
-      }
-      .modal-dialog{
-        border: 1px solid rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding-box;
-        background-clip: padding-box;
-      }
-
-      .twitter-typeahead, .tt-hint, .tt-input, .tt-dropdown-menu { width: 100%; }
-      .btn-main-pos{
-        text-transform: capitalize; 
-        font-weight: bold; 
-        height: 80px; 
-        width: 120px; 
-        background-color: #ECEFF1; 
-        color: #263238;
-      }
-      .btn-main-pos:hover{
-        background-color: #CFD8DC;
-      }
-      .btn-ins-main{
-        margin: 10px
-      }
-      .btn-hr-main{
-        margin: 0 !important; 
-        padding: 0 !important; 
-        border-top: 1px solid #CFD8DC;
-      }
-      #tbl_card, #tbl_gc, #tbl_charge, #tbl_cheque tbody tr{
-        cursor: pointer;
-      }
-
-  </style>
 </head>
 <body>
-<!-- <div class="wrapper"> -->
-  <!-- Content Wrapper. Contains page content -->
   <div>
-  <?php echo $_top_navigation;?>
-      <!-- Main content -->
-    <section class="content">
-        <div class="box">
-            <!-- /.box-header -->
-            <div id="invoice_fields">
-              <div class="panel panel-default">
-                <div class="panel-body" style="padding:5px;">
-                      <div class="col-md-9 custom_frame"><br />
-                          <label class="control-label boldlabel" ><strong>Enter Barcode or Search Item :</strong></label>
-                          <div id="custom-templates">
-                              <label class="control-label"><strong>Quantity:</strong></label><input style="border:none;background-color:white !important;" type="text" id="tempcode" disabled>
-                              <input class="typeahead" id="txtsearch" style="border-style: inset !important; border:4px solid #607D8B !important; border-radius: 2px !important; height: 40px; font-size: 17pt !important;" type="text">
-                          </div><br />
+    <?php echo $_top_navigation;?>
+        <!-- Main content -->
+      <section class="content pos-content">
+          <div class="box" >
+              <!-- /.box-header -->
+              <div id="invoice_fields">
+                <div class="panel panel-default">
+                  <div class="panel-body panel-item-cart">
+                    <div class="col-md-9 custom_frame"><br />
+                      <label class="control-label boldlabel" ><strong>Enter Barcode or Search Item :</strong></label>
+                        <div id="custom-templates">
+                          <label class="control-label"><strong>Quantity:</strong></label><input type="text" id="tempcode" disabled>
+                            <input class="typeahead" id="txtsearch" type="text" >
+                              </div><br />
+                                <form id="frm_items">
+                                    <div class="table-responsive div-item-cart">
+                                      <table id="tbl_items" class="table table-striped table-bordered table-item-cart" cellspacing="0" width="100%">
+                                        <thead class="thead-item">
+                                          <tr>
+                                            <th width="40%" class="th-item">Item</th>
+                                            <th width="10%" class="th-qty">Qty</th>
+                                            <th width="12%" class="th-right-items">SRP</th>
+                                            <th width="12%" class="th-right-items">Discount</th>
+                                            <th hidden>T.D</th>
+                                            <th hidden>Tax %</th>
+                                            <th width="12%" class="th-right-items">Total</th>
+                                            <th hidden>V.I</th>
+                                            <th hidden>N.V</th>
+                                            <th hidden>Item ID</td>
+                                            <th hidden>Item Code</td>
+                                            <th hidden>Disc Status</td>
+                                            <th hidden>Non Vat Sales</td>
+                                            <th hidden>Rate</td>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-lg-3 col-lg-offset-9">
+                                        <table id="tbl_purchase_summary" class="table invoice-total" hidden>
+                                            <tbody>
+                                            <tr>
+                                              <td class="black">Discount :</td>
+                                              <td align="right" class="black">0.00</td>
+                                            </tr>
+                                            <tr>
+                                              <td class="black">Total before Tax :</td>
+                                              <td align="right" class="black">0.00</td>
+                                            </tr>
+                                            <tr>
+                                              <td class="black">Tax :</td>
+                                              <td align="right" class="black">0.00</td>
+                                            </tr>
+                                            <tr>
+                                              <td ><strong class="boldlabel">Total After Tax :</strong></td>
+                                              <td class="green" align="right"><b>0.00</b></td>
+                                            </tr>
+                                            <tr>
+                                              <td ><strong class="boldlabel">Non Vat Sales :</strong></td>
+                                              <td class="green" align="right"><b>0.00</b></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 custom_frame">
+                              <div class="col-md-12 amount-due-right">
+                                <div class="row panel-amt-due">
+                                  <h3 class="amt-due-lbl">Amount Due</h3>
+                                    <hr class="hr-amt-due">
+                                      <input class="amounts amt-due" type="text" name="post_amountdue" value="0.00" id="amountdue" disabled>
+                                </div>
+                                <hr class="custom-hr">
+                                <div class="row panel-discount-due">
+                                  <h3 class="disc-lbl">Discount</h3>
+                                    <hr class="hr-disc">
+                                      <input class="amounts disc-inp" type="text" name="post_tdiscount" value="0.00" id="tdiscount" disabled>
+                                </div>
 
-                          <form id="frm_items">
-                              <div class="table-responsive" style="overflow-x: auto;overflow-y: scroll; height: 469px;">
-                                  <table id="tbl_items" class="table table-striped table-bordered " cellspacing="0" width="100%" style="border-collapse: collapse !important;">
-                                  <thead style="background-color: #DCEDC8 !important;">
-                                  <tr>
-                                    <th width="40%" style="border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-left: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Item</th><!-- Item Description -->
-                                    <th width="10%" style="border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;text-align: center !important;border-right: 1px solid #90A4AE !important;">Qty</th><!-- Item Quantity -->
-                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">SRP</th><!-- Item Cost -->
-                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Discount</th><!-- Item Discount -->
-                                    <th style="display: none;">T.D</th> <!-- total discount -->
-                                    <th style="display: none;">Tax %</th><!-- Item tax -->
-                                    <th width="12%" style="text-align: right;border-bottom: 1px solid #90A4AE !important;border-top: 1px solid #90A4AE !important;border-right: 1px solid #90A4AE !important;">Total</th><!-- Line Total -->
-                                    <th style="display: none;">V.I</th> <!-- vat input -->
-                                    <th style="display: none;">N.V</th> <!-- net of vat -->
-                                    <th style="display: none;">Item ID</td><!-- product id -->
-                                    <th style="display: none;">Item Code</td><!-- Item Code -->
-                                    <th style="display: none;">Disc Status</td><!-- Discount Status -->
-                                    <th style="display: none;">Non Vat Sales</td><!-- Non-vat-sales -->
-                                    <th style="display: none;">Rate</td><!-- Item rate -->
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-
-                                  </tbody>
-                              </table>
+                              <div class="row">
+                                <label for="Customer"><strong>Customer:</strong></label>
+                               <div class="input-group">
+                                 <select id="customers" name="customers_name" class="form-control" >
+                                   <option value="0">Walk-In</option>
+                                     <?php
+                                     foreach($customers as $row){
+                                      echo '<option value="'.$row->customer_code.'">'.$row->customer_name.'</option>';
+                                       }
+                                     ?>
+                                 </select>
+                                 <span class="input-group-btn">
+                                 <button class="btn btn-default" id="btn_customer" type="button"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
+                                 </span>
+                               </div>
                               </div>
-                          </form>
-                          <div class="row">
-                              <div class="col-lg-3 col-lg-offset-9">
-                                  <table id="tbl_purchase_summary" class="table invoice-total" style="display: none;">
-                                      <tbody>
-                                      <tr>
-                                          <td class="black">Discount :</td>
-                                          <td align="right" class="black">0.00</td>
-                                      </tr>
-                                      <tr>
-                                          <td class="black">Total before Tax :</td>
-                                          <td align="right" class="black">0.00</td>
-                                      </tr>
-                                      <tr>
-                                          <td class="black">Tax :</td>
-                                          <td align="right" class="black">0.00</td>
-                                      </tr>
-                                      <tr>
-                                          <td ><strong class="boldlabel">Total After Tax :</strong></td>
-                                          <td class="green" align="right"><b>0.00</b></td>
-                                      </tr>
-                                      <tr>
-                                          <td ><strong class="boldlabel">Non Vat Sales :</strong></td>
-                                          <td class="green" align="right"><b>0.00</b></td>
-                                      </tr>
-                                      </tbody>
-                                  </table>
+                              <div class="row">
+                                <button class="btn" id="btn_payment">Alt P - <strong>Payment</strong></button>
                               </div>
+                            </div>
+                            <div class="row">
+                              <img src="assets/img/jdev-logo.png" class="img-logo-pos" draggable="false">
+                            </div>
                           </div>
                       </div>
-                      <div class="col-md-3 custom_frame" style="padding-bottom: 20px !important;">
-                        <div class="col-md-12" style="margin-top:20px;">
-                          <div class="row" style="background-color:#4CAF50;border-radius:4px; padding: 10px;">
-                            <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Amount Due</h3>
-                            <hr style="border-top: 1px solid #CFD8DC !important; margin: 0px !important;margin-bottom: 10px !important;">
-                            <input class="amounts" type="text" style="color: #DCEDC8 !important;" name="post_amountdue" value="0.00" id="amountdue" disabled>
-                          </div>
-                          <hr style="margin:0 !important;">
-                          <div class="row" style="background-color:#607D8B;border-radius:5px;padding: 10px;margin-top: 2px !important;">
-                            <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Discount</h3>
-                            <hr style="border-top: 1px solid #CFD8DC !important; margin: 0px !important;margin-bottom: 10px !important;">
-                            <input class="amounts" type="text" style="color: #DCEDC8 !important;" name="post_tendered" value="0.00" id="tendered" disabled>
-                          </div>
-
-
-
- <!--                          <hr style="margin:0;">
-                          <div class="row" style="background-color:black;border-radius:5px;">
-                            <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Tendered</h3>
-                            <input class="amounts" type="text" name="post_tendered" value="0.00" id="tendered" disabled>
-                          </div>
-                          <hr style="margin:0;">
-                          <div class="row" style="background-color:black;border-radius:5px;">
-                            <h3 style="word-wrap:break-word;margin:5px;color:white;font-weight:bold;">Change</h3>
-                            <input class="amounts" type="text" name="post_change" value="0.00" id="change" disabled>
-                          </div> -->
-                          <!-- <div class="row">
-                            <h4 style="word-wrap:break-word;margin:5px;font-weight:bold;">Payment</h4>
-                            <table class="table table-responsive table-striped table-bordered smalltable">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Method</th>
-                                  <th>Amount</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Cash</td>
-      														<td><input type="text" class="noborder inputsmall" id="cashamount" name="post_cashamount" value="0.00" readonly></td>
-      														<td><center><span class="pointer"><i  id="removecash" class="fa fa-trash-o"></i></span></center>
-                                </tr>
-                                <tr>
-      														<td>2</td>
-      														<td>Check</td>
-      														<td><input type="text" class="noborder inputsmall" id="checkamount" name="post_checkamount" value="0.00" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_check_bank" name="post_check_bank" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_check_address" name="post_check_address" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_check_number" name="post_check_number" value="0.00" readonly></td>
-      														<td hidden><input type="date" class="noborder" id="post_check_date" name="post_check_date" value="" readonly></td>
-      														<td><center><span class="pointer" ><i id="removecheck" class="fa fa-trash-o"></i></span></center>
-      														</td>
-      													</tr>
-      													<tr>
-      														<td>3</td>
-      														<td>Card</td>
-      														<td><input type="text" class="noborder inputsmall" id="cardamount" name="post_cardamount" value="0.00" readonly></td>
-      														<td><center><span class="pointer" ><i id="removecard" class="fa fa-trash-o"></i></span></center>
-      														<td hidden><input type="text" class="noborder" id="post_card_type" name="post_card_type" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_card_holder" name="post_card_holder" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_card_number" name="post_card_number" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_card_apnumber" name="post_card_apnumber" value="" readonly></td>
-      														<td hidden><input type="date" class="noborder" id="post_card_expdate" name="post_card_expdate" value="" readonly></td>
-
-      														</td>
-      													</tr>
-      													<tr>
-      														<td>4</td>
-      														<td>Charge</td>
-      														<td><input type="text" class="noborder inputsmall" id="chargeamount" name="post_chargeamount" value="0.00" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_chargeto" name="post_chargeto" value="" readonly></td>
-      														<td hidden><input type="text" class="noborder" id="post_charge_remarks" name="post_charge_remarks" value="" readonly></td>
-      														<td hidden><input type="date" class="noborder" id="post_charge_date" name="post_charge_date" value="" readonly></td>
-      														<td><center><span class="pointer" ><i id="removecharge" class="fa fa-trash-o"></i></span></center>
-      														</td>
-      													</tr>
-                              </tbody>
-                            </table>
-                          </div> -->
-                          <div class="row">
-                            <label for="Customer" style="font-weight:bold;">Customer:</label>
-                           <div class="input-group">
-                           <select id="customers" name="customers_name" class="form-control" >
-                             <option value="0">Walk-In</option>
-                               <?php
-                               foreach($customers as $row)
-                                 {
-                                     echo '<option value="'.$row->customer_code.'">'.$row->customer_name.'</option>';
-                                 }
-                               ?>
-                           </select>
-                             <span class="input-group-btn">
-                             <button class="btn btn-default" id="btn_customer" type="button"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></button>
-                             </span>
-                           </div>
-                          </div>
-                          <div class="row">
-                            <button class="btn" style="margin-top:5px;width:100%; padding: 10px; background-color: #ECEFF1 !important; font-size: 12pt !important; color:#212121 !important; border: 1px solid #455A64 !important;" id="btn_payment">Alt P - <strong>Payment</strong></button>
-                            <!-- <button class="btn btn-success finalize" style="margin-top:5px;width:100%;margin-bottom:8px;">Finalize</button> -->
+                      <div class="panel-footer">
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <button id="btn_bcode" class="btn-main-pos">
+                                <div class="btn-ins-main">
+                                  <small>Alt + S </small>
+                                    <hr class="btn-hr-main">
+                                      <strong>Scan Barcode</strong>
+                                </div>
+                            </button>
+                            <button id="btn_browse" class="btn-main-pos">
+                                <div class="btn-ins-main">
+                                  <small> Alt + B </small>
+                                    <hr class="btn-hr-main">
+                                      <strong>Browse List </strong>
+                                </div>
+                            </button>
+                            <button id="btn_qty" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + Q </small>
+                                  <hr class="btn-hr-main">
+                                    <strong>Quantity</strong>
+                              </div>
+                            </button>
+                            <button id="btn_journal" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + J</small>
+                                  <hr class="btn-hr-main">
+                                    <strong>Journal</strong>
+                              </div>
+                            </button>
+                            <button id="btn_cancel" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + C </small>
+                                  <hr class="btn-hr-main">
+                                    <strong>Cancel</strong>
+                              </div>
+                            </button>
+                            <button id="btn_void" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + V </small>
+                                  <hr class="btn-hr-main">
+                                    <strong>Void</strong>
+                              </div>
+                            </button>
+                            <button id="btn_discount" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + T </small>
+                                  <hr class="btn-hr-main">
+                                    <strong>Discount</strong>
+                              </div>
+                            </button>
+                            <button id="btn_endbatch" class="btn-main-pos">
+                              <div class="btn-ins-main">
+                                <small>Alt + H </small>
+                                  <hr class="btn-hr-main">
+                                    <strong>End Batch</strong>
+                              </div>
+                            </button>
                           </div>
                         </div>
-                        <div class="row">
-                          <img src="assets/img/jdev-logo.png" style="margin-top: 20px !important; margin-left: 20px !important; width: 90% !important;" draggable="false" style="-moz-user-select: none;">
-                        </div>
-                      </div>
-              </div>
-              <div class="panel-footer">
-                  <div class="row">
-                      <div class="col-sm-12">
-                        <button id="btn_bcode" class="btn-main-pos">
-                            <div class="btn-ins-main">
-                              <small>Alt + S </small>
-                                <hr class="btn-hr-main">
-                                  <strong>Scan Barcode</strong>
-                            </div>
-                        </button>
-                        <button id="btn_browse" class="btn-main-pos">
-                            <div class="btn-ins-main">
-                              <small> Alt + B </small>
-                                <hr class="btn-hr-main">
-                                  <strong>Browse List </strong>
-                            </div>
-                        </button>
-                        <button id="btn_qty" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + Q </small>
-                              <hr class="btn-hr-main">
-                                <strong>Quantity</strong>
-                          </div>
-                        </button>
-                        <button id="btn_journal" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + J</small>
-                              <hr class="btn-hr-main">
-                                <strong>Journal</strong>
-                          </div>
-                        </button>
-                        <button id="btn_cancel" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + C </small>
-                              <hr class="btn-hr-main">
-                                <strong>Cancel</strong>
-                          </div>
-                        </button>
-                        <button id="btn_void" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + V </small>
-                              <hr class="btn-hr-main">
-                                <strong>Void</strong>
-                          </div>
-                        </button>
-                        <button id="btn_discount" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + T </small>
-                              <hr class="btn-hr-main">
-                                <strong>Discount</strong>
-                          </div>
-                        </button>
-                        <button id="btn_endbatch" class="btn-main-pos">
-                          <div class="btn-ins-main">
-                            <small>Alt + H </small>
-                              <hr class="btn-hr-main">
-                                <strong>End Batch</strong>
-                          </div>
-                        </button>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-    </section>
-    <!-- /.content -->
-  </div>
-  <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-lg" style="float:left !important;margin-left:18%; margin-top: 5% !important;">
-          <div class="modal-content"><!---content-->
-              <div class="modal-header" style="background-color:#2ecc71; border-bottom: 10px solid #ECEFF1 !important;">
-                  <h4 class="modal-title"><strong>PAYMENT</strong></h4>
-
-              </div>
-
-              <div class="modal-body">
-<!--       				  <ul class="nav nav-tabs">
-          				<li class="active"><a data-toggle="tab" href="#cash_tab">Cash</a></li>
-          				<li><a data-toggle="tab" href="#check_tab">Check</a></li>
-          				<li><a data-toggle="tab" href="#card_tab">Card</a></li>
-          				<li><a data-toggle="tab" href="#charge_tab">Charge</a></li>
-      				  </ul> -->
-				        </div>
-
-				  <div class="tab-content">
-				<div id="cash_tab" class="tab-pane fade in active">
-				<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="20">20</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="50">50</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="100">100</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="200">200</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="500">500</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class" value="1000">1000</button>
-						</div>
-            <div class="col-md-12" style="margin-bottom: 10px !important;"></div>
-
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="7">7</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="8">8</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="9">9</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="4">4</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="5">5</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="6">6</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="1">1</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="2">2</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="3">3</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_class2" value="0">0</button>
-						</div>
-						<div class="col-md-4" style="margin-bottom:2px;">
-							<button class="btn btncash clearcash" style="color: #e67e22 !important;">CLEAR</button>
-						</div>
-            <div class="col-md-4" style="margin-bottom:2px;">
-              <button class="btn btncash cancelpymnt" style="color: #e74c3c !important;">CANCEL</button>
-            </div>
-            <div class="col-md-12">
-            <button class="btn btncash finalize" style="background-color:#78909C !important; color: #ecf0f1 !important; height:60px !important; font-size: 18pt !important;">ENTER</button>
-            </div>
-					</div>
-					<div class="col-md-6">
-            <div>
-              <div>
-                <table class="pymntmthdtbl" style="width: 95%; font-size: 15pt !important;">
-                  <tr>
-                    <td colspan="2" style="border-bottom: 3px solid #90A4AE !important;">
-                      <small style="font-weight: bold;">Type of payment</small>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="60%">Alt 1 - Card</td>
-                    <td><input type="text" class="crd pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                  <tr>
-                    <td>Alt 2 - Cheque</td>
-                    <td><input type="text" class="chq pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                  <tr>
-                    <td>Alt 3 - GC</td>
-                    <td><input type="text" class="gc pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                  <tr>
-                    <td>Alt 4 - Charge</td>
-                    <td><input type="text" class="chrge pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                  <tr>
-                    <td>Alt 5 - Cash</td>
-                    <td><input type="text" class="csh pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                  <tr>
-                    <td style="border-bottom: 0px !important;"></td>
-                    <td style="border-bottom: 0px !important;"><input type="text" class="totalpymntmthd pymntmthd" value="0.00" readonly></td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-						<div style="margin-top: 0px !important;">
-  						<div class="form-group" style="margin-top:5px;">
-                <div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
-                  <label for="payment summary" style="font-weight:bold;">AMOUNT DUE:</label>
-                </div>
-                <input type="text" class="lgtext" id="amountduepymt" style="color: #d35400 !important;" placeholder="0.00" readonly>
-              </div>
-                <div class="form-group">
-                  <div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
-                    <label for="payment summary" style="font-weight:bold;">TENDERED:</label>
-                  </div>
-                  <input type="text" class="lgtext" id="cash" style="color: #2E7D32 !important;" placeholder="0.00" autocomplete="off">
-                </div>
-              <div class="form-group">
-  							<div style="border-bottom: 2px solid #90A4AE !important; width: 95%;">
-                  <label for="payment summary" style="font-weight:bold;">CHANGED:</label>
-                </div>
-  							<input type="text" class="lgtext" id="chngedpymnt" style="color: #d35400 !important;" placeholder="0.00" readonly>
-  						</div>
-						</div>
-					</div>
-				</div>
-				</div>
-				</div>
-			<div id="check_tab" class="tab-pane fade in">
-				<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="20" >20</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="50">50</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="100">100</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="200">200</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="500">500</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check" value="1000">1000</button>
-						</div>
-
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="1">1</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="2">2</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="3">3</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="4">4</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="5">5</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="6">6</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="7">7</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="8">8</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="9">9</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_check2" value="0">0</button>
-						</div>
-						<div class="col-md-4" style="margin-bottom:2px;">
-							<button class="btn btncash clearcheck" style="background-color:#e74c3c !important;">CLEAR</button>
-						</div>
-					</div>
-					<div class="col-md-6">
-
-						<form role="form" name="check_payment">
-						<div class="form-group" style="margin-top:5px;">
-						  <label for="usr">Bank *:</label>
-						  <input type="text" class="form-control" id="check_bank" placeholder="Bank" name="check_bank">
-						  <label for="remarks">Address:</label>
-						  <textarea type="text" class="form-control" placeholder="Address" id="check_address" name="check_address"></textarea>
-							 <label for="remarks">Check # *:</label>
-							<input type="text" class="form-control" id="check_number" name="check_number" placeholder="Check Number" style="font-size:18pt">
-							 <label for="remarks">Check Date:</label>
-							<input type="date" class="form-control" id="check_date" name="check_date" placeholder="Check Date" >
-							<label for="check amount">Check Amount:</label>
-							<input type="text" class="form-control lgtext" id="check" placeholder="0.00"  style="color:#e74c3c;text-align:right;font-size:18pt">
-						</div>
-						</form>
-							<button class="btn btncash finalize" style="background-color:#2980b9 !important; height:60px !important;">Finalize</button>
-					</div>
-				</div>
-				</div>
-				</div>
-			<div id="card_tab" class="tab-pane fade in">
-				<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="20" >20</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="50">50</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="100">100</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="200">200</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="500">500</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card" value="1000">1000</button>
-						</div>
-
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="1">1</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="2">2</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="3">3</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="4">4</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="5">5</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="6">6</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="7">7</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="8">8</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="9">9</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_card2" value="0">0</button>
-						</div>
-						<div class="col-md-4" style="margin-bottom:2px;">
-							<button class="btn btncash clearcard" style="background-color:#e74c3c !important;">CLEAR</button>
-						</div>
-					</div>
-					<div class="col-md-6">
-					<form role="form" name="card_payment">
-
-						<div class="form-group" style="margin-top:5px;">
-						 <label for="usr">Card Type *:</label>
-						<select class="form-control" id="typeofcard">
-							<option value="">Select Type of Card</option>
-							<option value="Visa">Visa</option>
-							<option value="Mastercard">Mastercard</option>
-						</option>
-						</select>
-
-						  <label for="usr">Card Holder *:</label>
-						  <input type="text" class="form-control" placeholder="Card Holder" id="cardholder">
-						  <label for="remarks">Card # *:</label>
-						 <input type="text" class="form-control" placeholder="Card #" id="cardnum">
-							 <label for="remarks">Approval # *:</label>
-							<input type="text" class="form-control" id="approvalnum" placeholder="Approval Number" style="font-size:18pt">
-							 <label for="remarks">Expiry Date:</label>
-							<input type="date" class="form-control" id="cardexpiry" placeholder="Expiry Date" >
-							<label for="remarks">Card Amount:</label>
-							<input type="text" class="form-control lgtext" id="card" placeholder="0.00" style="color:#e74c3c;text-align:right;font-size:18pt">
-						</div>
-						</form>
-						<button class="btn btncash finalize" style="background-color:#2980b9 !important; height:60px !important;">Finalize</button>
-					</div>
-				</div>
-				</div>
-				</div>
-			<div id="charge_tab" class="tab-pane fade in">
-				<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="20" >20</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="50">50</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="100">100</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="200">200</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="500">500</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="1000">1000</button>
-						</div>
-
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="1">1</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="2">2</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="3">3</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="4">4</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="5">5</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="6">6</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="7">7</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="8">8</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="9">9</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="0">0</button>
-						</div>
-						<div class="col-md-4" style="margin-bottom:2px;">
-							<button class="btn btncash clearcharge" style="background-color:#e74c3c !important;">CLEAR</button>
-						</div>
-					</div>
-					<div class="col-md-6">
-					<form role="form" name="charge_payment">
-
-						<div class="form-group" style="margin-top:5px;">
-						  <label for="Charge to">Charge to *:</label>
-						  <input type="text" class="form-control" id="chargeto" placeholder="Charge to">
-						  <label for="Charge Remarks" >Remarks:</label>
-						  <textarea type="text" class="form-control" id="charge_remarks"></textarea>
-							 <label for="remarks">Charge Date:</label>
-							<input type="date" class="form-control" id="charge_date" placeholder="Approval Number">
-							 <label for="remarks">Charge Amount:</label>
-							<input type="text" class="form-control lgtext" id="charge" placeholder="0.00" style="color:#e74c3c;text-align:right;font-size:18pt">
-						</div>
-						</form>
-							<button class="btn btncash finalize" style="background-color:#2980b9 !important; height:60px !important;">Finalize</button>
-					</div>
-				</div>
-				</div>
-				</div>
-
-			<div id="total_payment_amount" class="tab-pane fade in">
-				<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-6">
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="20" disabled>20</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="50" disabled>50</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="100" disabled>100</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="200" disabled>200</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="500" disabled>500</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge" value="1000" disabled>1000</button>
-						</div>
-
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="1" disabled>1</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="2" disabled>2</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="3" disabled>3</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="4" disabled>4</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="5" disabled>5</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="6" disabled>6</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="7" disabled>7</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="8" disabled>8</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="9" disabled>9</button>
-						</div>
-						<div class="col-md-4">
-							<button class="btn btncash click_charge2" value="0" disabled>0</button>
-						</div>
-						<div class="col-md-4" style="margin-bottom:2px;" >
-							<button class="btn btncash clearcharge" style="background-color:#e74c3c !important;"  disabled>CLEAR</button>
-						</div>
-					</div>
-					<div class="col-md-6">
-					<form role="form" name="total_payment">
-						<h2> Total Payment </h2>
-						<div class="form-group" style="margin-top:5px;">
-							<input type="text" class="form-control lgtext" id="total_payment" placeholder="0.00" style="color:#e74c3c;text-align:right;font-size:18pt">
-						</div>
-						</form>
-							<button class="btn btncash finalize" style="background-color:#2980b9 !important; height:60px !important;">Finalize</button>
-					</div>
-				</div>
-				</div>
-				</div>
-				<br><br>
-				  </div><!--end of tabs -->
-
-
-
-          </div><!---content-->
-      </div>
-    </div>
-  </div><!---modal-->
-
-  <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-lg" style="top: 5%;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 10px solid #ECEFF1 !important;">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><strong>Items/Products</strong></h4>
-            </div>
-
-              <div class="modal-body" style="margin-left: 0px !important;margin-top: 10px !important; padding:0px !important; ">
-                 <div class="container-fluid">
-                     <div class="table-responsive" id="div_product_list">
-                       <div style="overflow:scroll; max-height: 550px;">
-                          <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%" style="font-size: 12pt !important;">
-                            <thead> 
-                              <tr>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">PLU</th>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">Description</th>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">SRP</th>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">Tax Value</th>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">On hand</th>
-                                <th style="border-bottom: 2px solid #90A4AE !important;">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
                       </div>
                     </div>
-               </div>
+                  </div>
+              <!-- /.box-body -->
             </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
+      </section>
+      <!-- /.content -->
+    </div>
 
-  <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-m" style="margin-top: 5%;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9;">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;">Discounts</h4>
+    <!-- modal-payment -->
+    <div id="modal_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-lg modal-pymnt">
+            <div class="modal-content">
+                <div class="modal-header header-pymnt">
+                    <h4 class="modal-title">
+                        <strong>PAYMENT</strong>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="20">20</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="50">50</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="100">100</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="200">200</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="500">500</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class" value="1000">1000</button>
+                                </div>
+                                <div class="col-md-12 space-mdl-pymnt"></div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="7">7</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="8">8</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="9">9</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="4">4</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="5">5</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="6">6</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="1">1</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="2">2</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="3">3</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btncash click_class2" value="0">0</button>
+                                </div>
+                                <div class="col-md-4 btn-cl">
+                                    <button class="btn btncash clearcash">CLEAR</button>
+                                </div>
+                                <div class="col-md-4 btn-cl">
+                                    <button class="btn btncash cancelpymnt">CANCEL</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btncash finalize">ENTER</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="pymntmthdtblinp">
+                                    <tr>
+                                        <td colspan="2" class="td-pymnt-type">
+                                            <small><strong>TYPE OF PAYMENT</strong></small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="60%" class="pymntmthdtbl">Alt 1 - Card</td>
+                                        <td class="pymntmthdtbl"><input type="text" class="crd pymntmthd" value="0.00" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pymntmthdtbl">Alt 2 - Cheque</td>
+                                        <td class="pymntmthdtbl"><input type="text" class="chq pymntmthd" value="0.00" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pymntmthdtbl">Alt 3 - GC</td>
+                                        <td class="pymntmthdtbl"><input type="text" class="gc pymntmthd" value="0.00" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pymntmthdtbl">Alt 4 - Charge</td>
+                                        <td class="pymntmthdtbl"><input type="text" class="chrge pymntmthd" value="0.00" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pymntmthdtbl">Alt 5 - Cash</td>
+                                        <td class="pymntmthdtbl"><input type="text" class="csh pymntmthd" value="0.00" readonly></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-pymnt-border"></td>
+                                        <td class="td-pymnt-border">
+                                            <input type="text" class="totalpymntmthd pymntmthd" value="0.00" readonly>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="payment-details">
+                                    <div class="form-group fgroup">
+                                        <div class="border-paymnt-details">
+                                            <label for="payment summary"><strong>AMOUNT DUE</strong></label>
+                                        </div>
+                                        <input type="text" class="lgtext pymnt-details-color" id="amountduepymt" placeholder="0.00" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="border-paymnt-details">
+                                            <label for="payment summary"><strong>TENDERED:</strong></label>
+                                        </div>
+                                        <input type="text" class="lgtext" id="cash" placeholder="0.00" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="border-paymnt-details">
+                                            <label for="payment summary"><strong>CHANGED:</strong></label>
+                                        </div>
+                                        <input type="text" class="lgtext pymnt-details-color" id="chngedpymnt" placeholder="0.00" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-              <div class="modal-body">
-                 <div class="container-fluid">
-                     <div id="div_product_list">
-                        <table id="tbl_discounts" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                          <thead class="tbl-header">
+        </div>
+    </div>
+    <!-- /modal-payment -->
+
+    <!-- modal_browse_products -->
+    <div id="modal_browse_products" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-lg md-pos">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <button class="btn" id="btn-cancel-pro" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                    <h4 class="modal-title">
+                        <strong>Items/Products</strong>
+                    </h4>
+                </div>
+                <div class="modal-body mb-tbl-product">
+                    <div class="container-fluid">
+                        <div class="table-responsive" id="div_product_list">
+                            <div class="">
+                                <table id="tbl_products" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-modal"> 
+                                        <tr>
+                                            <th>PLU</th>
+                                            <th>Description</th>
+                                            <th>SRP</th>
+                                            <th>Tax Value</th>
+                                            <th>On hand</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / modal_browse_products -->
+
+    <!-- modal_browse_discounts -->
+    <div id="modal_browse_discounts" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+      <div class="modal-dialog modal-m md-pos">
+        <div class="modal-content">
+          <div class="modal-header hd-modal-pos">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            <h4 class="modal-title">
+              <strong>Discounts</strong>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="table-responsive" id="div_product_list">
+                  <div class="scroll-div-pro">
+                    <table id="tbl_discounts" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead class="tbl-header">
                             <tr>
                               <th>Discount</th>
                               <th>Rate</th>
                               <th>Action</th>
                             </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                    </div>
-               </div>
-            </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-  <div id="modal_customers_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-m" style="margin-top: 5%;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9;">
-                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;">Customers</h4>
-            </div>
-              <div class="modal-body">
-                 <div class="container-fluid">
-                     <div id="div_product_list">
-                        <table id="tbl_customers" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                          <thead class="tbl-header">
-                            <tr>
-                              <th>Code</th>
-                              <th>Customer Name</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                          <tfoot>
-                              <th>Code</th>
-                              <th>Customer Name</th>
-                              <th>Action</th>
-                          </tfoot>
-                        </table>
-                    </div>
-               </div>
-            </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-    <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-m" style="margin-top: 8%;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:white;">Journal</h4>
-            </div>
-              <div class="modal-body" style="width: 100% !important; margin: 0 !important; padding: 0 !important;">
-                 <div class="container-fluid">
-                     <div id="div_product_list">
-                      <div class="row" style="background: #ECEFF1; padding: 10px;padding-bottom: 10px; border-bottom: 1px solid #B0BEC5;border-top: 1px solid #B0BEC5;">
-                        <div class="col-md-6">
-                           <label>Receipt No:</label>
-                           <input type="text" name="receipt_no" id="receipt_no" class="form-control">
-                        </div>
-                       <div class="col-md-6">
-                          <label>Filter Date:</label>
-                          <input type="text" name="date_created" id="journal_date" class="date-picker form-control">
-                        </div>
-                      </div>
-                       <div class="table-responsive">
-                         <div style="overflow:scroll; max-height: 400px;">
-                           <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                          <thead class="tbl-header">
-                            <tr>
-                              <center>
-                                <th></th>
-                                <th>Invoice #</th>
-                                <th>Customer Name</th>
-                                <th>Amount</th>
-                                <th>Action</th>
-                              </center>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                         </div>
-                       </div>
-                    </div>
-               </div>
-            </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-
-  <div id="modal_qty" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog modal-sm" style="top: 15%;">
-          <div class="modal-content" style="margin: 0 auto;"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title"><span id="qty_pro_name" style="font-weight: bold;"></span></h4>
-            </div>
-              <div class="modal-body" style="margin: 0 !important; padding: 0 !important;">
-                 <div class="container-fluid">
-                     <div style="margin-bottom: 10px;">
-                       <form >
-                        <div class="qty-details">
-                          <table style="width: 100%;">
-                            <tr>
-                              <td style="text-align: right;">Barcode</td>
-                              <td class="detail-td"><div class="pro-detail"><span id="qty_bcode">1</span></div></td>
-                            <tr>
-                            <tr>
-                              <td style="text-align: right;">Quantity</td>
-                              <td class="detail-td">
-                                <div class="pro-detail" style="text-align: center !important;">
-                                      <span id="qty_prev"></span>
-                                  </div>
-                            </td>
-                            <tr>
-                            <tr>
-                              <td style="text-align: right;">Price</td>
-                              <td class="detail-td"><div class="pro-detail"><span id="qty_price"></span></div></td>
-                            <tr>
-                          </table>
-                        </div>
-                        <div class="enter-qty-header">Enter quantity</div>
-                         <input type="text" name="row_qty" id="row_qty" class="numeric form-control" style="height: 100px; font-size: 80px !important; text-align: center; color: green;" min="1" placeholder="0.00" autocomplete="off">
-                       </form>
-                    </div>
-               </div>
-            </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-  <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 30%; width: 350px !important;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
-                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user fa-size"></span> Authorization</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
-               <div class="container-fluid">
-                 <div class="input-group">
-                   <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                    <i class="fa fa-lock" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                   <input type="password" class="form-control" name="void_pwd" id="void_pwd" style="font-size: 15pt !important;">
-                 </div>
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important;">
-                   <button id="void_pwd_btn" type="button" style="width: 40%;" class="btn btn-primary">OK</button>
-                   <button type="button" class="btn btn-danger" style="width: 40%;" data-dismiss="modal" aria-label="Close">
-                       Cancel</button>
-                 </div>
-               </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-    <div id="modal_card_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 18%; width: 800px !important;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
-                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-credit-card"></span> Card</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
-               <div class="container-fluid" style="margin-top: 10px !important;">  
-
-                <div class="col-md-12">
-                  <div class="col-md-4">
-                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
-                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
-                      <table id="tbl_card" style="width: 100%; margin: 0px !important; padding: 0px !important;">
-                        <thead>
-                          <th style="display: none;">Card</th>
                         </thead>
                         <tbody>
                         </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <form role="form" name="check_payment">
-            <div class="form-group" style="margin-top:5px;">
-
-              <div style="margin-bottom: 10px;">
-                  <label for="usr">Card Holder Name</label>
-                  <div class="input-group">
-                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                    <i class="fa fa-user" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="check_bank" placeholder="Card Holder Name" name="check_bank" style="font-size:11pt !important;">
-                  </div>
-                </div>
-
-                  <div style="margin-bottom: 10px;">
-                    <label for="usr">Approval No.</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Approval No." style="font-size:11pt !important;">
-                    </div>
-                  </div>
-
-                  <div style="margin-bottom: 10px;">
-                    <label for="usr">Card No.</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Card No." style="font-size:11pt !important;">
-                    </div>
-                  </div>
-
-                  <label for="check amount">Amount</label>
-                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
-                </div>
-                </form>
-                  </div>
-                </div>
-                 
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important; ">
-                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
-                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
-                 </div>
-               </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-      <div id="modal_gift_certificate_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 22%; width: 800px !important; margin-left: 22%;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
-                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-gift"></span> Gift Certificate</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
-               <div class="container-fluid" style="margin-top: 10px !important;">  
-
-                <div class="col-md-12">
-                  <div class="col-md-4">
-                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
-                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
-                      <table id="tbl_gc" style="width: 100%; margin: 0px !important; padding: 0px !important;">
-                        <thead>
-                          <th style="display: none;">Card</th>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <form role="form" name="check_payment">
-            <div class="form-group" style="margin-top:5px;">
-
-              <div style="margin-bottom: 10px;">
-                  <label for="usr">Branch / Address</label>
-                  <div class="input-group">
-                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
-                  </div>
-                </div>
-
-                  <div style="margin-bottom: 10px;">
-                    <label for="usr">Gift Certificate No.</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
-                    </div>
-                  </div>
-
-                  <label for="check amount">Amount</label>
-                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
-                </div>
-                </form>
-                  </div>
-                </div>
-                 
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important; ">
-                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
-                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
-                 </div>
-               </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-        <div id="modal_cheque_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 23%; width: 800px !important;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
-                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-gift"></span> Cheque</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
-               <div class="container-fluid" style="margin-top: 10px !important;">  
-
-                <div class="col-md-12">
-                  <div class="col-md-4">
-                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Card</strong></div>
-                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
-                      <table id="tbl_cheque" style="width: 100%; margin: 0px !important; padding: 0px !important;">
-                        <thead>
-                          <th style="display: none;">Cheque</th>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <form role="form" name="check_payment">
-            <div class="form-group" style="margin-top:5px;">
-
-              <div style="margin-bottom: 10px;">
-                  <label for="usr">Branch / Address</label>
-                  <div class="input-group">
-                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
-                  </div>
-                </div>
-
-                  <div style="margin-bottom: 10px;">
-                    <label for="usr">Cheque No.</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
-                    </div>
-                  </div>
-
-                  <label for="check amount">Amount</label>
-                  <input type="text" class="lgtext" id="chequeamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
-                </div>
-                </form>
-                  </div>
-                </div>
-                 
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important; ">
-                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
-                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
-                 </div>
-               </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-        <div id="modal_charge_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
-      <div class="modal-dialog" style="top: 22%; width: 800px !important;">
-          <div class="modal-content"><!---content-->
-            <div class="modal-header" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important;">
-                <h4 class="modal-title"><center style="font-weight: bold;"><span class="fa fa-user"></span> Charge</center></h4>
-            </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important; padding: 0px !important; margin: 0px !important;">
-               <div class="container-fluid" style="margin-top: 10px !important;">  
-
-                <div class="col-md-12">
-                  <div class="col-md-4">
-                    <div style="background-color: #ECEFF1; padding: 10px; margin-bottom: 0px !important;border-top: 1px solid #CFD8DC;border-left: 1px solid #CFD8DC;border-right: 1px solid #CFD8DC;"><strong>Charge</strong></div>
-                    <div style="overflow:scroll; max-height: 240px;overflow-x: hidden; border: 1px solid #CFD8DC;">
-                      <table id="tbl_gc" style="width: 100%; margin: 0px !important; padding: 0px !important;">
-                        <thead>
-                          <th style="display: none;">Charge</th>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <form role="form" name="check_payment">
-            <div class="form-group" style="margin-top:5px;">
-
-              <div style="margin-bottom: 10px;">
-                  <label for="usr">Branch / Address</label>
-                  <div class="input-group">
-                    <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                    <i class="fa fa-home" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" id="check_bank" placeholder="Branch/Address" name="check_bank" style="font-size:11pt !important;">
-                  </div>
-                </div>
-
-                  <div style="margin-bottom: 10px;">
-                    <label for="usr">Reference</label>
-                    <div class="input-group">
-                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;">
-                      <i class="fa fa-list" style="margin-top: 4px !important;margin-bottom: 3px !important;" aria-hidden="true"></i></span>
-                      <input type="text" class="form-control" id="check_number" name="check_number" placeholder="Gift Certificate No." style="font-size:11pt !important;">
-                    </div>
-                  </div>
-
-                  <label for="check amount">Amount</label>
-                  <input type="text" class="lgtext" id="cardamount" placeholder="0.00"  style="width: 100% !important; color:#2E7D32 !important;text-align:right;font-size:18pt; border: 1px solid #90A4AE !important; padding: 5px !important;">
-                </div>
-                </form>
-                  </div>
-                </div>
-                 
-               </div>
-               </div>
-               <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                 <div class="row" style="text-align: center !important; ">
-                   <button id="btn_ok_gc_payment" type="button" style="width: 20%; height: 40px;" class="btn btn-primary"><strong style="font-size: 12pt;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong></button>
-                   <button type="button" class="btn btn-danger" style="width: 20%; height: 40px;" data-dismiss="modal" aria-label="Close"><strong style="font-size: 12pt;"><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong></button>
-                 </div>
-               </div>
-          </div><!---content-->
-      </div>
-  </div><!---modal-->
-
-  <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-      <div class="modal-dialog" id="modal-senior" style="top: 10%;">
-          <div class="modal-content">
-              <div class="modal-header bgm-indigo" style="background-color:#2980b9; border-bottom: 2px solid #CFD8DC !important; ">
-                  <h4 class="modal-title"><center style="font-weight: bold;">Senior Citizen Information</center></h4>
-              </div>
-              <div class="modal-body" style="border-top: 10px solid #ECEFF1 !important;">
-                  <form id="frm_senior">
-                    <input type="text" id="seniorTotalDiscount" name="seniorTotalDiscount" style="display: none;">
-                  <div class="container-fluid">
-                        <div class="row">
-                          <div class="form-group">
-                              <div class="col-sm-12">
-                                  <div class="input-group">
-                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-tags fa-size" aria-hidden="true"></i></span>
-                                          <input type="text" id="seniorID" name="seniorID" class="form-control" style="font-size: 12pt !important;" placeholder="Senior ID" data-error-msg="Senior ID is required." required>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="row" style="margin-top:5px;">
-                          <div class="form-group">
-                              <div class="col-sm-12">
-                                  <div class="input-group">
-                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-user fa-size" aria-hidden="true"></i></span>
-                                      <input type="text" id="seniorName" name="seniorName" class="form-control" style="font-size: 12pt !important;" placeholder="Name" data-error-msg="Senior name is required." required>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="row" style="margin-top:5px;">
-                          <div class="form-group">
-                              <div class="col-sm-12">
-                                  <div class="input-group">
-                                      <span class="input-group-addon" style="background: #ECEFF1; color: #78909C;"><i class="fa fa-home fa-size" aria-hidden="true"></i></span>
-                                      <input type="text" id="seniorAddress" name="seniorAddress" class="form-control" style="font-size: 12pt !important;" placeholder="Address">
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
+                    </table>
                   </div>
               </div>
-              </form>
-              <div class="modal-footer" style="background-color: #ECEFF1; border-top: 2px solid #CFD8DC !important;">
-                <div class="row" style="text-align: center !important;">
-                  <button id="c_btn" type="button" style="width: 38%;" class="btn btn-primary">OK</button>
-                  <button id="cancel-btn" type="button" class="btn btn-danger" style="width: 38%;" data-dismiss="modal" aria-label="Close">
-                      Cancel</button>
-                </div>
-              </div>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
+    <!-- / modal_browse_discounts -->
+
+    <!-- modal_customers_list -->
+    <div id="modal_customers_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static"><!--modal-->
+      <div class="modal-dialog modal-m md-pos">
+        <div class="modal-content">
+          <div class="modal-header hd-modal-pos">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            <h4 class="modal-title"><strong>Customers</strong></h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div id="div_product_list">
+                <table id="tbl_customers" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                  <thead class="tbl-header">
+                    <tr>
+                      <th>Code</th>
+                      <th>Customer Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                    <th>Code</th>
+                    <th>Customer Name</th>
+                    <th>Action</th>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <!-- / modal_customers_list -->
+
+   <!-- modal_journal_list -->
+    <div id="modal_journal_list" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-m md-pos">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title"><strong>Journal</strong></h4>
+                </div>
+                <div class="modal-body mb-journal">
+                    <div class="container-fluid">
+                        <div id="div_product_list">
+                            <div class="row journal-panel">
+                                <div class="col-md-6">
+                                    <label>Receipt No:</label>
+                                    <input type="text" name="receipt_no" id="receipt_no" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Filter Date:</label>
+                                    <input type="text" name="date_created" id="journal_date" class="date-picker form-control">
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="scroll-div-journal">
+                                    <table id="tbl_journal" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class="thead-modal">
+                                          <tr>
+                                              <center>
+                                                  <th class="th-modal-first"></th>
+                                                  <th class="th-modal">Invoice #</th>
+                                                  <th class="th-modal">Customer Name</th>
+                                                  <th class="th-modal">Amount</th>
+                                                  <th class="th-modal-last">Action</th>
+                                              </center>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /modal_journal_list -->
+
+    <!-- modal_qty -->
+    <div id="modal_qty" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog modal-sm md-qty">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pos">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                    <h4 class="modal-title">
+                        <strong>
+                            <span id="qty_pro_name"></span>
+                        </strong>
+                    </h4>
+                </div>
+                <div class="modal-body mb-qty">
+                    <div class="container-fluid">
+                        <div class="qty-panel">
+                            <form>
+                              <div class="qty-details">
+                                  <table id="tbl_qty">
+                                      <tr>
+                                          <td align="right">Barcode</td>
+                                          <td class="detail-td"><div class="pro-detail"><span id="qty_bcode">1</span></div></td>
+                                      </tr>
+                                      <tr>
+                                          <td align="right">Quantity</td>
+                                          <td class="detail-td">
+                                              <div class="pro-detail">
+                                                  <center>
+                                                      <span id="qty_prev"></span>
+                                                  </center>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td align="right">Price</td>
+                                          <td class="detail-td">
+                                              <div class="pro-detail">
+                                                  <span id="qty_price"></span>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="enter-qty-header">Enter quantity</div>
+                              <input type="text" name="row_qty" id="row_qty" class="numeric form-control" min="1" placeholder="0.00" autocomplete="off">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / modal_qty -->
+
+    <!-- modal_void -->
+    <div id="modal_void" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog md-authorization">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <h4 class="modal-title">
+                        <center>
+                            <strong>
+                                <span class="fa fa-user fa-size"></span> Authorization
+                            </strong>
+                        </center>
+                    </h4>
+                </div>
+                <div class="modal-body mb-authorization">
+                    <div class="container-fluid">
+                        <div class="input-group">
+                            <span class="input-group-addon addon-pos">
+                                <i class="fa fa-lock left-fa-inp" aria-hidden="true"></i>
+                            </span>
+                            <input type="password" class="form-control" name="void_pwd" id="void_pwd">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-authorization">
+                    <div class="row">
+                        <center>
+                            <button id="void_pwd_btn" type="button" class="btn btn-primary btn-authorization">OK</button>
+                            <button type="button" class="btn btn-danger btn-authorization" data-dismiss="modal" aria-label="Close">
+                              Cancel
+                           </button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / modal_void -->
+
+    <!-- modal_card_payment -->
+    <div id="modal_card_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog md-card-pymnt">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <h4 class="modal-title">
+                        <center>
+                            <strong>
+                                <span class="fa fa-credit-card"></span> Card
+                            </strong>
+                        </center>
+                    </h4>
+                </div>
+                <div class="modal-body mb-pymnt">
+                    <div class="container-fluid cf-pymnt"> 
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="panel-pymnt">
+                                    <strong>Card</strong>
+                                </div>
+                                <div class="scroll-panel-pymnt">
+                                    <table id="tbl_card">
+                                        <thead>
+                                            <th hidden>Card</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <form role="form" id="frm_card_details">
+                                    <div class="form-group fg-pymnt">
+                                        <div class="col-pymnt-details">
+                                            <label for="usr">Card Holder Name</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-user icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_card_holder" placeholder="Card Holder Name" name="check_bank" data-error-msg="Card Holder name is required." required>
+                                              </div>
+                                        </div>
+                                        <div class="col-pymnt-details">
+                                            <label for="usr">Approval No.</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-list icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_card_approval" name="check_number" placeholder="Approval No." data-error-msg="Approval No# is required." required>
+                                              </div>
+                                        </div>
+                                        <div class="col-pymnt-details">
+                                            <label for="usr">Card No.</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-list icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_card_no" name="check_number" placeholder="Card No." data-error-msg="Card no# is required." required>
+                                              </div>
+                                        </div>
+                                          <label for="check amount">Amount</label>
+                                          <input type="text" class="lgtext amnt-pymnt" id="cardamount" placeholder="0.00" data-error-msg="Please input an amount." required>
+                                    </div>
+                                      <input type="hidden" id="card_code" data-error-msg="Please choose your card." required>
+                                      <input type="hidden" id="card_holder_name">
+                                      <input type="hidden" id="card_approval">
+                                      <input type="hidden" id="card_no">
+                                      <input type="hidden" id="card_amount">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-pymnt">
+                  <div class="row">
+                    <center>
+                      <button id="btn_ok_card_payment" type="button" class="btn btn-primary btn-pymnt">
+                        <strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong>
+                      </button>
+                      <button type="button" class="btn btn-danger btn-pymnt" data-dismiss="modal" aria-label="Close">
+                        <strong><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong>
+                      </button>
+                    </center>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / modal_card_payment -->
+
+    <!-- modal_gift_certificate_payment -->
+    <div id="modal_gift_certificate_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog md-pymnt">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <h4 class="modal-title">
+                      <center>
+                        <strong>
+                          <span class="fa fa-gift"></span> Gift Certificate
+                        </strong>
+                      </center>
+                    </h4>
+                  </div>
+                  <div class="modal-body mb-pymnt">
+                      <div class="container-fluid cf-pymnt">  
+                          <div class="col-md-12">
+                              <div class="col-md-4">
+                                  <div class="panel-pymnt">
+                                      <strong>Gift Certificate</strong>
+                                  </div>
+                                  <div class="scroll-panel-pymnt">
+                                      <table id="tbl_gc">
+                                          <thead>
+                                              <th hidden>Card</th>
+                                          </thead>
+                                          <tbody>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                  <form role="form" id="frm_gc_details">
+                                      <div class="form-group fg-pymnt">
+                                          <div class="col-pymnt-details">
+                                              <label for="usr">Branch / Address</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-home icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_gc_branch" placeholder="Branch/Address" name="check_bank" data-error-msg="Branch/Address is required." required>
+                                              </div>
+                                          </div>
+                                          <div class="col-pymnt-details">
+                                              <label for="usr">Gift Certificate No.</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-list icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_gc_no" name="check_number" placeholder="Gift Certificate No." data-error-msg="Gift Certificate No is required." required>
+                                              </div>
+                                          </div>
+                                            <label for="check amount">Amount</label>
+                                            <input type="text" class="lgtext amnt-pymnt" id="gcamount" placeholder="0.00" data-error-msg="Please input an amount." required>
+                                      </div>
+                                      <input type="hidden" id="gc_code" data-error-msg="Please choose a Gift Certificate." required>
+                                      <input type="hidden" id="gc_branch">
+                                      <input type="hidden" id="gc_no">
+                                      <input type="hidden" id="gc_amount">
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer mf-pymnt">
+                      <div class="row">
+                          <center>
+                              <button id="btn_ok_gc_payment" type="button" class="btn btn-primary btn-pymnt">
+                                  <strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong>
+                              </button>
+                              <button type="button" class="btn btn-danger btn-pymnt" data-dismiss="modal" aria-label="Close">
+                                  <strong><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong>
+                              </button>
+                          </center>
+                      </div>
+                  </div>
+              </div>
+         </div>
+    </div>
+    <!-- / modal_gift_certificate_payment -->
+
+    <!-- modal_cheque_payment -->
+    <div id="modal_cheque_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog md-pymnt">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <h4 class="modal-title">
+                        <center>
+                            <strong>
+                                <span class="fa fa-gift"></span> Cheque
+                            </strong>
+                        </center>
+                    </h4>
+                </div>
+                <div class="modal-body mb-pymnt">
+                    <div class="container-fluid cf-pymnt">  
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="panel-pymnt">
+                                    <strong>Card</strong>
+                                </div>
+                                <div class="scroll-panel-pymnt">
+                                    <table id="tbl_cheque">
+                                        <thead>
+                                            <th hidden>Cheque</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <form role="form" id="frm_cheque_details">
+                                    <div class="form-group fg-pymnt">
+                                      <div class="col-pymnt-details">
+                                          <label for="usr">Branch / Address</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon addon-pos">
+                                                    <i class="fa fa-home icon-pymnt" aria-hidden="true"></i>
+                                                </span>
+                                              <input type="text" class="form-control inp-size" id="inp_cheque_branch" placeholder="Branch/Address" name="check_bank" data-error-msg="Branch/Address is required." required>
+                                          </div>
+                                        </div>
+                                        <div class="col-pymnt-details">
+                                            <label for="usr">Cheque No.</label>
+                                              <div class="input-group">
+                                                  <span class="input-group-addon addon-pos">
+                                                      <i class="fa fa-list icon-pymnt" aria-hidden="true"></i>
+                                                  </span>
+                                                  <input type="text" class="form-control inp-size" id="inp_cheque_no" name="check_number" placeholder="Cheque No." data-error-msg="Cheque No. is required." required>
+                                              </div>
+                                        </div>
+                                        <label for="check amount">Amount</label>
+                                        <input type="text" class="lgtext amnt-pymnt" id="chequeamount" placeholder="0.00" data-error-msg="Please input an amount." required>
+                                    </div>
+                                    <input type="hidden" id="cheque_bank" data-error-msg="Please choose a bank." required>
+                                    <input type="hidden" id="cheque_branch">
+                                    <input type="hidden" id="cheque_no">
+                                    <input type="hidden" id="cheque_amount">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-pymnt">
+                    <div class="row">
+                        <center>
+                            <button id="btn_ok_cheque_payment" type="button" class="btn btn-primary btn-pymnt">
+                                <strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-pymnt" data-dismiss="modal" aria-label="Close">
+                                <strong><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong>
+                            </button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / modal_cheque_payment -->
+
+    <!-- modal_charge_payment -->
+    <div id="modal_charge_payment" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog md-pymnt">
+            <div class="modal-content">
+                <div class="modal-header hd-modal-pymnt">
+                    <h4 class="modal-title">
+                        <center>
+                            <strong>
+                                <span class="fa fa-user"></span> Charge
+                            </strong>
+                        </center>
+                    </h4>
+                </div>
+                <div class="modal-body mb-pymnt">
+                    <div class="container-fluid cf-pymnt">  
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                              <div class="panel-pymnt">
+                                <strong>Charge</strong>
+                              </div>
+                              <div class="scroll-panel-pymnt">
+                                  <table id="tbl_charge">
+                                      <thead>
+                                          <th hidden>Charge</th>
+                                      </thead>
+                                      <tbody>
+                                      </tbody>
+                                  </table>
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                                <form role="form" id="frm_charge_details">
+                                  <div class="form-group fg-pymnt">
+                                      <div class="col-pymnt-details">
+                                          <label for="usr">Branch / Address</label>
+                                          <div class="input-group">
+                                              <span class="input-group-addon addon-pos">
+                                                  <i class="fa fa-home icon-pymnt" aria-hidden="true"></i>
+                                              </span>
+                                              <input type="text" class="form-control inp-size" id="inp_charge_branch" placeholder="Branch/Address" name="check_bank" data-error-msg="Branch/Address is required." required>
+                                          </div>
+                                      </div>
+                                      <div class="col-pymnt-details">
+                                        <label for="usr">Reference</label>
+                                          <div class="input-group">
+                                              <span class="input-group-addon addon-pos">
+                                                <i class="fa fa-list icon-pymnt" aria-hidden="true"></i>
+                                              </span>
+                                              <input type="text" class="form-control inp-size" id="inp_charge_reference" name="check_number" placeholder="Reference" data-error-msg="Reference is required." required>
+                                          </div>
+                                      </div>
+                                      <label for="check amount">Amount</label>
+                                      <input type="text" class="lgtext amnt-pymnt" id="chargeamount" placeholder="0.00" data-error-msg="Please input an amount." required>
+                                  </div>
+                                    <input type="hidden" id="charge_code" data-error-msg="Please choose a charge." required>
+                                    <input type="hidden" id="charge_branch">
+                                    <input type="hidden" id="charge_reference">
+                                    <input type="hidden" id="charge_amount">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer mf-pymnt">
+                    <div class="row">
+                        <center>
+                            <button id="btn_ok_charge_payment" type="button" class="btn btn-primary btn-pymnt">
+                                <strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-pymnt" data-dismiss="modal" aria-label="Close">
+                                <strong><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong>
+                            </button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- / modal_charge_payment-->
+
+    <!--- modal_senior_citizen-->
+    <div id="modal_senior_citizen" class="modal fade"  tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" id="modal-senior">
+            <div class="modal-content">
+                <div class="modal-header bgm-indigo hd-modal-pymnt">
+                    <h4 class="modal-title"><center><strong>Senior Citizen Information</strong></center></h4>
+                </div>
+                <div class="modal-body mb-senior">
+                    <form id="frm_senior">
+                      <input type="hidden" id="seniorTotalDiscount" name="seniorTotalDiscount">
+                      <div class="container-fluid">
+                          <div class="row">
+                              <div class="form-group">
+                                  <div class="col-sm-12">
+                                      <div class="input-group">
+                                          <span class="input-group-addon addon-pos">
+                                              <i class="fa fa-tags fa-size" aria-hidden="true"></i>
+                                          </span>
+                                          <input type="text" id="seniorID" name="seniorID" class="form-control inp-size" placeholder="Senior ID" data-error-msg="Senior ID is required." required>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row fgroup">
+                              <div class="form-group">
+                                  <div class="col-sm-12">
+                                      <div class="input-group">
+                                          <span class="input-group-addon addon-pos">
+                                              <i class="fa fa-user fa-size" aria-hidden="true"></i>
+                                          </span>
+                                          <input type="text" id="seniorName" name="seniorName" class="form-control inp-size" placeholder="Name" data-error-msg="Senior name is required." required>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row fgroup">
+                              <div class="form-group">
+                                  <div class="col-sm-12">
+                                      <div class="input-group">
+                                          <span class="input-group-addon addon-pos">
+                                              <i class="fa fa-home fa-size" aria-hidden="true"></i>
+                                          </span>
+                                          <input type="text" id="seniorAddress" name="seniorAddress" class="form-control inp-size" placeholder="Address">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </form>
+                </div>
+                <div class="modal-footer mf-pymnt">
+                    <div class="row">
+                        <center>
+                            <button id="c_btn" type="button" class="btn btn-primary btn-senior">OK</button>
+                            <button id="cancel-btn" type="button" class="btn btn-danger btn-senior" data-dismiss="modal" aria-label="Close">
+                                Cancel
+                            </button>
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--- / modal_senior_citizen-->
   </div>
 </div>
 <!-- ./wrapper -->
@@ -1403,18 +975,18 @@
 <script src="assets/plugins/twittertypehead/bloodhound.min.js"></script>
 <script src="assets/plugins/twittertypehead/typeahead.bundle.min.js"></script>
 <script src="assets/plugins/twittertypehead/typeahead.jquery.min.js"></script>
-
 <!-- numeric formatter -->
 <script src="assets/plugins/formatter/autoNumeric.js" type="text/javascript"></script>
 <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 
 <!-- <?php echo $_rights; ?> -->
-
     <script type="text/javascript">
 
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
     var row; var rowhead; var itemcount = 0; var seniorcitizenid; var dataDiscount; var dataDiscountDesc;
     var sc; var discounted_price = 0; var line_total_discount= 0; var line_total=0; var net_vat=0; var vat_input=0;
+    var pymnt_modal_status = '0';
+
       $('#txtsearch').focus(400);
       var oTableItems={
           desc : 'td:eq(0)',
@@ -1449,13 +1021,15 @@
 
         // $("body").css("overflow", "hidden");
 
-        // $(document).bind("contextmenu", function (e) {
-        //         e.preventDefault();
-        // });
+        $('.modal').css("overflow", "hidden");
+
+        $(document).bind("contextmenu", function (e) {
+                e.preventDefault();
+        });
 
         $(document).keydown(function(event){
             if(event.keyCode == 123){
-              return false;  //Prevent from F12
+              //return false;  //Prevent from F12
           }
           else if(event.ctrlKey && event.shiftKey && event.keyCode == 73){
               return false;  //Prevent from ctrl+shift+i
@@ -1463,7 +1037,23 @@
           else if(event.ctrlKey && event.keyCode == 85){
               return false;  //Prevent from ctrl+u
           }
+          else if(event.ctrlKey && event.keyCode == 84){
+              return false;  //Prevent from ctrl+t
+          }
+          else if(event.ctrlKey && event.keyCode == 83){
+              return false;  //Prevent from ctrl+s
+          }
+          else if(event.keyCode == 113){
+            alert();
+              $('#txtsearch').focus();  //Prevent from ctrl+s
+          }
+        });
 
+        $(window).keydown(function(event) {
+          if(event.ctrlKey && event.keyCode == 84) { 
+            event.preventDefault(); 
+            console.log("Hey! Ctrl+T event captured!");
+          }
         });
 
           $("#cash").keydown(function (e) {
@@ -1697,6 +1287,123 @@
             showList(false);
         });
 
+        $('#btn_ok_card_payment').click(function(){
+          if(validateRequiredFields($('#frm_card_details'))){
+            var inp_card_holder = $('#inp_card_holder').val();
+            var inp_card_approval = $('#inp_card_approval').val();
+            var inp_card_no = $('#inp_card_no').val();
+            var cardamount = $('#cardamount').val();
+
+            $('#card_holder_name').val(inp_card_holder);
+            $('#card_approval').val(inp_card_approval);
+            $('#card_no').val(inp_card_no);
+            $('#card_amount').val(cardamount);
+
+            $('#modal_card_payment').modal('hide');
+
+            $('#inp_card_holder').val("");
+            $('#inp_card_approval').val("");
+            $('#inp_card_no').val("");
+            $('#cardamount').val("");
+
+            var ca = $('#card_amount').val();
+            var num = ca.replace(/,/gi, "");
+            var num2 = num.split(/(?=(?:\d{3})+$)/).join(",");
+            $('.crd').val(accounting.formatNumber(num2,2));
+            $('.csh').val('0.00');
+            $('#cash').val('0.00');
+
+            reComputeChange();
+          }
+        });
+
+        $('#btn_ok_cheque_payment').click(function(){
+          if(validateRequiredFields($('#frm_cheque_details'))){
+
+            var inp_cheque_branch = $('#inp_cheque_branch').val();
+            var inp_cheque_no = $('#inp_cheque_no').val();
+            var chequeamount = $('#chequeamount').val();
+
+            $('#cheque_branch').val(inp_cheque_branch);
+            $('#cheque_no').val(inp_cheque_no);
+            $('#cheque_amount').val(chequeamount);
+
+            $('#modal_cheque_payment').modal('hide');
+
+            $('#inp_cheque_branch').val("");
+            $('#inp_cheque_no').val("");
+            $('#chequeamount').val("");
+
+            var ca = $('#cheque_amount').val();
+            var num = ca.replace(/,/gi, "");
+            var num2 = num.split(/(?=(?:\d{3})+$)/).join(",");
+
+            $('.chq').val(accounting.formatNumber(num2,2));
+            $('.csh').val('0.00');
+            $('#cash').val('0.00');
+
+            reComputeChange();
+          }
+        });
+
+        $('#btn_ok_gc_payment').click(function(){
+          if(validateRequiredFields($('#frm_gc_details'))){
+
+            var inp_gc_branch = $('#inp_gc_branch').val();
+            var inp_gc_no = $('#inp_gc_no').val();
+            var gcamount = $('#gcamount').val();
+
+            $('#gc_branch').val(inp_gc_branch);
+            $('#gc_no').val(inp_gc_no);
+            $('#gc_amount').val(gcamount);
+
+            $('#modal_gift_certificate_payment').modal('hide');
+
+            $('#inp_gc_branch').val("");
+            $('#inp_gc_no').val("");
+            $('#gcamount').val("");
+
+            var ca = $('#gc_amount').val();
+            var num = ca.replace(/,/gi, "");
+            var num2 = num.split(/(?=(?:\d{3})+$)/).join(",");
+
+            $('.gc').val(accounting.formatNumber(num2,2));
+            $('.csh').val('0.00');
+            $('#cash').val('0.00');
+
+            reComputeChange();
+          }
+        });
+
+        $('#btn_ok_charge_payment').click(function(){
+          if(validateRequiredFields($('#frm_charge_details'))){
+
+            var inp_charge_branch = $('#inp_charge_branch').val();
+            var inp_charge_reference = $('#inp_charge_reference').val();
+            var chargeamount = $('#chargeamount').val();
+
+            $('#charge_branch').val(inp_charge_branch);
+            $('#charge_reference').val(inp_charge_reference);
+            $('#charge_amount').val(chargeamount);
+
+            $('#modal_charge_payment').modal('hide');
+
+            $('#inp_charge_branch').val("");
+            $('#inp_charge_reference').val("");
+            $('#chargeamount').val("");
+
+            var ca = $('#charge_amount').val();
+            var num = ca.replace(/,/gi, "");
+            var num2 = num.split(/(?=(?:\d{3})+$)/).join(",");
+
+            $('.chrge').val(accounting.formatNumber(num2,2));
+            $('.csh').val('0.00');
+            $('#cash').val('0.00');
+
+            reComputeChange();
+          }
+        });
+
         $('#btn_create_user_suppliers').click(function(){
 
             var btn=$(this);
@@ -1754,6 +1461,10 @@
           $('#tbl_card tbody tr').css('cursor','pointer');
           row=$(this).closest('tr');
           row.css('background-color','#FFF9C4');
+
+          var data=dt.row(row).data();
+          var card_code = data.card_code;
+          $('#card_code').val(card_code);
         });
 
         $('#tbl_gc tbody').on('click','tr',function(){
@@ -1761,6 +1472,33 @@
           $('#tbl_gc tbody tr').css('cursor','pointer');
           row=$(this).closest('tr');
           row.css('background-color','#FFF9C4');
+
+          var data=dt.row(row).data();
+          var gift_code = data.giftcard_code;
+          $('#gc_code').val(gift_code);
+        });
+
+        $('#tbl_cheque tbody').on('click','tr',function(){
+          $('#tbl_cheque tbody tr').css('background-color','#fff');
+          $('#tbl_cheque tbody tr').css('cursor','pointer');
+          row=$(this).closest('tr');
+          row.css('background-color','#FFF9C4');
+
+          var data=dt.row(row).data();
+          var cheque_bank = data.bank_code;
+          $('#cheque_bank').val(cheque_bank);
+        });
+
+        $('#tbl_charge tbody').on('click','tr',function(){
+          $('#tbl_charge tbody tr').css('background-color','#fff');
+          $('#tbl_charge tbody tr').css('cursor','pointer');
+          row=$(this).closest('tr');
+          row.css('background-color','#FFF9C4');
+
+          var data=dt.row(row).data();
+          var charges_code = data.charges_code;
+
+          $('#charge_code').val(charges_code);
         });
 
         $(document).keydown(function(event) {
@@ -2046,6 +1784,7 @@
 
         $('#btn_payment').click(function(){
           if (itemcount != 0){
+            pymnt_modal_status = '1';
             $('#modal_payment').modal('show');        
             var amountdueinput = $('#amountdue').val();
             $('#amountduepymt').val(amountdueinput);   
@@ -2065,7 +1804,10 @@
 
         $('.cancelpymnt').click(function(){
           $('#modal_payment').modal('hide'); 
+          pymnt_modal_status = '0';
         });
+
+
 
         $('#btn_cancel').click(function(){
             showList(true);
@@ -2121,7 +1863,6 @@
             title:  obj.title,
             text:  obj.msg,
             type:  obj.stat,
-            addClass: 'pnotify_class',
             nonblock: {
               nonblock: true
             }
@@ -2209,7 +1950,9 @@
         tbl_summary.find(oTableDetails.tax_amount).html(accounting.formatNumber(total_vat_input,2));
         tbl_summary.find(oTableDetails.after_tax).html(accounting.formatNumber(total_computed_vat_sale,2));
         tbl_summary.find(oTableDetails.summary_non_vat_sales).html(accounting.formatNumber(total_non_vat_sale,2));
+
         $('#amountdue').val(accounting.formatNumber(total_amount,2));
+        $('#tdiscount').val(accounting.formatNumber(total_discount,2));
     };
 
     var reInitializeNumeric=function(){
@@ -2457,13 +2200,6 @@
 			var amountdue = samountdue.replace(/,/g, "");
       var cassh = stotalcash.replace(/,/g, "");
 
-      if (stotalcash == ""){
-        var csh2 = stotalcash.replace('',0);
-        chngepmntmodal = parseFloat(csh2)-parseFloat(amountdue);
-      }else{
-        chngepmntmodal = parseFloat(cassh)-parseFloat(amountdue);
-      }
-
       var crd = $('.crd').val();
       var chq = $('.chq').val();
       var gc = $('.gc').val();
@@ -2479,24 +2215,30 @@
       var totalpymntmthd = parseFloat(totalcash)+parseFloat(totalcheck)+parseFloat(totalcard)+parseFloat(totalcharge)+parseFloat(totalgc);
       $('.totalpymntmthd').val(accounting.formatNumber(totalpymntmthd,2));
 
+      var tpmthd = $('.totalpymntmthd').val();
+      var paymntmethodtotal = tpmthd.replace(/,/g, "");
+
+      var ComputeTotalCange = parseFloat(paymntmethodtotal) - parseFloat(amountdue);
+
 			$("#cashamount").val(accounting.formatNumber(totalcash,2));
-      $('#chngedpymnt').val(accounting.formatNumber(chngepmntmodal,2));
+      $('#chngedpymnt').val(accounting.formatNumber(ComputeTotalCange,2));
 
     };
 
     $('.finalize').click(function(){
 			var samountdue = $("#amountdue").val();
 			var amountdue = samountdue.replace(/,/g, "");
-			var stendered = $("#tendered").val();
-			var tendered = stendered.replace(/,/g, "");
-      var cashinput = $("#cash").val();
+
+      var cashinput = $(".totalpymntmthd").val();
+      var cshinp = cashinput.replace(/,/g, "");
+      alert(cashinput);
 			synchronizeFields();
 
 			if(amountdue==0){
 				oopsnotice();
 			}
 			else{
-  			if(parseFloat(cashinput)>=parseFloat(amountdue)){
+  			if(parseFloat(cshinp)>=parseFloat(amountdue)){
           if ($('#seniorTotalDiscount').val() != ""){
             $('#modal_senior_citizen').modal('show');
           }
@@ -2514,20 +2256,21 @@
 
     $('#cash').keypress(function(evt){
             if(evt.keyCode==13){
-              var scash = $("#cash").val();
+              var scash = $(".totalpymntmthd").val();
               var samountdue = $("#amountdue").val();
+
               var amountdue = samountdue.replace(/,/g, "");
-              var stendered = $("#tendered").val();
-              var tendered = stendered.replace(/,/g, "");
+              var tcash = scash.replace(/,/g, "");
+
               var seniorTotalDisc = $('#seniorTotalDiscount').val();
               synchronizeFields();
+
               if(amountdue==0){
                 oopsnotice();
               }
               else{
-                if(parseFloat(scash)>=parseFloat(samountdue))
+                if(parseFloat(tcash)>=parseFloat(amountdue))
                 {
-                  $('#tendered').val(scash);
                   reComputeChange();
 
                     if (seniorTotalDisc != ""){
@@ -2539,10 +2282,10 @@
                     }
                   $('#btn_bcode').click();
                 }
-                else if(parseFloat(scash)<parseFloat(samountdue)){
+                else if(parseFloat(tcash)<parseFloat(amountdue)){
                   oopsfunds();
                 }
-                else if(parseFloat(tendered)>=parseFloat(amountdue)){
+                else if(parseFloat(tcash)>=parseFloat(amountdue)){
                   validaterequirefields();
                   $('#btn_bcode').click();
                 }
@@ -2556,8 +2299,7 @@
     $('#c_btn').click(function(){
       var samountdue = $("#amountdue").val();
 			var amountdue = samountdue.replace(/,/g, "");
-			var stendered = $("#tendered").val();
-			var tendered = stendered.replace(/,/g, "");
+
 			synchronizeFields();
       if(validateRequiredFields($('#frm_senior'))){
         $('#modal_senior_citizen').modal('hide');
@@ -2567,95 +2309,66 @@
 
     var validaterequirefields=function(){
 
-			var scheckamount = $('#checkamount').val();
-			var checkamount = scheckamount.replace(/,/g, "");
-			var scardamount = $('#cardamount').val();
-			var cardamount = scardamount.replace(/,/g, "");
-			var schargeamount = $('#chargeamount').val();
-			var chargeamount = schargeamount.replace(/,/g, "");
-			var checkbank = $('#check_bank').val();
-			var checknumber = $('#check_number').val();
-			var cardholder = $('#cardholder').val();
-			var cardnumber = $('#cardnum').val();
-			var cardapprovalnum = $('#approvalnum').val();
-			var chargeto = $('#chargeto').val();
+  		// var scheckamount = $('#checkamount').val();
+  		// var checkamount = scheckamount.replace(/,/g, "");
 
-			if(parseFloat(checkamount)!="0"){
-					if(checkbank==""){
-  					bankisrequired();
-  					return;
-					}
-					if(checknumber==""){
-  					checknumberisrequired();
-  					return;
-					}
+  		// var scardamount = $('#cardamount').val();
+  		// var cardamount = scardamount.replace(/,/g, "");
 
-				}
-			if(parseFloat(cardamount)!="0"){
-					if(cardholder==""){
-  					cardholderisrequired();
-  					return;
-					}
-					if(cardnumber==""){
-  					cardnumberisrequired();
-  					return;
-					}
-					if(cardapprovalnum==""){
-  					cardapprovalisrequired();
-  					return;
-					}
-				}
+  		// var schargeamount = $('#chargeamount').val();
+  		// var chargeamount = schargeamount.replace(/,/g, "");
 
-			if(parseFloat(chargeamount)!="0"){
-					if(chargeto==""){
-  					chargetofieldisrequired();
-  					return;
-					}
-				}
-					//if all condtion is false -> proceed
-				createPurchaseOrder().done(function(response){   //Create Purchase
-          showNotification(response);
-  				var payment_id=response.pos_payment_id;
-  				$("#payment_id").val(payment_id);
-  				clearFields();
-  				reComputeTotal();
-          _customers.select2('val',"0");
-  				$('#cart_count').text("0 rows");
-  				$("#modal_payment").modal('hide');
-  				window.open("Templates/layout/pospr/"+payment_id+"/print");
-          countCart();
-          swal("Finish!", "Transaction Complete.", "success");
-          $.unblockUI();
-				});
+  		// var checkbank = $('#check_bank').val();
+  		// var checknumber = $('#check_number').val();
+  		// var cardholder = $('#cardholder').val();
+  		// var cardnumber = $('#cardnum').val();
+  		// var cardapprovalnum = $('#approvalnum').val();
+  		// var chargeto = $('#chargeto').val();
+
+				//if all condtion is false -> proceed
+			createPurchaseOrder().done(function(response){   //Create Purchase
+        showNotification(response);
+				var payment_id=response.pos_payment_id;
+				$("#payment_id").val(payment_id);
+				clearFields();
+				reComputeTotal();
+        _customers.select2('val',"0");
+				$('#cart_count').text("0 rows");
+				$("#modal_payment").modal('hide');
+				window.open("Templates/layout/pospr/"+payment_id+"/print");
+        countCart();
+        swal("Finish!", "Transaction Complete.", "success");
+        $.unblockUI();
+			});
     };
 
     var synchronizeFields=function(){
-  			var acheckbank = $("#check_bank").val();
-  			var achecknumber = $("#check_number").val();
-  			var acheckaddress = $("#check_address").val();
-  			var acheckdate = $("#check_date").val();
-  			$("#post_check_bank").val(acheckbank);
-  			$("#post_check_number").val(achecknumber);
-  			$("#post_check_address").val(acheckaddress);
-  			$("#post_check_date").val(acheckdate);
+  			// var acheckbank = $("#check_bank").val();
+  			// var achecknumber = $("#check_number").val();
+  			// var acheckaddress = $("#check_address").val();
+  			// var acheckdate = $("#check_date").val();
+  			// $("#post_check_bank").val(acheckbank);
+  			// $("#post_check_number").val(achecknumber);
+  			// $("#post_check_address").val(acheckaddress);
+  			// $("#post_check_date").val(acheckdate);
 
-  			var atypeofcard = $("#typeofcard").val();
-  			var acardholder = $("#cardholder").val();
-  			var acardnum = $("#cardnum").val();
-  			var aapprovalnum = $("#approvalnum").val();
-  			var acardexpiry = $("#cardexpiry").val();
-  			$("#post_card_type").val(atypeofcard);
-  			$("#post_card_holder").val(acardholder);
-  			$("#post_card_number").val(acardnum);
-  			$("#post_card_apnumber").val(aapprovalnum);
-  			$("#post_card_expdate").val(acardexpiry);
+  			// var atypeofcard = $("#typeofcard").val();
+  			// var acardholder = $("#cardholder").val();
+  			// var acardnum = $("#cardnum").val();
+  			// var aapprovalnum = $("#approvalnum").val();
+  			// var acardexpiry = $("#cardexpiry").val();
+  			// $("#post_card_type").val(atypeofcard);
+  			// $("#post_card_holder").val(acardholder);
+  			// $("#post_card_number").val(acardnum);
+  			// $("#pox`st_card_apnumber").val(aapprovalnum);
+  			// $("#post_card_expdate").val(acardexpiry);
 
-  			var achargeto = $("#chargeto").val();
-  			var achargeremarks = $("#charge_remarks").val();
-  			var achargedate = $("#charge_date").val();
-  			$("#post_chargeto").val(achargeto);
-  			$("#post_charge_remarks").val(achargeremarks);
-  			$("#post_charge_date").val(achargedate);
+  			// var achargeto = $("#chargeto").val();
+  			// var achargeremarks = $("#charge_remarks").val();
+  			// var achargedate = $("#charge_date").val();
+  			// $("#post_chargeto").val(achargeto);
+  			// $("#post_charge_remarks").val(achargeremarks);
+  			// $("#post_charge_date").val(achargedate);
     };
 
     $('.clearcash').click(function(){
@@ -2703,14 +2416,31 @@
     var createPurchaseOrder=function(){
         var _data=$('#frm_items').serializeArray();
         _data.push({name : "post_amountdue" ,value : $('#amountdue').val()});
-        _data.push({name : "post_tendered" ,value : $('#tendered').val()});
-        _data.push({name : "post_change" ,value : $('#change').val()});
+        _data.push({name : "post_tendered" ,value : $('.totalpymntmthd').val()});
+        _data.push({name : "post_change" ,value : $('#chngedpymnt').val()});
         _data.push({name : "seniorTotalDiscount" ,value : $('#seniorTotalDiscount').val()});
         _data.push({name : "seniorID" ,value : $('#seniorID').val()});
         _data.push({name : "seniorName" ,value : $('#seniorName').val()});
         _data.push({name : "seniorAddress" ,value : $('#seniorAddress').val()});
         _data.push({name : "customer_code" ,value : $('#customers').val()});
-
+        _data.push({name : "cash_amount" ,value : $('.csh').val()});
+        _data.push({name : "check_amount" ,value : $('.chq').val()});
+        _data.push({name : "card_amount" ,value : $('.crd').val()});
+        _data.push({name : "charge_amount" ,value : $('.chrge').val()});
+        _data.push({name : "gc_amount" ,value : $('.gc').val()});
+        _data.push({name : "check_bank" ,value : $('#cheque_bank').val()});
+        _data.push({name : "check_address" ,value : $('#cheque_branch').val()});
+        _data.push({name : "check_number" ,value : $('#cheque_no').val()});
+        _data.push({name : "card_type" ,value : $('#card_code').val()});
+        _data.push({name : "card_holder" ,value : $('#card_holder_name').val()});
+        _data.push({name : "card_number" ,value : $('#card_no').val()});
+        _data.push({name : "approval_number" ,value : $('#card_approval').val()});
+        _data.push({name : "charge_to" ,value : $('#charge_code').val()});
+        _data.push({name : "charge_branch" ,value : $('#charge_branch').val()});
+        _data.push({name : "charge_reference" ,value : $('#charge_reference').val()});
+        _data.push({name : "gc_code" ,value : $('#gc_code').val()});
+        _data.push({name : "gc_branch" ,value : $('#gc_branch').val()});
+        _data.push({name : "gc_number" ,value : $('#gc_no').val()});
         var tbl_summary=$('#tbl_purchase_summary');
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_tax", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -2786,6 +2516,18 @@
       $('#tbl_products').dataTable().fnDestroy();
       getproducts();
       $('#modal_browse_products').modal('toggle');
+      $('.inp-search-pro').focus(500);
+    });
+
+    $('.inp-search-pro').keyup(function(){
+      var searchinp = $('.inp-search-pro').val();
+      $('#tbl_products').dataTable().fnDestroy();
+      if (searchinp != ""){
+        getsearchpro();
+      }
+      else{
+        getproducts();
+      }
     });
 
     $('#btn_bcode').click(function(){
@@ -2805,53 +2547,147 @@
         }
       });
 
+    $("#modal_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        pymnt_modal_status = '0';
+      });    
+    });
+
+    $("#modal_card_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearCardPayment();
+      });    
+    });
+
+    $("#modal_cheque_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearChequePayment();
+      });    
+    });
+
+    $("#modal_gift_certificate_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearGCPayment();
+      });    
+    });
+
+    $("#modal_charge_payment").on('hide.bs.modal', function(){
+       setTimeout(function(){
+        ClearChargePayment();
+      });    
+    });
+
+    var ClearCardPayment = function(){
+      $('#inp_card_holder').val("");
+      $('#inp_card_approval').val("");
+      $('#inp_card_no').val("");
+    };
+
+    var ClearChequePayment = function(){
+      $('#inp_cheque_branch').val("");
+      $('#inp_cheque_no').val("");
+    };
+
+    var ClearGCPayment = function(){
+      $('#inp_gc_branch').val("");
+      $('#inp_gc_no').val("");
+    };
+
+    var ClearChargePayment = function(){
+      $('#inp_charge_branch').val("");
+      $('#inp_charge_reference').val("");
+    };
+
     //Alt 1 - Card
     $(document).keydown(function(event) {
       if( event.which === 49 && event.altKey ) {
-        $('#tbl_card').dataTable().fnDestroy();
-        getcard();
-        $('#modal_card_payment').modal('show');
+        if (pymnt_modal_status == '1'){  
+          $('#tbl_card').dataTable().fnDestroy();
+          getcard();
 
-        var cash = $('#cash').val();
-        var tcash = cash.replace(/,/g, "");
-        $('#cardamount').val(tcash);
+          $('#modal_card_payment').modal('show');
+          $('#modal_charge_payment').modal('hide');
+          $('#modal_gift_certificate_payment').modal('hide');
+          $('#modal_cheque_payment').modal('hide');
+
+          var amountduepymt = $('#amountduepymt').val();
+          var tamountduepymt = amountduepymt.replace(/,/g, "");
+          $('#cardamount').val(tamountduepymt);
+        }
       }
     });
 
     //Alt 2 - Cheque
     $(document).keydown(function(event) {
       if( event.which === 50 && event.altKey ) {
-        //$('#tbl_cheque').dataTable().fnDestroy();
-        // getcheque();
-        $('#modal_cheque_payment').modal('show');
+        if (pymnt_modal_status == '1'){
+          $('#tbl_cheque').dataTable().fnDestroy();
+          getcheque();
+          $('#modal_cheque_payment').modal('show');
+          $('#modal_card_payment').modal('hide');
+          $('#modal_charge_payment').modal('hide');
+          $('#modal_gift_certificate_payment').modal('hide');
 
-        var cash = $('#cash').val();
-        var tcash = cash.replace(/,/g, "");
-        $('#chequeamount').val(tcash);
+          var amountduepymt = $('#amountduepymt').val();
+          var tamountduepymt = amountduepymt.replace(/,/g, "");
+          $('#chequeamount').val(amountduepymt);
+        }
       }
     });
 
     //Alt 3 - GC
     $(document).keydown(function(event) {
       if( event.which === 51 && event.altKey ) {
-        $('#tbl_gc').dataTable().fnDestroy();
-        getgc();
-        $('#modal_gift_certificate_payment').modal('show');
+        if (pymnt_modal_status == '1'){
+          $('#tbl_gc').dataTable().fnDestroy();
+          getgc();
+          $('#modal_gift_certificate_payment').modal('show');
+          $('#modal_cheque_payment').modal('hide');
+          $('#modal_card_payment').modal('hide');
+          $('#modal_charge_payment').modal('hide');
+
+          var amountduepymt = $('#amountduepymt').val();
+          var tamountduepymt = amountduepymt.replace(/,/g, "");
+          $('#gcamount').val(tamountduepymt);
+        }
       }
     });
 
     //Alt 4 - Charge
     $(document).keydown(function(event) {
       if( event.which === 52 && event.altKey ) {
-        // $('#tbl_charge').dataTable().fnDestroy();
-        // getcharge();
-        $('#modal_charge_payment').modal('show');
+        if (pymnt_modal_status == '1'){
+          $('#tbl_charge').dataTable().fnDestroy();
+          getcharge();
+          $('#modal_charge_payment').modal('show');
+          $('#modal_cheque_payment').modal('hide');
+          $('#modal_card_payment').modal('hide');
+          $('#modal_gift_certificate_payment').modal('hide');
+
+          var amountduepymt = $('#amountduepymt').val();
+          var tamountduepymt = amountduepymt.replace(/,/g, "");
+          $('#chargeamount').val(tamountduepymt);
+        }
+      }
+    });
+
+    //Alt 5 - Cash Focus
+    $(document).keydown(function(event) {
+      if( event.which === 53 && event.altKey ) {
+        if (pymnt_modal_status == '1'){
+          $('#cash').focus();
+        }
       }
     });
 
     var getproducts=function(){
           dt=$('#tbl_products').DataTable({
-             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "dom": '<"toolbar">frtip', 
+            "bPaginate": false,
+            "bInfo" : false,            
+            "bFilter": true,
+            "scrollY": "300px",
+            "scrollCollapse": true,
              "ajax" : "Products/transaction/list",
              "bDestroy": true,
          			"language": {
@@ -2867,9 +2703,7 @@
                      targets:[5],
                      render: function (data, type, full, meta){
                          var btn_addtocart_close='<button class="btn btn-default btn-l" style="width: 50px; height: 50px; margin-left:-15px;" name="addtocart_close" data-toggle="tooltip" data-placement="top" title="Add"><span class="glyphicon glyphicon-ok"></span> </button>';
-                         // var btn_addtocart='<button class="btn btn-default btn-l" name="addtocart" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Add to Cart"><i class="fa fa-plus" aria-hidden="true"></i> </button>';
-
-                         return '<center>'+btn_addtocart_close+'</center>';
+                           return '<center>'+btn_addtocart_close+'</center>';
                      }
                  },
 
@@ -2962,7 +2796,53 @@
                    }
                });
           }
-    
+
+          var getcharge=function(){
+                dt=$('#tbl_charge').DataTable({
+                  "dom": '<"toolbar">frtip', 
+                  "bPaginate": false,
+                  "bInfo" : false,            
+                  "bFilter": false,
+                   "ajax" : "Charges/transaction/list",
+                   "bDestroy": true,
+                   "columns": [
+                      { targets:[0],data: "charges_desc"},
+                   ],
+                   "rowCallback":function( row, data, index ){
+
+                       $(row).find('td').eq(2).attr({
+                           "align": "right"
+                       });
+
+                       $(row).find('td').css('padding','10px');
+                       $(row).find('td').css('border-bottom','1px solid #B0BEC5');
+                   }
+               });
+          }
+
+          var getcheque=function(){
+                dt=$('#tbl_cheque').DataTable({
+                  "dom": '<"toolbar">frtip', 
+                  "bPaginate": false,
+                  "bInfo" : false,            
+                  "bFilter": false,
+                   "ajax" : "Banks/transaction/list",
+                   "bDestroy": true,
+                   "columns": [
+                      { targets:[0],data: "bank_name"},
+                   ],
+                   "rowCallback":function( row, data, index ){
+
+                       $(row).find('td').eq(2).attr({
+                           "align": "right"
+                       });
+
+                       $(row).find('td').css('padding','10px');
+                       $(row).find('td').css('border-bottom','1px solid #CFD8DC');
+                   }
+               });
+          }
+
         var getjournal=function(){
           var _selecteddatedt = $('#journal_date').val();
           dtjournal=$('#tbl_journal').DataTable({
@@ -3006,6 +2886,48 @@
                   $(row).find('td').eq(10).attr({
                       "align": "right"
                   });
+                  $(row).find('td').css('border-bottom','1px solid #CFD8DC');
+              }
+          });
+        }
+
+        var getsearchpro = function(){
+           var _searchtext = $('.inp-search-pro').val();
+            dt=$('#tbl_products').DataTable({
+              "dom": '<"toolbar">frtip',               
+              "bFilter": false,
+              "bInfo" : false, 
+              "ajax": {
+              "url": "Products/transaction/searchlist",
+              "type": "POST",
+              "bDestroy": true,
+              "data": function ( d ) {
+                  return $.extend( {}, d, {
+                      "search_text": _searchtext
+                      } );
+                  }
+              },
+               "columns": [
+                  { targets:[0],data: "product_code"},
+                  { targets:[1],data: "product_desc" },
+                  { targets:[2],data: "sale_cost" },
+                  { targets:[3],data: "tax_rate" },
+                  { targets:[4],data: "stock_onhand" },
+                  {
+                       targets:[5],
+                       render: function (data, type, full, meta){
+                           var btn_addtocart_close='<button class="btn btn-default btn-l" style="width: 50px; height: 50px; margin-left:-15px;" name="addtocart_close" data-toggle="tooltip" data-placement="top" title="Add"><span class="glyphicon glyphicon-ok"></span> </button>';
+                             return '<center>'+btn_addtocart_close+'</center>';
+                       }
+                   },
+
+               ],
+              "rowCallback":function( row, data, index ){
+
+                  $(row).find('td').eq(10).attr({
+                      "align": "right"
+                  });
+                  $(row).find('td').css('border-bottom','1px solid #CFD8DC');
               }
           });
         }
@@ -3053,6 +2975,7 @@
                   $(row).find('td').eq(10).attr({
                       "align": "right"
                   });
+                  $(row).find('td').css('border-bottom','1px solid #ECEFF1');
               }
           });
 
@@ -3284,16 +3207,17 @@
           }
 
         row.find(oTableItems.discount).find('input.numeric').val(parseFloat(computeTotalDiscount).toFixed(2));
+
         $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(computeTotalwdisc,2)); // line total amount
         $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
         $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
         $(oTableItems.non_vat_sales,row).find('input.numeric').val(nvs); //non vat sales
       }
+
       reComputeTotal();
       reComputeChange();
       $('#modal_senior_citizen').modal('hide');
       $('#modal_browse_discounts').modal('hide');
-      showNotificationDiscount({title:"Discount Applied",stat:"success",msg:""+dataDiscountDesc+""});
       $('#txtsearch').focus();
       _objTypeHead.typeahead('close');
     });

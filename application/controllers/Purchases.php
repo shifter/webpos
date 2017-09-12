@@ -13,7 +13,7 @@ class Purchases extends CORE_Controller
         $this->load->model('Products_model');
         $this->load->model('Purchase_items_model');
         $this->load->model('Invoice_model');
-	      $this->load->model('Pos_payment_model');
+	    $this->load->model('Pos_payment_model');
         $this->load->model('Payment_details_model');
         $this->load->model('Customers_model');
         $this->load->model('Seniorcitizen_model');
@@ -96,18 +96,18 @@ class Purchases extends CORE_Controller
 					$m_products=$this->Products_model;
 
 					$summary_discount=$this->input->post('summary_discount',TRUE);
-          $summary_before_tax=$this->input->post('summary_before_tax',TRUE);
-          $summary_tax_amount=$this->input->post('summary_tax_amount',TRUE);
-          $summary_after_tax=$this->input->post('summary_after_tax',TRUE);
-          $summary_non_vat_sales=$this->input->post('summary_non_vat_sales',TRUE);
+			        $summary_before_tax=$this->input->post('summary_before_tax',TRUE);
+			        $summary_tax_amount=$this->input->post('summary_tax_amount',TRUE);
+			        $summary_after_tax=$this->input->post('summary_after_tax',TRUE);
+			        $summary_non_vat_sales=$this->input->post('summary_non_vat_sales',TRUE);
 					$customers=$this->input->post('customer_code',TRUE);
 					$session_id=$this->input->post('session_id',TRUE);
 
 					$pos_invoice_summary->totaldiscount=$this->get_numeric_value($summary_discount);
-	        $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
-	        $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
-	        $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
-          $pos_invoice_summary->non_vat_sales=$this->get_numeric_value($summary_non_vat_sales);
+			        $pos_invoice_summary->before_tax=$this->get_numeric_value($summary_before_tax);
+			        $pos_invoice_summary->tax_amount=$this->get_numeric_value($summary_tax_amount);
+			        $pos_invoice_summary->total_after_tax=$this->get_numeric_value($summary_after_tax);
+		          	$pos_invoice_summary->non_vat_sales=$this->get_numeric_value($summary_non_vat_sales);
 					$pos_invoice_summary->customer_code=$customers;
 					$pos_invoice_summary->transaction_date=$today;
           //$pos_invoice_summary->transaction_timestamp=$fulldate;
@@ -115,14 +115,14 @@ class Purchases extends CORE_Controller
 					$pos_invoice_summary->save();
 
 					$pos_invoice_id=$pos_invoice_summary->last_insert_id();
-          $m_po_items=$this->Purchase_items_model;
+          			$m_po_items=$this->Purchase_items_model;
 
-          $product_id=$this->input->post('product_id',TRUE);
-          $pos_qty=$this->input->post('pos_qty',TRUE);
-          $pos_price=$this->input->post('pos_price',TRUE);
-          $pos_discount=$this->input->post('pos_discount',TRUE);
-          $tax_rate=$this->input->post('pos_tax_rate',TRUE);
-          $tax_amount=$this->input->post('pos_tax_amount',TRUE);
+			        $product_id=$this->input->post('product_id',TRUE);
+			        $pos_qty=$this->input->post('pos_qty',TRUE);
+			        $pos_price=$this->input->post('pos_price',TRUE);
+			        $pos_discount=$this->input->post('pos_discount',TRUE);
+			        $tax_rate=$this->input->post('pos_tax_rate',TRUE);
+			        $tax_amount=$this->input->post('pos_tax_amount',TRUE);
           //$total = $pos_price + $pos_qty;
           //$total=$this->input->post('pos_line_total_price',TRUE);
 					$i=0;
@@ -152,141 +152,79 @@ class Purchases extends CORE_Controller
 					$post_tendered=$this->input->post('post_tendered',TRUE);
 					$post_change=$this->input->post('post_change',TRUE);
 
-          $pos_payment->amount_due=$this->get_numeric_value($post_amountdue);
-          $pos_payment->tendered=$this->get_numeric_value($post_tendered);
-          $pos_payment->change=$this->get_numeric_value($post_change);
+		            $pos_payment->amount_due=$this->get_numeric_value($post_amountdue);
+		            $pos_payment->tendered=$this->get_numeric_value($post_tendered);
+		            $pos_payment->change=$this->get_numeric_value($post_change);
 					$pos_payment->pos_invoice_id=$this->get_numeric_value($pos_invoice_id);
-          $pos_payment->transaction_date=$today;
+         			$pos_payment->transaction_date=$today;
 					$pos_payment->set('receipt_no','cr_receipt("T1")');
 					$pos_payment->save();
 
-          $pos_payment_id=$pos_payment->last_insert_id();
+			        $pos_payment_id=$pos_payment->last_insert_id();
 
-          $pos_seniorcitizen=$this->Seniorcitizen_model;
-          $post_seniorTotalDiscount=$this->input->post('seniorTotalDiscount',TRUE);
+			        $pos_seniorcitizen=$this->Seniorcitizen_model;
+			        $post_seniorTotalDiscount=$this->input->post('seniorTotalDiscount',TRUE);
 
-          if ($post_seniorTotalDiscount != ""){
-            $pos_seniorcitizen->discountAmount=$this->get_numeric_value($post_seniorTotalDiscount);
-  					$pos_seniorcitizen->pos_payment_id=$pos_payment_id;
-  					$pos_seniorcitizen->seniorID=$this->input->post('seniorID',TRUE);
-  					$pos_seniorcitizen->seniorName=$this->input->post('seniorName',TRUE);
-  					$pos_seniorcitizen->seniorAddress=$this->input->post('seniorAddress',TRUE);
-  					$pos_seniorcitizen->save();
-          }
+		          	if ($post_seniorTotalDiscount != ""){
+	            		$pos_seniorcitizen->discountAmount=$this->get_numeric_value($post_seniorTotalDiscount);
+	  					$pos_seniorcitizen->pos_payment_id=$pos_payment_id;
+	  					$pos_seniorcitizen->seniorID=$this->input->post('seniorID',TRUE);
+	  					$pos_seniorcitizen->seniorName=$this->input->post('seniorName',TRUE);
+	  					$pos_seniorcitizen->seniorAddress=$this->input->post('seniorAddress',TRUE);
+	  					$pos_seniorcitizen->save();
+			        }
 
 					$pos_paymentdetails=$this->Payment_details_model;
-					$post_cashamount=$this->input->post('post_cashamount',TRUE);
-					$post_cash_remarks=$this->input->post('post_cash_remarks',TRUE);
-
-					$post_checkamount=$this->input->post('post_checkamount',TRUE);
-					$post_check_bank=$this->input->post('post_check_bank',TRUE);
-					$post_check_address=$this->input->post('post_check_address',TRUE);
-					$post_check_number=$this->input->post('post_check_number',TRUE);
-					$post_check_date=$this->input->post('post_check_date',TRUE);
-
-					$post_cardamount=$this->input->post('post_cardamount',TRUE);
-					$post_card_type=$this->input->post('post_card_type',TRUE);
-					$post_card_holder=$this->input->post('post_card_holder',TRUE);
-					$post_card_number=$this->input->post('post_card_number',TRUE);
-					$post_card_apnumber=$this->input->post('post_card_apnumber',TRUE);
-					$post_card_expdate=$this->input->post('post_card_expdate',TRUE);
-
-
-					$post_chargeamount=$this->input->post('post_chargeamount',TRUE);
-					$post_chargeto=$this->input->post('post_chargeto',TRUE);
-					$post_charge_remarks=$this->input->post('post_charge_remarks',TRUE);
-					$post_charge_date=$this->input->post('post_charge_date',TRUE);
-
-					$post_method1=$this->input->post('post_method1',TRUE);
-					$post_method2=$this->input->post('post_method2',TRUE);
-					$post_method3=$this->input->post('post_method3',TRUE);
-					$post_method4=$this->input->post('post_method4',TRUE);
-
-					while($post_cashamount!="0.00"){
-						while ($post_method1==1) {
-						$pos_paymentdetails->pos_payment_id=$pos_payment_id;
-						$pos_paymentdetails->method_id=$post_method1;
-						$pos_paymentdetails->cash_amount=$this->get_numeric_value($post_cashamount);
-						$pos_paymentdetails->cash_remarks=$post_cash_remarks;
-						$pos_paymentdetails->check_amount=0;
-						$pos_paymentdetails->card_amount=0;
-						$pos_paymentdetails->charge_amount=0;
-						$pos_paymentdetails->save();
-						break;
-						}
-					break;
-					}
-					while($post_checkamount!="0.00"){
-						while ($post_method2==2) {
-						$pos_paymentdetails->pos_payment_id=$pos_payment_id;
-						$pos_paymentdetails->method_id=$post_method2;
-						$pos_paymentdetails->cash_amount=0;
-						$pos_paymentdetails->cash_remarks="";
-						$pos_paymentdetails->check_amount=$this->get_numeric_value($post_checkamount);
-						$pos_paymentdetails->check_bank=$post_check_bank;
-						$pos_paymentdetails->check_address=$post_check_address;
-						$pos_paymentdetails->check_number=$this->get_numeric_value($post_check_number);
-						$pos_paymentdetails->check_date=$post_check_date;
-						$pos_paymentdetails->charge_amount=0;
-						$pos_paymentdetails->save();
-						break;
-						}
-					break;
-					}
-					while($post_cardamount!="0.00"){
-						while ($post_method3==3) {
-						$pos_paymentdetails->pos_payment_id=$pos_payment_id;
-						$pos_paymentdetails->method_id=$post_method3;
-						$pos_paymentdetails->cash_amount=0;
-						$pos_paymentdetails->check_amount=0;
-
-						$pos_paymentdetails->check_bank="";
-						$pos_paymentdetails->check_address="";
-						$pos_paymentdetails->check_number=0;
-						$pos_paymentdetails->check_date="";
-
-						$pos_paymentdetails->card_amount=$this->get_numeric_value($post_cardamount);
-						$pos_paymentdetails->card_type=$post_card_type;
-						$pos_paymentdetails->card_holder=$post_card_holder;
-						$pos_paymentdetails->card_number=$this->get_numeric_value($post_card_number);
-						$pos_paymentdetails->approval_number=$this->get_numeric_value($post_card_apnumber);
-						$pos_paymentdetails->card_expiry_date=$post_card_expdate;
-						$pos_paymentdetails->charge_amount=0;
-						$pos_paymentdetails->save();
-						break;
-						}
-					break;
-					}
-					while($post_chargeamount!="0.00"){
-						while ($post_method4==4) {
-						$pos_paymentdetails->pos_payment_id=$pos_payment_id;
-						$pos_paymentdetails->method_id=$post_method4;
-						$pos_paymentdetails->cash_amount=0;
-						$pos_paymentdetails->check_amount=0;
-						$pos_paymentdetails->card_amount=0;
-						$pos_paymentdetails->card_type="";
-						$pos_paymentdetails->card_holder="";
-						$pos_paymentdetails->card_number="";
-						$pos_paymentdetails->approval_number=0;
-						$pos_paymentdetails->card_expiry_date="";
-						$pos_paymentdetails->charge_amount=$this->get_numeric_value($post_chargeamount);
-						$pos_paymentdetails->charge_to=$post_chargeto;
-						$pos_paymentdetails->charge_remarks=$post_charge_remarks;
-						$pos_paymentdetails->charge_date=$post_charge_date;
-						$pos_paymentdetails->save();
-						break;
-						}
-					break;
-					}
+					$cash_amount=$this->input->post('cash_amount',TRUE);
+					$check_amount=$this->input->post('check_amount',TRUE);
+					$card_amount=$this->input->post('card_amount',TRUE);
+					$charge_amount=$this->input->post('charge_amount',TRUE);
+					$gc_amount=$this->input->post('gc_amount',TRUE);
+					$check_bank=$this->input->post('check_bank',TRUE);
+					$check_address=$this->input->post('check_address',TRUE);
+					$check_number=$this->input->post('check_number',TRUE);
+					$card_type=$this->input->post('card_type',TRUE);
+					$card_holder=$this->input->post('card_holder',TRUE);
+					$card_number=$this->input->post('card_number',TRUE);
+					$approval_number=$this->input->post('approval_number',TRUE);
+					$charge_to=$this->input->post('charge_to',TRUE);
+					$charge_branch=$this->input->post('charge_branch',TRUE);
+					$charge_reference=$this->input->post('charge_reference',TRUE);
+					$gc_code=$this->input->post('gc_code',TRUE);
+					$gc_branch=$this->input->post('gc_branch',TRUE);
+					$gc_number=$this->input->post('gc_number',TRUE);
+					// while($post_cashamount!="0.00"){
+					// 	while ($post_method1==1) {
+					$pos_paymentdetails->pos_payment_id=$pos_payment_id;
+					$pos_paymentdetails->cash_amount=$this->get_numeric_value($cash_amount);
+					$pos_paymentdetails->check_amount=$this->get_numeric_value($check_amount);
+					$pos_paymentdetails->card_amount=$this->get_numeric_value($card_amount);
+					$pos_paymentdetails->charge_amount=$this->get_numeric_value($charge_amount);
+					$pos_paymentdetails->gc_amount=$this->get_numeric_value($gc_amount);
+					$pos_paymentdetails->check_bank=$check_bank;
+					$pos_paymentdetails->check_address=$check_address;
+					$pos_paymentdetails->check_number=$check_number;
+					$pos_paymentdetails->card_type=$card_type;
+					$pos_paymentdetails->card_holder=$card_holder;
+					$pos_paymentdetails->card_number=$card_number;
+					$pos_paymentdetails->approval_number=$approval_number;
+					$pos_paymentdetails->charge_to=$charge_to;
+					$pos_paymentdetails->charge_branch=$charge_branch;
+					$pos_paymentdetails->charge_reference=$charge_reference;
+					$pos_paymentdetails->gc_code=$gc_code;
+					$pos_paymentdetails->gc_branch=$gc_branch;
+					$pos_paymentdetails->gc_number=$gc_number;
+					$pos_paymentdetails->save();
+				
 					$response['pos_payment_id'] = $pos_payment_id;
 					$response['title'] = 'Success!';
-          $response['stat'] = 'success';
-          $response['msg'] = 'Invoice successfully created.';
+				    $response['stat'] = 'success';
+				    $response['msg'] = 'Invoice successfully created.';
 
-          echo json_encode($response);
+          			echo json_encode($response);
 
 					$receipt = $this->Pos_payment_model->get_list($pos_payment_id,'receipt_no');
-						$data['r']=$receipt[0];
+					$data['r']=$receipt[0];
                     break;
         }
 

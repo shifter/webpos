@@ -47,7 +47,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="Pos">
+          <a href="Pos" id="btn_pos">
             <i class="fa fa-shopping-cart"></i> <span>Point of Sale</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -129,3 +129,14 @@
 
     <!-- /.sidebar -->
   </aside>
+
+  <script type="text/javascript">
+    jQuery(document).ready(function($) {
+
+      function toggleFullScreen(elem) {
+    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    alert();
+    }
+
+    });
+  </script>

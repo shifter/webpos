@@ -40,6 +40,7 @@
     <script src="assets/plugins/iCheck/icheck.min.js"></script>
 
     <script src="assets/plugins/blockUI.js"></script>
+    
     <!-- DataTables -->
     <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -339,7 +340,26 @@
         $('#rmv_banks').remove();
     <?php }
      ?> 
-
+     function toggleFullScreen() {
+        if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+         (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+          if (document.documentElement.requestFullScreen) {  
+            document.documentElement.requestFullScreen();  
+          } else if (document.documentElement.mozRequestFullScreen) {  
+            document.documentElement.mozRequestFullScreen();  
+          } else if (document.documentElement.webkitRequestFullScreen) {  
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+          }  
+        } else {  
+          if (document.cancelFullScreen) {  
+            document.cancelFullScreen();  
+          } else if (document.mozCancelFullScreen) {  
+            document.mozCancelFullScreen();  
+          } else if (document.webkitCancelFullScreen) {  
+            document.webkitCancelFullScreen();  
+          }  
+        }  
+      }
     var validateRequiredFields=function(f){
     var stat=true;
     var pword=$('#user_pword').val();

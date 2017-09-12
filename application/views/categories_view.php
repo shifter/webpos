@@ -174,6 +174,7 @@
     var btn_edit = "";
     var btn_trash = "";
     var _cboCategories; var _cboBrand; var _cboUnit; var _cboVendor;
+
         var initializeControls=function(){
         dt=$('#tbl_category').DataTable({
             "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
