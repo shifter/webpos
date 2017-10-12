@@ -17,6 +17,9 @@ class Purchases extends CORE_Controller
         $this->load->model('Payment_details_model');
         $this->load->model('Customers_model');
         $this->load->model('Seniorcitizen_model');
+        $this->load->model('Pos_denomination_model');
+        $this->load->model('User_inout_model');
+        $this->load->model('Reports_model');
 
     }
 
@@ -51,6 +54,68 @@ class Purchases extends CORE_Controller
 
     function transaction($txn = null,$id_filter=null) {
         switch ($txn){
+        	case 'endbatch':
+        		$m_invoices=$this->Invoice_model;
+        		$user_id=$this->session->user_id;
+        		$result=$m_invoices->getTransactions($user_id);
+        		if($result->num_rows()>0){//valid username and pword
+                        //set session data here and response data
+
+                        $response['stat']='success';
+                        $response['msg']='Successfully authenticated.';
+                        echo json_encode($response);
+
+                    }else{ //not valid
+                        $response['stat']='error';
+                        $response['msg']='You are not Authorized.';
+                        $response['title']='Error authentication!';
+                        echo json_encode($response);
+                    }
+
+                break;
+            case 'cashcount':
+        		$m_denomination=$this->Pos_denomination_model;
+				$cents5=$this->input->post('cents5',TRUE);
+				$cents10=$this->input->post('cents10',TRUE);
+				$cents25=$this->input->post('cents25',TRUE);
+				$peso1=$this->input->post('peso1',TRUE);
+				$peso5=$this->input->post('peso5',TRUE);
+				$peso10=$this->input->post('peso10',TRUE);
+				$peso20=$this->input->post('peso20',TRUE);
+				$peso50=$this->input->post('peso50',TRUE);
+				$peso100=$this->input->post('peso50',TRUE);
+				$peso200=$this->input->post('peso200',TRUE);
+				$peso500=$this->input->post('peso500',TRUE);
+				$peso1000=$this->input->post('peso1000',TRUE);
+				$total_cash=$this->input->post('total_cash',TRUE);
+				$change_fund=$this->input->post('change_fund',TRUE);
+	            $m_denomination->user_id=$this->session->user_id;
+	            $m_denomination->cents5=$this->get_numeric_value($cents5);
+	            $m_denomination->cents10=$this->get_numeric_value($cents10);
+	            $m_denomination->cents25=$this->get_numeric_value($cents25);
+	            $m_denomination->peso1=$this->get_numeric_value($peso1);
+	            $m_denomination->peso5=$this->get_numeric_value($peso5);
+	            $m_denomination->peso10=$this->get_numeric_value($peso10);
+	            $m_denomination->peso20=$this->get_numeric_value($peso20);
+	            $m_denomination->peso50=$this->get_numeric_value($peso50);
+	            $m_denomination->peso100=$this->get_numeric_value($peso100);
+	            $m_denomination->peso200=$this->get_numeric_value($peso200);
+	            $m_denomination->peso500=$this->get_numeric_value($peso500);
+	            $m_denomination->peso1000=$this->get_numeric_value($peso1000);
+	            $m_denomination->total_cash=$this->get_numeric_value($total_cash);
+	            $m_denomination->change_fund=$this->get_numeric_value($change_fund);
+				$m_denomination->save();
+				$denomination_id=$m_denomination->last_insert_id();
+				$m_invoices = $this->Invoice_model;
+				$m_invoices->modify_by_user($this->session->user_id,$denomination_id);
+				$m_user_inout = $this->User_inout_model;
+				$m_user_inout->modify_by_user($this->session->user_id,$denomination_id);
+				$response['data']=$denomination_id;
+				$response['stat']='success';
+                $response['msg']='User successfully End Batch.';
+                
+                echo json_encode($response);
+                break;
             case 'list':  //this returns JSON of Purchase Order to be rendered on Datatable
                 $m_pos_payment=$this->Pos_payment_model;
                 $response['data']=$m_pos_payment->get_list(
@@ -126,13 +191,12 @@ class Purchases extends CORE_Controller
 
 			        $pos_qty=$this->input->post('pos_qty',TRUE);
 			        $pos_price=$this->input->post('pos_price',TRUE);
-
-
+			        $pos_cost=$this->input->post('pos_cost',TRUE);
 			        $pos_discount=$this->input->post('pos_discount',TRUE);
 			        $tax_rate=$this->input->post('pos_tax_rate',TRUE);
 			        $tax_amount=$this->input->post('pos_tax_amount',TRUE);
 			        //$total = $pos_price + $pos_qty;
-			        //$total=$this->input->post('pos_line_total_price',TRUE);
+			        $pos_line_total_price=$this->input->post('pos_line_total_price',TRUE);
 					$i=0;
 					$a="+";
 						// New function for insert
@@ -145,10 +209,11 @@ class Purchases extends CORE_Controller
 								  'product_id' => $product_id[$i],
 								  'pos_qty' => $this->get_numeric_value($pos_qty[$i]),
 								  'pos_price' => $this->get_numeric_value($pos_price[$i]),
+								  'pos_cost' => $this->get_numeric_value($pos_cost[$i]),
 								  'pos_discount' => $this->get_numeric_value($pos_discount[$i]),
 								  'tax_rate' => $this->get_numeric_value($tax_rate[$i]),
 								  'tax_amount' => $this->get_numeric_value($tax_amount[$i]),
-								  'total' => $this->get_numeric_value($pos_price[$i]*$pos_qty[$i])
+								  'total' => $this->get_numeric_value($pos_line_total_price[$i])
 							   );
 							$i++;
 						}

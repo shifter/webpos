@@ -23,6 +23,7 @@ class Login extends CORE_Controller {
         }  */
         $this->load->model('Users_model');
         $this->load->model('User_groups_model');
+        $this->load->model('User_inout_model');
         /*$this->load->model('Tax_types_model');
         $this->load->model('Approval_status_model');
         $this->load->model('Order_status_model');*/
@@ -67,7 +68,18 @@ class Login extends CORE_Controller {
 
                     if($result->num_rows()>0){//valid username and pword
                         //set session data here and response data
-
+                        $m_user_inout = $this->User_inout_model;
+                        $s_timein = 0;
+                        $is_login=$m_user_inout->inout($result->row()->user_id);
+                        if($is_login->num_rows()>0){
+                            $s_timein=$is_login->row()->time_in;
+                        }
+                        else{
+                            $m_user_inout->user_id=$result->row()->user_id;
+                            $m_user_inout->time_in=date('Y-m-d H:i:s');
+                            $s_timein=date('Y-m-d H:i:s');
+                            $m_user_inout->save();
+                        }
                         $this->session->set_userdata(
                             array(
                                 'user_id'=>$result->row()->user_id,
@@ -128,12 +140,12 @@ class Login extends CORE_Controller {
                                 'banks_view'=>$result->row()->banks_view,
                                 'banks_create'=>$result->row()->banks_create,
                                 'banks_update'=>$result->row()->banks_update,
-                                'banks_delete'=>$result->row()->banks_delete
+                                'banks_delete'=>$result->row()->banks_delete,
+                                'timein'=>$s_timein
                             )
                         );
                         $response['stat']='success';
                         $response['msg']='User successfully authenticated.';
-
                         echo json_encode($response);
 
                     }else{ //not valid

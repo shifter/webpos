@@ -70,6 +70,25 @@
         font-weight: bold;
         font-size:11pt;
     }
+    .form-control-cc {
+      transition: all 0.5s ease;
+      border:1px solid #95a5a6 !important;
+      height:30px;
+      width:75px;
+      align-self: right;
+    }
+    .form-control-cc:focus {
+        transition: all 0.5s ease;
+        box-shadow: 1px 1px 15px black !important;
+        border-radius: 5px;
+        color:black;
+        font-weight: bold;
+        font-size:11pt;
+    }
+    .th-right{
+        text-align: right;
+        padding: 10px;
+    }
     /*select:focus {
 			transition: all 0.5s ease;
 			box-shadow: 1px 1px 15px black !important;
@@ -77,6 +96,12 @@
 			color:black;
         font-weight: bold;
     }*/
+    .sm-pos{
+      top: 0.0001%;
+      bottom: 10%;
+      height: auto !important;
+      width:25% !important;
+    }
 		textarea.form-control{
 			transition: all 0.5s ease;
     }
@@ -491,6 +516,12 @@
         max-height: 420px;
         border: 1px solid #90A4AE !important; 
         margin-bottom: 20px !important;
+      }
+      .scroll-div-pro-cc{
+        overflow:scroll; 
+        max-height: 500px; 
+        margin-bottom: 20px !important;
+        overflow-x: hidden;
       }
       .mb-tbl-product{
         margin-left: 0px !important;

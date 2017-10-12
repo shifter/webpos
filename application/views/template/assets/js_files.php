@@ -403,5 +403,113 @@
 
         return stat;
         };
+    var denom_id;
+    var oTableItems={
+          id : 'td:eq(1)'
+      };
+    $('#tbl_xreading tbody').on('click','tr',function(){
+          $('#tbl_xreading tbody tr').css('background-color','#fff');
+          $('#tbl_xreading tbody tr').css('cursor','pointer');
+          $('#tbl_xreading .numeric').css('background-color','#fff');
+          row=$(this).closest('tr');
+          row.css('background-color','#ECEFF1');
+          denom_id = dt.row(row).data();
+        });
+    var report_type = "";
+    var toggle_modal=function(report){
+        $('#modal_report')
+        .find('.modal-header > h4').text(report).end()
+        .modal('toggle');
+        report_type = report;
+        if(report != "Best Seller"){
+            $('.sort').hide();
+        }
+        else{
+            $('.sort').show();
+        }
+        if(report == "Stock Onhand Report"){
+            $('.stck').hide();
+        }
+        else{
+            $('.stck').show();
+        }
+        if(report == "Xreading"){
+            $('.main_modal').hide();
+            $('.sub_modal').show();
+            $('#tbl_xreading').dataTable().fnDestroy();
+            getxreading();
+        }
+        else{
+            $('.main_modal').show();
+            $('.sub_modal').hide();
+        }
+    }
+    // $("#modal_report").on("close", function () {
+    //     alert();
+    //     $('.modaldal').show();
+    // });
+    $('.date-picker-sb').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+    $('#btn_report').click(function(){
+        var _data=$('#frm_reports_all').serializeArray();
+        if(report_type == "Best Seller"){
+            $.post('Templates/layout/reports', {_data}, function(){
+                window.open('Templates/layout/bestseller');
+            });
+        }
+        else if(report_type == "Item Sales Report"){
+            $.post('Templates/layout/reports', {_data}, function(){
+                window.open('Templates/layout/itemsales');
+            });
+        }
+        else if(report_type == "Net Profit Report"){
+            $.post('Templates/layout/reports', {_data}, function(){
+                window.open('Templates/layout/netprofit');
+            });
+        }
+        else if(report_type == "Stock Onhand Report"){
+            $.post('Templates/layout/reports', {_data}, function(){
+                window.open('Templates/layout/stockonhand');
+            });
+        }
+        else if(report_type == "Xreading"){
+            window.open("Templates/layout/endbatch/"+denom_id.denomination_id+"/print");
+        }
+    });
 
-    </script>
+    $('#xreading_date').change(function(){ 
+        $('#tbl_xreading').dataTable().fnDestroy();
+        getxreading();
+    });
+    var getxreading=function(){
+          var _selecteddatedt = $('#xreading_date').val();
+          dt=$('#tbl_xreading').DataTable({
+              "dom": '<"toolbar">frtip',               
+              "ajax": {
+              "url": "Templates/transaction/list",
+              "type": "POST",
+              "bDestroy": true,
+              "data": function ( d ) {
+                  return $.extend( {}, d, {
+                      "xdate": _selecteddatedt
+                      } );
+                  }
+              },
+            "columns": [
+                { targets:[1],data: "denomination_id",visible:false },
+                { targets:[2],data: "name" },
+                { targets:[3],data: "amount" },
+                ],
+                language: {
+                         searchPlaceholder: "Search"
+                     },
+            "rowCallback":function( row, data, index ){
+
+            }
+        });
+    }
+</script>

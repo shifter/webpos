@@ -46,6 +46,7 @@
                                             <th>Non Vat Sales</td>
                                             <th>Rate</td>
                                             <th>Zero Vat Sales</th>
+                                            <th>Item Cost</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -389,6 +390,113 @@
                         </tbody>
                     </table>
                   </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal_endbatch" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+      <div class="modal-dialog modal-sm sm-pos">
+        <div class="modal-content">
+          <div class="modal-header hd-modal-pos">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            <h4 class="modal-title">
+              <strong>Count By Denomination</strong>
+            </h4>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="table-responsive" id="div_product_list">
+                <div class="scroll-div-pro-cc">
+                  <form id="frm_endbatch">
+                    <table id="tbl_endbatch" class="table" cellspacing="0" width="75%">
+                      <tr>
+                        <th class="th-right">5 Cents:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="cents5" id="5cents" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="5centsval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">10 Cents:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="cents10" id="10cents" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="10centsval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">25 Cents:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="cents25" id="25cents" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="25centsval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">1:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso1" id="1peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="1pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">5:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso5" id="5peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="5pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">10:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso10" id="10peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="10pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">20:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso20" id="20peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="20pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">50:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso50" id="50peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="50pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">100:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso100" id="100peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="100pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">200:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso200" id="200peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="200pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">500:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso500" id="500peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="500pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right">1000:</th>
+                        <th><input type="text" class="form-control-cc numeric numeric-cc" name="peso1000" id="1000peso" value="0"></th>
+                        <th><input type="text" class="form-control-cc numeric" id="1000pesoval" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right"></th>
+                        <th class="th-right">Total Cash:</th>
+                        <th><input type="text" class="form-control-cc numeric" name="total_cash" id="total_cash" readonly tabindex="-1" value="0.00"></th>
+                      </tr>
+                      <tr>
+                        <th class="th-right"></th>
+                        <th class="th-right">Change Fund:</th>
+                        <th><input type="text" class="form-control-cc numeric" name="change_fund" id="change_fund" value="0.00"></th>
+                      </tr>
+                    </table>
+                  </form>
+                  <div class="modal-footer">
+                    <div class="row">
+                      <center>
+                        <button id="btn-eb-ok" type="button" class="btn btn-primary">
+                          <strong><i class="fa fa-check-circle-o" aria-hidden="true"></i> OK</strong>
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                          <strong><i class="fa fa-times" aria-hidden="true"></i> Cancel</strong>
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -987,7 +1095,8 @@
     var row; var rowhead; var itemcount = 0; var seniorcitizenid; var dataDiscount; var dataDiscountDesc;
     var sc; var discounted_price = 0; var line_total_discount= 0; var line_total=0; var net_vat=0; var vat_input=0;
     var pymnt_modal_status = '0';
-
+    $('.numeric-cc').autoNumeric('init', {mDec: '0'});
+    $('.numeric').autoNumeric('init');
       $('#txtsearch').focus(400);
       var oTableItems={
           desc : 'td:eq(0)',
@@ -1210,7 +1319,8 @@
                     pos_tax_amount:vat_input,
                     disc_status: "0",
                     non_vat_sales: n_vat_sls,
-                    zero_vat: zero_vat_sls
+                    zero_vat: zero_vat_sls,
+                    pos_cost : suggestion.purchase_cost
                 }));
 		          }
 				      else{
@@ -1232,7 +1342,8 @@
                     pos_tax_amount:vat_input,
                     disc_status: "0",
                     non_vat_sales: n_vat_sls,
-                    zero_vat: zero_vat_sls
+                    zero_vat: zero_vat_sls,
+                    pos_cost : suggestion.purchase_cost
                 }));
 		          }
 
@@ -1462,7 +1573,6 @@
         });
 
 
-
         $('#tbl_items tbody').on('click','tr',function(){
           $('#tbl_items tbody tr').css('background-color','#fff');
           $('#tbl_items tbody tr').css('cursor','pointer');
@@ -1566,6 +1676,9 @@
             if( event.which == 84 && event.altKey ) {
               $('#btn_discount').click();
             }
+            if(event.which == 72 && event.altKey) {
+              $('#btn_endbatch').click();
+            }
           });
 
         $('#row_qty').keypress(function(evt){
@@ -1649,6 +1762,22 @@
           }
         });
 
+        $('#btn_endbatch').click(function(){
+         transaction_count().done(function(response){   //End Batch
+           var checking = response['stat'];
+            if(checking =="success"){
+              _txnMode = "endbatch";
+              $('#modal_void').modal('show');
+              $('#void_pwd').val("");
+              $('#void_pwd').focus(500).select();
+            }
+            else {
+              var stitle = "No Transactions Yet.";
+              swalpopup(stitle);
+            }
+          });
+        });
+
         $('#btn_customer').click(function(){
 
             $('#tbl_customers').dataTable().fnDestroy();
@@ -1669,7 +1798,15 @@
                        }
              });
        });
-
+       var transaction_count=(function(){
+                return $.ajax({
+                     "dataType":"json",
+                     "type":"POST",
+                     "url":"Purchases/transaction/endbatch",
+                     "beforeSend": function(){
+                     }
+          });
+       });
        $('#void_pwd').keypress(function(evt){
            if(evt.keyCode==13){
              $('#void_pwd_btn').click();
@@ -1729,13 +1866,15 @@
        			if(checking=="success")
        			{
        				$('#modal_void').modal('hide');
-
               if (_txnMode == "void"){
                 var desc_name = row.find(oTableItems.desc).find('.row_desc').text();
                 void_notif(desc_name);
               }
               else if (_txnMode == "cancel"){
                 cancel_notif();
+              }
+              else if (_txnMode == "endbatch"){
+                $('#modal_endbatch').modal('toggle');
               }
        			}
        			else{
@@ -1754,7 +1893,7 @@
         $('#btn_void').click(function(){
           if (itemcount != 0){
             _txnMode = "void";
-            $('#modal_void').modal('show');
+            
             $('#void_pwd').val("");
             $('#void_pwd').focus(500).select();
           }
@@ -1769,7 +1908,25 @@
                 $('#btn_cancel').click();
             }
         });
-
+        $('#btn-eb-ok').click(function(){
+            $('#modal_endbatch').modal('toggle');
+            cashcount().done(function(response){
+            window.open("Templates/layout/endbatch/"+response['data']+"/print");
+            window.location.href = "Login/transaction/logout";
+            });
+            
+        });
+        var cashcount=(function(){
+        var _data=$('#frm_endbatch').serializeArray();
+            return $.ajax({
+              "dataType":"json",
+              "type":"POST",
+              "url":"Purchases/transaction/cashcount",
+              "data":_data,
+              "beforeSend": function(){
+                     }
+            });
+        });
         var cancel_notif=function(type){
           swal({
                   title: "Are you sure want to cancel this transaction?",
@@ -1798,8 +1955,7 @@
           if (itemcount != 0){
             _txnMode = "cancel";
             $('#modal_void').modal('show');
-            $('#void_pwd').val("");
-            $('#void_pwd').focus(500).select();
+           
           }
           else {
             var stitle = "No items to cancel.";
@@ -1946,6 +2102,7 @@
         '<td style=""><input name="non_vat_sales[]" type="text" class="numeric" style="width:40px !important;" value="'+ d.non_vat_sales+'" readonly></td>'+
         '<td style=""><input name="rate[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_tax_rate,2)+'"></td>'+
         '<td style=""><input name="zero_vat[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.zero_vat,2)+'"></td>'+
+        '<td style=""><input name="pos_cost[]" type="text" style="width:40px !important;" class="numeric" value="'+ accounting.formatNumber(d.pos_cost,2)+'"></td>'+
         '</tr>';
     };
 
@@ -3298,7 +3455,8 @@
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount: vat_input,
                     non_vat_sales: n_vat_sls,
-                    zero_vat : zero_vat_sls
+                    zero_vat : zero_vat_sls,
+                    pos_cost : data.purchase_cost
                 }));
         reInitializeNumeric();
 				reComputeTotal();
@@ -3371,7 +3529,8 @@
                     pos_non_tax_amount: net_vat,
                     pos_tax_amount:vat_input,
                     non_vat_sales: n_vat_sls,
-                    zero_vat: zero_vat_sls
+                    zero_vat: zero_vat_sls,
+                    pos_cost : data.purchase_cost
                 }));
         reInitializeNumeric();
         reComputeTotal();
@@ -3388,7 +3547,131 @@
         row.find(oTableItems.total).find('input.numeric').css('background-color','#ECEFF1');
       return false;
     });
-
+    var value5c=0; var value10c=0; var value25c=0; var value1p=0; var value5p=0; var value10p=0; var value20p=0; var value50p=0; var value100p=0; var value200p=0; var value500p=0; var value1000p=0;
+    $('#5cents').keyup(function(){
+      var value=$('#5cents').val();
+      if(value=="")
+      {
+        $('#5cents').val('0');
+      }
+      value5c = value.replace(/,/gi, "") * 0.05;
+      $('#5centsval').val(accounting.formatNumber(value5c,2));
+      totalcash();
+    });
+    $('#10cents').keyup(function(){
+      var value=$('#10cents').val();
+      if(value=="")
+      {
+        $('#10cents').val('0');
+      }
+      value10c = value.replace(/,/gi, "") * 0.1;
+      $('#10centsval').val(accounting.formatNumber(value10c,2));
+      totalcash();    
+    });
+    $('#25cents').keyup(function(){
+      var value=$('#25cents').val();
+      if(value=="")
+      {
+        $('#25cents').val('0');
+      }
+      value25c = value.replace(/,/gi, "") * 0.25;
+      $('#25centsval').val(accounting.formatNumber(value25c,2));
+      totalcash();
+    });
+    $('#1peso').keyup(function(){
+      var value=$('#1peso').val();
+      if(value=="")
+      {
+        $('#1peso').val('0');
+      }
+      value1p = value.replace(/,/gi, "") * 1;
+      $('#1pesoval').val(accounting.formatNumber(value1p,2));
+      totalcash();
+    });
+    $('#5peso').keyup(function(){
+      var value=$('#5peso').val();
+      if(value=="")
+      {
+        $('#5peso').val('0');
+      }
+      value5p = value.replace(/,/gi, "") * 5;
+      $('#5pesoval').val(accounting.formatNumber(value5p,2));
+      totalcash();
+    });
+    $('#10peso').keyup(function(){
+      var value=$('#10peso').val();
+      if(value=="")
+      {
+        $('#10peso').val('0');
+      }   
+      value10p = value.replace(/,/gi, "") * 10;
+      $('#10pesoval').val(accounting.formatNumber(value10p,2));
+      totalcash();
+    });
+    $('#20peso').keyup(function(){
+      var value=$('#20peso').val();
+      if(value=="")
+      {
+        $('#20peso').val('0');
+      }
+      value20p = value.replace(/,/gi, "") * 20;
+      $('#20pesoval').val(accounting.formatNumber(value20p,2));
+      totalcash();
+    });
+    $('#50peso').keyup(function(){
+      var value=$('#50peso').val();
+      if(value=="")
+      {
+        $('#50peso').val('0');
+      }
+      value50p = value.replace(/,/gi, "") * 50;
+      $('#50pesoval').val(accounting.formatNumber(value50p,2));
+      totalcash();
+    });
+    $('#100peso').keyup(function(){
+      var value=$('#100peso').val();
+      if(value=="")
+      {
+        $('#100peso').val('0');
+      }
+      value100p = value.replace(/,/gi, "") * 100;
+      $('#100pesoval').val(accounting.formatNumber(value100p,2));
+      totalcash();
+    });
+    $('#200peso').keyup(function(){
+      var value=$('#200peso').val();
+      if(value=="")
+      {
+        $('#200peso').val('0');
+      }
+      value200p = value.replace(/,/gi, "") * 200;
+      $('#200pesoval').val(accounting.formatNumber(value200p,2));
+      totalcash();
+    });
+    $('#500peso').keyup(function(){
+      var value=$('#500peso').val();
+      if(value=="")
+      {
+        $('#500peso').val('0');
+      }
+      value500p = value.replace(/,/gi, "") * 500;
+      $('#500pesoval').val(accounting.formatNumber(value500p,2));
+      totalcash();
+    });
+    $('#1000peso').keyup(function(){
+      var value=$('#1000peso').val();
+      if(value=="")
+      {
+        $('#1000peso').val('0');
+      }
+      value1000p = value.replace(/,/gi, "") * 1000;
+      $('#1000pesoval').val(accounting.formatNumber(value1000p,2));
+      totalcash();
+    });
+    var totalcash=function(){
+      var total_amount = value5c + value10c + value25c + value1p + value5p + value10p + value20p + value50p + value100p + value200p + value500p + value1000p;
+      $('#total_cash').val(accounting.formatNumber(total_amount,2));
+    };
 </script>
 </body>
 </html>

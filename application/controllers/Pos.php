@@ -23,7 +23,7 @@ class Pos extends CORE_Controller
 
         //default resources of the active view
         $data['_def_css_files']=$this->load->view('template/assets/css_files','',TRUE);
-        $data['_def_js_files']=$this->load->view('template/assets/js_pos_files','',TRUE);
+        $data['_def_js_files']=$this->load->view('template/assets/js_files','',TRUE);
 
         $data['_top_navigation']=$this->load->view('template/elements/top_navigation_pos','',TRUE);
         // $data['_side_navigation']=$this->load->view('template/elements/side_bar_navigation','',TRUE);

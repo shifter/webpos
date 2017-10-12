@@ -8,8 +8,6 @@ class Pos_payment_model extends CORE_Model {
     function __construct() {
         parent::__construct();
     }
-	
-
 
     function get_products_with_balance_qty($purchase_order_id){
         $sql="SELECT o.*,(o.po_line_total-o.non_tax_amount)as tax_amount FROM

@@ -10,6 +10,7 @@ class Templates extends CORE_Controller {
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Delivery_invoice_item_model');
         $this->load->model('Company_model');
+        $this->load->model('Categories_model');
         $this->load->model('Pos_payment_model');
 		$this->load->model('Invoice_model');
 		$this->load->model('Products_model');
@@ -20,14 +21,28 @@ class Templates extends CORE_Controller {
         $this->load->model('Adjustment_model');
         $this->load->model('Notes_model');
         $this->load->model('Seniorcitizen_model');
+        $this->load->model('Suppliers_model');
         $this->load->model('purchase_order_model');
         $this->load->model('purchase_order_item_model');
+        $this->load->model('Pos_denomination_model');
+        $this->load->model('Units_model');
+        $this->load->model('Reports_model');
     }
 
     public function index() {
 
     }
-
+    function transaction($list=null){
+        switch($list){
+            case 'list':
+                $m_reports=$this->Reports_model;
+                $xreading_date = ($this->input->post('xdate', TRUE) == null || $this->input->post('xdate', TRUE) == "" ) ? 0 : $this->input->post('xdate', TRUE);
+                $xdate = date('Y-m-d',strtotime($xreading_date));
+                $response['data']=$m_reports->xreading($xdate);
+                echo json_encode($response);
+            break;
+        }
+    }
 
     function layout($layout=null,$filter_value=null,$filter_value2=null,$id_filter=null){
 
@@ -287,22 +302,22 @@ class Templates extends CORE_Controller {
                         $info=$m_invoice->get_list(
                           $filter_value,
                           'pos_payment.pos_invoice_id,pos_payment.pos_payment_id,pos_payment.receipt_no,pos_invoice.*,customers.customer_name',
-            							array(
-            								array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
-            								array('customers','customers.customer_id=pos_invoice.customer_id','left')								//join
-				                 )
+        							array(
+        								array('pos_invoice','pos_invoice.pos_invoice_id=pos_payment.pos_invoice_id','left'),
+        								array('customers','customers.customer_id=pos_invoice.customer_id','left')								//join
+    		                 )
                         );
 
 		                    $invoice_id=$info[0]->pos_invoice_id;
                         $data['info']=$invoice_id;
                         $company=$m_company->get_list();
                         $data['pos_invoice_item']=$m_invoice_items->get_list(
-            							array('pos_invoice_items.pos_invoice_id'=>$invoice_id),
-            								'pos_invoice_items.*,products.product_desc',
-            							array(
-            								array('products','products.product_id=pos_invoice_items.product_id','left')
-            							)
-            						);
+    						array('pos_invoice_items.pos_invoice_id'=>$invoice_id),
+    							'pos_invoice_items.*,products.product_desc',
+    						array(
+    							array('products','products.product_id=pos_invoice_items.product_id','left')
+    						)
+    					);
                         $data['delivery_info']=$info[0];
                         $data['company_info']=$company[0];
 
@@ -323,14 +338,14 @@ class Templates extends CORE_Controller {
                         $m_pos_payment=$this->Pos_payment_model;
                         $m_invoice=$this->Invoice_model;
                         $m_company=$this->Company_model;
-		                    $m_notes=$this->Notes_model;
+	                    $m_notes=$this->Notes_model;
                         $data['receipts']=$m_pos_payment->get_list('pos_payment.transaction_date BETWEEN "'.$salesfromdate.'" AND "'.$salestodate.'" ');
                         $data['invoice']=$m_invoice->get_invoice_items($salesfromdate,$salestodate);
                         // echo json_encode($data['invoice']);
                         $company=$m_company->get_list();
-            						$data['company_info']=$company[0];
-            						$notes=$m_notes->get_list();
-            						$data['notes']=$notes[0];
+						$data['company_info']=$company[0];
+						$notes=$m_notes->get_list();
+						$data['notes']=$notes[0];
 
                         echo $this->load->view('template/dailyreports_content',$data,TRUE);
 
@@ -342,7 +357,7 @@ class Templates extends CORE_Controller {
                         $m_company=$this->Company_model;
                         $data['inventory']=$this->Inventory_model->get_inventory_onhand_list_filter($inventoryfromdate,$inventorytodate);
                         $company=$m_company->get_list();
-		                    $data['company_info']=$company[0];
+	                    $data['company_info']=$company[0];
 
 
                         echo $this->load->view('template/inventoryreports_content',$data,TRUE);
@@ -355,7 +370,7 @@ class Templates extends CORE_Controller {
                         $m_company=$this->Company_model;
 
                         $company=$m_company->get_list();
-		                    $data['company_info']=$company[0];
+	                    $data['company_info']=$company[0];
 
                         echo $this->load->view('template/stockcard_content',$data,TRUE);
 
@@ -365,46 +380,181 @@ class Templates extends CORE_Controller {
                         $m_invoice=$this->Pos_payment_model;
                         $m_invoice_items=$this->Purchase_items_model;
                         $m_company=$this->Company_model;
-            						$m_notes=$this->Notes_model;
-            						$m_user=$this->Users_model;
-            						$user_id=$this->session->user_id;
+						$m_notes=$this->Notes_model;
+						$m_user=$this->Users_model;
+						$user_id=$this->session->user_id;
 
-                                    $company=$m_company->get_list();
-            						$data['company_info']=$company[0];
-            						$notes=$m_notes->get_list();
-            						$data['notes']=$notes[0];
+                        $company=$m_company->get_list();
+						$data['company_info']=$company[0];
+						$notes=$m_notes->get_list();
+						$data['notes']=$notes[0];
 
-            						$user=$m_user->get_user_list(
-            										$filter_value
-            						);
-            						$data['user_info']=$user[0];
+						$user=$m_user->get_user_list(
+										$filter_value
+						);
+						$data['user_info']=$user[0];
 
-            						$data['id']=$filter_value;
+						$data['id']=$filter_value;
 
-                            echo $this->load->view('template/xreading_content',$data,TRUE);
+                        echo $this->load->view('template/xreading_content',$data,TRUE);
 
             break;
+            case 'reports':
+                    $this->session->set_userdata(
+                        array(
+                            'first'=>$this->input->post('_data[0][value]',TRUE),
+                            'second'=>$this->input->post('_data[1][value]',TRUE),
+                            'third'=>$this->input->post('_data[2][value]',TRUE),
+                            'fourth'=>$this->input->post('_data[3][value]',TRUE),
+                            'fifth'=>$this->input->post('_data[4][value]',TRUE),
+                            'sixth'=>$this->input->post('_data[5][value]',TRUE),
+                            'seventh'=>$this->input->post('_data[6][value]',TRUE)
+                        )
+                    );
+                    // $datefrom=$this->input->post('date_from',TRUE);
+                    // $dateto=$this->input->post('date_to',TRUE);
+                    // $cashier=$this->input->post('cashier',TRUE);
+                    // $category=$this->input->post('category',TRUE);
+                    // $unit=$this->input->post('unit',TRUE);
+                    // $supplier=$this->input->post('supplier',TRUE);
+                    // $sort=$this->input->post('sort',TRUE);
+                       
+                    
+            break;
 
+            case 'bestseller':
+                        $from = $this->session->first;
+                        $to = $this->session->second;
+                        $cashier = $this->session->third;
+                        $category = $this->session->fourth;
+                        $unit = $this->session->fifth;
+                        $supplier = $this->session->sixth;
+                        $sort = $this->session->seventh;
+                        $m_company=$this->Company_model;
+                        $m_user=$this->Users_model;
+                        $user=$m_user->get_list($cashier);
+                        $data['user']=$user;
+                        $m_category=$this->Categories_model;
+                        $categ=$m_category->get_list($category);
+                        $data['category']=$categ;
+                        $m_unit=$this->Units_model;
+                        $units=$m_unit->get_list($unit);
+                        $data['unit']=$units;
+                        $m_supplier=$this->Suppliers_model;
+                        $supp=$m_supplier->get_list($supplier);
+                        $data['supplier']=$supp;
+                        $company=$m_company->get_list();
+                        $data['company_info']=$company[0];
+                        $m_reports=$this->Reports_model;
+                        $repo=$m_reports->bestseller($from, $to, $cashier, $category, $unit, $supplier, $sort);
+                        $data['data']=$repo;
+                        echo $this->load->view('template/bestseller',$data,TRUE);
+            break;
+            case 'itemsales':
+                        $from = $this->session->first;
+                        $to = $this->session->second;
+                        $cashier = $this->session->third;
+                        $category = $this->session->fourth;
+                        $unit = $this->session->fifth;
+                        $supplier = $this->session->sixth;
+                        $sort = $this->session->seventh;
+                        $m_company=$this->Company_model;
+                        $m_user=$this->Users_model;
+                        $user=$m_user->get_list($cashier);
+                        $data['user']=$user;
+                        $m_category=$this->Categories_model;
+                        $categ=$m_category->get_list($category);
+                        $data['category']=$categ;
+                        $m_unit=$this->Units_model;
+                        $units=$m_unit->get_list($unit);
+                        $data['unit']=$units;
+                        $m_supplier=$this->Suppliers_model;
+                        $supp=$m_supplier->get_list($supplier);
+                        $data['supplier']=$supp;
+                        $company=$m_company->get_list();
+                        $data['company_info']=$company[0];
+                        $m_reports=$this->Reports_model;
+                        $repo=$m_reports->itemsales($from, $to, $cashier, $category, $unit, $supplier, $sort);
+                        $data['data']=$repo;
+                       echo $this->load->view('template/itemsales',$data,TRUE);
+            break;
+
+            case 'netprofit':
+                        $from = $this->session->first;
+                        $to = $this->session->second;
+                        $cashier = $this->session->third;
+                        $category = $this->session->fourth;
+                        $unit = $this->session->fifth;
+                        $supplier = $this->session->sixth;
+                        $sort = $this->session->seventh;
+                        $m_company=$this->Company_model;
+                        $m_user=$this->Users_model;
+                        $user=$m_user->get_list($cashier);
+                        $data['user']=$user;
+                        $m_category=$this->Categories_model;
+                        $categ=$m_category->get_list($category);
+                        $data['category']=$categ;
+                        $m_unit=$this->Units_model;
+                        $units=$m_unit->get_list($unit);
+                        $data['unit']=$units;
+                        $m_supplier=$this->Suppliers_model;
+                        $supp=$m_supplier->get_list($supplier);
+                        $data['supplier']=$supp;
+                        $company=$m_company->get_list();
+                        $data['company_info']=$company[0];
+                        $m_reports=$this->Reports_model;
+                        $repo=$m_reports->netprofit($from, $to, $cashier, $category, $unit, $supplier, $sort);
+                        $data['data']=$repo;
+                        echo $this->load->view('template/netprofit',$data,TRUE);
+            break;
+            case 'stockonhand':
+                        $from = $this->session->first;
+                        $to = $this->session->second;
+                        $cashier = $this->session->third;
+                        $category = $this->session->fourth;
+                        $unit = $this->session->fifth;
+                        $supplier = $this->session->sixth;
+                        $sort = $this->session->seventh;
+                        $m_company=$this->Company_model;
+                        $m_user=$this->Users_model;
+                        $user=$m_user->get_list($cashier);
+                        $data['user']=$user;
+                        $m_category=$this->Categories_model;
+                        $categ=$m_category->get_list($category);
+                        $data['category']=$categ;
+                        $m_unit=$this->Units_model;
+                        $units=$m_unit->get_list($unit);
+                        $data['unit']=$units;
+                        $m_supplier=$this->Suppliers_model;
+                        $supp=$m_supplier->get_list($supplier);
+                        $data['supplier']=$supp;
+                        $company=$m_company->get_list();
+                        $data['company_info']=$company[0];
+                        $m_reports=$this->Reports_model;
+                        $repo=$m_reports->stockonhand($from, $to, $cashier, $category, $unit, $supplier, $sort);
+                        $data['data']=$repo;
+                        echo $this->load->view('template/stockonhand',$data,TRUE);
+            break;
             case 'endbatch': //delivery invoice
                         $m_invoice=$this->Pos_payment_model;
                         $m_invoice_items=$this->Purchase_items_model;
                         $m_company=$this->Company_model;
-            						$m_notes=$this->Notes_model;
-            						$m_user=$this->Users_model;
-
-            						$user_id=$this->session->user_id;
-
-                                    $company=$m_company->get_list();
-            						$data['company_info']=$company[0];
-            						$notes=$m_notes->get_list();
-            						$data['notes']=$notes[0];
-
-            						$user=$m_user->get_user_list(
-            										$user_id
-            						);
-
-            						$data['user_info']=$user[0];
-
+						$m_notes=$this->Notes_model;
+						$m_user=$this->Users_model;
+                        $m_denomination=$this->Pos_denomination_model;
+						$user_id=$this->session->user_id;
+                        $company=$m_company->get_list();
+						$data['company_info']=$company[0];
+						$notes=$m_notes->get_list();
+						$data['notes']=$notes[0];
+						$user=$m_user->get_user_list(
+										$user_id
+						);
+                        $deno=$m_denomination->print_endbatch($filter_value);
+                        $data['denomination_info']=$deno[0];
+						$data['user_info']=$user[0];
+                        $count=$m_denomination->count_transaction($filter_value);
+                        $data['count']=$count[0];
                         if($filter_value2=='print'){
                           echo $this->load->view('template/end_batch',$data,TRUE);
                         }

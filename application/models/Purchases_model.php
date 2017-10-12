@@ -19,8 +19,6 @@ class Purchases_model extends CORE_Model {
             ";
         return $this->db->query($sql)->result();
     }
-
-    
 }
 
 

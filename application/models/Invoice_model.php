@@ -72,7 +72,22 @@ class Invoice_model extends CORE_Model {
         return $this->db->query($sql)->result();
 
     }
-
+    function getTransactions($cashier){
+        $this->db->select('pos_invoice_id');
+        $this->db->from('pos_invoice');
+        $this->db->where('end_batch', 0);
+        $this->db->where('user_id', $cashier);
+        return $this->db->get();
+        // $query = "SELECT pos_invoice_id as transactions FROM pos_invoice WHERE end_batch = 0 AND user_id = ".$cashier;
+        // return $this->db->query($query)->get();
+    }
+    function modify_by_user($user_id, $denomination_id){
+        $timein = $this->session->timein;
+        $time = date("Y-m-d", strtotime($timein));
+        $sql = "UPDATE pos_invoice SET end_batch=1, denomination_id =".$denomination_id." WHERE end_batch = 0 AND transaction_date = '".$time."' AND user_id=".$user_id;
+        return $this->db->query($sql);
+    }
+    
 
 }
 

@@ -737,7 +737,6 @@
                 { targets:[3],data: "sale_cost" },
                 { targets:[4],data: "stock_onhand" },
                 {
-
                     targets:[5],
                     render: function (data, type, full, meta){
                       var btn_edit='<button class="btn btn-success btn-xs" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
